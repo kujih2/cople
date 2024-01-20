@@ -6,6 +6,7 @@
 <div class="align-right">
 	
 	<a href="${pageContext.request.contextPath}/wiki/detail">위키</a>
+	<a href="${pageContext.request.contextPath}/wiki/write">문서작성</a>
 	<a href="${pageContext.request.contextPath}/board/list">게시판</a>
 	<c:if test="${!empty user}">
 		<a href="${pageContext.request.contextPath}/member/myPage">MY페이지</a>
