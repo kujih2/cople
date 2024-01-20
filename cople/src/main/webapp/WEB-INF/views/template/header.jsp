@@ -4,7 +4,9 @@
 <!-- 상단시작 -->
 <h2 class="align-center">SpringPage</h2>
 <div class="align-right">
-<a href="${pageContext.request.contextPath}/board/list">게시판</a>
+	
+	<a href="${pageContext.request.contextPath}/wiki/detail">위키</a>
+	<a href="${pageContext.request.contextPath}/board/list">게시판</a>
 	<c:if test="${!empty user}">
 		<a href="${pageContext.request.contextPath}/member/myPage">MY페이지</a>
 		<img src="${pageContext.request.contextPath}/member/photoView" width="25" height="25" class="my-photo">
