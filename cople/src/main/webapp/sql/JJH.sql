@@ -8,7 +8,7 @@ CREATE TABLE market_product(
   product_photo2 VARCHAR2(100), -- 상품사진2
   product_photo3 VARCHAR2(100), -- 상품사진3
   product_photo4 VARCHAR2(100), -- 상품사진4
-  product_content NUMBER NOT NULL, -- 상품의 설명
+  product_content VARCHAR2(200) NOT NULL, -- 상품의 설명
   product_category NUMBER(1) NOT NULL, -- 0:중고, 1:나눔 
   product_price NUMBER DEFAULT 0, -- 상품 가격 0
   product_place VARCHAR2(50), -- 거래 장소
