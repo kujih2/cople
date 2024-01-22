@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.wiki.dao.WikiMapper">
+<!-- 게시판 글 등록 -->
+	<insert id="updateWiki" parameterType="wikiVO">
+		INSERT INTO wiki_update(
+			doc_num,
+			update_num,
+			update_content,
+			doc_status,
+			update_status,
+			update_writer,
+			update_summary
+			)
+		VALUES(
+			#{doc_num},
+			wiki_update_seq.nextval,
+			#{update_content},
+			2,
+			1,
+			1,
+			#{update_summary})
+	
+	</insert>
+</mapper>
+
+
+
+
+
+

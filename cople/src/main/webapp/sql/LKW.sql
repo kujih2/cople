@@ -9,7 +9,7 @@ create sequence wiki_doc_seq;
 create table wiki_update(
 	doc_num number not null,
 	update_num number not null,
-	update_content blob,
+	update_content clob,
 	doc_status number not null,
 	update_status number default 1 not null,
 	update_writer number not null,
