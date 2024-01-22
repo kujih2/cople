@@ -16,7 +16,6 @@ public class MarketVO {
 	private String product_title;
 	private int product_seller;
 	private int product_buyer;
-	@NotBlank
 	private String product_photo1;
 	private String product_photo2;
 	private String product_photo3;

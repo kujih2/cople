@@ -1,1 +1,32 @@
 @charset "UTF-8";
+
+/* 장터 글쓰기 
+-------------------------*/
+.marketWrite1{
+	width:40%;
+	float:left;
+	padding:10px;
+	margin-right:10px;
+}
+.marketWrite2{
+	width:40%;
+	padding:10px;
+	float:right;
+	margin-left:10px;
+}
+form#register_form{
+	border:none;
+}
+.clear{
+	clear:both;
+}
+.market_photo{
+	width:70px;
+	height:60px;
+	padding:10px;
+	border: 1px solid gray;
+	border-radius:5px;
+}
+.market_photo img{
+	margin-left:10px;
+}
