@@ -8,6 +8,7 @@
 	<a href="${pageContext.request.contextPath}/wiki/detail?doc_num=1">위키</a>
 	<a href="${pageContext.request.contextPath}/wiki/write">문서작성</a>
 	<a href="${pageContext.request.contextPath}/board/list">게시판</a>
+	<a href="${pageContext.request.contextPath}/matching/mmain">취업현황</a>
 	<c:if test="${!empty user}">
 		<a href="${pageContext.request.contextPath}/member/myPage">MY페이지</a>
 		<img src="${pageContext.request.contextPath}/member/photoView" width="25" height="25" class="my-photo">
