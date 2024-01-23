@@ -1,1 +1,142 @@
 @charset "UTF-8";
+
+/* 전체 레이아웃
+-------------------------*/
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	margin:0;
+	padding:0;
+	min-height:100vh;
+}
+#main{
+	margin:0 auto;
+	font-family:"맑은 고딕";
+	min-height:calc(100vh - 21.33px);
+}
+#main_header{
+	width:100%;
+	margin-bottom:10px;
+	padding:0 10px 0 0;
+}
+#side_branch{
+	width:80%;
+	margin:0 auto;
+}
+#main_body{
+
+}
+#main_footer{
+	background-color:#c3a3ff;
+}
+
+
+/*-------------------------
+*main 페이지
+---------------------------*/
+#main_body{
+	width:75%;
+	float:left;
+}
+#side_body{
+	float:left;
+	width:25%;
+	min-height:530px;
+}
+.page-clear{
+	clear:both;
+}
+/*-------------------------
+*wikiHeader
+---------------------------*/
+#wikiHeader{
+	background-image: linear-gradient(40deg,rgb(237, 227, 255),rgb(1, 144, 249));
+	height:42px;
+	position:relative;
+}
+#wikiHeader #search_form{
+	height:42px;
+	
+}
+#wikiHeader input{
+	box-sizing: border-box;
+	height:42px;
+	border:1px solid grey;
+	transform: translateY(-2px);
+	padding-left:10px;
+	
+}
+#wikiHeader input:focus {
+outline: none;}
+
+	
+#wikiHeader button{
+	box-sizing: border-box;
+	height:42px;
+	width:35px;
+	border:1px solid grey;
+	margin-left:-7px;
+	
+		
+}
+
+
+/* ----------------------
+공통 정렬
+-------------------------*/
+.align-center{
+	text-align:center;
+}
+.align-right{
+	text-align:right;
+}
+/* ----------------------
+wikiDetail
+-------------------------*/
+#content_header{
+	position:relative;
+}
+#content_header h2{
+	float:left;
+}
+#content_header button{
+	float:right;
+}
+#content_main{
+	clear:both;
+}
+/* ----------------------
+wikiList
+-------------------------*/
+#search_list{
+	min-height:100px;
+	clear:both;
+}
+#search_item_name{
+	font-size:20px;
+	font-weight:bold;
+}
+#search_list a:link{
+	text-decoration:none;
+	color:#000000;
+}
+#search_list a:visited{
+	text-decoration:none;
+	color:#000000;
+}
+#search_list a:hover{
+	text-decoration:underline;
+	color:#000000;
+}
+#write_guide{
+	position:relative;
+}
+#write_guide p{
+	float:left;
+}
+#write_guide button{
+	float:right;
+}
+

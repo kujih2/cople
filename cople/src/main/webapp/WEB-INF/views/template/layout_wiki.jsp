@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:getAsString name="title"/></title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/LKW.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <tiles:insertAttribute name="css" ignore="true"/>
 <tiles:insertAttribute name="js" ignore="true"/>
 
@@ -17,15 +18,18 @@
 		<tiles:insertAttribute name="header"/>
 		<tiles:insertAttribute name="subHeader"/>
 	</div>
-	<div class="side-branch">
-		<div id="page_body">
+	<div id="side_branch">
+		<div id="main_body">
 			<tiles:insertAttribute name="body"/>
 		</div>
+		<div id="side_body">
+		
+		</div>
 	</div>
-	<div id="main_footer">
+</div>
+	<div id="main_footer" class="page-clear">
 		<tiles:insertAttribute name="footer"/>
 	</div>
 
-</div>
 </body>
 </html>

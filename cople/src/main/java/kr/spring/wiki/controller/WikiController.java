@@ -1,5 +1,9 @@
 package kr.spring.wiki.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
 import kr.spring.wiki.service.WikiService;
 import kr.spring.wiki.vo.WikiVO;
@@ -33,9 +38,54 @@ public class WikiController {
 	}
 	//생성 폼 호출
 	@GetMapping("/wiki/write")
-	public String form() {
-		return "wikiWrite";
+	public ModelAndView createDoc(@RequestParam String doc_name) {
+		log.debug("<<Controller-생성폼호출/새로 생성될 위키 문서 이름 >>:"+doc_name);
+		//위키문서 중복체크
+		
+		WikiVO wikiVO = new WikiVO();
+		
+		wikiVO.setDoc_name(doc_name);
+		int doc_num = wikiService.insertWiki(wikiVO);
+		wikiVO.setDoc_num(doc_num);
+		wikiVO.setUpdate_summary("문서 생성");
+		log.debug("<<Controller-생성폼호출//위키 문서>> : "+wikiVO);
+		
+		wikiService.updateWiki(0,wikiVO);
+		
+		return new ModelAndView("wikiDetail","wiki",wikiVO);
 	}
+
+	/*=================
+	 * 위키 글 목록
+	 ==================*/
+	@RequestMapping("/wiki/list")
+	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order, String keyfield,String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체/검색 레코드 수
+		int count = wikiService.selectRowCount(map);
+		log.debug("<<count>> :"+count);
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","%order="+order);
+		List<WikiVO> list = null;
+		
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = wikiService.selectList(map);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("wikiList");
+		mav.addObject("count",count);
+		mav.addObject("list",list);
+		mav.addObject("page",page.getPage());
+		
+		return mav;
+	}
+	
 	/*=================
 	 * 위키 글 상세
 	 ==================*/

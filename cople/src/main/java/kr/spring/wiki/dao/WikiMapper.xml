@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.wiki.dao.WikiMapper">
-<!-- 게시판 글 등록 -->
+<!-- 문서 새로 생성시 문서 번호 가져오기 -->
+	<select id="getNewDocNum" resultType="integer">
+		SELECT
+			wiki_doc_seq.nextval
+		FROM dual
+	</select>
+<!-- 위키 문서 생성 -->
+	<insert id="insertWiki" parameterType="wikiVO">
+		INSERT INTO wiki_doc(
+			doc_num,
+			doc_name)
+		VALUES(
+			wiki_doc_seq.currval,
+			#{doc_name})
+	</insert>
+
+<!-- 위키 업데이트 -->
 	<insert id="updateWiki" parameterType="wikiVO">
 		INSERT INTO wiki_update(
 			doc_num,
@@ -15,13 +31,83 @@
 		VALUES(
 			#{doc_num},
 			wiki_update_seq.nextval,
-			#{update_content},
+			#{update_content ,jdbcType=VARCHAR},
 			2,
 			1,
 			1,
 			#{update_summary})
 	
 	</insert>
+	
+<!-- 위키 문서의 총 개수/검색개수 -->
+	<sql id="wikiSearchCount">
+			<if test="keyword != null and keyword !=''">
+				<if test="keyfield == 1 or keyfield==null">
+					AND doc_name Like '%' || #{keyword} || '%' OR
+					update_content Like '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					AND doc_name Like '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					AND update_content Like '%' || #{keyword} || '%'
+				</if>
+			</if>
+	</sql>
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM wiki_doc LEFT OUTER JOIN wiki_update USING(doc_num)
+		WHERE wiki_update.update_status = 1
+		<include refid="wikiSearchCount"></include>
+		
+	</select>
+<!-- 게시판 전체목록/검색목록 -->
+	<sql id="wikiSearch">
+		<where>
+			<if test="keyword != null and keyword !=''">
+				<if test="keyfield == 1 or keyfield==null">
+					doc_name Like '%' || #{keyword} || '%' OR
+					update_content Like '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					doc_name Like '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 3">
+					update_content Like '%' || #{keyword} || '%'
+				</if>
+
+			</if>
+		</where>
+	</sql>
+	<select id="selectList" parameterType="map" resultType="wikiVO">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			  FROM (SELECT
+				doc_num,
+				<![CDATA[
+				REPLACE(REPLACE(doc_name,'<','&lt;'),'>','&gt;') doc_name,
+				]]>
+				update_num,
+				update_content,
+				doc_status,
+				update_status,
+				update_writer,
+				update_summary,
+				update_date
+			 FROM wiki_doc
+			 LEFT OUTER JOIN wiki_update USING(doc_num)
+			<include refid="wikiSearch"></include>
+			)a)
+			
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <=#{end} AND update_status=1
+		]]>
+			
+	</select>
 </mapper>
 
 
