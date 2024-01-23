@@ -7,7 +7,7 @@
 	
 	<a href="${pageContext.request.contextPath}/wiki/detail?doc_num=1">위키</a>
 	<a href="${pageContext.request.contextPath}/wiki/write">문서작성</a>
-	<a href="${pageContext.request.contextPath}/board/list">게시판</a>
+	<a href="${pageContext.request.contextPath}/community/commuMain">커뮤니티</a>
 	<a href="${pageContext.request.contextPath}/market/list">장터</a>
 	<a href="${pageContext.request.contextPath}/matching/mmain">취업현황</a>
 	<c:if test="${!empty user}">
