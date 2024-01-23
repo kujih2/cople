@@ -48,6 +48,11 @@ public class WikiServiceImpl implements WikiService{
 		return newNum;
 	}
 
+	@Override
+	public List<WikiVO> selectLatest() {
+		return wikiMapper.selectLatest();
+	}
+
 	
 
 

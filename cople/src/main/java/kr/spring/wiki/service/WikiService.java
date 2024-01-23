@@ -11,6 +11,7 @@ public interface WikiService {
 	public WikiVO selectWiki(int doc_num);
 	public int selectRowCount(Map<String,Object> map);
 	public List<WikiVO> selectList(Map<String,Object> map);
+	public List<WikiVO> selectLatest();
 
 
 

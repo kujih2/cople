@@ -13,6 +13,7 @@ import kr.spring.wiki.vo.WikiVO;
 public interface WikiMapper {
 	//위키문서 생성하기
 		//새로운 위키문서 번호 받아오기
+		@Select("SELECT wiki_doc_seq.nextval FROM dual")
 		public int getNewDocNum();
 	public int insertWiki(WikiVO wiki);
 	
@@ -30,6 +31,9 @@ public interface WikiMapper {
 	public int selectRowCount(Map<String,Object> map);
 	public List<WikiVO> selectList(Map<String,Object> map);
 	
+	//최신변경 리스트 불러오기
+	@Select("SELECT * FROM (SELECT * FROM wiki_doc JOIN wiki_update USING(doc_num) WHERE update_status=1 ORDER BY update_date DESC) WHERE ROWNUM <=15")
+	public List<WikiVO> selectLatest();
 	
 	
 	

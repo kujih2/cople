@@ -20,14 +20,13 @@ $(document).ready(function(){
 		</div>
 	
 	</form>
-		<c:if test="${count==0}">
 		<div id="write_guide">
 			<p>찾는 문서가 없나요? 새 문서를 만들 수 있습니다.</p>
 				<button onclick="location.href='write?doc_name=${param.keyword}'">'${param.keyword}' 문서 만들기</button>
 		</div>
 		
 		
-		</c:if>
+
 		
 		<div id="search_list">
 		<p>전체 : ${count}건</p>

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.wiki.dao.WikiMapper">
-<!-- 문서 새로 생성시 문서 번호 가져오기 -->
-	<select id="getNewDocNum" resultType="integer">
-		SELECT
-			wiki_doc_seq.nextval
-		FROM dual
-	</select>
+
 <!-- 위키 문서 생성 -->
 	<insert id="insertWiki" parameterType="wikiVO">
 		INSERT INTO wiki_doc(
@@ -43,14 +38,14 @@
 	<sql id="wikiSearchCount">
 			<if test="keyword != null and keyword !=''">
 				<if test="keyfield == 1 or keyfield==null">
-					AND doc_name Like '%' || #{keyword} || '%' OR
-					update_content Like '%' || #{keyword} || '%'
+					AND (doc_name Like '%' || #{keyword} || '%' OR
+					update_content Like '%' || #{keyword} || '%')
 				</if>
 				<if test="keyfield == 2">
-					AND doc_name Like '%' || #{keyword} || '%'
+					AND (doc_name Like '%' || #{keyword} || '%')
 				</if>
 				<if test="keyfield == 3">
-					AND update_content Like '%' || #{keyword} || '%'
+					AND (update_content Like '%' || #{keyword} || '%')
 				</if>
 			</if>
 	</sql>

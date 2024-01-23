@@ -28,9 +28,11 @@ import lombok.extern.slf4j.Slf4j;
 public class WikiController {
 	@Autowired
 	private WikiService wikiService;
+	
 	/*=================
 	 * 위키 문서 생성
 	 ==================*/
+	
 	//자바빈VO 초기화
 	@ModelAttribute
 	public WikiVO initCommand() {
@@ -38,21 +40,26 @@ public class WikiController {
 	}
 	//생성 폼 호출
 	@GetMapping("/wiki/write")
-	public ModelAndView createDoc(@RequestParam String doc_name) {
+	public ModelAndView createDoc(@RequestParam String doc_name,Model model) {
 		log.debug("<<Controller-생성폼호출/새로 생성될 위키 문서 이름 >>:"+doc_name);
 		//위키문서 중복체크
 		
-		WikiVO wikiVO = new WikiVO();
+		WikiVO wiki = new WikiVO();
 		
-		wikiVO.setDoc_name(doc_name);
-		int doc_num = wikiService.insertWiki(wikiVO);
-		wikiVO.setDoc_num(doc_num);
-		wikiVO.setUpdate_summary("문서 생성");
-		log.debug("<<Controller-생성폼호출//위키 문서>> : "+wikiVO);
+		wiki.setDoc_name(doc_name);
+		int doc_num = wikiService.insertWiki(wiki);
+		wiki.setDoc_num(doc_num);
+		wiki.setUpdate_summary("문서 생성");
+		log.debug("<<Controller-생성폼호출//위키 문서>> : "+wiki);
 		
-		wikiService.updateWiki(0,wikiVO);
+		wikiService.updateWiki(0,wiki);
 		
-		return new ModelAndView("wikiDetail","wiki",wikiVO);
+		model.addAttribute("wiki",wiki);
+		
+		List<WikiVO> latest = wikiService.selectLatest();
+		model.addAttribute("latest",latest);
+		
+		return new ModelAndView("wikiDetail",model.asMap());
 	}
 
 	/*=================
@@ -77,11 +84,15 @@ public class WikiController {
 			
 			list = wikiService.selectList(map);
 		}
+		List<WikiVO> latest = wikiService.selectLatest();
+
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("wikiList");
 		mav.addObject("count",count);
 		mav.addObject("list",list);
 		mav.addObject("page",page.getPage());
+		mav.addObject("latest",latest);
 		
 		return mav;
 	}
@@ -90,17 +101,17 @@ public class WikiController {
 	 * 위키 글 상세
 	 ==================*/
 	@RequestMapping("/wiki/detail")
-	public ModelAndView process(@RequestParam int doc_num) {
-		log.debug("<<위키 글 상세 doc_num>> : "+doc_num);
-	    log.debug("Before selectWiki method");
-
+	public ModelAndView process(@RequestParam int doc_num,Model model) {
 		WikiVO wiki = wikiService.selectWiki(doc_num);   
-		log.debug("After selectWiki method");
-
-		log.debug("wiki:"+wiki);
-		//wiki.setDoc_name(StringUtil.useNoHtml(wiki.getDoc_name()));
+		model.addAttribute("wiki",wiki);
 		
-		return new ModelAndView("wikiDetail","wiki",wiki);
+		List<WikiVO> latest = wikiService.selectLatest();
+		model.addAttribute("latest",latest);
+		//wiki.setDoc_name(StringUtil.useNoHtml(wiki.getDoc_name()));
+
+		
+		
+		return new ModelAndView("wikiDetail",model.asMap());
 	}
 	
 	/*=================
@@ -110,6 +121,8 @@ public class WikiController {
 	public String formUpdate(@RequestParam int doc_num,@RequestParam int update_num, Model model) {
 		WikiVO wikiVO = wikiService.selectWiki(doc_num);
 		model.addAttribute("wikiVO",wikiVO);
+		List<WikiVO> latest = wikiService.selectLatest();
+		model.addAttribute("latest",latest);
 		
 		return "wikiUpdate";
 	}
@@ -123,6 +136,7 @@ public class WikiController {
 		
 		return "common/resultAlert";
 	}
+	
 
 	
 	

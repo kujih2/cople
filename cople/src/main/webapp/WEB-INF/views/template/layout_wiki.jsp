@@ -23,7 +23,7 @@
 			<tiles:insertAttribute name="body"/>
 		</div>
 		<div id="side_body">
-		
+			<tiles:insertAttribute name="side"/>
 		</div>
 	</div>
 </div>
