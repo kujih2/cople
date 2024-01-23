@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<input type="button" value="글쓰기" onclick="location.href='write'">
 </body>
 </html>

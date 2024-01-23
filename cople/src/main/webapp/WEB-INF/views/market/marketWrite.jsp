@@ -33,8 +33,8 @@
 					<input type="button" value="나눔하기">
 				</li>
 				<li>
-					<form:input path="product_category" placeholder="가격을 입력해 주세요."/>
-					<form:errors path="product_category" cssClass="error-color"/>
+					<form:input path="product_price" placeholder="가격을 입력해 주세요."/>
+					<form:errors path="product_price" cssClass="error-color"/>
 				</li>
 			</ul>
 		</div>
@@ -58,7 +58,7 @@
 		</div>
 		<div class="align-center clear">
 			<form:button>작성 완료</form:button>
-			<input type="button" value="작성 취소" onclick="'">
+			<input type="button" value="작성 취소" onclick="">
 		</div>	
 	</form:form>
 </div>

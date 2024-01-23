@@ -3,6 +3,9 @@ package kr.spring.market.vo;
 import java.sql.Date;
 
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,14 +19,15 @@ public class MarketVO {
 	private String product_title;
 	private int product_seller;
 	private int product_buyer;
-	private String product_photo1;
-	private String product_photo2;
-	private String product_photo3;
-	private String product_photo4;
+	private String filename1;
+	private String filename2;
+	private String filename3;
+	private String filename4;
+	private MultipartFile[] upload = new MultipartFile[4];
 	@NotBlank
 	private String product_content;
 	private int product_category;
-	private int product_price;
+	private Integer product_price;
 	private String product_place; 
 	private String product_placeDetail;
 	private int product_sale;
