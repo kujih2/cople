@@ -6,10 +6,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -52,7 +54,8 @@ public class MatchingController {
 	}
 
 	@PostMapping("/matching/empInsert")
-	public String registerEmp(EmpVO empVO, Model model, HttpSession session, HttpServletRequest request) throws IllegalStateException, IOException {
+	public String registerEmp(@Valid EmpVO empVO, BindingResult result, Model model, HttpSession session, 
+			HttpServletRequest request) throws IllegalStateException, IOException {
 
 		log.debug("<< 합격자 신청 폼 >> : " + empVO);
 
