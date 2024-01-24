@@ -208,6 +208,11 @@ public class MemberController {
 		model.addAttribute("imageFile", readbyte);
 		model.addAttribute("filename", "face.png");
 	}
+	
+	@RequestMapping("/main/admin")
+	public String goAdminPage() {
+		return "adminMain";
+	}
 }
 
 

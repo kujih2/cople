@@ -51,7 +51,9 @@
     .hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
     #centerAddr {display:block;margin-top:2px;font-weight: normal;}
     .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-
+.submit{
+	text-align:center;
+}
 </style>
 <script>
 
@@ -62,9 +64,9 @@
 
 <h2>현직자 신청 양식</h2>
 <div class="marquee">
-        <p>님의 취업을 진심으로 축하드립니다!</p>
+        <p><b>${user.name}</b>님의 취업을 진심으로 축하드립니다!</p>
     </div>
-<form action="empInsert" method="post">
+<form action="empInsert" method="post" enctype="multipart/form-data">
 	<table>
 		<tr>
 			<td>아이디</td>
@@ -103,11 +105,11 @@
 				</select>
 			</td>
 			<td colspan="5">
-				<input type="radio" id="compeople" name="comple" value="0">5~10인
-				<input type="radio" id="compeople" name="comple" value="1">10~30인
-				<input type="radio" id="compeople" name="comple" value="2">30~50인
-				<input type="radio" id="compeople" name="comple" value="3">50~100인
-				<input type="radio" id="compeople" name="comple" value="4">100인 이상
+				<input type="radio" id="compeople" name="compeople" value="5~10인">5~10인
+				<input type="radio" id="compeople" name="compeople" value="10~30인">10~30인
+				<input type="radio" id="compeople" name="compeople" value="30~50인">30~50인
+				<input type="radio" id="compeople" name="compeople" value="50~100인">50~100인
+				<input type="radio" id="compeople" name="compeople" value="100인 이상">100인 이상
 			</td>
 		</tr>
 		<tr>
@@ -268,7 +270,7 @@
         <span class="title">지도중심기준 행정동 주소정보</span>
         <span id="centerAddr"></span>
     </div>
-    	<input type="hidden" id="result" name="result" value="">
+    	<input type="hidden" id="location_api" name="location_api" value="">
 </div>
 			</td>
 		</tr>
@@ -291,14 +293,14 @@
 			</td>
 			<td colspan="5">
 				최종합격 문자/메일 혹은 명함을 첨부해주세요!
-				<input type="file" id="filename" name="filename">
+				<input type="file" id="upload" name="upload">
 			</td>
 		</tr>
 		<tr>
 			<td><label for="advice">후배 쌍용인들에게 조언 한 마디!</label>
 			</td>
 			<td colspan="5">
-				<textarea cols="50" rows="5"></textarea>
+				<textarea cols="50" rows="5" id="advice" name="advice"></textarea>
 			</td>
 		</tr>
 		
@@ -308,6 +310,7 @@
 			<input type="button" value="취소" onclick="closePopup()">
 		</div>
 </form>
+<br>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e592360b98e7e7af7c0620352a4709c&libraries=services"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -342,7 +345,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
             //주소정보를 입력폼에 저장
 			var result = result[0].address.address_name;
             
-            document.getElementById('result').value=result;
+            document.getElementById('location_api').value=result;
             
             // 마커를 클릭한 위치에 표시합니다 
             marker.setPosition(mouseEvent.latLng);

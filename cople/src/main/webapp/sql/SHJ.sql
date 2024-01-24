@@ -5,7 +5,7 @@ create table emp(
 	compeople_status number not null,
 	compeople varchar2(100) not null,
 	field_status number not null,
-	field varchar2(100) not null,
+	field number not null,
 	role_status number not null,
 	role varchar2(100) not null,
 	career_status number not null,
@@ -27,6 +27,7 @@ create table emp(
 	mem_num number not null,
 	filename varchar2(300) not null,
 	advice varchar2(300) not null,
+	location_api varchar2(300) not null,
 	constraint emp_pk primary key (emp_num),
 	constraint emp_fk foreign key (mem_num) references member(mem_num)
 );
