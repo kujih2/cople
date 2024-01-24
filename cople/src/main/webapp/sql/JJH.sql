@@ -4,9 +4,9 @@ CREATE TABLE market_product(
   product_title VARCHAR2(15) NOT NULL, -- 상품 글의 제목
   product_seller NUMBER NOT NULL, -- 판매자의 식별번호
   product_buyer NUMBER, -- 구매자의 식별번호
-  product_photo1 VARCHAR2(100) NOT NULL, -- 상품사진 1
-  product_photo2 VARCHAR2(100), -- 상품사진2
-  product_photo3 VARCHAR2(100), -- 상품사진3
+  product_photo1 VARCHAR2(200) NOT NULL, -- 상품사진 1
+  product_photo2 VARCHAR2(200), -- 상품사진2
+  product_photo3 VARCHAR2(200), -- 상품사진3
   product_photo4 VARCHAR2(100), -- 상품사진4
   product_content VARCHAR2(200) NOT NULL, -- 상품의 설명
   product_category NUMBER(1) NOT NULL, -- 0:중고, 1:나눔 

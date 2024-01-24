@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/JJH/market.photo.js"></script>
 <div class="page-main">
 <h1>상품 등록</h1>
 	<form:form action="write" modelAttribute="marketVO" id="register_form"
@@ -12,10 +13,17 @@
 			<ul>
 				<li>
 					<div class="market_photo">
-						<img src="${pageContext.request.contextPath}/images/camera icon.png" width="50">
+						<label for="upload" class="camera-click"><img src="${pageContext.request.contextPath}/images/camera icon.png" width="50"></label>
 						<br>
-						<div class="align-center"><b><span>0</span>/4</b></div>
+						<b><span id="count">0/4</span></b>
 					</div>
+					<div class="file-list">
+					</div>
+					
+					
+					<input type="file" id="upload" class="hide" onchange="addFile(this);" 
+										accept="image/gif,image/png,image/jpeg"  multiple>
+										
 					<small>※1개이상의 사진은 필수로 넣어주세요!</small>
 				</li>
 				<li>

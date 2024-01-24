@@ -3,6 +3,7 @@
 /* 장터 글쓰기 
 -------------------------*/
 .marketWrite1{
+	position:relative;
 	width:40%;
 	float:left;
 	padding:10px;
@@ -24,9 +25,58 @@ form#register_form{
 	width:70px;
 	height:60px;
 	padding:10px;
+	padding-left:30px;
+	padding-bottom:30px;
 	border: 1px solid gray;
 	border-radius:5px;
+	cursor:pointer;
+}
+.market_photo span{
+	position:absolute;
+	clear:both;
+	text-align:center;
+	padding-left:11px;
+	margin-top:40px;
+}
+.camera-click{
+	position:absolute;
+	cursor:pointer;
+	width:100px;
+	height:80px;
+	margin-left:-10px;
+}
+.hide{
+	display:none;
 }
 .market_photo img{
 	margin-left:10px;
+}
+.file-list{
+	position:absolute;
+	margin-left:120px;
+	margin-top:-80px;
+	width:280px;
+}
+.file-list .pr-photo{
+	margin-left:8px;
+}
+.file-list .filebox{
+	position:relative;
+	float:left;
+	margin-left:10px;
+}
+.delete-button{
+	position:absolute;
+	margin-top:-55px;
+	margin-left:55px;
+	width:18px;
+	height:20px;
+	background-color:black;
+	color:white;
+	font-size:16px;
+	text-align:center;
+	padding-top:-5px;
+	font-weight:bold;
+	border-radius:3px;
+	cursor:pointer;
 }
