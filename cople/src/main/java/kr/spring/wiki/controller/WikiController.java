@@ -146,7 +146,7 @@ public class WikiController {
 	}
 	/*=================
 	 * 위키 되돌리기
-	 ==================*/
+	 ==================*/ 
 	@GetMapping("wiki/undo")
 	public String wikiUndo(@RequestParam int update_num,
 						   @RequestParam int doc_num,

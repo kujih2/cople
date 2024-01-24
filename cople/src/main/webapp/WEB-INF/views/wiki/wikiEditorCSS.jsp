@@ -15,7 +15,7 @@ position:relative;
 }
 #sub_headings{
 position:absolute;}
-#editor p{
+#editor p{ 
 clear:both;
 }
 #editor h2,#editor h3,#editor h4{

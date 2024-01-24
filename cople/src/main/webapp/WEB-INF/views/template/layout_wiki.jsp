@@ -11,7 +11,7 @@
 <tiles:insertAttribute name="css" ignore="true"/>
 <tiles:insertAttribute name="js" ignore="true"/>
 
-</head>
+</head> 
 <body>
 <div id="main">
 	<div id="main_header">

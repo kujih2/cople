@@ -17,7 +17,7 @@
 		</c:if>
 		
 		<button onclick="location.href='history?doc_num=${wiki.doc_num}'">역사</button>
-</div>
+</div> 
 	
 <div id="content_main">
 <c:if test="${wiki.update_status == 0}">

@@ -46,7 +46,7 @@
 				</if>
 				<if test="keyfield == 3">
 					AND (update_content Like '%' || #{keyword} || '%')
-				</if>
+				</if> 
 			</if>
 	</sql>
 	<select id="selectRowCount" parameterType="map" resultType="integer">

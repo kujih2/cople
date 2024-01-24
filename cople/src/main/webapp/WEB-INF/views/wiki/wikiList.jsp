@@ -4,7 +4,7 @@
 <script>
 $(document).ready(function(){
 
-});
+}); 
 </script>
 <div>
 	<h2>검색</h2>

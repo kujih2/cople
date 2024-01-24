@@ -25,7 +25,7 @@ public interface WikiMapper {
 	
 	//최신 편집 갱신(이전 최신글의 status를 0으로)
 	@Update("UPDATE wiki_update SET update_status=0 WHERE update_num=#{update_num}")
-	public void changeWiki(int update_num);
+	public void changeWiki(int update_num); 
 	
 	//리스트 불러오기
 	public int selectRowCount(Map<String,Object> map);

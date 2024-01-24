@@ -46,7 +46,7 @@ public class WikiServiceImpl implements WikiService{
 		int newNum = wikiMapper.getNewDocNum();
 		wikiMapper.insertWiki(wiki);
 		return newNum;
-	}
+	} 
 
 	@Override
 	public List<WikiVO> selectLatest() {

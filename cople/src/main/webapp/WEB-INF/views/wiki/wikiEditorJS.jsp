@@ -14,7 +14,7 @@ $(document).ready(function() {
 	$('#update_summary').val('');
 	//수정 제출 시 에디터폼에서 다시 내용 주기
 	$('#btn_submit').on('click',function(){
-		event.preventDefault();
+		event.preventDefault(); 
 
     	$('#editor .parag-index').remove();
   		$('#textarea').val($('#editor').html());

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
 <!DOCTYPE html>
-<h2>최근 변경</h2>
+<h2>최근 변경</h2> 
 <table width="100%">
 	<c:forEach var="latest" items="${latest}">
 

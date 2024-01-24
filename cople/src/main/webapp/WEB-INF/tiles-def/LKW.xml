@@ -12,7 +12,7 @@
     	<put-attribute name="body" value="/WEB-INF/views/wiki/wikiDetail.jsp"/>
     	<put-attribute name="side" value="/WEB-INF/views/wiki/wikiLatest.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>    	
-    </definition>
+    </definition> 
     <definition name="wikiWrite" extends="wikiDetail">
 	    <put-attribute name="title" value="문서작성"/> 	
     	<put-attribute name="body" value="/WEB-INF/views/wiki/wikiWirte.jsp"/>    	    	
