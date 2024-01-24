@@ -73,6 +73,7 @@ public class MemberVO {
 		//파일명 지정
 		setPhoto_name(upload.getOriginalFilename());
 	}
+	
 }
 
 

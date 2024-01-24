@@ -16,6 +16,6 @@ public interface MemberService {
 		public void deleteAu_id(int mem_num);
 		//프로필 이미지 업데이트
 		public void updateProfile(MemberVO member);
-
+		
 
 }

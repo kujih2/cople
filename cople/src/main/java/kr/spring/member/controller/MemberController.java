@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -63,7 +64,6 @@ public class MemberController {
 		
 		return "common/resultView";
 	}
-	
 	/*==============================
 	 * 회원로그인
 	 *==============================*/	
@@ -109,11 +109,9 @@ public class MemberController {
 				log.debug("<<auth>> : " + member.getAuth());
 				log.debug("<<au_id>> : " + member.getAu_id());
 				
-				if(member.getAuth()==9) {//관리자는 관리자 메인으로 이동
-					return "redirect:/main/admin";
-				}else {//일반 사용자는 사용자 메인으로 이동
+			
 					return "redirect:/main/main";
-				}
+				
 			}
 			//인증 실패
 			throw new AuthCheckException();
