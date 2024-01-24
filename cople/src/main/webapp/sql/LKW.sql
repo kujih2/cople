@@ -12,7 +12,7 @@ create table wiki_update(
 	update_content clob,
 	doc_status number not null,
 	update_status number default 1 not null,
-	update_writer number not null,
+	update_writer varchar2(30),
 	update_summary varchar2(300),
 	update_date date default sysdate not null,
 	constraint wiki_update_pk primary key (update_num),
