@@ -26,7 +26,7 @@ create table emp(
 	workstart varchar2(100) not null,
 	mem_num number not null,
 	filename varchar2(300) not null,
-	comment varchar2(300) not null,
+	advice varchar2(300) not null,
 	constraint emp_pk primary key (emp_num),
 	constraint emp_fk foreign key (mem_num) references member(mem_num)
 );
