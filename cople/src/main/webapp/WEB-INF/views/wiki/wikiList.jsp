@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
 $(document).ready(function(){
-
+	$('#direct_btn').click(function(){
+	
+	});
 }); 
 </script>
 <div>
@@ -21,8 +23,8 @@ $(document).ready(function(){
 	
 	</form>
 		<div id="write_guide">
-			<p>찾는 문서가 없나요? 새 문서를 만들 수 있습니다.</p>
-				<button onclick="location.href='write?doc_name=${param.keyword}'">'${param.keyword}' 문서 만들기</button>
+			<p>찾는 문서가 없나요? 문서로 바로 가보세요</p>
+				<button id="direct_btn" onclick="location.href='write?doc_name=${param.keyword}'">'${param.keyword}' 문서로 바로가기</button>
 		</div>
 		
 		

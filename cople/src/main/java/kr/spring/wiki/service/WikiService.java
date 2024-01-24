@@ -17,7 +17,8 @@ public interface WikiService {
 	public WikiVO selectOldWiki(int update_num);
 	
 	public void undoWiki(int doc_num, int update_num);
- 
+	public WikiVO findDoc(String doc_name);
+
 
 
 

@@ -76,6 +76,13 @@ public class WikiServiceImpl implements WikiService{
 		updateWiki(update_num,wiki);
 	}
 
+	@Override
+	public WikiVO findDoc(String doc_name) {
+		return wikiMapper.findDoc(doc_name);
+	}
+
+
+
 	
 
 

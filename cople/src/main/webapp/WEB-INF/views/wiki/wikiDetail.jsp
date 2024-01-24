@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+
+
+
 <!-- 내용시작 -->
 <div id="content_header">
 	<h2>${wiki.doc_name}
@@ -27,7 +30,9 @@
 	작성된 내용이 없습니다.
 </c:if>
 <c:if test="${wiki.doc_status == 2}">
-	${wiki.update_content}
+	<div id="editor">
+		${wiki.update_content}
+	</div>
 </c:if>
 </div>
 <!-- 내용끝 -->

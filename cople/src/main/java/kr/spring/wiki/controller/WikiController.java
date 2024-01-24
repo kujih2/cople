@@ -48,6 +48,14 @@ public class WikiController {
 	public ModelAndView createDoc(@RequestParam String doc_name,Model model) {
 		log.debug("<<Controller-생성폼호출/새로 생성될 위키 문서 이름 >>:"+doc_name);
 		//위키문서 중복체크
+		if(wikiService.findDoc(doc_name) != null) {
+			
+			model.addAttribute("wiki",wikiService.findDoc(doc_name));
+			model.addAttribute("latest",wikiLatest(model));
+
+			return new ModelAndView("wikiDetail",model.asMap());
+		}
+		
 		
 		WikiVO wiki = new WikiVO();
 		
@@ -58,6 +66,7 @@ public class WikiController {
 		log.debug("<<Controller-생성폼호출//위키 문서>> : "+wiki);
 		
 		wikiService.updateWiki(0,wiki);
+		wiki = wikiService.selectWiki(doc_num);
 		
 		model.addAttribute("wiki",wiki);
 		model.addAttribute("latest",wikiLatest(model));

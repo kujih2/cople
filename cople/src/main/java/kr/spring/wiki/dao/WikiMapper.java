@@ -11,11 +11,15 @@ import kr.spring.wiki.vo.WikiVO;
 
 @Mapper
 public interface WikiMapper {
+	//문서 중복체크
+	@Select("SELECT * FROM wiki_doc JOIN wiki_update USING(doc_num) WHERE doc_name = #{doc_name} AND update_status=1")
+	public WikiVO findDoc(String doc_name);
+	
 	//위키문서 생성하기
 		//새로운 위키문서 번호 받아오기
 		@Select("SELECT wiki_doc_seq.nextval FROM dual")
 		public int getNewDocNum();
-	public int insertWiki(WikiVO wiki);
+	public void insertWiki(WikiVO wiki);
 	
 	//위키글 업데이트
 	public void updateWiki(WikiVO wiki);

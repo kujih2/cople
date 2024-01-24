@@ -10,17 +10,17 @@
     	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>    	
     	<put-attribute name="subHeader" value="/WEB-INF/views/wiki/wikiHeader.jsp"/>    	
     	<put-attribute name="body" value="/WEB-INF/views/wiki/wikiDetail.jsp"/>
+    	<put-attribute name="css" value="/WEB-INF/views/wiki/wikiEditorCSS.jsp"/>
+	    <put-attribute name="js" value="/WEB-INF/views/wiki/wikiEditorJS.jsp"/>
     	<put-attribute name="side" value="/WEB-INF/views/wiki/wikiLatest.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>    	
     </definition> 
     <definition name="wikiWrite" extends="wikiDetail">
-	    <put-attribute name="title" value="문서작성"/> 	
+	    <put-attribute name="title" value="문서작성"/>
     	<put-attribute name="body" value="/WEB-INF/views/wiki/wikiWirte.jsp"/>    	    	
     </definition>
     <definition name="wikiUpdate" extends="wikiDetail">
 	    <put-attribute name="title" value="문서편집"/>
-	    <put-attribute name="css" value="/WEB-INF/views/wiki/wikiEditorCSS.jsp"/>
-	    <put-attribute name="js" value="/WEB-INF/views/wiki/wikiEditorJS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/wiki/wikiUpdate.jsp"/>    	    	
     </definition>
     <definition name="wikiList" extends="wikiDetail">

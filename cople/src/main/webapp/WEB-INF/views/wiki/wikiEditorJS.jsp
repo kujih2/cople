@@ -209,6 +209,17 @@ $(document).ready(function() {
     function focusEditor() {
         editor.focus({preventScroll: true});
     }
-
+	
+/*     function updateEditorMenuPosition(){
+		var marginLeftValue = $('#side_branch').css('margin-left');
+		$('.editor-menu').css('left',marginLeftValue);
+    }
+    updateEditorMenuPosition();
+    $(window).resize(updateEditorMenuPosition);
+     */
+    
+    
+    
+    
 });
 </script>
