@@ -29,6 +29,11 @@ public class WikiController {
 	@Autowired
 	private WikiService wikiService;
 	
+	//최근변경된 문서들 목록 불러오기
+	public List<WikiVO> wikiLatest(Model model) {
+        List<WikiVO> latest = wikiService.selectLatest();
+        return latest;
+    }
 	/*=================
 	 * 위키 문서 생성
 	 ==================*/
@@ -55,9 +60,7 @@ public class WikiController {
 		wikiService.updateWiki(0,wiki);
 		
 		model.addAttribute("wiki",wiki);
-		
-		List<WikiVO> latest = wikiService.selectLatest();
-		model.addAttribute("latest",latest);
+		model.addAttribute("latest",wikiLatest(model));
 		
 		return new ModelAndView("wikiDetail",model.asMap());
 	}
@@ -66,7 +69,9 @@ public class WikiController {
 	 * 위키 글 목록
 	 ==================*/
 	@RequestMapping("/wiki/list")
-	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,@RequestParam(value="order",defaultValue="1") int order, String keyfield,String keyword) {
+	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								@RequestParam(value="order",defaultValue="1") int order,
+								String keyfield, String keyword, Model model) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -74,7 +79,7 @@ public class WikiController {
 		//전체/검색 레코드 수
 		int count = wikiService.selectRowCount(map);
 		log.debug("<<count>> :"+count);
-		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","%order="+order);
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
 		List<WikiVO> list = null;
 		
 		if(count > 0) {
@@ -84,7 +89,6 @@ public class WikiController {
 			
 			list = wikiService.selectList(map);
 		}
-		List<WikiVO> latest = wikiService.selectLatest();
 
 		
 		ModelAndView mav = new ModelAndView();
@@ -92,7 +96,7 @@ public class WikiController {
 		mav.addObject("count",count);
 		mav.addObject("list",list);
 		mav.addObject("page",page.getPage());
-		mav.addObject("latest",latest);
+		mav.addObject("latest",wikiLatest(model));
 		
 		return mav;
 	}
@@ -101,15 +105,20 @@ public class WikiController {
 	 * 위키 글 상세
 	 ==================*/
 	@RequestMapping("/wiki/detail")
-	public ModelAndView process(@RequestParam int doc_num,Model model) {
-		WikiVO wiki = wikiService.selectWiki(doc_num);   
-		model.addAttribute("wiki",wiki);
-		
-		List<WikiVO> latest = wikiService.selectLatest();
-		model.addAttribute("latest",latest);
-		//wiki.setDoc_name(StringUtil.useNoHtml(wiki.getDoc_name()));
+	public ModelAndView process(@RequestParam int doc_num,
+								@RequestParam(required=false) Integer update_num,
+								Model model) {
+		WikiVO wiki = null;
+		if(update_num == null) {
+			wiki = wikiService.selectWiki(doc_num);   
+		}else if(update_num !=null) {
+			wiki = wikiService.selectOldWiki(update_num);
+		}
+		log.debug("<<wiki>> :"+wiki);
 
-		
+		model.addAttribute("wiki",wiki);
+		model.addAttribute("latest",wikiLatest(model));
+		//wiki.setDoc_name(StringUtil.useNoHtml(wiki.getDoc_name()));
 		
 		return new ModelAndView("wikiDetail",model.asMap());
 	}
@@ -121,8 +130,7 @@ public class WikiController {
 	public String formUpdate(@RequestParam int doc_num,@RequestParam int update_num, Model model) {
 		WikiVO wikiVO = wikiService.selectWiki(doc_num);
 		model.addAttribute("wikiVO",wikiVO);
-		List<WikiVO> latest = wikiService.selectLatest();
-		model.addAttribute("latest",latest);
+		model.addAttribute("latest",wikiLatest(model));
 		
 		return "wikiUpdate";
 	}
@@ -136,7 +144,52 @@ public class WikiController {
 		
 		return "common/resultAlert";
 	}
-	
+	/*=================
+	 * 위키 되돌리기
+	 ==================*/
+	@GetMapping("wiki/undo")
+	public String wikiUndo(@RequestParam int update_num,
+						   @RequestParam int doc_num,
+							Model model,HttpServletRequest request) {
+		wikiService.undoWiki(doc_num, update_num);
+		
+		model.addAttribute("message","되돌리기 완료");
+		model.addAttribute("url",request.getContextPath()+"/wiki/detail?doc_num="+doc_num);
+		
+		return "common/resultAlert";
+	}
+	/*=================
+	 * 위키 역사
+	 ==================*/
+	@GetMapping("wiki/history")
+	public ModelAndView history(@RequestParam int doc_num,
+								@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								@RequestParam(value="order",defaultValue="1") int order,
+								Model model) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("doc_num",doc_num);
+		
+		//전체 히스토리 개수
+		int count = wikiService.selectRowCountOfHistory(doc_num);
+		PageUtil page = new PageUtil(currentPage,count,20,10,"history","&order="+order);
+		List<WikiVO> list = null;
+		if(count>0) {
+			map.put("order",order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+
+			list = wikiService.selectHistory(map);
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("wikiHistory");
+		mav.addObject("count",count);
+		mav.addObject("list",list);
+		mav.addObject("page",page.getPage());
+		mav.addObject("latest",wikiLatest(model));
+		mav.addObject("wiki",wikiService.selectWiki(doc_num));
+		
+		return mav;
+	}
 
 	
 	

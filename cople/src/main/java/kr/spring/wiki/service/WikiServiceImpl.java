@@ -53,6 +53,29 @@ public class WikiServiceImpl implements WikiService{
 		return wikiMapper.selectLatest();
 	}
 
+	@Override
+	public List<WikiVO> selectHistory(Map<String,Object> map) {
+		return wikiMapper.selectHistory(map);
+	}
+
+	@Override
+	public int selectRowCountOfHistory(int doc_num) {
+		return wikiMapper.selectRowCountOfHistory(doc_num);
+	}
+
+	@Override
+	public WikiVO selectOldWiki(int update_num) {
+		return wikiMapper.selectOldWiki(update_num);
+	}
+
+	@Override
+	public void undoWiki(int doc_num, int update_num) {
+		wikiMapper.changeWiki(wikiMapper.selectWiki(doc_num).getUpdate_num());
+		WikiVO wiki = wikiMapper.selectOldWiki(update_num);
+		wiki.setUpdate_summary("문서 되돌리기");
+		updateWiki(update_num,wiki);
+	}
+
 	
 
 

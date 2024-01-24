@@ -35,6 +35,16 @@ public interface WikiMapper {
 	@Select("SELECT * FROM (SELECT * FROM wiki_doc JOIN wiki_update USING(doc_num) WHERE update_status=1 ORDER BY update_date DESC) WHERE ROWNUM <=15")
 	public List<WikiVO> selectLatest();
 	
+	//위키 역사 개수 불러오기
+	@Select("SELECT COUNT(*) FROM wiki_doc JOIN wiki_update USING(doc_num) WHERE doc_num=#{doc_num}")
+	public int selectRowCountOfHistory(int doc_num);
+	//위키 역사 리스트 불러오기
+	@Select("SELECT * FROM wiki_doc JOIN wiki_update USING(doc_num) WHERE doc_num=#{doc_num} ORDER BY update_date DESC")
+	public List<WikiVO> selectHistory(Map<String,Object> map);
+	@Select("SELECT * FROM wiki_doc JOIN wiki_update USING(doc_num) WHERE update_num=#{update_num}")
+	public WikiVO selectOldWiki(int update_num);
+	
+	
 	
 	
 }

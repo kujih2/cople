@@ -4,12 +4,12 @@
     
 <!DOCTYPE html>
 <h2>최근 변경</h2>
-<table>
+<table width="100%">
 	<c:forEach var="latest" items="${latest}">
 
 				<tr onclick="location.href='detail?doc_num=${latest.doc_num}'" style="cursor:pointer;">
 					<td>${latest.doc_name}</td>
-					<td>${latest.update_date}</td>
+					<td class="align-right">${latest.update_date}</td>
 				</tr>
 
 	</c:forEach>
