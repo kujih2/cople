@@ -100,16 +100,13 @@ a:hover{
 .align-right{
 	text-align:right;
 }
-/* 상단 메뉴
--------------------------*/
-/* 메인
--------------------------*/
+
 /* 공통 등록, 수정 폼
 -------------------------*/
 form{
 	width:600px;
 	margin:0 auto;
-	border:1px solid #000;
+	border:none;
 	padding:10px 10px 30px 10px;
 }
 ul{
@@ -125,11 +122,15 @@ form ul li label{
 	float:left;
 }
 input{
-	margin-top:4px;
+	margin-top:8px;
+	margin-bottom:10px;
 	padding:5px;
 }
-input[type="text"],input[type="password"],input[type="email"]{
-	width:350px;
+input[type="text"],input[type="textarea"]{
+	font-size:15px;
+	width:746px;
+	height:30px;
+	padding-left:10px;
 }
 input[type="checkbox"]{
 	margin:11px 0 10px 0;
@@ -192,6 +193,16 @@ table.striped-table tr:nth-child(odd){
 -----------------------*/
 form#search_form #order{
 	height:32px;
+}
+div.board_list div{
+	float:left;
+	width:auto;
+	padding-right:10px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+div.both{
+	clear:both;
 }
 /*게시판 폼
 ---------------------*/
