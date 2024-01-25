@@ -15,9 +15,6 @@
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색할 내용을 입력하세요">
 			</li>
 			<li>
-				<input type="submit" value="찾기">
-			</li>
-			<li>
 				<select id="order" name="order">
 					<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
 					<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
@@ -47,15 +44,22 @@
 			<li>
 			<c:forEach var="board" items="${list}">
 				<div class="board_list" >
-					<div>사진</div>
+					<div>
+					<img src="${pageContext.request.contextPath}/member/photoView" width="25" height="25" class="my-photo">
+					</div>
 					<div>
 						<c:if test="${empty board.nick_name}">${board.id}</c:if>
 						<c:if test="${!empty board.nick_name}">${board.nick_name}</c:if>
 					</div>	
+					<div>
+						<c:if test="${board.auth == 1}">유저</c:if>
+						<c:if test="${board.auth == 2}">현직자</c:if>
+						<c:if test="${board.auth == 9}">관리자</c:if>
+					</div>
 					<div>${board.reg_date}</div>
 				</div>
 				<div class="both">
-					<a href="detail?board_num=${board.board_num}">${board.title}</a>
+					<a href="boardDetail?board_num=${board.board_num}">${board.title}</a>
 				</div>
 				<div class="board_list both">
 					<div>조회 ${board.hit}</div>
@@ -70,4 +74,22 @@
 		<div class="align-center">${page}</div>
 	</c:if>
 </div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//검색 유효성 체크
+	$('#search_form').submit(function(){
+		if($('#keyword').val().trim()==''){
+			alert('검색어를 입력하세요!');
+			$('#keyword').val('').focus();
+			return false;
+		}
+	});//end of submit
+	
+	//정렬 선택
+	$('#order').change(function(){
+		location.href='boardList?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
+	});
+});
+</script>
 <!---내용 끝 -->  

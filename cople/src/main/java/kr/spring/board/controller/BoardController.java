@@ -23,7 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -96,7 +98,7 @@ public class BoardController {
 		int count = boardService.selectRowCount(map);
 		log.debug("<<board count>> : " + count);
 		
-		PageUtil page = new PageUtil(keyfield, keyword, currentPage, count,20,10, "list", "&order="+order);
+		PageUtil page = new PageUtil(keyfield, keyword, currentPage, count,5,10, "boardList", "&order="+order);
 		
 		List<BoardVO> list = null;
 		if(count > 0) {
@@ -115,4 +117,70 @@ public class BoardController {
 		
 		return mav;
 	}
+	
+	/*===========================
+	 * 게시판 글 상세
+	 *==========================*/
+	@RequestMapping("/community/boardDetail")
+	public ModelAndView process(@RequestParam int board_num) {
+		log.debug("<<게시판 글 상세 board_num>> : " + board_num);
+		
+		//해당 글의 조회수 증가
+		boardService.updateHit(board_num);
+		
+		BoardVO board = boardService.detailBoard(board_num);
+		//제목에 태그를 허용하지 않음
+		board.setTitle(StringUtil.useNoHtml(board.getTitle()));
+								//타일스설정명,  속성명, 속성값
+		return new ModelAndView("boardDetail","board",board);
+	}
+	
+	/*===========================
+	 * 게시판 글 수정
+	 *==========================*/
+	//수정 폼 호출
+	@GetMapping("/community/boardUpdate")
+	public String formUpdate(@RequestParam int board_num,Model model) {
+		BoardVO boardVO = boardService.detailBoard(board_num);
+		
+		model.addAttribute("boardVO",boardVO);
+		
+		return "boardUpdate";
+	}
+	//수정 폼에서 전송된 데이터 처리
+	@PostMapping("/community/boardUpdate")
+	public String submitUpdate(@Valid BoardVO boardVO, BindingResult result,
+								HttpServletRequest request, Model model) throws IOException {
+		log.debug("<<글 수정>> : " + boardVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return "boardUpdate";
+		}
+		//ip 셋팅
+		boardVO.setIp(request.getRemoteAddr());
+		
+		//글 수정
+		boardService.updateBoard(boardVO);
+		
+		//View에 표시할 메세지
+		model.addAttribute("message","글 수정 완료");
+		model.addAttribute("url", request.getContextPath()+"/community/boardDetail?board_num="+boardVO.getBoard_num());
+		
+		return "common/resultAlert";
+	}
+	
+	/*===========================
+	 * 게시판 글 삭제
+	 *==========================*/
+	@RequestMapping("/community/boardDelete")
+	public String submitDelete(@RequestParam int board_num, HttpServletRequest request) {
+		log.debug("<<게시판 글 삭제>> : " + board_num);
+		
+		//글 삭제
+		boardService.deleteBoard(board_num);
+		
+		return "redirect:/community/boardList";
+	}
+	
 }

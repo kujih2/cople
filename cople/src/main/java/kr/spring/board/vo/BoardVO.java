@@ -14,7 +14,7 @@ import lombok.ToString;
 public class BoardVO {
 	private int board_num;
 	private int board_status;//글의 상태 0:일반글, 1:블라인글, 2:신고처리완료글, 9:관리자 글
-	private int save_temp;//글 임시저장 여부
+	private String save_temp;//글 임시저장 여부
 	@NotBlank
 	private String title;
 	@NotBlank
@@ -27,4 +27,5 @@ public class BoardVO {
 
 	private String id;
 	private String nick_name;
+	private int auth;
 }

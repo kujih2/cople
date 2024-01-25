@@ -295,8 +295,12 @@ form#mre_form{
 	border:none;
 	margin:5px;
 }
-
-
+/*프로필*/
+.my-photo{
+   object-fit:cover;
+   object-position:top;
+   border-radius:50%;
+}
 
 
 

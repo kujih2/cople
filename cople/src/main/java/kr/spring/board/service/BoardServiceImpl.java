@@ -29,23 +29,22 @@ public class BoardServiceImpl implements BoardService{
 		boardMapper.insertBoard(board);
 	}
 	@Override
-	public BoardVO selectBoard(int board_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardVO detailBoard(int board_num) {
+		return boardMapper.detailBoard(board_num);
 	}
 	@Override
 	public void updateHit(int board_num) {
-		// TODO Auto-generated method stub
+		boardMapper.updateHit(board_num);
 		
 	}
 	@Override
 	public void updateBoard(BoardVO board) {
-		// TODO Auto-generated method stub
+		boardMapper.updateBoard(board);
 		
 	}
 	@Override
 	public void deleteBoard(int board_num) {
-		// TODO Auto-generated method stub
+		boardMapper.deleteBoard(board_num);
 		
 	}
 }
