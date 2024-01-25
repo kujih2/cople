@@ -13,7 +13,7 @@ CREATE TABLE market_product(
   product_price NUMBER DEFAULT 0, -- 상품 가격 0
   product_place VARCHAR2(50), -- 거래 장소
   product_placeDetail VARCHAR2(50), -- 거래 장소 상세
-  product_sale NUMBER(1) NOT NULL, -- 판매현황 (0:판매중, 1:거래완료)
+  product_sale NUMBER(1) DEFAULT 0 NOT NULL, -- 판매현황 (0:판매중, 1:거래완료)
   product_buyerReview VARCHAR2(100), -- 구매자 리뷰
   product_sellerReview VARCHAR2(100), -- 판매자 리뷰
   product_status NUMBER DEFAULT 0 NOT NULL, -- 판매글의 상태(0:열람가능, 1:신고 처리 완료)

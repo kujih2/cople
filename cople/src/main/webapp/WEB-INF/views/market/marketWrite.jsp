@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/JJH/market.photo.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/JJH/market.write.js"></script>
 <div class="page-main">
 <h1>상품 등록</h1>
 	<form:form action="write" modelAttribute="marketVO" id="register_form"
@@ -21,8 +21,8 @@
 					</div>
 					
 					
-					<input type="file" id="upload" class="hide" onchange="addFile(this);" 
-										accept="image/gif,image/png,image/jpeg"  multiple>
+					<input type="file" id="upload" class="hide"  
+									accept="image/gif,image/png,image/jpeg"  multiple>
 										
 					<small>※1개이상의 사진은 필수로 넣어주세요!</small>
 				</li>
@@ -37,8 +37,9 @@
 					<form:label path="product_category"><h2>거래 방식</h2></form:label>
 				</li>
 				<li>
-					<input type="button" value="판매하기">
-					<input type="button" value="나눔하기">
+					<input type="button" value="판매하기" class="sale-button">
+					<input type="button" value="나눔하기" class="share-button">
+					<form:input path="product_category"  type="hidden"/>
 				</li>
 				<li>
 					<form:input path="product_price" placeholder="가격을 입력해 주세요."/>
@@ -66,7 +67,7 @@
 		</div>
 		<div class="align-center clear">
 			<form:button>작성 완료</form:button>
-			<input type="button" value="작성 취소" onclick="">
+			<input type="button" value="작성 취소" onclick="location.href='list'">
 		</div>	
 	</form:form>
 </div>
