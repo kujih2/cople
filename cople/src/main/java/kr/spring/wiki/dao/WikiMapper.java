@@ -23,13 +23,16 @@ public interface WikiMapper {
 	
 	//위키글 업데이트
 	public void updateWiki(WikiVO wiki);
+	//위키 삭제
+	public void deleteWiki(WikiVO wiki);
 	//위키 문서 정보 불러오기
 	@Select("SELECT * FROM wiki_doc LEFT OUTER JOIN wiki_update USING(doc_num) WHERE doc_num=#{doc_num} AND update_status=1")
 	public WikiVO selectWiki(int doc_num);
 	
 	//최신 편집 갱신(이전 최신글의 status를 0으로)
 	@Update("UPDATE wiki_update SET update_status=0 WHERE update_num=#{update_num}")
-	public void changeWiki(int update_num); 
+	public void changeWiki(int update_num);
+	
 	
 	//리스트 불러오기
 	public int selectRowCount(Map<String,Object> map);
@@ -47,6 +50,8 @@ public interface WikiMapper {
 	public List<WikiVO> selectHistory(Map<String,Object> map);
 	@Select("SELECT * FROM wiki_doc JOIN wiki_update USING(doc_num) WHERE update_num=#{update_num}")
 	public WikiVO selectOldWiki(int update_num);
+	@Select("SELECT * FROM wiki_doc JOIN wiki_update USING (doc_num) WHERE doc_status=2 AND update_status=1 AND doc_name LIKE #{doc_name}||'%' ORDER BY doc_name ASC")
+	public List<WikiVO> searchInternal(String doc_name);
 	
 	
 	

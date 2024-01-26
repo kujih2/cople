@@ -29,7 +29,27 @@
 			#{update_content ,jdbcType=VARCHAR},
 			2,
 			1,
+			#{update_writer ,jdbcType=VARCHAR},
+			#{update_summary})
+	</insert>
+<!-- 위키 문서 삭제 -->
+<insert id="deleteWiki" parameterType="wikiVO">
+		INSERT INTO wiki_update(
+			doc_num,
+			update_num,
+			update_content,
+			doc_status,
+			update_status,
+			update_writer,
+			update_summary
+			)
+		VALUES(
+			#{doc_num},
+			wiki_update_seq.nextval,
+			#{update_content ,jdbcType=VARCHAR},
 			1,
+			1,
+			#{update_writer ,jdbcType=VARCHAR},
 			#{update_summary})
 	
 	</insert>

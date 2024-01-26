@@ -26,7 +26,11 @@ public class AppConfig implements WebMvcConfigurer{
 				.addPathPatterns("/member/myPage")
 				.addPathPatterns("/member/write")
 				.addPathPatterns("/member/update")
-				.addPathPatterns("/member/delete");
+				.addPathPatterns("/member/delete")
+				.addPathPatterns("/wiki/update")
+				.addPathPatterns("/wiki/undo")
+				.addPathPatterns("/wiki/delete")
+				;
 	}
 	
 	@Bean

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
 import kr.spring.wiki.service.WikiService;
@@ -135,7 +137,7 @@ public class WikiController {
 	/*=================
 	 * 위키 글 편집
 	 ==================*/
-	@GetMapping("wiki/update")
+	@GetMapping("/wiki/update")
 	public String formUpdate(@RequestParam int doc_num,@RequestParam int update_num, Model model) {
 		WikiVO wikiVO = wikiService.selectWiki(doc_num);
 		model.addAttribute("wikiVO",wikiVO);
@@ -144,7 +146,8 @@ public class WikiController {
 		return "wikiUpdate";
 	}
 	@PostMapping("/wiki/update")
-	public String submitUpdate(int update_num,WikiVO wikiVO,BindingResult result,HttpServletRequest request, Model model) {
+	public String submitUpdate(int update_num,WikiVO wikiVO,BindingResult result,HttpServletRequest request, Model model,HttpSession session) {
+		wikiVO.setUpdate_writer(((MemberVO)session.getAttribute("user")).getId());
 		log.debug("<<위키 편집>> : "+wikiVO);
 		wikiService.updateWiki(update_num,wikiVO);
 		
@@ -152,15 +155,32 @@ public class WikiController {
 		model.addAttribute("url",request.getContextPath()+"/wiki/detail?doc_num="+wikiVO.getDoc_num());
 		
 		return "common/resultAlert";
+	}	
+	/*=================
+	 * 위키 삭제
+	 ==================*/
+	@GetMapping("wiki/delete")
+	public String deleteWiki(@RequestParam int doc_num,@RequestParam int update_num, Model model,HttpSession session,HttpServletRequest request) {
+		WikiVO wiki = new WikiVO();
+		wiki.setUpdate_writer(((MemberVO)session.getAttribute("user")).getId());
+		wiki.setDoc_num(doc_num);
+		wiki.setUpdate_summary("문서 삭제");
+		wikiService.deleteWiki(doc_num, update_num, wiki);
+		
+		model.addAttribute("message","삭제 완료");
+		model.addAttribute("url",request.getContextPath()+"/wiki/detail?doc_num="+wiki.getDoc_num());
+		
+		return "common/resultAlert";
 	}
+	
 	/*=================
 	 * 위키 되돌리기
 	 ==================*/ 
-	@GetMapping("wiki/undo")
+	@GetMapping("/wiki/undo")
 	public String wikiUndo(@RequestParam int update_num,
 						   @RequestParam int doc_num,
-							Model model,HttpServletRequest request) {
-		wikiService.undoWiki(doc_num, update_num);
+							Model model,HttpServletRequest request,HttpSession session) {
+		wikiService.undoWiki(doc_num, update_num,((MemberVO)session.getAttribute("user")).getId());
 		
 		model.addAttribute("message","되돌리기 완료");
 		model.addAttribute("url",request.getContextPath()+"/wiki/detail?doc_num="+doc_num);
@@ -170,7 +190,7 @@ public class WikiController {
 	/*=================
 	 * 위키 역사
 	 ==================*/
-	@GetMapping("wiki/history")
+	@GetMapping("/wiki/history")
 	public ModelAndView history(@RequestParam int doc_num,
 								@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 								@RequestParam(value="order",defaultValue="1") int order,
