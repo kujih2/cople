@@ -44,7 +44,7 @@ public class MarketController {
             Model model ) throws IllegalStateException, IOException  {
 		
 		MemberVO vo = (MemberVO)session.getAttribute("user");
-		
+		log.debug("user:" + vo.getMem_num() );
 		marketVO.setProduct_seller(vo.getMem_num());
 		//파일 업로드
 		int count = Integer.parseInt(request.getParameter("count"));
@@ -71,11 +71,12 @@ public class MarketController {
 		}
 		
 		log.debug("제목 : " + marketVO.getProduct_title());
+		log.debug("판매자 : " + marketVO.getProduct_seller());
 		log.debug("파일명0 : " + marketVO.getFilename0());
 		log.debug("파일명1 : " + marketVO.getFilename1());
 		log.debug("파일명2 : " + marketVO.getFilename2());
 		log.debug("파일명3 : " + marketVO.getFilename3());
-		log.debug("제목 : " + marketVO.getProduct_content());
+		log.debug("내용: " + marketVO.getProduct_content());
 		log.debug("카테고리 : " + marketVO.getProduct_category());
 		log.debug("가격 : " + marketVO.getProduct_price());
 		
