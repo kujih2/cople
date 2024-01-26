@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- MyPage 메뉴 시작 -->
 <div class="side-bar">
-	<ul>
+	<ul> 
 		<li>
 			<img src="${pageContext.request.contextPath}/member/photoView" width="200" height="200" class="my-photo">
 			<div class="camera" id="photo_btn">
