@@ -16,7 +16,6 @@ INSERT INTO market_product(product_title,product_seller
 							${product_content},${product_category},
 							${product_price},${product_place},
 							${product_placeDetail})
-						   
-						    
+									    
 </insert>
 </mapper>
