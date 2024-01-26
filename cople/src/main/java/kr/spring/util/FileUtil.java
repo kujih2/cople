@@ -55,4 +55,20 @@ public class FileUtil {
 		}
 		return readbyte;
 	}
+	//다중 파일 생성
+		public static String createMultiFile(HttpServletRequest request, MultipartFile[] file, int count) throws IllegalStateException, IOException {
+			
+			//절대 경로 구하기
+			String absolutePath = request.getServletContext().getRealPath(UPLOAD_PATH);
+			//파일명 생성
+			String filename =  null;
+				if(!file[count].isEmpty()) {
+					filename = UUID.randomUUID()+"_"+file[count].getOriginalFilename();
+					//원하는 경로에 파일 저장
+					file[count].transferTo(new File(absolutePath+"/"+filename));
+					
+			}
+			
+			return filename;
+		}
 }

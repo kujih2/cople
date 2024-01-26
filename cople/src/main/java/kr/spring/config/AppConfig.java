@@ -30,6 +30,7 @@ public class AppConfig implements WebMvcConfigurer{
 				.addPathPatterns("/wiki/update")
 				.addPathPatterns("/wiki/undo")
 				.addPathPatterns("/wiki/delete")
+				.addPathPatterns("/market/write")
 				;
 	}
 	

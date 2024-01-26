@@ -20,7 +20,7 @@ public class MarketVO {
 	private String filename1;
 	private String filename2;
 	private String filename3;
-	private MultipartFile upload;
+	private MultipartFile[] upload = new MultipartFile[4];
 	private String product_content;
 	private int product_category;
 	private Integer product_price;

@@ -4,16 +4,19 @@
 <!-- 장터 글 등록 -->
 <insert id="insertMarket" parameterType="marketVO">
 INSERT INTO market_product(product_title,product_seller
-						    ,product_buyer,product_photo1,
+						    ,product_photo0,product_photo1,
 						    product_photo2,product_photo3,
-						    product_photo4,product_content,
-						    product_category,product_price,
-						    product_place,product_placedetail 
+						    product_content,product_category,
+						    product_price, product_place,
+						    product_placedetail 
 						    )VALUES(
 						    #{product_title},#{product_seller},
-						    #{product_buyer},#{filename1},
-						    #{filename2,jdbcType=VARCHAR},#{filename3,jdbcType=VARCHAR},
-						    #{filename4,jdbcType=VARCHAR},${product_category},
-						    ${product_price},${product_place},${product_placeDetail})
+							#{filename0},#{filename1,jdbcType=VARCHAR},
+							#{filename2,jdbcType=VARCHAR}, #{filename3,jdbcType=VARCHAR},
+							${product_content},${product_category},
+							${product_price},${product_place},
+							${product_placeDetail})
+						   
+						    
 </insert>
 </mapper>

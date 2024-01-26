@@ -13,7 +13,7 @@
 			<ul>
 				<li>
 					<div class="market_photo">
-						<label for="upload" class="camera-click"><img src="${pageContext.request.contextPath}/images/camera icon.png" width="50"></label>
+						<form:label path="upload" class="camera-click"><img src="${pageContext.request.contextPath}/images/camera icon.png" width="50"></form:label>
 						<br>
 						<b><span id="count">0/4</span></b>
 					</div>
@@ -21,8 +21,9 @@
 					</div>
 					
 					<input type="hidden" name="count" id="photo_count">
-					<input type="file" id="upload" class="hide"  
+					<input type="file" id="upload" name="upload" 
 									accept="image/gif,image/png,image/jpeg"  multiple>
+					<input type="hidden" name="count" id="photo_count">
 										
 					<span id="photo_valid" class="valid-message"></span>
 				</li>

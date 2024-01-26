@@ -1,8 +1,9 @@
 $(function(){
 var fileNo = 0;
+var filesArr = new Array();
+var count = 0;
 /* 첨부파일 추가 */
   $('#upload').change(function(){
-	var count = 0;
     var maxFileCnt = 4;   // 첨부파일 최대 개수
     var attFileCnt = document.querySelectorAll('.filebox').length;    // 기존 추가된 첨부파일 개수
     var remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
@@ -12,7 +13,7 @@ var fileNo = 0;
     
 
    if(this.files.length==1){
-		if(count+this.files.length>4){
+		if(filesArr.length+this.files.length>4){
 			alert("첨부파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.1");
 			return;
 		}
@@ -24,7 +25,7 @@ var fileNo = 0;
 			loadImage(reader,this.files[0]);
 		}
     }else if(this.files.length>1 && this.files.length <=4){
-		if(count+this.files.length>4){
+		if(filesArr.length+this.files.length>4){
 			alert("첨부파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.2");
 			return;
 		}
@@ -46,36 +47,41 @@ var fileNo = 0;
 				// 목록 추가
            		 let htmlData = '';
             	 htmlData += '<div id="photo' + fileNo + '" class="filebox">';
-                 htmlData += '<input type="hidden" name="fileName'+ count +'" value="'+ file.name +'">' ;
+                 htmlData += '<input type="hidden" name="fileName'+ count +'" value="'+ file +'">' ;
 			     htmlData += '<img width="50" height="50" class="pr-photo' + fileNo + ' pr-image" > <div class="delete-button" data-num="'+fileNo+'" >x</div>';
                  htmlData += '</div>';
 				 $('.file-list').append(htmlData);
-			
-				$('.pr-photo' + fileNo).attr('src',reader.result);
 				count++;
+				filesArr.push(file);
+				$('.pr-photo' + fileNo).attr('src',reader.result);
 				//선택한 이미지수 변경
-				$('#count').text(count + "/4");
+				$('#count').text(filesArr.length + "/4");
+				console.log("addcount:" + count);
 				$('#photo_count').val(count);
                 fileNo++;
 				
 		};
 	}
+   
+  });
+	
 			/* 첨부파일 삭제 */
 			$(document).on('click','.delete-button',function() {
 				let num = $(this).attr('data-num');
-				console.log("before delcount:" + count);
 			   $("#photo" + num).remove();
-				count--;
-				//선택한 이미지수 변경
-				$('#count').text(count + "/4");
-				$('#photo_count').val(count);
-				console.log("count:" + count);
 				
-			});
-    // 초기화
-   $("input[type=file]").val("");
-  });
-
+				filesArr.splice(0,1);
+				count--;
+			
+					
+				//선택한 이미지수 변경
+				$('#count').text(filesArr.length + "/4");
+				$('#photo_count').val(count);
+				if(filesArr.length== 0){
+					// 초기화
+   					$("input[type=file]").val("");
+				}
+			});	
 
 	/*---------------
 	사진 개수 유효성 체크
