@@ -2,9 +2,12 @@
     pageEncoding="UTF-8"%>
 <style>
 #editor {
-        border: 1px solid #ccc;
+
         padding: 10px;
         min-height: 200px;
+}
+#editor:focus {
+    outline: none;
 }
 .editor-menu{
 	position:relative;

@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.market.dao.MarketMapper">
-
-
+<!-- 장터 글 등록 -->
+<insert id="insertMarket" parameterType="marketVO">
+INSERT INTO market_product(product_title,product_seller
+						    ,product_buyer,product_photo1,
+						    product_photo2,product_photo3,
+						    product_photo4,product_content,
+						    product_category,product_price,
+						    product_place,product_placedetail 
+						    )VALUES(
+						    #{product_title},#{product_seller},
+						    #{product_buyer},#{filename1},
+						    #{filename2,jdbcType=VARCHAR},#{filename3,jdbcType=VARCHAR},
+						    #{filename4,jdbcType=VARCHAR},${product_category},
+						    ${product_price},${product_place},${product_placeDetail})
+</insert>
 </mapper>

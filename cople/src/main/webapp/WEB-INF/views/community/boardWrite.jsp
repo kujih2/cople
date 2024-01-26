@@ -3,24 +3,24 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>    
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContetx.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="hrrp://stackpath.bootstrapcnd.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContetx.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContetx.request.contextPath}/js/uploadAdapter.js"></script>
 
 <div class="page-main">
-	<h2>글쓰기</h2>
-	<form:form action="write" modelAttribute="boardVO" id="register_form"
+	<form:form action="boardWrite" modelAttribute="boardVO" id="register_form"
 											enctype="multipart/form-data">
 		<form:errors element="div" cssClass="error-color"/>
+		<div class="form-main">
 		<ul>
 			<li>
-				<form:label path="title">제목</form:label>
-				<form:input path="title"/>
+				제목
+				<form:input path="title" placeholder="제목을 입력하세요."/>
 				<form:errors path="title" cssClass="error-color"/>
 			</li>
-			<li><b>내용</b></li>
 			<li>
-				<form:textarea path="content"/>
+				내용
+				<form:textarea path="content" placeholder="내용을 입력하세요."/>
 				<form:errors path="content" cssClass="error-color"/>
 				<script>
 					function MyCustomUploadAdapterPlugin(editor){
@@ -41,14 +41,11 @@
 						});
 				</script>
 			</li>
-			<li>
-				<form:label path="upload">파일업로드</form:label>
-				<input type="file" name="upload" id="upload">
-			</li>
 		</ul>
+		</div>
 		<div class="align-center">
 			<form:button>전송</form:button>
-			<input type="button" value="목록" onclick="location.href='list'">
+			<input type="button" value="목록" onclick="location.href='boardList'">
 		</div>
 	</form:form>
 </div>

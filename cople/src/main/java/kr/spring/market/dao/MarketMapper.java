@@ -12,7 +12,7 @@ public interface MarketMapper {
    //부모글
 	public List<MarketVO> selectList(Map<String,Object> map);
     public int selectRowCount(Map<String,Object> map);
-    public void insertMarket(MarketVO market);
+    public void insertMarket(MarketVO marketVO);
     public MarketVO selectMarketDetail(int product_num);
     public void updateMarket(int product_num);
     public void deleteMarket(int product_num);

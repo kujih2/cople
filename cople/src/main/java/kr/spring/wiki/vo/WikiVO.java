@@ -19,7 +19,7 @@ public class WikiVO {
 	private String update_content;
 	private int doc_status;
 	private int update_status;
-	private int update_writer;
+	private String update_writer;
 	private String update_summary;
 	private Date update_date;
 }

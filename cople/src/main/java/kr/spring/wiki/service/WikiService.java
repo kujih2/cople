@@ -16,8 +16,11 @@ public interface WikiService {
 	public List<WikiVO> selectHistory(Map<String,Object> map);
 	public WikiVO selectOldWiki(int update_num);
 	
-	public void undoWiki(int doc_num, int update_num);
- 
+	public void undoWiki(int doc_num, int update_num, String update_writer);
+	public WikiVO findDoc(String doc_name);
+	public void deleteWiki(int doc_num, int update_num,WikiVO wiki);
+
+	public List<WikiVO> searchInternal(String doc_name);
 
 
 

@@ -69,12 +69,32 @@ public class WikiServiceImpl implements WikiService{
 	}
 
 	@Override
-	public void undoWiki(int doc_num, int update_num) {
+	public void undoWiki(int doc_num, int update_num, String update_writer) {
 		wikiMapper.changeWiki(wikiMapper.selectWiki(doc_num).getUpdate_num());
 		WikiVO wiki = wikiMapper.selectOldWiki(update_num);
 		wiki.setUpdate_summary("문서 되돌리기");
+		wiki.setUpdate_writer(update_writer);
 		updateWiki(update_num,wiki);
 	}
+
+	@Override
+	public WikiVO findDoc(String doc_name) {
+		return wikiMapper.findDoc(doc_name);
+	}
+
+	@Override
+	public void deleteWiki(int doc_num, int update_num, WikiVO wiki) {
+		wikiMapper.changeWiki(update_num);
+		wikiMapper.deleteWiki(wiki);
+		
+	}
+
+	@Override
+	public List<WikiVO> searchInternal(String doc_name) {
+		return wikiMapper.searchInternal(doc_name);
+	}
+
+
 
 	
 

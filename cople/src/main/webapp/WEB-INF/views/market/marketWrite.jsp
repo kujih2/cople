@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/JJH/market.photo.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/JJH/market.write.js"></script>
 <div class="page-main">
 <h1>상품 등록</h1>
 	<form:form action="write" modelAttribute="marketVO" id="register_form"
@@ -20,29 +20,32 @@
 					<div class="file-list">
 					</div>
 					
-					
-					<input type="file" id="upload" class="hide" onchange="addFile(this);" 
-										accept="image/gif,image/png,image/jpeg"  multiple>
+					<input type="hidden" name="count" id="photo_count">
+					<input type="file" id="upload" class="hide"  
+									accept="image/gif,image/png,image/jpeg"  multiple>
 										
-					<small>※1개이상의 사진은 필수로 넣어주세요!</small>
+					<span id="photo_valid" class="valid-message"></span>
 				</li>
 				<li>
 					<form:label path="product_title"><h2>제목</h2></form:label>
 				</li>
 				<li>
-					<form:input path="product_title" placeholder="제목을 입력해 주세요."/>
-					<form:errors path="product_title" cssClass="error-color"/>
+					<span class="letter-count" id="title_count">0/15</span>
+					<form:input path="product_title" placeholder="제목을 입력해 주세요." autocomplete='off'/>
+					<span id="title_valid" class="valid-message"></span>
 				</li>
 				<li>
 					<form:label path="product_category"><h2>거래 방식</h2></form:label>
 				</li>
 				<li>
-					<input type="button" value="판매하기">
-					<input type="button" value="나눔하기">
+					<input type="button" value="판매하기" class="sale-button">
+					<input type="button" value="나눔하기" class="share-button">
+					<form:input path="product_category"  type="hidden"/>
 				</li>
 				<li>
-					<form:input path="product_price" placeholder="가격을 입력해 주세요."/>
+					<form:input path="product_price" placeholder="가격을 입력해 주세요." autocomplete='off'/>
 					<form:errors path="product_price" cssClass="error-color"/>
+					<span id="price_valid" class="valid-message"></span>
 				</li>
 			</ul>
 		</div>
@@ -52,9 +55,10 @@
 					<h3>상품에 대한 자세한 설명을 적어주세요</h3>
 				</li>
 				<li>
+					<span class="letter-count" id="content_count">0/300</span>
 					<form:textarea path="product_content" placeholder="신뢰할 수 있는 거래를 위해 자세히 적어주세요.
 비속어,유해한 내용,허위 사실은 신고 조치 대상이 될 수 있습니다." rows="7" cols="50"/>
-					<form:errors path="product_content" cssClass="error-color"/>
+					<span id="content_valid" class="valid-message"></span>
 				</li>
 				<li>
 					<h2>거래 희망 장소</h2>
@@ -66,7 +70,7 @@
 		</div>
 		<div class="align-center clear">
 			<form:button>작성 완료</form:button>
-			<input type="button" value="작성 취소" onclick="">
+			<input type="button" value="작성 취소" onclick="location.href='list'">
 		</div>	
 	</form:form>
 </div>

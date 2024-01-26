@@ -4,16 +4,16 @@ CREATE TABLE market_product(
   product_title VARCHAR2(15) NOT NULL, -- 상품 글의 제목
   product_seller NUMBER NOT NULL, -- 판매자의 식별번호
   product_buyer NUMBER, -- 구매자의 식별번호
-  product_photo1 VARCHAR2(200) NOT NULL, -- 상품사진 1
-  product_photo2 VARCHAR2(200), -- 상품사진2
-  product_photo3 VARCHAR2(200), -- 상품사진3
-  product_photo4 VARCHAR2(100), -- 상품사진4
-  product_content VARCHAR2(200) NOT NULL, -- 상품의 설명
+  product_photo0 VARCHAR2(200) NOT NULL, -- 상품사진 1
+  product_photo1 VARCHAR2(200), -- 상품사진2
+  product_photo2 VARCHAR2(200), -- 상품사진3
+  product_photo3 VARCHAR2(100), -- 상품사진4
+  product_content VARCHAR2(300) NOT NULL, -- 상품의 설명
   product_category NUMBER(1) NOT NULL, -- 0:중고, 1:나눔 
   product_price NUMBER DEFAULT 0, -- 상품 가격 0
   product_place VARCHAR2(50), -- 거래 장소
   product_placeDetail VARCHAR2(50), -- 거래 장소 상세
-  product_sale NUMBER(1) NOT NULL, -- 판매현황 (0:판매중, 1:거래완료)
+  product_sale NUMBER(1) DEFAULT 0 NOT NULL, -- 판매현황 (0:판매중, 1:거래완료)
   product_buyerReview VARCHAR2(100), -- 구매자 리뷰
   product_sellerReview VARCHAR2(100), -- 판매자 리뷰
   product_status NUMBER DEFAULT 0 NOT NULL, -- 판매글의 상태(0:열람가능, 1:신고 처리 완료)

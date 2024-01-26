@@ -83,11 +83,6 @@
 		</tr>
 		<tr>
 			<td><label for="comsize">회사규모</label>
-			<br>
-				<select id="comsize" name="comsize_status">
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-				</select>
 			</td>
 			<td colspan="5">
 				<input type="radio" id="comsize" name="comsize" value="스타트업">스타트업
@@ -98,11 +93,6 @@
 		</tr>
 		<tr>
 			<td><label for="compeople_status">기업인력규모</label>
-			<br>
-				<select id="compeople_status" name="compeople_status">
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-				</select>
 			</td>
 			<td colspan="5">
 				<input type="radio" id="compeople" name="compeople" value="5~10인">5~10인
@@ -114,11 +104,6 @@
 		</tr>
 		<tr>
 			<td><label for="field_status">지원분야</label>
-			<br>
-				<select id="field_status" name="field_status">
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-				</select>
 			</td>
 			<td colspan="5">
 				<input type="radio" id="field" name="field" value="0">SI
@@ -131,11 +116,6 @@
 		</tr>
 		<tr>
 			<td><label for="role_status">직무</label>
-			<br>
-				<select id="role_status" name="role_status">
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-				</select>
 			</td>
 			<td colspan="5">
 				<input type="radio" id="role" name="role" value="0">백엔드
@@ -149,11 +129,6 @@
 		</tr>
 		<tr>
 			<td><label for="career_status">지원형태</label>
-			<br>
-				<select id="career_status" name="career_status">
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-				</select>
 			</td>
 			<td colspan="5">
 				<input type="radio" id="career" name="career" value="신입">신입
@@ -180,11 +155,6 @@
 		</tr>
 		<tr>
 			<td><label for="periodtime_status">수료 후 준비기간</label>
-			<br>
-				<select id="periodtime_status" name="periodtime_status">
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-				</select>
 			</td>
 			<td colspan="5">
 				<input type="radio" id="periodtime" name="periodtime" value="0">수료 전
@@ -197,11 +167,6 @@
 		</tr>
 		<tr>
 			<td><label for="edcation_status">학력</label>
-			<br>
-				<select id="edcation_status" name="edcation_status">
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-				</select>
 			</td>
 			<td colspan="5">
 				<input type="radio" id="education" name="education" value="0">~고졸
@@ -214,11 +179,6 @@
 		</tr>
 		<tr>
 			<td><label for="major_status">전공 유무</label>
-			<br>
-				<select id="major_status" name="major_status">
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-				</select>
 			</td>
 			<td colspan="5">
 				<input type="radio" id="major" name="major" value="전공">전공
@@ -227,11 +187,6 @@
 		</tr>
 		<tr>
 			<td><label for="certification_status">취업 당시 보유 자격증</label>
-			<br>
-				<select id="certification_status" name="certification_status">
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-				</select>
 			</td>
 			<td colspan="5">
 				<input type="radio" id="certification" name="certification" value="0">없음
@@ -242,11 +197,6 @@
 		</tr>
 		<tr>
 			<td><label for="location_status">취업회사 지역</label>
-			<br>
-				<select id="location_status" name="location_status">
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-				</select>
 			</td>
 			<td colspan="5">
 				<input type="radio" id="location" name="location" value="0">구로/가산 디지털단지
@@ -271,6 +221,8 @@
         <span id="centerAddr"></span>
     </div>
     	<input type="hidden" id="location_api" name="location_api" value="">
+    	<input type="hidden" id="location_api_lat" name="location_api_lat" value="">
+    	<input type="hidden" id="location_api_lng" name="location_api_lng" value="">
 </div>
 			</td>
 		</tr>
@@ -346,6 +298,8 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 			var result = result[0].address.address_name;
             
             document.getElementById('location_api').value=result;
+           
+           
             
             // 마커를 클릭한 위치에 표시합니다 
             marker.setPosition(mouseEvent.latLng);
@@ -368,10 +322,22 @@ function searchAddrFromCoords(coords, callback) {
     geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
 }
 
+//좌표의 lat, lng 값 얻어내기
+var lat;
+var lng;
+
 function searchDetailAddrFromCoords(coords, callback) {
     // 좌표로 법정동 상세 주소 정보를 요청합니다
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    lat = coords.getLat();
+    lng = coords.getLng();
+    
+	//좌표 정보를 입력폼에 hidden으로 저장
+	document.getElementById('location_api_lat').value=lat;
+	document.getElementById('location_api_lng').value=lng;
 }
+
+
 
 // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
 function displayCenterInfo(result, status) {
