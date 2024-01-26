@@ -82,8 +82,9 @@
 			<form:button class="default-btn">전송</form:button>
 			<input type="button" value="홈으로" class="default-btn"
 			    onclick="location.href='${pageContext.request.contextPath}/main/main'">
-		</div>                                  
+		</div>                    
 	</form:form>
+ 
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/HJW/member.register.js"></script>

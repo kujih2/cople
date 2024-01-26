@@ -7,7 +7,7 @@
 	                          onclick="location.href='update'"></h2>
 	<ul>
 		<li>이름 : ${member.name}</li>
-		<li>별명 : ${member.nick_name}</li>
+		<li>닉네임 : ${member.nick_name}</li>
 		<li>전화번호 : ${member.phone}</li>
 		<li>이메일 : ${member.email}</li>
 		<li>우편번호 : ${member.zipcode}</li>

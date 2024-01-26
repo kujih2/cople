@@ -50,5 +50,7 @@ public class AppConfig implements WebMvcConfigurer{
 		tilesViewResolver.setViewClass(TilesView.class);
 		return tilesViewResolver;
 	}
+
+	
 }
  
