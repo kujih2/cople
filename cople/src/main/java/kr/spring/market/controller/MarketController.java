@@ -86,7 +86,7 @@ public class MarketController {
 		model.addAttribute("message","글쓰기가 완료되었습니다.");
 		return "common/resultAlert";
 	}
-
+  
 	/*=================================
 	 * 장터 글 리스트 조회
 	 *=================================*/
