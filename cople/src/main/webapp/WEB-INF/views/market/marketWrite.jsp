@@ -21,7 +21,7 @@
 					</div>
 					
 					<input type="hidden" name="count" id="photo_count">
-					<input type="file" id="upload" name="upload" 
+					<input type="file" id="upload" name="upload" class="hide"
 									accept="image/gif,image/png,image/jpeg"  multiple>
 					<input type="hidden" name="count" id="photo_count">
 										

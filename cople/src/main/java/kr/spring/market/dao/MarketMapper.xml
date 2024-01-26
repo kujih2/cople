@@ -3,19 +3,20 @@
 <mapper namespace="kr.spring.market.dao.MarketMapper">
 <!-- 장터 글 등록 -->
 <insert id="insertMarket" parameterType="marketVO">
-INSERT INTO market_product(product_title,product_seller
+INSERT INTO market_product(product_num,product_title,product_seller
 						    ,product_photo0,product_photo1,
 						    product_photo2,product_photo3,
 						    product_content,product_category,
 						    product_price, product_place,
 						    product_placedetail 
 						    )VALUES(
+						    market_product_seq.nextval,
 						    #{product_title},#{product_seller},
 							#{filename0},#{filename1,jdbcType=VARCHAR},
 							#{filename2,jdbcType=VARCHAR}, #{filename3,jdbcType=VARCHAR},
-							${product_content},${product_category},
-							${product_price},${product_place},
-							${product_placeDetail})
+							#{product_content},#{product_category},
+							#{product_price},#{product_place,jdbcType=VARCHAR},
+							#{product_placeDetail,jdbcType=VARCHAR})
 									    
 </insert>
 </mapper>

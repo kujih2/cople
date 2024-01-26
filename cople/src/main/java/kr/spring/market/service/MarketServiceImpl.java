@@ -32,8 +32,7 @@ public class MarketServiceImpl implements MarketService{
 
 	@Override
 	public void insertMarket(MarketVO market) {
-		// TODO Auto-generated method stub
-		
+		marketMapper.insertMarket(market);
 	}
 
 	@Override

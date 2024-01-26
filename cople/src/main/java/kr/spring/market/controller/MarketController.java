@@ -42,6 +42,8 @@ public class MarketController {
 	@PostMapping("/market/write")
 	public String submit(MarketVO marketVO,HttpServletRequest request,HttpSession session,
             Model model ) throws IllegalStateException, IOException  {
+		log.debug("<<글 작성 MarketVO>> : " + marketVO);
+		
 		
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		log.debug("user:" + vo.getMem_num() );
@@ -70,21 +72,14 @@ public class MarketController {
 		    }
 		}
 		
-		log.debug("제목 : " + marketVO.getProduct_title());
-		log.debug("판매자 : " + marketVO.getProduct_seller());
-		log.debug("파일명0 : " + marketVO.getFilename0());
-		log.debug("파일명1 : " + marketVO.getFilename1());
-		log.debug("파일명2 : " + marketVO.getFilename2());
-		log.debug("파일명3 : " + marketVO.getFilename3());
-		log.debug("내용: " + marketVO.getProduct_content());
-		log.debug("카테고리 : " + marketVO.getProduct_category());
-		log.debug("가격 : " + marketVO.getProduct_price());
+		log.debug("<<글 작성2 MarketVO>> : " + marketVO);
 		
 		//글쓰기
 		marketService.insertMarket(marketVO);
 		
 		//View에 표시할 메시지
 		model.addAttribute("message","글쓰기가 완료되었습니다.");
+		model.addAttribute("url",request.getContextPath()+"/market/list");
 		return "common/resultAlert";
 	}
   
