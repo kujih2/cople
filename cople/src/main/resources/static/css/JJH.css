@@ -80,3 +80,6 @@ form#register_form{
 	border-radius:3px;
 	cursor:pointer;
 }
+.valid-message{
+	color:red;
+}
