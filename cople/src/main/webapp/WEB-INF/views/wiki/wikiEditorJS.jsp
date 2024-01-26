@@ -27,9 +27,6 @@ $(document).ready(function() {
 	addSpanTagsToHeadings();
 
 	
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
 	//에디터 수정시
 	$('#editor').on('click', function (event) {
 		hideSubMenus();
@@ -40,15 +37,10 @@ $(document).ready(function() {
  			$('a[style*="background-color: rgb(210, 210, 210)"]').each(function() {
  			    $(this).css('background-color', 'white');
  			});
- 			//$('span[style*="background-color: rgb(210, 210, 210)"]').unwrap();
-			//$('a[style*="background-color: rgb(210, 210, 210)"]').css('background-color', 'white');
-
 		}
-
-	
 	});
 	
-	
+
 	
 	
 
@@ -69,10 +61,12 @@ $(document).ready(function() {
 	$('#btn_headings').on('click',function(){
 		if(headingStatus==0){
 	    	event.preventDefault();
+			hideSubMenus();
 			headingStatus=1;
 			$("#sub_headings").show();
 		}else if(headingStatus==1){
 	    	event.preventDefault();
+			hideSubMenus();
 			headingStatus=0;
 			$("#sub_headings").hide();
 		}	
@@ -166,28 +160,29 @@ $(document).ready(function() {
     //링크연결
     let linksStatus=0;
 	$('#btn_links').on('click',function(){
+	    	event.preventDefault();
 		if(linksStatus==0){
 			document.execCommand("BackColor",false,"#D2D2D2");
-	    	event.preventDefault();
+			hideSubMenus();
 	    	linksStatus=1;
 			$("#sub_links").show();
 
 		}else if(linksStatus==1){
-	    	event.preventDefault();
+			hideSubMenus();
 	    	linksStatus=0;
 			$("#sub_links").hide();
 		}	
 	});
-	$('#sub_links_menu :nth-child(1)').on('click',function(){
+	$('#sub_links_menu_title1').on('click',function(){
 		$('#sub_links_menu_item1').show();
 		$('#sub_links_menu_item2').hide();
 	});
-	$('#sub_links_menu :nth-child(2)').on('click',function(){
+	$('#sub_links_menu_title2').on('click',function(){
 		$('#sub_links_menu_item1').hide();
 		$('#sub_links_menu_item2').show();
 	});
 
-	//내부문서 검색
+	//문서연결-내부문서 검색
 	 $('#internal_search').keyup(function(){
 		if($('#internal_search').val().trim()==''){
 			$('#internal_search').empty();
@@ -230,18 +225,84 @@ $(document).ready(function() {
 				//두번째로 링크줄때
 				$('a[style*="background-color: rgb(210, 210, 210)"]').attr('href', 'detail?doc_num='+doc_num);
 			}
-			$('#internal_search').empty();
+			$('#internal_search').val('');
+			$('#search_area').empty();
 			hideSubMenus();
-	
-		
 		});
+	//외부문서 연결
+	$('#btn_linkImport').on('click',function(){
+		event.preventDefault();
+		let external_addr = $('#external_import').val();
+		let external_import_logo = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">'+
+								   		'<path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>'+
+								   		'<path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>'+
+								   	'</svg>';
+		if($('span[style*="background-color: rgb(210, 210, 210)"]').length){
+			//첫번째로 링크 줄때
+			$('span[style*="background-color: rgb(210, 210, 210)"]').wrap('<a href="'+external_addr+'"></a>');
+			$('span[style*="background-color: rgb(210, 210, 210)"]').before(external_import_logo);
+		}else if($('a[style*="background-color: rgb(210, 210, 210)"]').length){
+			//두번째로 링크줄때
+			$('a[style*="background-color: rgb(210, 210, 210)"]').attr('href', external_addr);
+		}
+		$('#external_addr').val('');
+		hideSubMenus();
+	});
 	
+	//문서 넘겨주기
+	let tossStatus=0;
+	$('#btn_docToss').on('click',function(){
+	    	event.preventDefault();
+		if(tossStatus==0){
+			document.execCommand("BackColor",false,"#D2D2D2");
+			hideSubMenus();
+	    	tossStatus=1;
+			$("#sub_toss").show();
+		}else if(tossStatus==1){
+			hideSubMenus();
+	    	tossStatus=0;
+			$("#sub_toss").hide();
+		}
+	});
+	//문서넘겨주기-내부문서 검색
+	 $('#toss_search').keyup(function(){
+		if($('#toss_search').val().trim()==''){
+			$('#toss_search').empty();
+			return;
+		}
+		//서버와 통신
+		$.ajax({
+			url:'internalSearchAjax',
+			type:'post',
+			data:{doc_name:$('#toss_search').val()},
+			dataType:'json',
+			success:function(param){
+				if(param.result == 'success'){
+					$('#search_area2').empty();
+					$(param.wikiList).each(function(index,item){
+						let output = '';
+						output += '<li data-num="'+item.doc_num+'">';
+						output += item.doc_name;
+						output += '</li>';
+						$('#search_area2').append(output);
+					});
+		
+				}else{
+					alert('내부문서 검색 오류 발생');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생')
+			}
+		});
+	});
+	//검색된 문서 선택하기
+	$(document).on('click','#search_area2 li',function(){
 
-	
+	});
 	
 	//정렬
 	$('#btn_alignLeft').on('click',function(){
-
 		event.preventDefault();
 	    document.execCommand('justifyLeft');
 	});
@@ -280,11 +341,14 @@ $(document).ready(function() {
      */
     
     function hideSubMenus(){
-    	 headingStatus=0;
-    	 $("#sub_headings").hide();
-    	 linksStatus=0;
-    	 $("#sub_links").hide();
-     	 $('#internal_search').empty();
+    	headingStatus=0;
+    	$("#sub_headings").hide();
+    	linksStatus=0;
+    	$("#sub_links").hide();
+     	$('#internal_search').empty();
+		$("#sub_toss").hide();
+		tossStatus=0;
+
 
 
      }

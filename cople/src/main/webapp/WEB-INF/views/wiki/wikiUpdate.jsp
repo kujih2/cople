@@ -78,8 +78,8 @@
 	</button>
 		<div id="sub_links">
 			<div id="sub_links_menu">
-				<div>위키 내부 문서</div>
-				<div>외부 URL</div>
+				<div id="sub_links_menu_title1">위키 내부 문서</div>
+				<div id="sub_links_menu_title2">외부 URL</div>
 				
 				<div id="sub_links_menu_item1">
 					<div>
@@ -87,7 +87,7 @@
 							  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 						</svg>
 						<input type="text" id="internal_search" autocomplete="off">
-						<ul id=search_area></ul>
+						<ul id="search_area"></ul>
 					</div>
 				</div>
 								
@@ -97,8 +97,8 @@
 						  <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
 						  <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
 						</svg>
-						<input type="text">
-						<button>완료</button>
+						<input type="text" id="external_import" autocomplete="off">
+						<button id="btn_linkImport">완료</button>
 					</div>
 				</div>
 			</div>
@@ -110,6 +110,14 @@
 		  <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
 		</svg>
 	</button>
+		<div id="sub_toss">
+			<div>문서 넘겨주기</div>
+			<div>
+				<input tupe="text" id="toss_search">
+				<ul id="search_area2"></ul>
+			</div>
+			
+		</div>
 	<button id="btn_alignLeft">
 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-text-left" viewBox="0 0 16 16">
 		  <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
@@ -128,7 +136,7 @@
 	<button id="btn_submit">전송</button>
 </div>
 <h2>${wikiVO.doc_name}</h2>
-<div id="editor" contenteditable="true">
+<div id="editor" contenteditable="true" spellcheck="false">
 </div>
 <form:textarea path="update_summary" id="update_summary"></form:textarea>
 

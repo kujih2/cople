@@ -25,6 +25,9 @@ clear:both;
 padding-bottom:20px;
 border-bottom:1px solid black;
 }
+/*=======================================================================
+*문서 연결하기
+*=======================================================================*/
 #sub_links{
 position:absolute;
 left:100px;
@@ -48,5 +51,18 @@ background-color:#efefef;
 	clear:both;
 	display:none;
 }
+/*=======================================================================
+*문서 넘겨주기
+*=======================================================================*/
+#sub_toss{
+	position:absolute;
+	left:200px;
+	display:none;
+	border:1px solid black;
+	border-radius:3px;
+	background-color:#efefef;
+}
+
+
 
 </style>
