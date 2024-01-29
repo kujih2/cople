@@ -83,3 +83,44 @@ form#register_form{
 .valid-message{
 	color:red;
 }
+/* 장터 목록
+-------------------------*/
+#market_keyword{
+	width:400px;
+	height:40px;
+	border-radius:5px;
+	text-align:center;
+	border:3px solid gray;
+	margin-right:15px;
+}
+.market-search{
+	width:80px;	
+}
+.write-button{
+	position:absolute;
+	text-align:right;
+	margin-top:-30px;
+	margin-left:850px;
+}
+.search-ul{
+	margin:0 auto;
+	width: 500px;
+}
+.market-profile{
+	position:absolute;
+	margin-left:50px;
+	margin-top:-20px;
+}
+.market-profile p{
+	font-size:15px;
+	margin-top:-30px;
+	margin-left:38px;
+}
+span.category0{
+	cursor:pointer;
+	font-weight:bold;
+}
+span.category1{
+	cursor:pointer;
+	color:gray;
+}
