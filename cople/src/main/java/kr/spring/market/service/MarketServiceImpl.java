@@ -18,18 +18,25 @@ public class MarketServiceImpl implements MarketService{
 	
 	@Autowired
 	private MarketMapper marketMapper;
+	@Autowired
 	private MemberMapper memberMapper;
 	
 	
 	@Override
 	public List<MarketVO> selectList(Map<String, Object> map) {
 		List<MarketVO> list = marketMapper.selectList(map);
-		MemberVO member = new MemberVO();
-		for(MarketVO each : list) {
-			System.out.println(each.getProduct_seller());
-			member = memberMapper.selectMember(each.getProduct_seller());
-			each.setSeller_name(member.getName());
+		if (list!=null) {
+			for (MarketVO each : list) {
+		        Integer sellerNum = each.getProduct_seller();
+		        if (sellerNum != null) {
+		            MemberVO member = memberMapper.selectMember(sellerNum);
+		            if (member != null) {
+		                each.setSeller_id(member.getId());
+		            }
+		        }
+		    }
 		}
+	    
 		return list;
 	}
 
@@ -66,5 +73,7 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

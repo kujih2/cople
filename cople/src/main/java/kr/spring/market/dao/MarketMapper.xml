@@ -4,8 +4,8 @@
 <!-- 장터 글 등록 -->
 <insert id="insertMarket" parameterType="marketVO">
 INSERT INTO market_product(product_num,product_title,product_seller
-						    ,product_photo0,product_photo1,
-						    product_photo2,product_photo3,
+						    ,filename0,filename1,
+						    filename2,filename3,
 						    product_content,product_category,
 						    product_price, product_place,
 						    product_placedetail 
@@ -64,6 +64,7 @@ INSERT INTO market_product(product_num,product_title,product_seller
 			   		product_seller,
 			   		filename0,
 			   		product_category,
+			   		product_price,
 			   		product_sale,
 			   		product_status,
 			   		product_regDate,

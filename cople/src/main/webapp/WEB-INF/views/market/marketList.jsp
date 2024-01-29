@@ -18,8 +18,8 @@
 		<ul class="search-ul">
 			<li>
 				<input type="search" name="market_keyword" id="market_keyword"
-				                                  value="${param.keyword}">
-				 <input type="submit" value="검색" class="market-search">
+				                                  value="${param.market_keyword}">
+				 <input type="submit" id="submit-btn" value="검색" class="market-search">
 			</li>
 		</ul>
 			<div class="write-button">
@@ -37,17 +37,32 @@
   			<input type="hidden" name="category" id="category" value="${category}">
   		</div>
 	</form>
-	
+	<hr width="100%">
 	<div class="market-list">
+	<c:if test="${!empty list}">
 		<c:forEach var="market" items="${list}">
-			<div>
-				${market.product_title}
-				
+				<div class="list-box">
+					<img src="${pageContext.request.contextPath}/upload/${market.filename0}" width="200" height="200">
+					<br><span class="list-span1">${market.product_title}</span>
+					<br><span class="list-span2"><c:if test="${category == 0}">${market.product_price}원</c:if> 
+							  <c:if test="${category == 1}">나눔</c:if> &nbsp;&nbsp;&nbsp;&nbsp;
+					${market.seller_id}</span>
+				</div>
+				<c:if test="${status.index eq 3}">
+					<br>
+				</c:if>
+			</c:forEach>
+	
+	</c:if>
+
+		<c:if test="${empty list}">
+			<div class="align-center">
+				<h3>상품이 존재하지 않습니다.</h3>
 			</div>
-		</c:forEach>
+		</c:if>
 	</div>
 	
-	
+	<div class="align-center">${page}</div>
 	
 	
 </div>
@@ -57,15 +72,28 @@
 $(function(){
 	$('.category0').click(function(){
 		$('#category').val(0);
-		$('.category0').css({"font-weight": "bold", "color": "black"});
+		$(this).css({"font-weight": "bold", "color": "black"});
 		$('.category1').css({"font-weight": "normal", "color": "gray"});
-		window.location.href="${pageContext.request.contextPath}/market/list?category=0";
+		$('#search_form').submit();
 	});
 	$('.category1').click(function(){
 		$('#category').val(1);
 		$(this).css({"font-weight": "bold", "color": "black"});
 		$('.category0').css({"font-weight": "normal", "color": "gray"});
-		window.location.href="${pageContext.request.contextPath}/market/list?category=1";
+		$('#search_form').submit();
 	});
+	
+	$('.list-box:gt(3)').each(function(index) {
+	      $(this).after('<br>');
+	    });
+	//검색 유효성 체크
+	$('#submit-btn').click(function(){
+		if($('#market_keyword').val().trim()==''){
+			alert('검색어를 입력하세요!');
+			$('#market_keyword').val('').focus();
+			return false;
+		}
+		$('#search_form').submit();
+	});//end of submit
 });
 </script>

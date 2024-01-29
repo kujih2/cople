@@ -14,8 +14,8 @@ import lombok.ToString;
 public class MarketVO {
 	private int product_num;
 	private String product_title;
-	private int product_seller;
-	private String seller_name;
+	private Integer product_seller;
+	private String seller_id;
 	private int product_buyer;
 	private String filename0;
 	private String filename1;
