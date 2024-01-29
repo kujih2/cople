@@ -28,10 +28,27 @@
 				</c:if>
   			</div>
   		<div class="category-box">
+  		<c:if test="${category == 0}">
   			<span class="category0">중고 상품</span>/<span class="category1">나눔 상품</span>
-  			<input type="hidden" name="category" id="category" value="0">
+  		</c:if>
+  		<c:if test="${category == 1}">
+  			<span class="category0" style="color:gray;font-weight:none">중고 상품</span>/<span class="category1" style="color:black;font-weight:bold">나눔 상품</span>
+  		</c:if>
+  			<input type="hidden" name="category" id="category" value="${category}">
   		</div>
 	</form>
+	
+	<div class="market-list">
+		<c:forEach var="market" items="${list}">
+			<div>
+				${market.product_title}
+				
+			</div>
+		</c:forEach>
+	</div>
+	
+	
+	
 	
 </div>
 
@@ -42,11 +59,13 @@ $(function(){
 		$('#category').val(0);
 		$('.category0').css({"font-weight": "bold", "color": "black"});
 		$('.category1').css({"font-weight": "normal", "color": "gray"});
+		window.location.href="${pageContext.request.contextPath}/market/list?category=0";
 	});
 	$('.category1').click(function(){
 		$('#category').val(1);
 		$(this).css({"font-weight": "bold", "color": "black"});
 		$('.category0').css({"font-weight": "normal", "color": "gray"});
+		window.location.href="${pageContext.request.contextPath}/market/list?category=1";
 	});
 });
 </script>

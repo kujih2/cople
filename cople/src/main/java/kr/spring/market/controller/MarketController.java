@@ -102,6 +102,7 @@ public class MarketController {
 			       String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyword", keyword);
+		map.put("category", category);
 		
 		//전체/검색 레코드수
 		int count = marketService.selectRowCount(map);
@@ -117,7 +118,7 @@ public class MarketController {
 			
 			list = marketService.selectList(map);
 		}
-		
+		log.debug("<<list>> : " + list);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("marketList");
 		mav.addObject("count", count);

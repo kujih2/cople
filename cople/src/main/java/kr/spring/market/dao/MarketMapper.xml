@@ -22,27 +22,23 @@ INSERT INTO market_product(product_num,product_title,product_seller
 
 <!-- sql 태그와 include 태그를 이용해 SQL문 재사용 -->
 	<sql id="marketSearch">
-		<where>
-			<if test="keyword != null and keyword != ''">
-				<if test="category == 0">	
-					product_category = 0 AND (product_title LIKE '%' || #{keyword} || '%' OR
-					product_content LIKE '%' || #{keyword} || '%')
-				</if>
-				<if test="category == 1">	
-					product_category = 1 AND (product_title LIKE '%' || #{keyword} || '%' OR
-					product_content LIKE '%' || #{keyword} || '%')
-				</if>
-			</if>
-			<if test="keyword == null OR keyword == ''">
-				<if test="category == 0">
-					product_category = 0
-				</if>
-				<if test="category == 1">
-					product_category = 1
-				</if>
-			</if>
-		</where>
-	</sql>
+    <where>
+        <choose>
+            <when test="keyword != null and keyword != '' and category == 0">	
+                product_category = 0 AND (product_title LIKE '%' || #{keyword} || '%' OR product_content LIKE '%' || #{keyword} || '%')
+            </when>
+            <when test="keyword != null and keyword != '' and category == 1">	
+                product_category = 1 AND (product_title LIKE '%' || #{keyword} || '%' OR product_content LIKE '%' || #{keyword} || '%')
+            </when>
+            <when test="keyword == null or keyword == '' and category == 0">
+                product_category = 0
+            </when>
+            <when test="keyword == null or keyword == '' and category == 1">
+                product_category = 1
+            </when>
+        </choose>
+    </where>
+</sql>
 	
 	
 	<!-- 장터 글의 총개수/검색 개수 -->
@@ -52,6 +48,7 @@ INSERT INTO market_product(product_num,product_title,product_seller
 		FROM market_product
 		<include refid="marketSearch"></include>
 	</select>
+	
 	<!-- 장터 전체 목록/검색목록 -->
 	<select id="selectList" parameterType="map" resultType="marketVO">
 		SELECT
@@ -65,7 +62,7 @@ INSERT INTO market_product(product_num,product_title,product_seller
 				      REPLACE(REPLACE(product_title,'<','&lt;'),'>','&gt;') product_title,
 				    ]]>
 			   		product_seller,
-			   		product_photo0,
+			   		filename0,
 			   		product_category,
 			   		product_sale,
 			   		product_status,
