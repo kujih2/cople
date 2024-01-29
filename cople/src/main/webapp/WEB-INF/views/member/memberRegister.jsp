@@ -35,11 +35,11 @@
 				<form:input path="phone"/>
 				<form:errors path="phone" cssClass="error-color"/>
 			</li>
-			<li>
+			<!--  <li>
 				<form:label path="email">이메일</form:label>
 				<form:input path="email"/>
 				<form:errors path="email" cssClass="error-color"/>
-			</li>
+			</li>-->
 			<li>
 				<form:label path="birth">생년월일</form:label>
 				<form:input path="birth"/>
@@ -82,10 +82,26 @@
 			<form:button class="default-btn">전송</form:button>
 			<input type="button" value="홈으로" class="default-btn"
 			    onclick="location.href='${pageContext.request.contextPath}/main/main'">
-		</div>                    
-	</form:form>
+		</div>
+		<div class="form-group">
+  		<input class="form-control" placeholder="이메일을 입력해주세요." name="email" id="email" type="email" autofocus>
+   	 		<div style="display: block; text-align: right;">
+      			<input type="button" value="인증하기" class="btn btn-primary" id="emailAuth">
+   			</div>
+  			<input class="form-control" placeholder="인증 코드 6자리를 입력해주세요." maxlength="6" disabled="disabled" name="authCode" id="authCode" type="text" autofocus>
+  			<span id="emailAuthWarn"></span>
+		</div>
+		<input type="submit" value="회원가입" class="btn btn-lg btn-success btn-block" id="registerBtn" disabled="disabled">   
+	  
+		</form:form>            
+	
+		
+ </div>
  
-</div>
+
+ 	
+ 	
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/HJW/member.register.js"></script>
 <!-- 우편번호 검색 시작 -->
