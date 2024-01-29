@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:getAsString name="title"/></title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/main.css">
 <tiles:insertAttribute name="css" ignore="true"/>
 
 </head>

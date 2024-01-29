@@ -30,7 +30,7 @@
 							</div>
 							<div class="h-3 w-[1px] bg-gray-400"></div>
 						</div>
-					</div>
+					</div> 
 					<div class="hidden items-center md:flex">
 						<div class="flex items-center gap-x-6">
 							<div class="w-40 lg:w-[235px]"></div>
