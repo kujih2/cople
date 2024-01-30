@@ -15,7 +15,7 @@
 				<input type="submit" value="검색">
 		</div>
 	
-	</form>
+	</form> 
 		<div id="write_guide">
 			<p>찾는 문서가 없나요? 문서로 바로 가보세요</p>
 				<button id="direct_btn" onclick="location.href='write?doc_name=${param.keyword}'">'${param.keyword}' 문서로 바로가기</button>

@@ -22,7 +22,7 @@ public interface WikiService {
 	public WikiVO findDoc(String doc_name);
 	public void deleteWiki(int doc_num, int update_num,WikiVO wiki);
 
-	public List<WikiVO> searchInternal(String doc_name);
+	public List<WikiVO> searchInternal(String doc_name); 
 
 
 

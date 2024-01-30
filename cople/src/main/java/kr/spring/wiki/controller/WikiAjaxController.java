@@ -22,7 +22,7 @@ public class WikiAjaxController {
 	@Autowired
 	private WikiService wikiService;
 
-	@RequestMapping("/wiki/internalSearchAjax")
+	@RequestMapping("/wiki/internalSearchAjax") 
 	@ResponseBody
 	public Map<String,Object> internalSearch(@RequestParam String doc_name){
 		Map<String,Object> mapJson = new HashMap<String,Object>();

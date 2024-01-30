@@ -23,7 +23,7 @@ $(document).ready(function() {
         
         // Set the new position for the menu
         $('.editor-menu').css({
-            'top': newPosition + 'px',
+            'top': newPosition + 'px', 
             'width': mainBodyWidth + 'px',
             'transform':'translateX(-20.5px)'
         });

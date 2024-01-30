@@ -13,4 +13,4 @@
 				</tr>
 
 	</c:forEach>
-</table>
+</table> 

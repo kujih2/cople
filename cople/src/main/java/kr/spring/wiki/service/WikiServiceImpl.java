@@ -21,7 +21,7 @@ public class WikiServiceImpl implements WikiService{
 	@Override
 	public void updateWiki(int update_num,WikiVO wiki) {
 		if(update_num!=0) {
-			wikiMapper.changeWiki(update_num);			
+			wikiMapper.changeWiki(update_num);			 
 		}
 		wikiMapper.updateWiki(wiki);
 	}

@@ -10,7 +10,7 @@
 		VALUES(
 			wiki_doc_seq.currval,
 			#{doc_name})
-	</insert>
+	</insert> 
 
 <!-- 위키 업데이트 -->
 	<insert id="updateWiki" parameterType="wikiVO">

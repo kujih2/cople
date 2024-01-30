@@ -24,5 +24,5 @@ $(document).ready(function(){
     	window.location.href = 'detail?doc_num='+$('#redirect_to').attr('data-redirect')+'&from1='+$('#redirect_to').attr('data-name')+'&from2='+$('#redirect_to').attr('data-num');
     }
     
-});
+}); 
 </script>

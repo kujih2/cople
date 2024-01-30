@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WikiController {
 	@Autowired
-	private WikiService wikiService;
+	private WikiService wikiService; 
 	
 	//최근변경된 문서들 목록 불러오기
 	public List<WikiVO> wikiLatest(Model model) {

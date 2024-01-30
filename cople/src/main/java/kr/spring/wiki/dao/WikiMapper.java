@@ -15,7 +15,7 @@ public interface WikiMapper {
 	@Select("SELECT * FROM wiki_doc JOIN wiki_update USING(doc_num) WHERE doc_name = #{doc_name} AND update_status=1")
 	public WikiVO findDoc(String doc_name);
 	
-	//위키문서 생성하기
+	//위키문서 생성하기 
 		//새로운 위키문서 번호 받아오기
 		@Select("SELECT wiki_doc_seq.nextval FROM dual")
 		public int getNewDocNum();

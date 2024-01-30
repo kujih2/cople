@@ -15,7 +15,7 @@ $(document).ready(function(){
 	    if (event.which === 13) {
 	    	event.preventDefault();
 	    	window.location.href = 'detail?doc_name='+$('#keyword').val();
-	    }
+	    } 
 	});
 
 }); 

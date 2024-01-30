@@ -14,7 +14,7 @@
 }
 
 #redirect_message{
-	box-sizing: border-box;
+	box-sizing: border-box; 
 	width:100%;
 	height:40px;
 	border:1px solid #CCCCCC;

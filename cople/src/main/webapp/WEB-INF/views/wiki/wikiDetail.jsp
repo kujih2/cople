@@ -12,7 +12,7 @@
 	<h2 style="color:red;"><s>${wiki.doc_name}</s>
 		
 	</h2>
-	삭제된 문서입니다.
+	삭제된 문서입니다. 
 </c:if>
 <!-- 존재하는 문서 -->
 <c:if test="${wiki.doc_status==2}">

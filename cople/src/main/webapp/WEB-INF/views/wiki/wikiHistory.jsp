@@ -15,5 +15,5 @@
 			<td>${history.update_summary}</td>
 		</tr>
 	</c:forEach>
-	</table> 
+	</table>  
 </div>
