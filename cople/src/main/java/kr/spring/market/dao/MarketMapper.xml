@@ -4,8 +4,8 @@
 <!-- 장터 글 등록 -->
 <insert id="insertMarket" parameterType="marketVO">
 INSERT INTO market_product(product_num,product_title,product_seller
-						    ,product_photo0,product_photo1,
-						    product_photo2,product_photo3,
+						    ,filename0,filename1,
+						    filename2,filename3,
 						    product_content,product_category,
 						    product_price, product_place,
 						    product_placedetail 
@@ -19,4 +19,60 @@ INSERT INTO market_product(product_num,product_title,product_seller
 							#{product_placeDetail,jdbcType=VARCHAR})
 									    
 </insert>
+
+<!-- sql 태그와 include 태그를 이용해 SQL문 재사용 -->
+	<sql id="marketSearch">
+    <where>
+        <choose>
+            <when test="keyword != null and keyword != '' and category == 0">	
+                product_category = 0 AND (product_title LIKE '%' || #{keyword} || '%' OR product_content LIKE '%' || #{keyword} || '%')
+            </when>
+            <when test="keyword != null and keyword != '' and category == 1">	
+                product_category = 1 AND (product_title LIKE '%' || #{keyword} || '%' OR product_content LIKE '%' || #{keyword} || '%')
+            </when>
+            <when test="keyword == null or keyword == '' and category == 0">
+                product_category = 0
+            </when>
+            <when test="keyword == null or keyword == '' and category == 1">
+                product_category = 1
+            </when>
+        </choose>
+    </where>
+</sql>
+	
+	
+	<!-- 장터 글의 총개수/검색 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+		  COUNT(*)
+		FROM market_product
+		<include refid="marketSearch"></include>
+	</select>
+	
+	<!-- 장터 전체 목록/검색목록 -->
+	<select id="selectList" parameterType="map" resultType="marketVO">
+		SELECT
+		   *
+		FROM (SELECT
+			   	a.*,
+			   	rownum rnum
+			   FROM (SELECT
+			   		product_num,
+			   		<![CDATA[
+				      REPLACE(REPLACE(product_title,'<','&lt;'),'>','&gt;') product_title,
+				    ]]>
+			   		product_seller,
+			   		filename0,
+			   		product_category,
+			   		product_price,
+			   		product_sale,
+			   		product_status,
+			   		product_regDate,
+			   		product_modifyDate
+			   	FROM market_product
+			   	<include refid="marketSearch"></include>)a)	
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>       
+	</select>
 </mapper>

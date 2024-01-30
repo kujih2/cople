@@ -5,6 +5,7 @@
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/SHH/community.fav.js"></script>
 <div class="page-main">
 	<h1><a href="boardList">자유게시판</a></h1>
 	<hr size="1" width="100%">
@@ -33,8 +34,19 @@
 		${board.content}
 	</div>
 	<div>
-		<%-- 좋아요 --%>
-		
+	<ul>
+		<%-- 좋아요 싫어요 --%>
+		<li>
+			좋아요
+			<img id="output_fav" class="favicon" data-num="${board.board_num}" data-favStatus="1"
+				 src="${pageContext.request.contextPath}/images/fav.png" width="40">
+		</li>
+		<li>
+			싫어요
+			<img id="output_hate" class="favicon" data-num="${board.board_num}" data-favStatus="2"
+			src="${pageContext.request.contextPath}/images/hate.png" width="35">
+		</li>
+	</ul>	
 		<%-- 댓글수 --%>
 		
 	</div>

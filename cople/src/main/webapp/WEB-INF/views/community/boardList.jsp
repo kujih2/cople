@@ -45,7 +45,7 @@
 			<c:forEach var="board" items="${list}">
 				<div class="board_list" >
 					<div>
-					<img src="${pageContext.request.contextPath}/member/photoView" width="25" height="25" class="my-photo">
+					<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${board.mem_num}" width="25" height="25" class="my-photo">
 					</div>
 					<div>
 						<c:if test="${empty board.nick_name}">${board.id}</c:if>

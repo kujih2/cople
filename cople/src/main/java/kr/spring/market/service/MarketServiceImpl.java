@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.market.dao.MarketMapper;
 import kr.spring.market.vo.MarketVO;
+import kr.spring.member.dao.MemberMapper;
+import kr.spring.member.vo.MemberVO;
 
 @Service
 @Transactional
@@ -16,18 +18,31 @@ public class MarketServiceImpl implements MarketService{
 	
 	@Autowired
 	private MarketMapper marketMapper;
+	@Autowired
+	private MemberMapper memberMapper;
 	
 	
 	@Override
 	public List<MarketVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<MarketVO> list = marketMapper.selectList(map);
+		if (list!=null) {
+			for (MarketVO each : list) {
+		        Integer sellerNum = each.getProduct_seller();
+		        if (sellerNum != null) {
+		            MemberVO member = memberMapper.selectMember(sellerNum);
+		            if (member != null) {
+		                each.setSeller_id(member.getId());
+		            }
+		        }
+		    }
+		}
+	    
+		return list;
 	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return marketMapper.selectRowCount(map);
 	}
 
 	@Override
@@ -58,5 +73,7 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }
