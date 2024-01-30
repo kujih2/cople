@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script>
-$(document).ready(function(){
-	$('#direct_btn').click(function(){
-	
-	});
-}); 
-</script>
+
 <div>
 	<h2>검색</h2>
 	<form action="list" id="search_form" method="get">
@@ -35,12 +29,12 @@ $(document).ready(function(){
 		<hr width="100%">
 		<c:forEach var="wiki" items="${list}">
 		<div>
-			<div id="search_item_name">
+			<div class="search-item-name">
 				<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
 				  <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
 				</svg>
 				<a href="detail?doc_num=${wiki.doc_num}">${wiki.doc_name}</a></div>
-			<div id="search_item_content">${wiki.update_content}</div>
+			<div class="search-item-content">${wiki.update_content}</div>
 		</div>
 		</c:forEach>
 		</div>

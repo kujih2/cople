@@ -30,6 +30,11 @@ public class WikiServiceImpl implements WikiService{
 	public WikiVO selectWiki(int doc_num) {
 		return wikiMapper.selectWiki(doc_num);
 	}
+	@Override
+	public WikiVO selectWiki2(String doc_name) {
+		return wikiMapper.selectWiki2(doc_name);
+	}
+
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
@@ -93,6 +98,7 @@ public class WikiServiceImpl implements WikiService{
 	public List<WikiVO> searchInternal(String doc_name) {
 		return wikiMapper.searchInternal(doc_name);
 	}
+
 
 
 

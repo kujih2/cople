@@ -10,8 +10,8 @@
     	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>    	
     	<put-attribute name="subHeader" value="/WEB-INF/views/wiki/wikiHeader.jsp"/>    	
     	<put-attribute name="body" value="/WEB-INF/views/wiki/wikiDetail.jsp"/>
-    	<put-attribute name="css" value="/WEB-INF/views/wiki/wikiEditorCSS.jsp"/>
-	    <put-attribute name="js" value="/WEB-INF/views/wiki/wikiEditorJS.jsp"/>
+    	<put-attribute name="css" value="/WEB-INF/views/wiki/wikiDetailCSS.jsp"/>
+	    <put-attribute name="js" value="/WEB-INF/views/wiki/wikiDetailJS.jsp"/>
     	<put-attribute name="side" value="/WEB-INF/views/wiki/wikiLatest.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>    	
     </definition> 
@@ -21,10 +21,14 @@
     </definition>
     <definition name="wikiUpdate" extends="wikiDetail">
 	    <put-attribute name="title" value="문서편집"/>
+	    <put-attribute name="css" value="/WEB-INF/views/wiki/wikiUpdateCSS.jsp"/>
+	    <put-attribute name="js" value="/WEB-INF/views/wiki/wikiUpdateJS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/wiki/wikiUpdate.jsp"/>    	    	
     </definition>
     <definition name="wikiList" extends="wikiDetail">
 	    <put-attribute name="title" value="문서검색"/> 	
+	    <put-attribute name="js" value="/WEB-INF/views/wiki/wikiListJS.jsp"/>
+	    
     	<put-attribute name="body" value="/WEB-INF/views/wiki/wikiList.jsp"/>    	    	
     </definition>
     <definition name="wikiHistory" extends="wikiDetail">

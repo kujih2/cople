@@ -1,5 +1,8 @@
 package kr.spring.wiki.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PageUtil;
@@ -116,15 +120,26 @@ public class WikiController {
 	 * 위키 글 상세
 	 ==================*/
 	@RequestMapping("/wiki/detail")
-	public ModelAndView process(@RequestParam int doc_num,
+	public ModelAndView process(@RequestParam(required=false) Integer doc_num,
 								@RequestParam(required=false) Integer update_num,
-								Model model) {
+								@RequestParam(required=false) String doc_name,
+								Model model) throws UnsupportedEncodingException {
 		WikiVO wiki = null;
-		if(update_num == null) {
-			wiki = wikiService.selectWiki(doc_num);   
-		}else if(update_num !=null) {
-			wiki = wikiService.selectOldWiki(update_num);
+		
+		if(doc_name !=null) {
+			wiki = wikiService.selectWiki2(doc_name);
+			if(wiki==null) {
+				String encodedDocName = URLEncoder.encode(doc_name, StandardCharsets.UTF_8.toString());
+				return new ModelAndView(new RedirectView("/wiki/list?keyword="+encodedDocName));
+			}
+		}else {
+			if(update_num == null) {
+				wiki = wikiService.selectWiki(doc_num);   
+			}else if(update_num !=null) {
+				wiki = wikiService.selectOldWiki(update_num);
+			}
 		}
+		
 		log.debug("<<wiki>> :"+wiki);
 
 		model.addAttribute("wiki",wiki);
@@ -133,6 +148,7 @@ public class WikiController {
 		
 		return new ModelAndView("wikiDetail",model.asMap());
 	}
+
 	
 	/*=================
 	 * 위키 글 편집

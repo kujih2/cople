@@ -1,17 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript">
 $(document).ready(function() {
+	var mainBodyWidth = $('#main_body').outerWidth();
+	
+    $('.editor-menu').css({
+        'width': mainBodyWidth + 'px',
+        'transform': 'translateX(-20.5px)'
 
+    });
+	
+	//에디터 메뉴 위치 조절
+    var initialPosition = 103; // Initial fixed position
+    var scrollThreshold = 200; // Distance to scroll before the menu stays fixed
+
+    $(window).scroll(function() {
+        var scrollTop = $(this).scrollTop();
+
+        // Calculate the new position based on the scroll distance
+        var newPosition = Math.max(initialPosition - scrollTop, 0);
+        mainBodyWidth = $('#main_body').outerWidth();
+        
+        // Set the new position for the menu
+        $('.editor-menu').css({
+            'top': newPosition + 'px',
+            'width': mainBodyWidth + 'px',
+            'transform':'translateX(-20.5px)'
+        });
+
+        // If scroll distance is beyond the threshold, fix the menu
+        if (scrollTop > scrollThreshold) {
+            $('.editor-menu').css({
+                'top': '0',
+                'width': mainBodyWidth + 'px',
+                'transform': 'translateX(-20.5px)'
+
+            });
+        }
+    });
+
+	
+	//헤더에서 엔터를 눌러 검색할때
+	$('#keyword').on('keydown', function(event) {
+	    if (event.which === 13) {
+	    	event.preventDefault();
+	    	window.location.href = 'detail?doc_name='+$('#keyword').val();
+	    }
+	});
+	
+	//링크를 클릭할때
 	$('#editor').on('click', '.clickable', function() {
         var link = $(this).data('link');
         // Open the link in a new window or perform any other desired action
         window.open(link, '_blank');
     });
-	//데이터베이스의 내용 불러오기
+	
+	//처음 페이지가 로드될때 데이터베이스의 내용 불러오기
 	$('#editor').html($('#textarea').val());
 	$('#update_summary').val('');
+	
 	//수정 제출 시 에디터폼에서 다시 내용 주기
 	$('#btn_submit').on('click',function(){
 		event.preventDefault(); 
@@ -154,9 +201,6 @@ $(document).ready(function() {
     	event.preventDefault();
         setStyle('insertUnorderedList');
     });
-    //////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////
     //링크연결
     let linksStatus=0;
 	$('#btn_links').on('click',function(){
@@ -175,11 +219,15 @@ $(document).ready(function() {
 	});
 	$('#sub_links_menu_title1').on('click',function(){
 		$('#sub_links_menu_item1').show();
+		$('#sub_links_menu_title1').css('border-bottom', 'solid black 2px');
 		$('#sub_links_menu_item2').hide();
+		$('#sub_links_menu_title2').css('border-bottom', 'none');
 	});
 	$('#sub_links_menu_title2').on('click',function(){
 		$('#sub_links_menu_item1').hide();
+		$('#sub_links_menu_title1').css('border-bottom', 'none');
 		$('#sub_links_menu_item2').show();
+		$('#sub_links_menu_title2').css('border-bottom', 'solid black 2px');
 	});
 
 	//문서연결-내부문서 검색
@@ -281,7 +329,7 @@ $(document).ready(function() {
 					$('#search_area2').empty();
 					$(param.wikiList).each(function(index,item){
 						let output = '';
-						output += '<li data-num="'+item.doc_num+'">';
+						output += '<li data-num="'+item.doc_num+'" data-name="'+item.doc_name+'">';
 						output += item.doc_name;
 						output += '</li>';
 						$('#search_area2').append(output);
@@ -298,7 +346,16 @@ $(document).ready(function() {
 	});
 	//검색된 문서 선택하기
 	$(document).on('click','#search_area2 li',function(){
-
+		let doc_num = $(this).attr('data-num');//선택한 문서 번호
+		let doc_name = $(this).attr('data-name');//선택한 문서 이름
+		$('#editor').html('');
+		$('#editor').html('<div class="redirect"><a href="detail?doc_num='+doc_num+'&from1='+$('#original_doc').attr('data-name')+'&from2='+$('#original_doc').attr('data-num')+'">'+doc_name+'</a>으로 문서를 넘겨줌</div>');
+		$('.redirect').prepend('<input type="hidden" id="redirect_to" data-num="'+$('#original_doc').attr('data-num')+'" data-name="'+$('#original_doc').attr('data-name')+'" data-redirect="'+doc_num+'">')
+		
+		
+		$('#toss_search').val('');
+		$('#search_area2').empty();
+		hideSubMenus();
 	});
 	
 	//정렬
@@ -311,7 +368,6 @@ $(document).ready(function() {
 	    document.execCommand('justifyCenter');
 	});
 	$('#btn_alignRight').on('click',function(){
-		alert('클릭됨');
 		event.preventDefault();
 	    document.execCommand('justifyRight');
 	});
@@ -345,10 +401,8 @@ $(document).ready(function() {
     	$("#sub_headings").hide();
     	linksStatus=0;
     	$("#sub_links").hide();
-     	$('#internal_search').empty();
 		$("#sub_toss").hide();
 		tossStatus=0;
-
 
 
      }

@@ -28,7 +28,8 @@ public interface WikiMapper {
 	//위키 문서 정보 불러오기
 	@Select("SELECT * FROM wiki_doc LEFT OUTER JOIN wiki_update USING(doc_num) WHERE doc_num=#{doc_num} AND update_status=1")
 	public WikiVO selectWiki(int doc_num);
-	
+	@Select("SELECT * FROM wiki_doc LEFT OUTER JOIN wiki_update USING(doc_num) WHERE doc_name=#{doc_name} AND update_status=1")
+	public WikiVO selectWiki2(String doc_name);
 	//최신 편집 갱신(이전 최신글의 status를 0으로)
 	@Update("UPDATE wiki_update SET update_status=0 WHERE update_num=#{update_num}")
 	public void changeWiki(int update_num);

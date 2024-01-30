@@ -2,9 +2,8 @@
     pageEncoding="UTF-8"%>
 <style>
 #editor {
-
-        padding: 10px;
-        min-height: 200px;
+    padding: 10px;
+    min-height: 200px;
 }
 #editor:focus {
     outline: none;
@@ -13,21 +12,50 @@
 	position:relative;
 	width:1000px;
 }
+
+#redirect_message{
+	box-sizing: border-box;
+	width:100%;
+	height:40px;
+	border:1px solid #CCCCCC;
+	background-color:skyblue;
+	border-radius:5px;
+	padding-left:10px;
+	display:flex;
+	align-items:center;
+}
+
+
 #btn_headings{
 position:relative;
 }
 #sub_headings{
-position:absolute;}
+	position:absolute;}
 #editor p{ 
-clear:both;
+	clear:both;
 }
 #editor h2,#editor h3,#editor h4{
-padding-bottom:20px;
-border-bottom:1px solid black;
+	padding-bottom:20px;
+	border-bottom:1px solid black;
+}
+
+#edit_btn,
+#delete_btn,
+#history_btn{
+	background-color:white;
+	box-sizing:border-box;
+	border:1px solid #CCCCCC;
+	border-radius:5px;
+	width:60px;
+	height:30px;
+	margin-left:5px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
 }
 /*=======================================================================
 *문서 연결하기
-*=======================================================================*/
+*=======================================================================*/ 
 #sub_links{
 position:absolute;
 left:100px;

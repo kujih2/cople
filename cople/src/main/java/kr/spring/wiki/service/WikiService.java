@@ -9,6 +9,8 @@ public interface WikiService {
 	public int insertWiki(WikiVO wiki);
 	public void updateWiki(int update_num,WikiVO wiki);
 	public WikiVO selectWiki(int doc_num);
+	public WikiVO selectWiki2(String doc_name);
+
 	public int selectRowCount(Map<String,Object> map);
 	public List<WikiVO> selectList(Map<String,Object> map);
 	public List<WikiVO> selectLatest();
