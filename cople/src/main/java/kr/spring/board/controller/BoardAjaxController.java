@@ -79,42 +79,43 @@ public class BoardAjaxController {
 				//좋아요를 누른 경우
 				if(boardFavVO.getFav_status()==1) {
 					//좋아요 중복 클릭한 경우
-					if(boardFavVO.getFav_status()==1) {
-						boardService.deleteFav(boardFavVO);
+					if(fav.getFav_status()==1) {
+						boardService.deleteFav(fav);
 						mapJson.put("status", "noFav");
 					//좋아요 누른 상태에서 싫어요 클릭한경우	
 					}else {
-						boardService.switchFav(boardFavVO);
+						boardService.switchFav(fav);
 						mapJson.put("status", "yesHate");
 					}
 				//싫어요를 누른 경우	
 				}else {
 					//싫어요 중복 클릭한 경우
-					if(boardFavVO.getFav_status()==2) {
-						boardService.deleteFav(boardFavVO);
+					if(fav.getFav_status()==2) {
+						boardService.deleteFav(fav);
 						mapJson.put("status", "noHate");
 					//싫어요 누른 상태에서 좋아요 클릭한경우	
 					}else {
-						boardService.switchFav(boardFavVO);
+						boardService.switchFav(fav);
 						mapJson.put("status", "yesFav");
 					}
 				}
 			}else {//좋아요나 싫어요가 눌러있지 않은 경우
-				boardService.insertFav(boardFavVO);
-				if(boardFavVO.getFav_status()==1) {
-					boardService.updateFav(boardFavVO);
+				boardService.insertFav(fav);
+				if(fav.getFav_status()==1) {
+					boardService.updateFav(fav);
 					mapJson.put("status", "yesFav");
 				}else {
-					boardService.updateFav(boardFavVO);
+					boardService.updateFav(fav);
 					mapJson.put("status", "yesHate");
 				}
-				mapJson.put("result", "success");
-				mapJson.put("board_num", fav.getBoard_num());
-				mapJson.put("fav_status", fav.getFav_status());
-				mapJson.put("favCount", boardService.selectFavCount(fav.getBoard_num()));
-				mapJson.put("hateCount", boardService.selectHateCount(fav.getBoard_num()));
+				
 			}
-
+			mapJson.put("result", "success");
+			mapJson.put("board_num", fav.getBoard_num());
+			mapJson.put("fav_status", fav.getFav_status());
+			mapJson.put("fav_date", fav.getFav_date());
+			mapJson.put("favCount", boardService.selectFavCount(fav.getBoard_num()));
+			mapJson.put("hateCount", boardService.selectHateCount(fav.getBoard_num()));
 		}
 		return mapJson;
 	}

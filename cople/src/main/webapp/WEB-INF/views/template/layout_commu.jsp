@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/SHH.css">
+<tiles:insertAttribute name="css" ignore="true"/>
 </head>
 <body>
 	<div id="main_header">

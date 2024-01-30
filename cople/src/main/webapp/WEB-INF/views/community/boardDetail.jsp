@@ -40,11 +40,13 @@
 			좋아요
 			<img id="output_fav" class="favicon" data-num="${board.board_num}" data-favStatus="1"
 				 src="${pageContext.request.contextPath}/images/fav.png" width="40">
+			<span id="favCount"></span>	 
 		</li>
 		<li>
 			싫어요
 			<img id="output_hate" class="favicon" data-num="${board.board_num}" data-favStatus="2"
 			src="${pageContext.request.contextPath}/images/hate.png" width="35">
+			<span id="hateCount"></span>	
 		</li>
 	</ul>	
 		<%-- 댓글수 --%>

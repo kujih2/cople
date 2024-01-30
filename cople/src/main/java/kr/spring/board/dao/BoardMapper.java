@@ -33,7 +33,7 @@ public interface BoardMapper {
 		@Select("SELECT COUNT(*) FROM commu_fav WHERE board_num=#{board_num} AND fav_status=2")
 		public int selectHateCount(int board_num);
 		@Insert("INSERT INTO commu_fav (board_num,mem_num,fav_status) "
-			  + "VALUES (#{board_num},#{mem_num},#{fav_status}")
+			  + "VALUES (#{board_num},#{mem_num},#{fav_status})")
 		public void insertFav(BoardFavVO fav);
 		@Update("UPDATE commu_fav SET fav_status = CASE WHEN fav_status = 1 THEN 2 ELSE 1 END WHERE board_num=#{board_num} AND mem_num=#{mem_num}")
 		public void switchFav(BoardFavVO fav);

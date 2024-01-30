@@ -66,15 +66,15 @@ public class BoardServiceImpl implements BoardService{
 	}
 	@Override
 	public void switchFav(BoardFavVO fav) {
-		// TODO Auto-generated method stub
+		boardMapper.switchFav(fav);
 	}
 	@Override
 	public void updateFav(BoardFavVO fav) {
-		// TODO Auto-generated method stub
+		boardMapper.updateFav(fav);
 	}
 	@Override
 	public void deleteFav(BoardFavVO boardFav) {
-		// TODO Auto-generated method stub
+		boardMapper.deleteFav(boardFav);
 	}
 	
 }

@@ -234,6 +234,9 @@ ul.detail-info li:last-child{
 .detail-content img{
 	max-width:940px;
 }
+#output_hate{
+   cursor:pointer;
+}
 #output_fav{
    cursor:pointer;
 }

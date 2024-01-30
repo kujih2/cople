@@ -32,7 +32,7 @@
 			ORDER BY re_cnt DESC NULLS LAST
 		</if>
 	</sql>
-	
+
 	<!-- 게시판 글 총개수/검색 개수 -->
 	<select id="selectRowCount" parameterType="map" resultType="integer">
 		SELECT COUNT(*) FROM commu_board JOIN member USING(mem_num)
