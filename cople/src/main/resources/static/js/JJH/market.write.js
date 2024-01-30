@@ -196,8 +196,13 @@ var count = 0;
 	});
 	
 	
-	
-	
+	/*---------------
+	지도 버튼 클릭 이벤트
+	------------------*/
+	$('#map-button').click(function(){
+	     	$('.hide').show();
+			$('.page-main').hide();
+	     });
 	
 	
 	

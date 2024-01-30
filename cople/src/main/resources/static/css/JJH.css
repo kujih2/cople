@@ -83,6 +83,17 @@ form#register_form{
 .valid-message{
 	color:red;
 }
+#map-button{
+	width:400px;
+	text-align:left;
+	background-color:white;
+	font-weight:bold;
+	cursor:pointer;
+}
+#map-button:hover{
+	background-color:skyblue;
+	color:white;
+}
 /* 장터 목록
 -------------------------*/
 #market_keyword{
