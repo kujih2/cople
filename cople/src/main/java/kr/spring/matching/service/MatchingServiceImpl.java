@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.matching.dao.MatchingMapper;
 import kr.spring.matching.vo.EmpVO;
+import kr.spring.member.vo.MemberVO;
 
 @Service
 @Transactional
@@ -35,6 +36,11 @@ public class MatchingServiceImpl implements MatchingService{
 	@Override
 	public int selectEmpCount() {
 		return matchingMapper.selectEmpCount();
+	}
+
+	@Override
+	public List<MemberVO> selectMemberList() {
+		return matchingMapper.selectMemberList();
 	}
 
 }

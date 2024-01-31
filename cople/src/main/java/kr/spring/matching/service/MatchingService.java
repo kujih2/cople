@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.matching.vo.EmpVO;
+import kr.spring.member.vo.MemberVO;
 
 public interface MatchingService {
 	public void insertEmp(EmpVO empVO);
 	public List<EmpVO> listEmp(Map<String,Object> map);
 	public EmpVO selectEmp(int mem_num);
 	public int selectEmpCount();
+	public List<MemberVO> selectMemberList();
 }

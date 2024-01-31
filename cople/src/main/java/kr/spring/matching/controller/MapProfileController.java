@@ -70,4 +70,6 @@ public class MapProfileController {
 		model.addAttribute("imageFile", readbyte);
 		model.addAttribute("filename", "face.png");
 	}
+	
+	
 }

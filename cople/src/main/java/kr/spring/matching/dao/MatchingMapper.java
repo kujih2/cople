@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import kr.spring.matching.vo.EmpVO;
+import kr.spring.member.vo.MemberVO;
 
 @Mapper
 public interface MatchingMapper {
@@ -17,5 +18,6 @@ public interface MatchingMapper {
 	public int selectEmpCount();
 	@Select("SELECT * FROM emp WHERE mem_num=#{mem_num}")
 	public EmpVO selectEmp(int mem_num);
-
+	@Select("SELECT * FROM member WHERE auth=2")
+	public List<MemberVO> selectMemberList();
 }

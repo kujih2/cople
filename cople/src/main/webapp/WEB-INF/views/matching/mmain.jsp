@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 <style>
 .overlay-text {
 	position: absolute;
@@ -82,6 +84,44 @@
         background-color: #2980b9; /* 마우스 호버 시 배경색 변경 */
         color: #ffffff; /* 마우스 호버 시 텍스트 색상 변경 */
     }
+    
+    /*프로필 이미지들의 간격 조절*/
+    .photo_list {
+    margin-right: 25px; /* 원하는 간격으로 조절 */
+    padding-right: 25px;
+}
+	/*프로필 이미지들을 가로로 나열*/
+	.memberList {
+	    display: flex;
+	    flex-wrap: wrap; /* 필요에 따라 wrap 또는 nowrap 설정 */
+	}
+	
+	/*Swiper slider스타일*/
+	 swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    swiper-container {
+      margin-left: auto;
+      margin-right: auto;
+    }
 </style>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script>
@@ -150,8 +190,37 @@ $(document).ready(function(){
 </c:if>
 <h2>취업 현황 지도</h2>
 
-
 <div id="map" style="width: 100%; height: 350px;"></div>
+<br>
+
+<h2>현직자 프로필</h2>
+<c:if test="${count>0}">
+<div class="memberList">
+<div class="swiper-container">
+	<div class="swiper-wrapper">
+		<c:forEach var="member" items="${memberList}">
+			<div class="swiper-slide">
+				<a href="#"><img src="${pageContext.request.contextPath}/matching/viewProfile?userNum=${member.mem_num}" width="200" height="200" class="photo_list"></a>	
+			</div>
+		</c:forEach>
+	</div>
+	<!-- 네비게이션 -->
+	<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+	<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+
+	<!-- 페이징 -->
+	<div class="swiper-pagination"></div>
+</div>
+
+
+<%-- <c:forEach var="member" items="${memberList}">
+	<a href="#"><img src="${pageContext.request.contextPath}/matching/viewProfile?userNum=${member.mem_num}" width="200" height="200" class="photo_list"></a>	
+</c:forEach> --%>
+</div>
+</c:if>
+<c:if test="${count==0}">
+등록된 현직자가 존재하지 않습니다.
+</c:if>
 <br>
 <h2>취업 현황 데이터</h2>
 
@@ -180,6 +249,29 @@ $(document).ready(function(){
 </div>
 
 
+<script>
+	new Swiper('.swiper-container', {
+	
+		slidesPerView : 4, // 동시에 보여줄 슬라이드 갯수
+		spaceBetween : 30, // 슬라이드간 간격
+		slidesPerGroup : 4, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+	
+		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+		// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+		loopFillGroupWithBlank : true,
+	
+		loop : true, // 무한 반복
+	
+		pagination : { // 페이징
+			el : '.swiper-pagination',
+			clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+		},
+		navigation : { // 네비게이션
+			nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+			prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+		},
+	});
+</script>
 <script type="text/javascript">
 		
 		//empListJson은 JSP에서 가져온 JSON 문자열입니다.
@@ -211,7 +303,6 @@ $(document).ready(function(){
 		  }
 		}
 		
-		console.log('Generated Data:', data);
 
 		// 필드 값을 문자열로 변환하는 함수
 		function convertFieldToString(fieldValue) {
@@ -229,7 +320,6 @@ $(document).ready(function(){
 		    case 5:
 		      return '기타(非IT)';
 		    default:
-		      console.log('Unknown Field Value:', fieldValue);
 		      return 'Unknown';
 		  }
 		}
@@ -442,9 +532,11 @@ $(document).ready(function(){
     var markers = jsonData.map(function(position) {
     var userNum = position.user_num;
        
-	var content ='<div class="mapProfile" data-num="'+userNum+'">'+
-    '<a><img src="${pageContext.request.contextPath}/matching/viewProfile?userNum='+userNum+'" width="40" height="40" class="my-photo"></a>'
-    + ' <div class="profileDetail">'+'<p></p>'+'</div></div>';
+	var content =' <a><img src="${pageContext.request.contextPath}/matching/viewProfile?userNum='+userNum+'" width="40" height="40" class="my-photo"></a>'
+			    +' <div class="mapProfile" data-num="'+userNum+'">'
+			    +' <div class="profileDetail" style="display:none;">'
+			    +' <p>'+userNum+'</p>'
+			    +' </div></div>';
     	
     	return new kakao.maps.CustomOverlay({
             position: new kakao.maps.LatLng(position.lat, position.lng),
@@ -458,35 +550,36 @@ $(document).ready(function(){
     
     
     
-    // 이미지 컨테이너 요소를 가져옵니다.
-    const imageContainer = document.querySelector('.my-photo');
+ // 이미지 컨테이너 요소를 jQuery로 가져옵니다.
+    const imageContainer = $('.my-photo');
 
-    // 텍스트를 오버레이하는 요소를 가져옵니다.
-    const overlayText = document.querySelector('.overlay-text');
+    // 텍스트를 오버레이하는 요소를 jQuery로 가져옵니다.
+    const overlayText = $('.overlay-text');
+    
+   	const profileDetail = $('.profileDetail')
 
     // 마우스가 이미지에 진입했을 때 텍스트를 보여주는 이벤트를 추가합니다.
-    imageContainer.addEventListener('mouseenter', () => {
-        overlayText.style.display = 'block';
+    imageContainer.on('mouseenter', function () {
+        overlayText.show();
     });
 
     // 마우스가 이미지에서 빠져나갈 때 텍스트를 숨기는 이벤트를 추가합니다.
-    imageContainer.addEventListener('mouseleave', () => {
-        overlayText.style.display = 'none';
+    imageContainer.on('mouseleave', function () {
+        overlayText.hide();
     });
- 
 
-	$(document).on('mouseenter', '.my-photo', function() {
-	    // 이미지에 마우스를 가져다 댔을 때의 동작
-	    // 여기서는 해당 이미지를 감싸는 부모 요소의 클래스를 찾아 data-user-num 속성의 값을 설정합니다.
-	    var userNum = $(this).closest('.mapProfile').data('num');
-	    $(this).closest('.mapProfile').find('p').text(userNum);
-	});
-	
-	$(document).on('mouseleave', '.my-photo', function() {
-	    // 이미지에서 마우스가 빠져나갈 때의 동작
-	    // 여기서는 텍스트를 원래대로 설정하거나 숨기는 등의 동작을 추가할 수 있습니다.
-	    $(this).closest('.mapProfile').find('p').text('');
-	});
+    // 이미지에 마우스를 가져다 댔을 때의 동작
+    $(document).on('mouseenter', '.my-photo', function () {
+        // 여기서는 해당 이미지를 감싸는 부모 요소의 클래스를 찾아 data-user-num 속성의 값을 설정합니다.
+        const userNum = $(this).closest('.mapProfile').data('num');
+        $('.mapProfile[data-num="'+userNum+'"] .profileDetail').show();
+    });
+
+    // 이미지에서 마우스가 빠져나갈 때의 동작
+    $(document).on('mouseleave', '.my-photo', function () {
+        // 여기서는 텍스트를 원래대로 설정하거나 숨기는 등의 동작을 추가할 수 있습니다.
+    	 $('.mapProfile[data-num="userNum"] .profileDetail').hide();
+    });
 </script>
 
 <script type="text/javascript"
@@ -612,7 +705,6 @@ $(document).ready(function(){
 		
 		// 필드 값을 문자열로 변환하는 함수
 		function convertFieldToString(roleValue) {
-			console.log('roleValue:', roleValue); // 콘솔에 roleValue 출력
 		  switch (roleValue) {
 		    case '0':
 		      return '백엔드';
@@ -639,7 +731,6 @@ $(document).ready(function(){
 		function drawChart() {
 		  // 새로운 배열을 만들어 roleCounts 객체의 값을 배열로 변환
 		  var dataArray = Object.entries(roleCounts);
-			console.log(dataArray);
 		
 		  // 배열의 첫 번째 열을 추가하여 2차원 배열 형태로 만듦
 		  dataArray.unshift(['Role', 'Count']);

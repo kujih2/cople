@@ -45,27 +45,35 @@ public class MatchingController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		List<Map<String,Double>> mapDataList = new ArrayList();
 		List<EmpVO> empList;
+		List<MemberVO> memberList;
+		
 
-		//리스트를 만들기 위한 페이지 처리
+		//지도에 표시할 멤버리스트를 만들기 위한 페이지 처리
 		int count = matchingService.selectEmpCount();
+		model.addAttribute("count", count);
 		PageUtil page = new PageUtil(currentPage,count,rowCount);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());
-		//리스트 생성
 		
+		//지도에 표시할 리스트 생성
 		if(count>0) {
 			empList = matchingService.listEmp(map);
 			log.debug("<<listEmp >> : " + map);
 			ObjectMapper objectMapper = new ObjectMapper();
 			String empListJson = objectMapper.writeValueAsString(empList);
 			model.addAttribute("empListJson", empListJson);
+			//멤버 프로필리스트 생성
+			memberList = matchingService.selectMemberList();
+			model.addAttribute("memberList", memberList);
+			log.debug("<<count>> : " + count);
+			log.debug("<<memberList>> : " +memberList);
+			
 		}else {
 			empList = Collections.emptyList();
 		}
 		log.debug("<<empList>> : " + empList);
-
+		
 		//주소 좌표 정보 JSON 처리
-
 	  for(EmpVO empVO : empList) { 
 		  if (empVO.getLocation_api_lat() != null && empVO.getLocation_api_lng() != null) {
 			  
