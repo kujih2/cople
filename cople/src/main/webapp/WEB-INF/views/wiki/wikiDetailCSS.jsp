@@ -24,6 +24,9 @@
 	display:flex;
 	align-items:center;
 }
+#editor img {
+    max-width: 100%;
+}
 
 
 #btn_headings{

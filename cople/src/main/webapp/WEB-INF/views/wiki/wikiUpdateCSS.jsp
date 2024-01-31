@@ -11,6 +11,7 @@
 }
 .editor-menu{
 	position: fixed;
+	min-width:786px;
     top: 103px;
 	height:38px;
 	border-bottom:solid 1px #CCCCCC;
@@ -74,6 +75,14 @@
 }
 #btn_strike{
 	border-right:solid 1px #CCCCCC;
+}
+#btn_image{
+}
+#img-selector{
+	display:none;
+}
+#editor img {
+    max-width: 100%;
 }
 #sub_map{
 	display:none;

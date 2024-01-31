@@ -85,6 +85,10 @@ $(document).ready(function() {
  			    $(this).css('background-color', 'white');
  			});
 		}
+ 		if(mapStatus==0){
+			$('#position_of_map').remove();
+ 		}
+ 		$('#position_of_img').remove();
 	});
 	
 
@@ -194,6 +198,43 @@ $(document).ready(function() {
     	event.preventDefault();
         setStyle('insertUnorderedList');
     });
+    
+    $('#btn_image').on('click',function(){
+    	event.preventDefault();
+    	let htmlToInsert = '<div class="img-elements" id="position_of_img"></div>';
+    	insertHtmlAfterCaret(htmlToInsert);
+    	$('#img-selector').click();
+    });
+    $('#img-selector').on('change',function(e){
+    	    const files = e.target.files;
+    	    if (!!files) {
+    	        insertImageDate(files[0]);
+    	    }
+
+
+    	
+    });
+    function insertImageDate(file) {
+	    const reader = new FileReader();
+	    reader.onload = function (e) {
+	        $('#editor').focus();
+
+	        if (reader.result) {
+	            let inserted_tags = "<img src=\""+reader.result+"\" alt=\"Image\" />";
+
+	            $('#position_of_img').append(inserted_tags);
+	            $('.img-elements').removeAttr('id');
+	        } else {
+	            console.error('Failed to read the file.');
+	        }
+	    };
+
+	    reader.onerror = function (e) {
+	        console.error('Error reading the file.');
+	    };
+
+	    reader.readAsDataURL(file);
+	}
     //=======================================
     //지도 버튼
     //=======================================
@@ -201,7 +242,7 @@ $(document).ready(function() {
     $('#btn_map').on('click',function(){
     	event.preventDefault();
 		if(mapStatus==0){
-			var htmlToInsert = '<div class="map-elements" id="position_of_map"></div>';
+			let htmlToInsert = '<div class="map-elements" id="position_of_map"></div>';
 		    insertHtmlAfterCaret(htmlToInsert);
 			hideSubMenus();
 			mapStatus=1;
@@ -246,7 +287,7 @@ $(document).ready(function() {
     	event.stopPropagation();
     	hideSubMenus();
     	$('#editor').focus();
-    	var inserted_tags = "<iframe width=\"300\" height=\"300\" style=\"border:0\" loading=\"lazy\" allowfullscreen referrerpolicy=\"no-referrer-when-downgrade\" src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyAC4McV0RQma1mFznuFnW4paXEXkLhTZ2c&q="+$('#pac-input').val()+"\"></iframe>"	
+    	let inserted_tags = "<iframe width=\"300\" height=\"300\" style=\"border:0\" loading=\"lazy\" allowfullscreen referrerpolicy=\"no-referrer-when-downgrade\" src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyAC4McV0RQma1mFznuFnW4paXEXkLhTZ2c&q="+$('#pac-input').val()+"\"></iframe>"	
     
     	$('#position_of_map').append(inserted_tags);
     	$('.map-elements').removeAttr('id');

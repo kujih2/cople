@@ -23,7 +23,7 @@ body{
 	padding:0 0 0 0;
 }
 #side_branch{
-	min-width:1090px;
+	min-width:1098px;
 	width:90%;
 	margin:0 auto;
 	padding-top:30px;
@@ -40,7 +40,7 @@ body{
 *main 페이지
 ---------------------------*/
 #main_body{
-	min-width:400px;
+	min-width:786px;
 	width:71%;
 	float:left;
 	box-sizing: border-box;
