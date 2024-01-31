@@ -127,7 +127,7 @@ $(function () {
         }
         if ($('#detail').val().trim() == '') {
             alert('상세 장소명을 입력해주세요. ');
-            $('#detail').val('').focus() ;
+            $('#detail').val('').focus();
             return false;
         }
         $('#output2').text($('#detail').val());
