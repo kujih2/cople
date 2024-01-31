@@ -76,7 +76,7 @@
 		</div>
 		<div class="align-center clear">
 			<form:button>작성 완료</form:button>
-			<input type="button" value="작성 취소" onclick="location.href='list'">
+			<input type="button" value="작성 취소" onclick="location.href='list?category=0'">
 		</div>	
 	</form:form>
 </div>

@@ -125,6 +125,11 @@ $(function () {
             alert('지도에서 거래 장소를 클릭해 주세요.');
             return false;
         }
+        if ($('#detail').val().trim() == '') {
+            alert('상세 장소명을 입력해주세요. ');
+            $('#detail').val('').focus();
+            return false;
+        }
         $('#output2').text($('#detail').val());
         $('#placeDetail').val($('#detail').val());
         $('.hide').hide();
