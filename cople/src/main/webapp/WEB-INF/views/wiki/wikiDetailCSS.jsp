@@ -55,6 +55,12 @@ position:relative;
 	display:flex;
 	align-items:center;
 	justify-content:center;
+	cursor:pointer;
+}
+#edit_btn:hover,
+#delete_btn:hover,
+#history_btn:hover{
+	background-color:#CCCCCC;
 }
 /*=======================================================================
 *문서 연결하기
