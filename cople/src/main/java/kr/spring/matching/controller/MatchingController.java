@@ -39,7 +39,8 @@ public class MatchingController {
 
 	@RequestMapping("/matching/mmain")
 	public String mmain(@RequestParam(defaultValue="1") int currentPage, Model model,
-						@RequestParam(value="rowCount",defaultValue="10") int rowCount) throws JsonProcessingException {
+						@RequestParam(value="rowCount",defaultValue="10") int rowCount,
+						HttpSession session) throws JsonProcessingException {
 
 		Map<String,Object> map = new HashMap<String,Object>();
 		List<Map<String,Double>> mapDataList = new ArrayList();
@@ -52,11 +53,12 @@ public class MatchingController {
 		map.put("end", page.getEndRow());
 		//리스트 생성
 		
-		
 		if(count>0) {
 			empList = matchingService.listEmp(map);
-			model.addAllAttributes(empList);
 			log.debug("<<listEmp >> : " + map);
+			ObjectMapper objectMapper = new ObjectMapper();
+			String empListJson = objectMapper.writeValueAsString(empList);
+			model.addAttribute("empListJson", empListJson);
 		}else {
 			empList = Collections.emptyList();
 		}
@@ -69,7 +71,9 @@ public class MatchingController {
 			  
 		  Map<String,Double> mapData = new LinkedHashMap<String,Double>();
 		  mapData.put("lat",Double.valueOf(empVO.getLocation_api_lat())); 
-		  mapData.put("lng",Double.valueOf(empVO.getLocation_api_lng())); 
+		  mapData.put("lng",Double.valueOf(empVO.getLocation_api_lng()));
+		  mapData.put("user_num",Double.valueOf(empVO.getMem_num()));
+		 
 		  mapDataList.add(mapData); 
 		  }
 	  }
@@ -80,9 +84,9 @@ public class MatchingController {
 		ajaxMapData += mapper.writeValueAsString(mapDataList);
 		ajaxMapData += "}";
 		model.addAttribute("ajaxMapData", ajaxMapData);
-
+		
 		log.debug("<<mapDataList >> : " + ajaxMapData);
-
+		
 
 		return "matchingMain";
 	}
@@ -147,7 +151,7 @@ public class MatchingController {
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
 		empVO.setMem_num(memberVO.getMem_num());
 		empVO.setFilename(FileUtil.createFile(request, empVO.getUpload()));
-
+		
 		//DB에 empVO 등록
 		matchingService.insertEmp(empVO);
 

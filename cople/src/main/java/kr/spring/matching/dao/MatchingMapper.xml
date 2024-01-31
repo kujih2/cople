@@ -97,5 +97,6 @@
 	</select>
 	
 	<select id="listAllEmp" resultType="empVO">
+	
 	</select>
 </mapper>

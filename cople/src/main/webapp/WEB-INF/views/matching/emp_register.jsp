@@ -189,10 +189,12 @@
 			<td><label for="certification_status">취업 당시 보유 자격증</label>
 			</td>
 			<td colspan="5">
-				<input type="radio" id="certification" name="certification" value="0">없음
-				<input type="radio" id="certification" name="certification" value="0">정보처리기사
-				<input type="radio" id="certification" name="certification" value="0">SQLD
-				<input type="radio" id="certification" name="certification" value="0">기타
+				<input type="checkbox" id="certification" name="certification" value="0">없음
+				<input type="checkbox" id="certification" name="certification" value="1">정보처리기사(필기)
+				<input type="checkbox" id="certification" name="certification" value="2">정보처리기사(실기)
+				<input type="checkbox" id="certification" name="certification" value="3">SQLD
+				<input type="checkbox" id="certification" name="certification" value="4">AWS
+				<input type="checkbox" id="certification" name="certification" value="5">기타
 			</td>
 		</tr>
 		<tr>
