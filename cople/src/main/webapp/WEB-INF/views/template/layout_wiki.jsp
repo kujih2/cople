@@ -8,6 +8,10 @@
 <title><tiles:getAsString name="title"/></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/LKW.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/LKW/style.css" />
+    <script type="module" src="${pageContext.request.contextPath}/js/LKW/index.js"></script>
 <tiles:insertAttribute name="css" ignore="true"/>
 <tiles:insertAttribute name="js" ignore="true"/>
 

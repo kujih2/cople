@@ -52,11 +52,28 @@
 		  <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
 		</svg>
 	</button>
-	<button class="editor-item" id="btn_image">
+	<div class="editor-item" id="btn_image">
 		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
 		  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
 		  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
 		</svg>
+	</div>
+	<button class="editor-item" id="btn_map">
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+		  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+		</svg>
+		
+		<div id="sub_map">
+			<div id="map_selecter_container">
+					<input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+					<div id="choose_loc_btn">완료</div>
+			</div>
+				<div id="map_container">
+					<div id="map"></div>
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC4McV0RQma1mFznuFnW4paXEXkLhTZ2c&callback=initAutocomplete&libraries=places&v=weekly" defer></script>
+				</div>
+	
+		</div>
 	</button>
 	<button class="editor-item" id="btn_links">
 		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
@@ -92,11 +109,11 @@
 			</div>		
 		</div>
 						
-	<button class="editor-item" id="btn_docToss">
+	<div class="editor-item" id="btn_docToss">
 		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
 		  <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
 		</svg>
-	</button>
+	</div>
 		<div id="sub_toss">
 			<div>문서 넘겨주기</div>
 			<div>
@@ -120,10 +137,20 @@
 		  <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
 		</svg>
 	</button>
-	<button class="editor-item" id="btn_submit">전송</button>
+	<div class="editor-item" id="btn_submit">전송</div>
 </div>
 <h2>${wikiVO.doc_name}</h2>
 <input id="original_doc" type="hidden" data-num="${wikiVO.doc_num}" data-name="${wikiVO.doc_name}">
+
+<!--================================================== 
+구글 맵 api
+======================================================= -->
+
+
+<!--================================================== 
+구글 맵 api
+======================================================= -->
+
 
 <div id="editor" contenteditable="true" spellcheck="false">
 </div>

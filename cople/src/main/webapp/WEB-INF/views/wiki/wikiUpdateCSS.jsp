@@ -31,6 +31,7 @@
 	display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center;
+    position:relative;
 
 }
 .editor-item:hover{
@@ -74,6 +75,32 @@
 #btn_strike{
 	border-right:solid 1px #CCCCCC;
 }
+#sub_map{
+	display:none;
+	position:absolute;
+	z-index:30;
+	width:400px;
+	height:400px;
+	top:20px;
+	padding:10px;
+	border:1px solid #CCCCCC;
+	background-color:white;
+}
+#map_selecter_container{
+	
+}
+#choose_loc_btn{
+	width:40px;
+	height:20px;
+	border-radius:3px;
+	background-color:#b3cefd;
+	float:right;
+}
+#map_container{
+	border:1px solid #CCCCCC;
+	clear:both;
+}
+
 #sub_links{
 	box-sizing:border-box;
 }

@@ -236,6 +236,9 @@ public class WikiController {
 		return mav;
 	}
 
-	
+	@GetMapping("/wiki/map")
+	public String getMap() {
+		return "/google/map";
+	}
 	
 }

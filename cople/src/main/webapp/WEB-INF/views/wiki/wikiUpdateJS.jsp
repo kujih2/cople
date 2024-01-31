@@ -95,14 +95,7 @@ $(document).ready(function() {
 	
 	
 	//버튼들 기능
-	$('#btn_undo').on('click',function(){
-		event.preventDefault();
-		document.execCommand('undo');
-	});
-	$('#btn_redo').on('click',function(){
-		event.preventDefault();
-		document.execCommand('redo');
-	});
+
 		//문단
 	let headingStatus = 0;
 	$('#btn_headings').on('click',function(){
@@ -201,6 +194,64 @@ $(document).ready(function() {
     	event.preventDefault();
         setStyle('insertUnorderedList');
     });
+    //=======================================
+    //지도 버튼
+    //=======================================
+    let mapStatus=0;
+    $('#btn_map').on('click',function(){
+    	event.preventDefault();
+		if(mapStatus==0){
+			var htmlToInsert = '<div class="map-elements" id="position_of_map"></div>';
+		    insertHtmlAfterCaret(htmlToInsert);
+			hideSubMenus();
+			mapStatus=1;
+			$('#sub_map').show();
+		}else if(mapStatus==1){
+			hideSubMenus();
+			mapStatus=0;
+			$('#sub_map').hide();
+			
+		}
+    });
+    function insertHtmlAfterCaret(html) {
+        var editableDiv = document.getElementById('myEditableDiv');
+        var range, node;
+
+        if (window.getSelection && (range = window.getSelection().getRangeAt(0))) {
+          node = document.createElement('div');
+          node.innerHTML = html;
+
+          range.collapse(false);
+          range.insertNode(node);
+
+          // Move the caret after the inserted content
+          range.setStartAfter(node.lastChild);
+          range.collapse(true);
+
+          var selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      }
+    
+    $('#map').on('click', function(event) {
+        event.stopPropagation(); // Stop the event from propagating to parent elements
+    });
+    $('#pac-input').on('click', function(event) {
+    	event.preventDefault();
+    	event.stopPropagation();
+    });
+    $('#choose_loc_btn').on('click', function(event) {
+    	event.preventDefault();
+    	event.stopPropagation();
+    	hideSubMenus();
+    	$('#editor').focus();
+    	var inserted_tags = "<iframe width=\"300\" height=\"300\" style=\"border:0\" loading=\"lazy\" allowfullscreen referrerpolicy=\"no-referrer-when-downgrade\" src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyAC4McV0RQma1mFznuFnW4paXEXkLhTZ2c&q="+$('#pac-input').val()+"\"></iframe>"	
+    
+    	$('#position_of_map').append(inserted_tags);
+    	$('.map-elements').removeAttr('id');
+    });
+
     //링크연결
     let linksStatus=0;
 	$('#btn_links').on('click',function(){
@@ -401,8 +452,10 @@ $(document).ready(function() {
     	$("#sub_headings").hide();
     	linksStatus=0;
     	$("#sub_links").hide();
-		$("#sub_toss").hide();
 		tossStatus=0;
+		$("#sub_toss").hide();
+		mapStatus=0;
+		$('#sub_map').hide();
 
 
      }
