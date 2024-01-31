@@ -61,6 +61,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.selectHateCount(board_num);
 	}
 	@Override
+	public int selectFavHateSum(int board_num) {
+		return boardMapper.selectFavHateSum(board_num);
+	}
+	@Override
 	public void insertFav(BoardFavVO fav) {
 		boardMapper.insertFav(fav);
 	}

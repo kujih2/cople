@@ -7,25 +7,20 @@ $(function(){
 		$.ajax({
 			url:'getFav',
 			type:'post',
-			data:{board_num:$('.favicon').attr('data-num')},
+			data:{board_num:board_num},
 			dataType:'json',
 			success:function(param){
-				if(param.result == 'logout'){
-					$('#favCount').text(param.favCount);
-					$('#hateCount').text(param.hateCount);
-				}else{
-					$('#favCount').text(param.favCount);
-					$('#hateCount').text(param.hateCount);
-					var favbutton =  '.favicon[data-num="' + param.board_num + '"][data-favStatus="1"]';
-					var hatebutton = '.favicon[data-num="' + param.board_num + '"][data-favStatus="2"]';
-					if(param.status=='yesFav'){//초기값 좋아요 선택되어 있는것
-					  $(favbutton).attr('src', '../images/fav_alt.png');
-					}else if(param.status == 'yesHate'){//초기값 싫어요 선택 되어 있는것
-					  $(hatebutton).attr('src', '../images/hate_alt.png');
-					}else if(param.status == 'emptyFav'){//초기값 좋아요 싫어요 아무것도 선택되어 있지않은것
-						$(favbutton).attr('src', '../images/fav.png');
-						$(hatebutton).attr('src', '../images/hate.png');
-					}
+				
+				var favbutton =  '.favicon[data-num="' + param.board_num + '"][data-favStatus="1"]';
+				var hatebutton = '.favicon[data-num="' + param.board_num + '"][data-favStatus="2"]';
+				
+				if(param.status=='yesFav'){//초기값 좋아요 선택되어 있는것
+			  		$(favbutton).attr('src', '../images/fav_alt.png');
+				}else if(param.status == 'yesHate'){//초기값 싫어요 선택 되어 있는것
+			 		$(hatebutton).attr('src', '../images/hate_alt.png');
+				}else if(param.status == 'emptyFav'){//초기값 좋아요 싫어요 아무것도 선택되어 있지않은것
+					$(favbutton).attr('src', '../images/fav.png');
+					$(hatebutton).attr('src', '../images/hate.png');
 				}
 				displayFav(param);
 			},
@@ -56,6 +51,7 @@ $(function(){
 					alert('로그인 후 좋아요를 눌러주세요.');
 				}else if(param.result == 'success'){
 					displayFav(param);
+					console.log('좋아요등록성공');
 				}else{
 					alert('등록/삭제 시 오류 발생');
 				}
@@ -84,12 +80,13 @@ $(function(){
 			output = '../images/fav.png';
 			output2 = '../images/hate.png';
 		}
+		//문서 객체에 설정
 		$('#output_fav').attr('src',output);
 		$('#output_hate').attr('src',output2);
-		$('#output_favCount').text(param.favCount);
-		$('#output_hateCount').text(param.hateCount);
+		$('#favCount').text(param.favCount);
+		$('#hateCount').text(param.hateCount);
+		$('#favHateSum').text(param.favHateSum);
 	}
-
 
 	//초기 데이터 표시
 	selectFav($('#output_fav').attr('data-num'));

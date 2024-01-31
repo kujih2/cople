@@ -28,4 +28,6 @@ public class BoardVO {
 	private String id;
 	private String nick_name;
 	private int auth;
+	
+	private int favhate_cnt;//좋아요/싫어요 합
 }

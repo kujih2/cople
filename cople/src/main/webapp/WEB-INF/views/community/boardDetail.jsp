@@ -34,19 +34,18 @@
 		${board.content}
 	</div>
 	<div>
-	<ul>
+	<ul class="detail-info">
 		<%-- 좋아요 싫어요 --%>
 		<li>
-			좋아요
 			<img id="output_fav" class="favicon" data-num="${board.board_num}" data-favStatus="1"
-				 src="${pageContext.request.contextPath}/images/fav.png" width="40">
-			<span id="favCount"></span>	 
+				 src="${pageContext.request.contextPath}/images/fav.png" width="24">
 		</li>
 		<li>
-			싫어요
+			<span id="favHateSum"></span>
+		</li>
+		<li>
 			<img id="output_hate" class="favicon" data-num="${board.board_num}" data-favStatus="2"
-			src="${pageContext.request.contextPath}/images/hate.png" width="35">
-			<span id="hateCount"></span>	
+			src="${pageContext.request.contextPath}/images/hate.png" width="21">
 		</li>
 	</ul>	
 		<%-- 댓글수 --%>

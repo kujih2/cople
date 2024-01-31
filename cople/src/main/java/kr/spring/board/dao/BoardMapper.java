@@ -32,6 +32,9 @@ public interface BoardMapper {
 		public int selectFavCount(int board_num);
 		@Select("SELECT COUNT(*) FROM commu_fav WHERE board_num=#{board_num} AND fav_status=2")
 		public int selectHateCount(int board_num);
+		@Select("SELECT (SELECT COUNT(*) FROM commu_fav WHERE board_num=#{board_num} AND fav_status=1) - "
+			 + "(SELECT COUNT(*) FROM commu_fav WHERE board_num=#{board_num} AND fav_status=2) AS favhate_cnt FROM dual")
+		public int selectFavHateSum(int board_num);
 		@Insert("INSERT INTO commu_fav (board_num,mem_num,fav_status) "
 			  + "VALUES (#{board_num},#{mem_num},#{fav_status})")
 		public void insertFav(BoardFavVO fav);

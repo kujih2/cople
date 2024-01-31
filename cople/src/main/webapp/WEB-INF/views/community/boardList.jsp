@@ -63,7 +63,7 @@
 				</div>
 				<div class="board_list both">
 					<div>조회 ${board.hit}</div>
-					<div>좋아요</div>
+					<div>좋아요 ${board.favhate_cnt}</div>
 					<div>댓글</div>
 				</div>
 				<hr size="1" width="100%">

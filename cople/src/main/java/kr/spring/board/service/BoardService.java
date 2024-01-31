@@ -23,6 +23,7 @@ public interface BoardService {
 	public BoardFavVO selectFav(BoardFavVO fav);
 	public int selectFavCount(int board_num);
 	public int selectHateCount(int board_num);
+	public int selectFavHateSum(int board_num);
 	public void insertFav(BoardFavVO fav);
 	public void switchFav(BoardFavVO fav);
 	public void updateFav(BoardFavVO fav);

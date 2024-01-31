@@ -52,7 +52,8 @@ public class BoardAjaxController {
 		mapJson.put("favCount", boardService.selectFavCount(fav.getBoard_num()));
 		//싫어요 수
 		mapJson.put("hateCount", boardService.selectHateCount(fav.getBoard_num()));
-
+		//합산
+		mapJson.put("favHateSum", boardService.selectFavHateSum(fav.getBoard_num()));
 		return mapJson;
 	}
 	
@@ -116,6 +117,7 @@ public class BoardAjaxController {
 			mapJson.put("fav_date", fav.getFav_date());
 			mapJson.put("favCount", boardService.selectFavCount(fav.getBoard_num()));
 			mapJson.put("hateCount", boardService.selectHateCount(fav.getBoard_num()));
+			mapJson.put("favHateSum", boardService.selectFavHateSum(fav.getBoard_num()));
 		}
 		return mapJson;
 	}
