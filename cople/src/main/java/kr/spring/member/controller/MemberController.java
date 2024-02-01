@@ -91,6 +91,7 @@ public class MemberController {
 		MemberVO member = null;
 		try {
 			member = memberService.selectCheckMember(memberVO.getId());
+			member = memberService.selectMember(member.getMem_num());
 			boolean check = false;
 			
 			if(member!=null) {
