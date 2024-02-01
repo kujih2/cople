@@ -59,6 +59,7 @@
 		</svg>
 	</button>
 	<input id="img-selector" type="file" accept="image/*"/>
+<!-- 맵 버튼 -->	
 	<button class="editor-item" id="btn_map">
 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
 		  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
@@ -66,7 +67,7 @@
 		
 		<div id="sub_map">
 			<div id="map_selecter_container">
-					<input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+					<input id="pac-input" class="controls" type="text" placeholder="이곳에서 로케이션을 추가하십시오"/>
 					<div id="choose_loc_btn">완료</div>
 			</div>
 				<div id="map_container">
@@ -116,8 +117,11 @@
 		</svg>
 	</div>
 		<div id="sub_toss">
-			<div>문서 넘겨주기</div>
+			<div id="sub_toss_title">문서 넘겨주기</div>
 			<div>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+				  <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+				</svg>
 				<input tupe="text" id="toss_search">
 				<ul id="search_area2"></ul>
 			</div>

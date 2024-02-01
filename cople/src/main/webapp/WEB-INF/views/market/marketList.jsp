@@ -13,7 +13,7 @@
 			<c:if test="${!empty user.nick_name}">
 				<p>${user.nick_name}</p>
 			</c:if>
-			
+			<span>${user.market_score}</span>
 		</c:if>
 	</div>
 		<ul class="search-ul">
@@ -42,14 +42,19 @@
 	<div class="market-list">
 	<c:if test="${!empty list}">
 		<c:forEach var="market" items="${list}">
-				<div class="list-box">
-				<input type="hidden" id="product_num" value="${market.product_num}">
+	
+				<div class="list-box" onclick="location.href='detail?product_num='+${market.product_num}">
+				<input type="hidden" class="product_num" value="${market.product_num}">
 					<img src="${pageContext.request.contextPath}/upload/${market.filename0}" width="200" height="200">
 					<br><span class="list-span1">${market.product_title}</span>
 					<br><span class="list-span2"><c:if test="${category == 0}"><fmt:formatNumber value="${market.product_price}" pattern="#,###" />원</c:if> 
 							  <c:if test="${category == 1}">나눔</c:if> &nbsp;&nbsp;&nbsp;&nbsp;
-					${market.seller_id}</span>
+					<c:if test="${empty market.seller_nickname}">${market.seller_id}</c:if>
+					<c:if test="${!empty market.seller_nickname}">${market.seller_nickname}</c:if>
+					</span>
+					<span style="color:red;font-weight:bold;"><c:if test="${!empty market.product_sale && market.product_sale == 1}">판매 완료</c:if></span>
 				</div>
+			
 				<c:if test="${status.index eq 3}">
 					<br>
 				</c:if>
@@ -97,10 +102,6 @@ $(function(){
 		}
 		$('#search_form').submit();
 	});//end of submit
-	//상품 클릭시 detail로
-	$('.list-box').click(function(){
-		var product_num = $('#product_num').val();
-		 window.location.href='detail?product_num='+';
-	});
+	
 });
 </script>

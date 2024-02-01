@@ -76,4 +76,10 @@ INSERT INTO market_product(product_num,product_title,product_seller
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>       
 	</select>
+	<!-- 장터 글 상세 조회 -->
+	<select id="selectMarketDetail" parameterType="int" resultType="marketVO">
+		SELECT * FROM
+			market_product
+				WHERE product_num = #{prdouct_num}
+	</select>
 </mapper>

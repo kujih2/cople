@@ -37,6 +37,7 @@
 }
 .editor-item:hover{
 	background-color:#CCCCCC;
+	
 }
 #btn_headings{
 	width:100px;
@@ -51,6 +52,8 @@
 	top:37px;
 	border:solid 1px #CCCCCC;
 	box-sizing:border-box;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	
 	
 }
 #btn_heading1,#btn_heading2,#btn_heading3{
@@ -90,29 +93,35 @@
 	z-index:30;
 	width:400px;
 	height:400px;
-	top:20px;
+	top:37px;
+	left:-180px;
 	padding:10px;
+	padding-top:20px;
 	border:1px solid #CCCCCC;
 	background-color:white;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	
 }
 #map_selecter_container{
 	
 }
 #choose_loc_btn{
 	width:40px;
-	height:20px;
+	height:30px;
 	border-radius:3px;
 	background-color:#b3cefd;
 	float:right;
+	display:flex;
+	justify-content: center;
+    align-items: center;
+    transform: translateY(-10px);
+	
 }
 #map_container{
 	border:1px solid #CCCCCC;
 	clear:both;
 }
 
-#sub_links{
-	box-sizing:border-box;
-}
 
 #btn_docToss{
 	border-right:solid 1px #CCCCCC;
@@ -128,22 +137,25 @@
 clear:both;
 }
 #editor h2,#editor h3,#editor h4{
-padding-bottom:20px;
-border-bottom:1px solid black;
+padding-bottom:10px;
+border-bottom:1px solid #CCCCCC;
+margin-bottom:5px;
 }
 /*=======================================================================
 *문서 연결하기
 *=======================================================================*/ 
 #sub_links{
-position:absolute;
-top:37px;
-left:415px;
-display:none;
-border:solid 1px #CCCCCC;
-background-color:white;
-box-sizing:border-box;
-padding:10px;
-width:250px;
+	position:absolute;
+	top:37px;
+	left:360px;
+	display:none;
+	border:solid 1px #CCCCCC;
+	background-color:white;
+	box-sizing:border-box;
+	padding:10px 10px 0 10px;
+	width:250px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 #sub_links_menu_title1 {
 	float:left;
@@ -152,6 +164,22 @@ width:250px;
 	margin-right:10px;
 	box-sizing:border-box;
 	border-bottom:solid black 2px;
+	
+}
+#internal_search{
+	width:190px;
+	height:33px;
+	border:solid 1px #CCCCCC;
+	border-radius:0 5px 5px 0;
+	box-sizing:border-box;
+	float:left;
+	margin-right:20px;
+	padding-left:10px;
+	margin-bottom:10px;
+}
+#internal_search:focus{
+	outline:none;
+    border-color: #4d90fe;
 	
 }
 #sub_links_menu_title2 {
@@ -168,24 +196,144 @@ width:250px;
 #sub_links_menu_item1{
 	clear:both;
 	width:250px;
+    padding-top:10px;
 }
+#sub_links_menu_item1 svg{
+	padding:8px;
+	border:1px solid #CCCCCC;
+	border-radius:5px 0 0 5px;
+	box-sizing:border-box;
+	width:33px;
+	height:33px;
+	background-color:#CCCCCC;
+	float:left;
+}
+#sub_links_menu_item1 ul{
+	list-style: none;
+	padding-left:33px;
+	padding-top:30px;
+}
+#sub_links_menu_item1 ul li{
+	width:190px;
+	padding:10px 0 10px 0;
+	cursor:pointer;
+	border-top:1px solid #CCCCCC;
+	
+}
+#sub_links_menu_item1 ul li:hover{
+	background-color:rgba(77, 144, 254, 0.5);
+	
+}
+
+
 #sub_links_menu_item2{
 	clear:both;
 	display:none;
 	width:250px;
+    padding-top:10px;
+	
 }
+#sub_links_menu_item2 svg{
+	padding:8px;
+	border:1px solid #CCCCCC;
+	border-radius:5px 0 0 5px;
+	box-sizing:border-box;
+	width:33px;
+	height:33px;
+	background-color:#CCCCCC;
+	float:left;
+}
+#external_import{
+	width:150px;
+	height:33px;
+	border:solid 1px #CCCCCC;
+	border-radius:0 5px 5px 0;
+	box-sizing:border-box;
+	float:left;
+	margin-right:8px;
+	padding-left:10px;
+	margin-bottom:10px;
+}
+#external_import:focus{
+	outline:none;
+    border-color: #4d90fe;
+	
+}
+#sub_links_menu_item2 button{
+	width:40px;
+	height:33px;
+	border-radius:5px;
+	border:1px solid #b3cefd;
+	background-color:#b3cefd;
+	display:flex;
+	justify-content: center;
+    align-items: center;
+}
+
 /*=======================================================================
 *문서 넘겨주기
 *=======================================================================*/
 #sub_toss{
 	position:absolute;
-	left:200px;
+	top:37px;
+	left:420px;
 	display:none;
-	border:1px solid black;
-	border-radius:3px;
-	background-color:#efefef;
+	border:solid 1px #CCCCCC;
+	background-color:white;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding:10px 10px 0 10px;
+	
+	width:250px;
+}
+#sub_toss_title{
+	margin-bottom:10px;
 }
 
+#sub_toss svg{
+	padding:8px;
+	border:1px solid #CCCCCC;
+	border-radius:5px 0 0 5px;
+	box-sizing:border-box;
+	width:33px;
+	height:33px;
+	background-color:#CCCCCC;
+	float:left;
+}
+#sub_toss ul{
+	list-style: none;
+	padding-left:33px;
+	padding-top:30px;
+}
+#sub_toss ul li{
+	width:190px;
+	padding:10px 0 10px 0;
+	cursor:pointer;
+	border-top:1px solid #CCCCCC;
+	
+}
+#sub_toss ul li:hover{
+	background-color:rgba(77, 144, 254, 0.5);
+	
+}
+#toss_search{
+	width:190px;
+	height:33px;
+	border:solid 1px #CCCCCC;
+	border-radius:0 5px 5px 0;
+	box-sizing:border-box;
+	float:left;
+	margin-right:20px;
+	padding-left:10px;
+	margin-bottom:10px;
+}
+#toss_search:focus{
+	outline:none;
+    border-color: #4d90fe;
+	
+}
 
+#editor ul{
+padding-left:20px;
+}
 
 </style>

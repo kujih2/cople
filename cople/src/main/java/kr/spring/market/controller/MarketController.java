@@ -20,9 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.market.service.MarketService;
 import kr.spring.market.vo.MarketVO;
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -30,6 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MarketController {
 	@Autowired
 	private MarketService marketService;
+	@Autowired
+	private MemberService memberService;
 	
 	/*=================================
 	 * 장터 글 등록
@@ -98,10 +102,12 @@ public class MarketController {
 	public ModelAndView process(
 			       @RequestParam(value="pageNum",defaultValue="1") int currentPage,
 			       @RequestParam(value="category") int category,
-			       String market_keyword) {
+			       String market_keyword, HttpSession session) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyword", market_keyword);
 		map.put("category", category);
+		
+		
 		
 		//전체/검색 레코드수
 		int count = marketService.selectRowCount(map);
@@ -124,5 +130,18 @@ public class MarketController {
 		mav.addObject("page", page.getPage());
 		mav.addObject("category", category);
 		return mav;
+	}
+	/*=================================
+	 * 장터 글 상세
+	 *=================================*/
+	@RequestMapping("/market/detail")
+	public ModelAndView process(@RequestParam int product_num) {
+		
+		//상품번호를 통한 상세 조회
+		MarketVO vo = marketService.selectMarketDetail(product_num);
+		//제목에 태그를 허용하지 않음
+		vo.setProduct_title(StringUtil.useNoHtml(vo.getProduct_title()));
+								//타일즈설정명,     속성명,  속성값
+		return new ModelAndView("marketDetail","market",vo);
 	}
 }

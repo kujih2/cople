@@ -86,7 +86,7 @@ $(document).ready(function() {
  			});
 		}
  		if(mapStatus==0){
-			$('#position_of_map').remove();
+			$('#position_of_map').parent().remove();
  		}
  		$('#position_of_img').remove();
 	});
@@ -99,7 +99,6 @@ $(document).ready(function() {
 	
 	
 	//버튼들 기능
-
 		//문단
 	let headingStatus = 0;
 	$('#btn_headings').on('click',function(){
@@ -283,16 +282,26 @@ $(document).ready(function() {
     	event.stopPropagation();
     });
     $('#choose_loc_btn').on('click', function(event) {
+		if($('#pac-input').val().trim()==''){
+			$('#pac-input').val('').focus();
+	    	$('#position_of_map').parent().remove();
+			return;	
+		}
     	event.preventDefault();
     	event.stopPropagation();
     	hideSubMenus();
     	$('#editor').focus();
-    	let inserted_tags = "<iframe width=\"300\" height=\"300\" style=\"border:0\" loading=\"lazy\" allowfullscreen referrerpolicy=\"no-referrer-when-downgrade\" src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyAC4McV0RQma1mFznuFnW4paXEXkLhTZ2c&q="+$('#pac-input').val()+"\"></iframe>"	
+    	let inserted_tags = "<iframe class=\"map-iframe\"width=\"300\" height=\"300\" style=\"border:1px solid #CCCCCC;\" loading=\"lazy\" allowfullscreen referrerpolicy=\"no-referrer-when-downgrade\" src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyAC4McV0RQma1mFznuFnW4paXEXkLhTZ2c&q="+$('#pac-input').val()+"\"></iframe>"	
     
     	$('#position_of_map').append(inserted_tags);
     	$('.map-elements').removeAttr('id');
+    	$('#pac-input').val('');
+    });
+    $('#map > *').on('click', function(event) {
+    	event.preventDefault();
     });
 
+    
     //링크연결
     let linksStatus=0;
 	$('#btn_links').on('click',function(){
@@ -441,7 +450,7 @@ $(document).ready(function() {
 		let doc_num = $(this).attr('data-num');//선택한 문서 번호
 		let doc_name = $(this).attr('data-name');//선택한 문서 이름
 		$('#editor').html('');
-		$('#editor').html('<div class="redirect"><a href="detail?doc_num='+doc_num+'&from1='+$('#original_doc').attr('data-name')+'&from2='+$('#original_doc').attr('data-num')+'">'+doc_name+'</a>으로 문서를 넘겨줌</div>');
+		$('#editor').html('<div class="redirect"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/></svg><a href="detail?doc_num='+doc_num+'&from1='+$('#original_doc').attr('data-name')+'&from2='+$('#original_doc').attr('data-num')+'">'+doc_name+'</a>으로 문서를 넘겨줌</div>');
 		$('.redirect').prepend('<input type="hidden" id="redirect_to" data-num="'+$('#original_doc').attr('data-num')+'" data-name="'+$('#original_doc').attr('data-name')+'" data-redirect="'+doc_num+'">')
 		
 		
