@@ -204,7 +204,32 @@ var count = 0;
 			$('.page-main').hide();
 	     });
 	
-	
+	 // 취소버튼 클릭 이벤트
+    $('#reset_btn').click(function () {
+        $('.hide').hide();
+		$('.page-main').show();
+		$('#output').text('');
+		$('#output2').text('');
+        $('#placeDetail').val('');
+        $('#placeAddress').val('');
+    });
+
+    // 등록버튼 클릭 이벤트
+    $('#submit_btn').click(function () {
+        if ($('#placeAddress').val().trim() == '') {
+            alert('지도에서 거래 장소를 클릭해 주세요.');
+            return false;
+        }
+        if ($('#detail').val().trim() == '') {
+            alert('상세 장소명을 입력해주세요. ');
+            $('#detail').val('').focus();
+            return false;
+        }
+        $('#output2').text($('#detail').val());
+        $('#placeDetail').val($('#detail').val());
+        $('.hide').hide();
+		$('.page-main').show();
+    });
 	
 	
 

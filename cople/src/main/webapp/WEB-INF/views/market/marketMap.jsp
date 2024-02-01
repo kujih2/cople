@@ -35,7 +35,7 @@
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.49819, 127.0280), // 지도의 중심좌표
-        level: 1 // 지도의 확대 레벨
+        level: 2 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
@@ -107,34 +107,5 @@ function displayCenterInfo(result, status) {
 
 </script>
 
-<script type="text/javascript">
-$(function () {
-    // 취소버튼 클릭 이벤트
-    $('#reset_btn').click(function () {
-        $('.hide').hide();
-		$('.page-main').show();
-		$('#output').text('');
-		$('#output2').text('');
-        $('#placeDetail').val('');
-        $('#placeAddress').val('');
-    });
 
-    // 등록버튼 클릭 이벤트
-    $('#submit_btn').click(function () {
-        if ($('#placeAddress').val().trim() == '') {
-            alert('지도에서 거래 장소를 클릭해 주세요.');
-            return false;
-        }
-        if ($('#detail').val().trim() == '') {
-            alert('상세 장소명을 입력해주세요. ');
-            $('#detail').val('').focus();
-            return false;
-        }
-        $('#output2').text($('#detail').val());
-        $('#placeDetail').val($('#detail').val());
-        $('.hide').hide();
-		$('.page-main').show();
-    });
-});
-</script>
 </html>
