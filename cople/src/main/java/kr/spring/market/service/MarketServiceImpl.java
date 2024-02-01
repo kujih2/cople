@@ -32,6 +32,7 @@ public class MarketServiceImpl implements MarketService{
 		            MemberVO member = memberMapper.selectMember(sellerNum);
 		            if (member != null) {
 		                each.setSeller_id(member.getId());
+		               each.setSeller_nickname(member.getNick_name());
 		            }
 		        }
 		    }
@@ -52,10 +53,27 @@ public class MarketServiceImpl implements MarketService{
 
 	@Override
 	public MarketVO selectMarketDetail(int product_num) {
-		// TODO Auto-generated method stub
-		return null;
+		MarketVO vo =  marketMapper.selectMarketDetail(product_num);
+		Integer sellerNum = vo.getProduct_seller();
+		Integer buyerNum = vo.getProduct_buyer();
+		if(sellerNum!=null) {
+			 MemberVO member = memberMapper.selectMember(sellerNum);
+			 if(member!=null) {
+				 vo.setSeller_id(member.getId());
+				 vo.setSeller_nickname(member.getNick_name());
+			 }
+		}
+		if(buyerNum!=null) {
+			MemberVO member = memberMapper.selectMember(buyerNum);
+			if(member!=null) {
+				vo.setBuyer_id(member.getId());
+				vo.setBuyer_nickname(member.getNick_name());
+				 vo.setMarket_score(member.getMarket_score());
+			}
+		}
+		
+		return vo;
 	}
-
 	@Override
 	public void updateMarket(int product_num) {
 		// TODO Auto-generated method stub

@@ -16,7 +16,10 @@ public class MarketVO {
 	private String product_title;
 	private Integer product_seller;
 	private String seller_id;
+	private String seller_nickname;
 	private Integer product_buyer;
+	private String buyer_id;
+	private String buyer_nickname;
 	private String filename0;
 	private String filename1;
 	private String filename2;
@@ -34,5 +37,6 @@ public class MarketVO {
 	private Date product_regDate;
 	private Date product_modifyDate;
 	private Date product_soldDate;
+	private int market_score;
 	
 }
