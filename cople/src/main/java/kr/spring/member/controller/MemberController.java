@@ -96,7 +96,6 @@ public class MemberController {
 			if(member!=null) {
 				//비밀번호 일치 여부 체크
 				check = member.isCheckedPassword(memberVO.getPasswd());
-				member = memberService.selectMember(member.getMem_num()) ;
 			}
 			if(check) {//인증 성공
 				//====자동로그인 체크 시작===//
@@ -223,7 +222,6 @@ public class MemberController {
 	}
 	
 }
-
 
 
 
