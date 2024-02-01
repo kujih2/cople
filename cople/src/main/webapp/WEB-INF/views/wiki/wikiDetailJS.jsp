@@ -16,7 +16,7 @@ $(document).ready(function(){
     var from1 = urlParams.get('from1');
     var from2 = urlParams.get('from2');
     if(from1 !== null && from1.trim() !== ''){
-	    $('#editor').before('<div id="redirect_message"><a href="detail?doc_num='+from2+'&noredirect=1">'+from1+'</a>로부터 넘어옴</div>');
+	    $('#editor').before('<div id="notice_message"><a href="detail?doc_num='+from2+'&noredirect=1">'+from1+'</a>로부터 넘어옴</div>');
 
     }
     var noredirect = urlParams.get('noredirect');

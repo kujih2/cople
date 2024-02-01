@@ -13,6 +13,8 @@ import kr.spring.interceptor.LoginCheckInterceptor;
 @Configuration
 public class AppConfig implements WebMvcConfigurer{
 	private LoginCheckInterceptor loginCheck;
+	
+
 	@Bean
 	public LoginCheckInterceptor interceptor2() {
 		loginCheck = new LoginCheckInterceptor();
@@ -21,6 +23,7 @@ public class AppConfig implements WebMvcConfigurer{
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+
 		//LoginCheckInterceptor 설정
 		registry.addInterceptor(loginCheck)
 				.addPathPatterns("/member/myPage")
