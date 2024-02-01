@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 상단시작 -->
-<div id="__next">
 	<header class="sticky top-0 z-20 flex h-16 items-center border-b border-b-gray-500/30 bg-white py-5 text-sm font-medium leading-6 dark:border-b-gray-500/70 dark:bg-gray-800" data-headlessui-state="">
 		<nav aria-label="Global" class="mx-auto flex w-full max-w-7xl px-4 lg:px-0">
 			<div class="flex w-full items-center justify-between">
@@ -19,7 +18,7 @@
 							<a class="text-gray-900 hover:text-blue-500" href="${pageContext.request.contextPath}/community/commuMain">커뮤니티</a>
 						</div>
 						<div class="shrink-0">
-							<a class="text-blue-500 text-sm font-medium hover:no-underline" href="${pageContext.request.contextPath}/market/list">장터</a>
+							<a class="text-blue-500 text-sm font-medium hover:no-underline" href="${pageContext.request.contextPath}/market/list?category=0">장터</a>
 						</div>
 						<div class="h-3 w-[1px] bg-gray-400"></div>
 							<div class="shrink-0">
@@ -71,6 +70,5 @@
 				</div>
 			</nav>
 		</header>
-	</div>
 
 <!-- 상단끝 -->

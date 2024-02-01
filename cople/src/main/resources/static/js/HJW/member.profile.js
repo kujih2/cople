@@ -81,8 +81,9 @@ $(function(){
 		$('#photo_btn').show();
 	});//end of click - 취소 버튼 처리
 	
-});
+	
 
+});
 
 
 

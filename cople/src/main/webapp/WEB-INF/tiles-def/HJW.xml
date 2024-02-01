@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
@@ -9,23 +10,36 @@
 	    <put-attribute name="title" value="회원가입"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/memberRegister.jsp"/>    	
     </definition>
-      <definition name="memberLogin" extends="main">
+     <definition name="memberLogin"  extends="main">
     	<put-attribute name="title" value="회원로그인"/>
     	<put-attribute name="body"
     	               value="/WEB-INF/views/member/memberLogin.jsp"/>                                           
     </definition>
     
+    <!-- calendar -->
+    <definition name="calendarMain" template="/WEB-INF/views/template/layout_mypage2.jsp">
+    	<put-attribute name="title" value="캘린더"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/header2.jsp"/> 
+    	<put-attribute name="nav"
+    	               value="/WEB-INF/views/calendar/nav_calendar.jsp"/>  
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/calendar/calendarMain.jsp"/>      
+    </definition>
+    
+    
     <!-- myPage -->
-    <definition name="myPage" template="/WEB-INF/views/template/layout_mypage.jsp">
+    <definition name="myPage" template="/WEB-INF/views/template/layout_mypage2.jsp">
     	<put-attribute name="title" value="MyPage"/>
     	<put-attribute name="header" value="/WEB-INF/views/template/header2.jsp"/> 
     	<put-attribute name="nav"
-    	               value="/WEB-INF/views/template/nav_mypage2.jsp"/>               
+    	               value="/WEB-INF/views/template/nav_mypage.jsp"/>               
     	<put-attribute name="body"
-    	               value="/WEB-INF/views/member/memberView.jsp"/>
+    	               value="/WEB-INF/views/template/body_mypage.jsp"/>
     	<put-attribute name="footer"
     	               value="/WEB-INF/views/template/footer.jsp"/>                                             
     </definition>
+    
+    
     
     <!-- Admin Page -->
     <definition name="adminMain" 

@@ -28,7 +28,26 @@ create table member_detail(
  modify_date date,
  constraint member_detail_pk primary key (mem_num),
  constraint member_detail_fk foreign key (mem_num) 
-                               references spmember (mem_num)
+                               references member (mem_num)
 );
 
 create sequence member_seq;
+
+
+
+create table calendar(
+	cal_num number not null,
+	groupId NUMBER,
+	title varchar2(50),
+	writer varchar2(50),
+	content varchar2(1000),
+	start1 date,
+	end1 date,
+	allDay number(1),
+	textColor varchar(50),
+	backgroundColor varchar2(50),
+	borderColor varchar2(50)
+	mem_num number not null,
+ constraint calendar_pk primary key (cal_num),
+ constraint calendar_fk foreign key (mem_num) references member (mem_num)
+ );
