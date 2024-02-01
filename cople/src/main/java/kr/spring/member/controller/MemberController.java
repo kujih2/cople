@@ -99,7 +99,7 @@ public class MemberController {
 				check = member.isCheckedPassword(memberVO.getPasswd());
 				member = memberService.selectMember(member.getMem_num()) ;
 			}
-			if(check) {//인증 성공
+			if(check) {//인증 성공 
 				//====자동로그인 체크 시작===//
 				
 				
