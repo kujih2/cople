@@ -16,7 +16,7 @@ public class MarketVO {
 	private String product_title;
 	private Integer product_seller;
 	private String seller_id;
-	private int product_buyer;
+	private Integer product_buyer;
 	private String filename0;
 	private String filename1;
 	private String filename2;

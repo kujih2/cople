@@ -78,8 +78,9 @@ public class MarketController {
 		}
 		
 		log.debug("<<글 작성2 MarketVO>> : " + marketVO);
-		//지도정보
 		
+		marketVO.setProduct_place(request.getParameter("placeAddress"));
+		marketVO.setProduct_placeDetail(request.getParameter("placeDetail"));
 		
 		//글쓰기
 		marketService.insertMarket(marketVO);

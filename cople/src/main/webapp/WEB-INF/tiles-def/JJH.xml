@@ -16,11 +16,12 @@
 	    <put-attribute name="css" value="/WEB-INF/views/market/marketCSS.jsp"/> 	
     	<put-attribute name="body" value="/WEB-INF/views/market/marketWrite.jsp"/>   
     </definition>
-    <definition name="marketMap" extends="main">
-	    <put-attribute name="title" value="거래 희망 장소 선택"/>
+    <definition name="marketDetail" extends="main">
+	    <put-attribute name="title" value="글 상세"/>
 	    <put-attribute name="css" value="/WEB-INF/views/market/marketCSS.jsp"/> 	
-    	<put-attribute name="body" value="/WEB-INF/views/market/marketMap.jsp"/>   
+    	<put-attribute name="body" value="/WEB-INF/views/market/marketDetail.jsp"/>   
     </definition>
+   
 </tiles-definitions>
 
 

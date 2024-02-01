@@ -70,7 +70,8 @@ INSERT INTO market_product(product_num,product_title,product_seller
 			   		product_regDate,
 			   		product_modifyDate
 			   	FROM market_product
-			   	<include refid="marketSearch"></include>)a)	
+			   	<include refid="marketSearch"></include>
+			   	ORDER BY product_regDate DESC)a)	
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>       
