@@ -211,6 +211,11 @@ public class MemberController {
 		model.addAttribute("filename", "face.png");
 	}
 	
+	@RequestMapping("/calendar/calendarMain")
+	public String formCalendar() {
+		return "calendarMain";
+	}
+	
 	@RequestMapping("/main/admin")
 	public String goAdminPage() {
 		return "adminMain";
