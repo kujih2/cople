@@ -70,7 +70,7 @@
 			지난 버전의 내용을 보고 있습니다.
 		</div>
 	</c:if>
-	<c:if test="${wiki.update_content == null}">
+	<c:if test="${wiki.update_content == null && wiki.doc_status!=1}">
 		<div id="notice_message">	
 			아직 작성된 내용이 없습니다. 새로운 내용을 편집하세요.
 		</div>
