@@ -10,21 +10,25 @@
 <!-- 삭제된 문서 -->
 <c:if test="${wiki.doc_status==1}">
 	<h2 style="color:red;"><s>${wiki.doc_name}</s>
-		
 	</h2>
-	삭제된 문서입니다. 
 </c:if>
 <!-- 존재하는 문서 -->
 <c:if test="${wiki.doc_status==2}">
 	<h2>${wiki.doc_name}</h2>
 </c:if>
 		<c:if test="${wiki.update_status==0}">
-			(${wiki.doc_num}-${wiki.update_num}판)
+			<span id="old-version" style="color:grey;">(${wiki.doc_num}-${wiki.update_num}판)</span>
 		</c:if>
 		<div>
 			
 			<c:if test="${wiki.update_status==0}">
-				<button onclick="location.href='undo?doc_num=${wiki.doc_num}&update_num=${wiki.update_num}'">이 버전으로 되돌리기</button>
+				<button class="rewind-btn" onclick="location.href='undo?doc_num=${wiki.doc_num}&update_num=${wiki.update_num}'">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+						<path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+					</svg>
+					이 버전으로 되돌리기
+				</button>
 			</c:if>
 		
 			<button id="history_btn" onclick="location.href='history?doc_num=${wiki.doc_num}'">
@@ -61,16 +65,25 @@
 </div> 
 	
 <div id="content_main">
-<c:if test="${wiki.update_status == 0}">
-	<h3> 지난 버전의 내용을 보고 있습니다.</h3>
-</c:if>
-<c:if test="${wiki.doc_status == 0}">
-	작성된 내용이 없습니다.
-</c:if>
-<c:if test="${wiki.doc_status == 2}">
-	<div id="editor">
-		${wiki.update_content}
-	</div>
+	<c:if test="${wiki.update_status == 0}">
+		<div id="notice_message">
+			지난 버전의 내용을 보고 있습니다.
+		</div>
+	</c:if>
+	<c:if test="${wiki.update_content == null}">
+		<div id="notice_message">	
+			아직 작성된 내용이 없습니다. 새로운 내용을 편집하세요.
+		</div>
+	</c:if>
+	<c:if test="${wiki.doc_status == 2}">
+		<div id="editor">
+			${wiki.update_content}
+		</div>
+	</c:if>
+	<c:if test="${wiki.doc_status==1}">
+		<div id="notice_message">
+			삭제된 문서입니다. 새로 편집하거나 역사 탭에서 문서를 되돌리십시오.
+		</div>
 </c:if>
 </div>
 <!-- 내용끝 -->

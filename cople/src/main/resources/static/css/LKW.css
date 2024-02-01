@@ -130,6 +130,7 @@ wikiDetail
 }
 #content_main{
 	clear:both;
+	padding-top:10px;
 }
 /* ----------------------
 wikiList

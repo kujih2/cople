@@ -13,7 +13,7 @@
 	width:1000px;
 }
 
-#redirect_message{
+#notice_message{
 	box-sizing: border-box; 
 	width:100%;
 	height:40px;
@@ -23,6 +23,8 @@
 	padding-left:10px;
 	display:flex;
 	align-items:center;
+	margin-bottom:10px;
+	clear:both;
 }
 #editor img {
     max-width: 100%;
@@ -38,8 +40,9 @@ position:relative;
 	clear:both;
 }
 #editor h2,#editor h3,#editor h4{
-	padding-bottom:20px;
-	border-bottom:1px solid black;
+	padding-bottom:10px;
+border-bottom:1px solid #CCCCCC;
+margin-bottom:5px;
 }
 
 #edit_btn,
@@ -100,6 +103,29 @@ background-color:#efefef;
 	background-color:#efefef;
 }
 
-
+#editor ul{
+padding-left:20px;
+}
+#deleted_doc{
+	clear:both;
+	margin-left:30px;
+	margin-top:30px;
+}
+#old-version{
+	float:left;
+}
+.sng-history,.rewind-btn{
+	background-color:white;
+	box-sizing:border-box;
+	border:1px solid #CCCCCC;
+	border-radius:5px;
+	height:30px;
+	margin-left:5px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	cursor:pointer;
+	float:right;
+}
 
 </style>
