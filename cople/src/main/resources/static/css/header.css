@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+#header{
+	height:100px;
+	display:flex;
+	justify-content: center; /* Center horizontally */
+    align-items: center;
+    background-color:white;
+}
+#header_nav_logo{
+	
+}
+#header_nav_menu{
+	flex:1;
+}
+
+#header_nav_user{
+	width:230px;
+}
+#header a:link{
+   text-decoration:none;
+   color:#000000;
+}
+#header a:visited{
+   text-decoration:none;
+   color:#000000;
+}
+#header a:hover{
+   text-decoration:none;
+   color:#999999;
+}
+/* 로고 */
+#logo{
+	width:260px;
+}
+/* 메뉴 */
+#header_nav_menu{
+	margin-left:10px;
+}
+#header_nav_menu ul{
+	list-style:none;
+	display:flex;
+	height:100px;
+	justify-content: left;
+    align-items: center;
+	width:450px;
+}
+#header_nav_menu ul li{
+	display:inline;
+	margin-left:20px;
+	margin-right:20px;
+	font-size:20px;
+	font-weight:bold;
+	
+}
+/* 검색 */
+#header_nav_search{
+	flex:1;
+	display:flex;
+	justify-content: flex-end;
+    align-items: center;
+    padding-right:30px;
+}
+#header_nav_search div{
+	display:flex;
+	justify-content: center;
+    align-items: center;
+}
+#total_search_box{
+	width:450px;
+	height:40px;
+	border:2px solid #CCCCCC;
+	border-radius:25px 0 0 25px;
+	padding-left:20px;
+	font-size:17px;
+}
+#total_search_box:focus{
+	outline:none;
+	border:2px solid #0090F9;
+}
+#total_search_box_btn{
+	padding:12px;
+	border:2px solid #CCCCCC;
+	border-left:none;
+	border-radius:0 50% 50% 0;
+}
+/* 사용자 */
+#header_nav_user{
+	margin-right:30px;
+}
+#header_nav_user ul{
+	list-style:none;
+	display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#header_nav_user li{
+	display:inline;
+	margin-left:10px;
+	cursor:pointer;
+}
+#header_nav_user svg:hover{
+	fill:#0090F9;
+}
+
+#my_page{
+	border-radius:50%;
+}
+
+#login_btn{
+	display:flex;
+	justify-content: center;
+    align-items: center;
+	height:40px;
+	width:100px;
+	border:2px solid #CCCCCC;
+	border-radius:21px;
+	background-color:white;
+	font-weight:bold;
+}
+#register_btn{
+	display:flex;
+	justify-content: center;
+    align-items: center;
+    height:40px;
+	width:100px;
+	border-radius:21px;
+	background-color:#0090F9;
+	border:2px solid #0090F9;
+	font-weight:bold;
+	color: white;
+}
+#register_btn a:link{
+   text-decoration:none;
+	color: white;
+}
+#register_btn a:visited{
+   text-decoration:none;
+	color: white;
+}
+#register_btn a:hover{
+   text-decoration:none;
+	color: white;
+}

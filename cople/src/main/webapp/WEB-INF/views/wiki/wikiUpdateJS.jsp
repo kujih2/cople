@@ -429,11 +429,14 @@ $(document).ready(function() {
 				if(param.result == 'success'){
 					$('#search_area2').empty();
 					$(param.wikiList).each(function(index,item){
-						let output = '';
-						output += '<li data-num="'+item.doc_num+'" data-name="'+item.doc_name+'">';
-						output += item.doc_name;
-						output += '</li>';
-						$('#search_area2').append(output);
+
+						if(item.doc_name!=$('#original_doc').data('name')){
+							let output = '';
+							output += '<li data-num="'+item.doc_num+'" data-name="'+item.doc_name+'">';
+							output += item.doc_name;
+							output += '</li>';
+							$('#search_area2').append(output);
+						}
 					});
 		
 				}else{
