@@ -16,7 +16,7 @@ public interface MatchingMapper {
 	public List<EmpVO> listEmp(Map<String,Object> map);
 	@Select("SELECT count(*) FROM emp JOIN member USING(mem_num) WHERE auth=2")
 	public int selectEmpCount();
-	@Select("SELECT * FROM emp WHERE mem_num=#{mem_num}")
+	@Select("SELECT a.*, member.id FROM (SELECT * FROM emp) a JOIN member ON a.mem_num = member.mem_num WHERE member.mem_num = #{mem_num}")
 	public EmpVO selectEmp(int mem_num);
 	@Select("SELECT * FROM member WHERE auth=2")
 	public List<MemberVO> selectMemberList();

@@ -84,7 +84,8 @@
 					]]>
 					register_date,
 					m_date,
-					auth
+					auth,
+					id
 				FROM
 					emp
 				LEFT OUTER JOIN member USING(mem_num) 

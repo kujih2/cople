@@ -39,6 +39,7 @@ public class EmpVO {
 	private MultipartFile upload;
 	private String advice;
 	private int auth;
+	private String id;
 	
 	
 }

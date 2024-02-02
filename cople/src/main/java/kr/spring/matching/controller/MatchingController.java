@@ -163,10 +163,11 @@ public class MatchingController {
 			return "matching/resultAlert";
 		}else {
 			EmpVO empVO = matchingService.selectEmp(user_id);
+			log.debug("<<Emp id >> : " + empVO.getId());
 			model.addAttribute("empVO",empVO);
 		}
 
-		return "matching/my_emp_register";
+		return "matching/see_emp_register";
 	}
 
 	@PostMapping("/matching/empInsert")
