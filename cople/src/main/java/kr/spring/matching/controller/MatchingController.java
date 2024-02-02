@@ -148,6 +148,26 @@ public class MatchingController {
 
 		return "matching/my_emp_register";
 	}
+	
+	@RequestMapping("/matching/see_emp_register")
+	public String main3(int user_id,HttpSession session, Model model, HttpServletRequest request) {
+
+		MemberVO user = (MemberVO)session.getAttribute("user");
+
+		
+		if(user==null) {
+			//View에 표시할 메시지
+			model.addAttribute("message", "수강생 회원만 이용가능합니다.");
+			model.addAttribute("url", request.getContextPath()+ "/member/login");
+
+			return "matching/resultAlert";
+		}else {
+			EmpVO empVO = matchingService.selectEmp(user_id);
+			model.addAttribute("empVO",empVO);
+		}
+
+		return "matching/my_emp_register";
+	}
 
 	@PostMapping("/matching/empInsert")
 	public String registerEmp(@Valid EmpVO empVO, BindingResult result, Model model, HttpSession session, 
@@ -170,6 +190,8 @@ public class MatchingController {
 		return "common/resultAlert";
 
 	}
+	
+	
 
 
 }

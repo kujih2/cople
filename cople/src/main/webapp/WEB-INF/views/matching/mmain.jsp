@@ -89,6 +89,7 @@
     .photo_list {
     margin-right: 25px; /* 원하는 간격으로 조절 */
     padding-right: 25px;
+    z-index: 5;
 }
 	/*프로필 이미지들을 가로로 나열*/
 	.memberList {
@@ -98,7 +99,7 @@
 	
 	/*Swiper slider스타일*/
 	 swiper-container {
-      width: 100%;
+      width: 120%;
       height: 100%;
     }
 
@@ -109,6 +110,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
     }
 
     swiper-slide img {
@@ -122,6 +124,57 @@
       margin-left: auto;
       margin-right: auto;
     }
+/*     .swiper-button-next {
+    width:10%;
+    margin:0 -45px;
+    }
+	.swiper-button-prev {
+	width:10%;
+    margin:0 -45px;
+	} */
+	
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .profile-dropdown-content {
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            border-radius: 4px;
+            position: absolute;
+            opacity: 0;
+            top:270px;
+            left:50px;
+            transition:all 0.2s ease-in-out;
+        }
+
+        .profile-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .profile-dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .profile-dropdown-content a:hover {
+            background-color: #f9f9f9;
+        }
+
+        .profile-dropdown:hover .profile-dropdown-content {
+        	transform:translateY(-200px);
+            opacity: 1;
+        }
+
 </style>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script>
@@ -152,7 +205,7 @@ function my_emp_register() {
     var top = (window.innerHeight - height) / 2;
 
     // 팝업 창 열기
-    var popupWindow = window.open("my_emp_register", "현직자 신청하기", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top + ",scrollbars=yes");
+    var popupWindow = window.open("my_emp_register", "나의 프로필 확인하기", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top + ",scrollbars=yes");
 
     // 팝업 내용 스타일 조절
     if (popupWindow) {
@@ -162,6 +215,20 @@ function my_emp_register() {
             popupContent.style.maxHeight = '80vh'; // 팝업 창의 최대 높이를 설정 (가능하면 vh 단위 사용)
         };
     }
+}
+function see_emp_register(user_id) {
+    var width = '700';
+    var height = '700';
+
+    var left = (window.innerWidth - width) / 2;
+    var top = (window.innerHeight - height) / 2;
+	
+    
+    // 팝업 창 열기
+    var popupWindow = window.open("see_emp_register?user_id="+user_id, "현직자 프로필 확인하기", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top + ",scrollbars=yes");
+
+    // 팝업 내용 스타일 조절
+   
 }
 $(document).ready(function(){
 	
@@ -195,28 +262,30 @@ $(document).ready(function(){
 
 <h2>현직자 프로필</h2>
 <c:if test="${count>0}">
-<div class="memberList">
-<div class="swiper-container">
-	<div class="swiper-wrapper">
-		<c:forEach var="member" items="${memberList}">
-			<div class="swiper-slide">
-				<a href="#"><img src="${pageContext.request.contextPath}/matching/viewProfile?userNum=${member.mem_num}" width="200" height="200" class="photo_list"></a>	
-			</div>
-		</c:forEach>
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<c:forEach var="member" items="${memberList}">
+				<div class="swiper-slide">
+					<a href="#" data-id="${member.mem_num}">
+					</a>					    
+					 <div class="profile-dropdown">
+						<img src="${pageContext.request.contextPath}/matching/viewProfile?userNum=${member.mem_num}" width="200" height="200" class="photo_list">
+					    <div class="profile-dropdown-content">
+					        <a class="detail" href="#" onclick="see_emp_register('${member.mem_num}')" data-id="${member.mem_num}">프로필 보기</a>
+					        <a class="detail" href="#">쪽지 보내기</a>
+					        <a class="detail" href="#">첨삭 요청하기</a>
+					    </div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+		<!-- 네비게이션 -->
+		<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+		<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+	
+		<!-- 페이징 -->
+		<div class="swiper-pagination"></div>
 	</div>
-	<!-- 네비게이션 -->
-	<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-	<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
-
-	<!-- 페이징 -->
-	<div class="swiper-pagination"></div>
-</div>
-
-
-<%-- <c:forEach var="member" items="${memberList}">
-	<a href="#"><img src="${pageContext.request.contextPath}/matching/viewProfile?userNum=${member.mem_num}" width="200" height="200" class="photo_list"></a>	
-</c:forEach> --%>
-</div>
 </c:if>
 <c:if test="${count==0}">
 등록된 현직자가 존재하지 않습니다.
@@ -271,6 +340,18 @@ $(document).ready(function(){
 			prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
 		},
 	});
+	
+	 var dropdowns = document.querySelectorAll('.profile-dropdown');
+	    dropdowns.forEach(function(dropdown) {
+	        dropdown.addEventListener('click', function() {
+	            var dropdownContent = this.querySelector('.profile-dropdown-content');
+	            dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+	        	console.log(${member.mem_num});
+	        });
+	    });
+	    
+	  
+	
 </script>
 <script type="text/javascript">
 		
@@ -503,15 +584,15 @@ $(document).ready(function(){
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e592360b98e7e7af7c0620352a4709c&libraries=clusterer"></script>
 <script>
 	var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
-	    center : new kakao.maps.LatLng(37.50642899040794, 126.97303712266464), // 지도의 중심좌표 
-	    level : 10 // 지도의 확대 레벨 
+	    center : new kakao.maps.LatLng(37.48682304664591, 126.97286325902509), // 지도의 중심좌표 
+	    level : 9 // 지도의 확대 레벨 
 	});
 	
 	// 마커 클러스터러를 생성합니다 
 	var clusterer = new kakao.maps.MarkerClusterer({
 	    map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
 	    averageCenter: false, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-	    minLevel: 13 // 클러스터 할 최소 지도 레벨 
+	    minLevel: 10 // 클러스터 할 최소 지도 레벨 
 	});
 	
 	// 데이터를 가져오기 위해 jQuery를 사용합니다
@@ -521,10 +602,7 @@ $(document).ready(function(){
 	
 	/* JSON 문자열을 JavaScript 객체로 파싱 */
     var jsonData = ajaxMapData.positions;
-       
-	
-   
-  	
+   	
     // 데이터에서 좌표 값을 가지고 마커를 표시합니다
     // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
     
@@ -579,6 +657,11 @@ $(document).ready(function(){
     $(document).on('mouseleave', '.my-photo', function () {
         // 여기서는 텍스트를 원래대로 설정하거나 숨기는 등의 동작을 추가할 수 있습니다.
     	 $('.mapProfile[data-num="userNum"] .profileDetail').hide();
+    });
+    
+    // 프로필 클릭시 스크롤 초기화 이벤트 삭제
+    $(document).on('click','img',function(event){
+    	event.preventDefault();
     });
 </script>
 
