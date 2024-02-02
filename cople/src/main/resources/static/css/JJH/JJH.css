@@ -127,6 +127,10 @@ form#register_form{
 	margin-top:-30px;
 	margin-left:38px;
 }
+.score_desc{
+	color:gray;
+	cursor:pointer;
+}
 span.category0{
 	cursor:pointer;
 	font-weight:bold;

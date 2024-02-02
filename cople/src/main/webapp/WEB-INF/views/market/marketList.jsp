@@ -13,7 +13,14 @@
 			<c:if test="${!empty user.nick_name}">
 				<p>${user.nick_name}</p>
 			</c:if>
-			<span>${user.market_score}</span>
+			<c:if test="${user.market_score > 30}">
+				<span style=" color:blue; font-weight:bold;">${user.market_score}점 </span>
+				<span class="score_desc">장터점수</span>
+			</c:if>
+			<c:if test="${user.market_score < 30}">
+				<span style=" color:red; font-weight:bold;">${user.market_score}점 </span>
+				<span class="score_desc">장터점수</span>
+			</c:if>
 		</c:if>
 	</div>
 		<ul class="search-ul">

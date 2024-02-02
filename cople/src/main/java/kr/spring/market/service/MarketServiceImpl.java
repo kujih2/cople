@@ -61,6 +61,7 @@ public class MarketServiceImpl implements MarketService{
 			 if(member!=null) {
 				 vo.setSeller_id(member.getId());
 				 vo.setSeller_nickname(member.getNick_name());
+				 vo.setMarket_score(member.getMarket_score());
 			 }
 		}
 		if(buyerNum!=null) {
@@ -68,7 +69,6 @@ public class MarketServiceImpl implements MarketService{
 			if(member!=null) {
 				vo.setBuyer_id(member.getId());
 				vo.setBuyer_nickname(member.getNick_name());
-				 vo.setMarket_score(member.getMarket_score());
 			}
 		}
 		

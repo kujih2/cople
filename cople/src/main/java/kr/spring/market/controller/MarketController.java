@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.market.service.MarketService;
 import kr.spring.market.vo.MarketVO;
-import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
@@ -32,8 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MarketController {
 	@Autowired
 	private MarketService marketService;
-	@Autowired
-	private MemberService memberService;
+
 	
 	/*=================================
 	 * 장터 글 등록
