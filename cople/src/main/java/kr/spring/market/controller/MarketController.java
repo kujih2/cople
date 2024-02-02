@@ -142,4 +142,7 @@ public class MarketController {
 								//타일즈설정명,     속성명,  속성값
 		return new ModelAndView("marketDetail","market",vo);
 	}
+	/*=================================
+	 * 장터 글 수정
+	 *=================================*/
 }

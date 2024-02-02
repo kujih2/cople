@@ -98,7 +98,7 @@
 	padding-top:30px;
 	position:relative;
 	text-align:center;
-	width:300px;
+	width:500px;
 	height:100px;
 	font-weight:bold;
 }
@@ -107,12 +107,16 @@
 	position:absolute;
 }
 .seller_profile .seller_id{
-	margin-left:-70px;
+	margin-left:-270px;
+}
+.seller_profile .score_box{
+	width:100px;
+	margin-left:100px;
 }
 .detail_main{
 	margin-top:10px;
 	margin-left:100px;
-	margin-bottom:50px;
+	margin-bottom:10px;
 }
 
 .title_span{
@@ -133,7 +137,24 @@
 .detail_content{
 	padding:30px 50px 50px 80px ;
 }
-
+.content_foot{
+	margin-top:8px;
+	margin-left:20px;
+}
+.content_foot .report{
+	font-size:13px;
+	color:gray;
+}
+.content_foot .chat_btn{
+	margin-left:600px;
+	border: 1px solid skyblue;
+	background-color:skyblue;
+	color:white;
+	font-weight:bold;
+	width:80px;
+	height:40px;
+	border-radius:15px;
+}
 .detail_map{
 	margin:0 auto;
 	padding-top:20px;
@@ -152,9 +173,29 @@
 	font-weight:bold;
 }
 
-
-
-
+.modify_box{
+	margin-left:700px;
+	margin-bottom:10px;
+	margin-top:-30px;
+}
+.modify_box #modify_btn{
+	border: 1px solid skyblue;
+	background-color:skyblue;
+	color:white;
+	font-weight:bold;
+	width:60px;
+	height:20px;
+	border-radius:5px;
+}
+.modify_box #delete_btn{
+	border: 1px solid skyblue;
+	background-color:skyblue;
+	color:white;
+	font-weight:bold;
+	width:60px;
+	height:20px;
+	border-radius:5px;
+}
 
 
 

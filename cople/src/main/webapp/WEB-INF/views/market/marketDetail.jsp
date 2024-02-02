@@ -68,6 +68,7 @@
 			${market.seller_nickname}
 		</span>
 		<br>
+		<div class="score_box">
 		<c:if test="${market.market_score > 30}">
 				<span style=" color:blue; font-weight:bold; margin-left:-10px;">${market.market_score}점 </span>
 				<span class="score_desc">장터점수</span>
@@ -76,22 +77,33 @@
 				<span style=" color:red; font-weight:bold; margin-left:-10px;">${market.market_score}점 </span>
 				<span class="score_desc">장터점수</span>
 			</c:if>
+		</div>
 	</div>
+	<c:if test="${!empty user && user.id .equals(market.seller_id)}">
+			<div class="modify_box">
+				<button id="modify_btn" onclick="location.href='modify?product_num='+${market.product_num}">글 수정</button>
+				<button id="delete_btn" onclick="">글 삭제</button>
+			</div>
+		</c:if>
 	<hr width="80%" style="margin:0 auto;">
 	<div class="detail_main">
-	<div class="detail_title">
-		<span class="title_span">${market.product_title}</span><span class="reg_date">${market.product_regDate}	</span>
-	</div>
-	<div class="detail_price">
-		<c:if test="${market.product_price != 0}">
-			<fmt:formatNumber value="${market.product_price}" pattern="#,###" />원
-		</c:if>
-		<c:if test="${market.product_price == 0}">
-			나눔(0원)
-		</c:if>
-	</div>
+		<div class="detail_title">
+			<span class="title_span">${market.product_title}</span><span class="reg_date">${market.product_regDate}	</span>
+		</div>
+		<div class="detail_price">
+			<c:if test="${market.product_price != 0}">
+				<fmt:formatNumber value="${market.product_price}" pattern="#,###" />원
+			</c:if>
+			<c:if test="${market.product_price == 0}">
+				나눔(0원)
+			</c:if>
+		</div>
 		<div class="detail_content">
-			${market.product_content}
+				${market.product_content}
+		</div>
+		<div class="content_foot">
+			<span class="report">신고</span>
+			<button class="chat_btn">채팅하기</button>
 		</div>
 	</div>
 	<hr width="80%" style="margin:0 auto;">
