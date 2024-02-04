@@ -82,4 +82,18 @@ INSERT INTO market_product(product_num,product_title,product_seller
 			market_product
 				WHERE product_num = #{prdouct_num}
 	</select>
+<!-- 장터 글 수정 -->
+<update id="updateMarket" parameterType="int">
+UPDATE market_product SET  product_title = #{product_title},
+						    filename0 = #{filename0},filename1 = #{filename1,jdbcType=VARCHAR},
+						    filename2 = #{filename2,jdbcType=VARCHAR},filename3 = #{filename3,jdbcType=VARCHAR},
+						    product_content = #{product_content},product_category = #{product_category},
+						    product_price = #{product_price}, product_place = #{product_place,jdbcType=VARCHAR},
+						    product_placedetail = #{product_placeDetail,jdbcType=VARCHAR},
+						    product_modifyDate = SYSDATE 
+						    	
+				WHERE product_num = ${product_num}
+									    
+</update>
+	
 </mapper>

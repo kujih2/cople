@@ -145,4 +145,67 @@ public class MarketController {
 	/*=================================
 	 * 장터 글 수정
 	 *=================================*/
+	//수정 폼 호출
+		@GetMapping("/market/modify")
+		public String formUpdate(@RequestParam int product_num,Model model) {
+			MarketVO marketVO = marketService.selectMarketDetail(product_num);
+			
+			model.addAttribute("market",marketVO);
+			
+			return "marketModify";
+	}
+	@PostMapping("/market/modify")
+	public String submitModify(MarketVO marketVO,HttpServletRequest request,HttpSession session,
+            Model model ) throws IllegalStateException, IOException  {
+		log.debug("<<글 수정 MarketVO>> : " + marketVO);
+	
+		
+		MemberVO vo = (MemberVO)session.getAttribute("user");
+		log.debug("user:" + vo.getMem_num() );
+		marketVO.setProduct_seller(vo.getMem_num());
+		//파일 업로드
+		int count = Integer.parseInt(request.getParameter("count"));
+		
+		if (count > 0) {
+		    for (int i = 0; i < count; i++) {
+		        switch (i) {
+		            case 0:
+		            	marketVO.setFilename0(FileUtil.createMultiFile(request, marketVO.getUpload(), i));
+		                break;
+		            case 1:
+		            	marketVO.setFilename1(FileUtil.createMultiFile(request, marketVO.getUpload(), i));
+		                break;
+		            case 2:
+		            	marketVO.setFilename2(FileUtil.createMultiFile(request, marketVO.getUpload(), i));
+		            	break;
+		            case 3:
+		            	marketVO.setFilename3(FileUtil.createMultiFile(request, marketVO.getUpload(), i));
+		            	break;
+		            default:
+		            		break;
+		        }
+		    }
+		}
+		
+		log.debug("<<글 수정2 MarketVO>> : " + marketVO);
+		
+		marketVO.setProduct_place(request.getParameter("placeAddress"));
+		marketVO.setProduct_placeDetail(request.getParameter("placeDetail"));
+		int product_num = marketVO.getProduct_num();
+		
+		//글수정
+		marketService.updateMarket(product_num);
+		
+		//View에 표시할 메시지
+		model.addAttribute("message","글수정이 완료되었습니다.");
+		model.addAttribute("url",request.getContextPath()+"/market/detail?product_num="+product_num);
+		return "common/resultAlert";
+	}
+	/*=================================
+	 * 장터 글 삭제
+	 *=================================*/
+	@RequestMapping("/market/delete")
+	public void delete() {
+		
+	}
 }

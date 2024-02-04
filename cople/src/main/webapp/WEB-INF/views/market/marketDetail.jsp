@@ -88,7 +88,9 @@
 	<hr width="80%" style="margin:0 auto;">
 	<div class="detail_main">
 		<div class="detail_title">
-			<span class="title_span">${market.product_title}</span><span class="reg_date">${market.product_regDate}	</span>
+			<span class="title_span">${market.product_title}</span>
+			<c:if test="${empty market.product_modifyDate}"><span class="reg_date">작성일 : ${market.product_regDate}</span></c:if>
+			<c:if test="${!empty market.product_modifyDate}"><span class="reg_date">수정일 : ${market.product_modifyDate}</span></c:if>
 		</div>
 		<div class="detail_price">
 			<c:if test="${market.product_price != 0}">

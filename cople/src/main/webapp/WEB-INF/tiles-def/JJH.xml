@@ -21,6 +21,11 @@
 	    <put-attribute name="css" value="/WEB-INF/views/market/marketDetailCSS.jsp"/> 	
     	<put-attribute name="body" value="/WEB-INF/views/market/marketDetail.jsp"/>   
     </definition>
+    <definition name="marketModify" extends="main">
+	    <put-attribute name="title" value="글 상세"/>
+	    <put-attribute name="css" value="/WEB-INF/views/market/marketCSS.jsp"/> 	
+    	<put-attribute name="body" value="/WEB-INF/views/market/marketModify.jsp"/>   
+    </definition>
    
 </tiles-definitions>
 

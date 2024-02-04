@@ -76,7 +76,7 @@ public class MarketServiceImpl implements MarketService{
 	}
 	@Override
 	public void updateMarket(int product_num) {
-		// TODO Auto-generated method stub
+		marketMapper.updateMarket(product_num);
 		
 	}
 
