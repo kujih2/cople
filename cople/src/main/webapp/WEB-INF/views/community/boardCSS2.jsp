@@ -69,56 +69,11 @@ form ul li label{
 button[type="submit"],[type="button"]{
 	height:33px;
 }
-/*공통목록*/
-form#search_form{
-	width:98%;
-	padding-bottom:0;
-	border:none;
-}
-ul.search{
-	width:380px;
-	list-style:none;
-	padding:0;
-	margin:0 auto;
-}
+/*검색 창*/
 ul.search li{
 	margin:0 0 9px 0;
 	padding:0;
 	display:inline;
-}
-ul.search li select{
-	height:30px;
-}
-table.basic-table{
-	width:100%;
-	margin:7px 0;
-	border:1px solid #000;
-	border-collapse:collapse;
-}
-table.basic-table td, table.basic-table th{
-	border:1px solid #000;
-	padding:5px;
-}
-table.striped-table{
-	width:100%;
-	margin:7px 0;
-	border:1px solid #FFF;
-	font-size:15px;
-	border-collapse:collapse;
-}
-table.striped-table td, table.striped-table th{
-	padding:.7em .5em;
-	vertical-align:middle;
-}
-table.striped-table th{
-	font-weight:bold;
-	background:#E1E1E1;
-}
-table.striped-table td{
-	border-bottom:1px solid rgba(0,0,0,.1);
-}
-table.striped-table tr:nth-child(odd){
-	background-color:rgb(250,250,247);
 }
 /*게시판 목록
 -----------------------*/
@@ -229,6 +184,13 @@ form#mre_form{
 	border:none;
 	margin:5px;
 }
+div.editable {
+    width: 300px;
+    height: 200px;
+    border: 1px solid #dcdcdc;
+    overflow-y: auto;
+}
+
 /*프로필*/
 .my-photo{
    object-fit:cover;

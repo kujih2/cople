@@ -73,8 +73,12 @@
 		<span class="re-title">댓글 달기</span>
 		<form id="re_form">
 			<input type="hidden" name="board_num" 
-			                value="${board.board_num}" id="board_num">
-			<
+			                value="${board.board_num}" id="board_num">                
+			<textarea rows="3" cols="50" name="re_content"
+			    id="re_content" class="rep-content" 
+			    <c:if test="${empty user}">disabled="disabled"</c:if>
+			    ><c:if test="${empty user}">로그인해야 작성할 수 있습니다.</c:if>
+			</textarea>	
 			<c:if test="${!empty user}">
 			<div id="re_first">
 				<span class="letter-count">300/300</span>
