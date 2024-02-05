@@ -5,8 +5,9 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name="matchingMain" extends="main">
+	<definition name="matchingMain" extends="main2">
 		<put-attribute name="title" value="매칭서비스" />
+		
 		<put-attribute name="body"
 			value="/WEB-INF/views/matching/mmain.jsp" />
 	</definition>
