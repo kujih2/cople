@@ -3,7 +3,7 @@
 #header{
 	height:100px;
 	display:flex;
-	justify-content: center; /* Center horizontally */
+	justify-content: center;
     align-items: center;
     background-color:white;
 }
@@ -73,16 +73,22 @@
 	border-radius:25px 0 0 25px;
 	padding-left:20px;
 	font-size:17px;
+	box-sizing:border-box;
 }
 #total_search_box:focus{
 	outline:none;
 	border:2px solid #0090F9;
 }
 #total_search_box_btn{
+	height:40px;
+	width:40px;
 	padding:12px;
 	border:2px solid #CCCCCC;
 	border-left:none;
 	border-radius:0 50% 50% 0;
+	box-sizing:border-box;
+	
+	
 }
 /* 사용자 */
 #header_nav_user{

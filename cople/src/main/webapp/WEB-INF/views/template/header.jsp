@@ -34,7 +34,7 @@
 				<li><img id="my_page" width="50" height="50" src="${pageContext.request.contextPath}/member/photoView" onclick="window.location.href='${pageContext.request.contextPath}/member/myPage';" class="my-photo"></li>
 			</c:if>		
 			<c:if test="${empty user}">
-				<li><div id="register_btn"><a href="${pageContext.request.contextPath}/member/registerUser">회원가입</a></div></li>
+				<li><div id="register_btn"><a href="${pageContext.request.contextPath}/member/registerSelect">회원가입</a></div></li>
 				<li><div id="login_btn"><a href="${pageContext.request.contextPath}/member/login">로그인</a></div></li>
 			</c:if>
 			<c:if test="${!empty user && user.auth ==9}">
