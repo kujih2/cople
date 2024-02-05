@@ -65,20 +65,7 @@ form ul li label{
 	width:110px;
 	float:left;
 }
-input{
-	margin-top:8px;
-	margin-bottom:10px;
-	padding:5px;
-}
-input[type="text"],input[type="textarea"]{
-	font-size:15px;
-	width:746px;
-	height:30px;
-	padding-left:10px;
-}
-input[type="checkbox"]{
-	margin:11px 0 10px 0;
-}
+
 button[type="submit"],[type="button"]{
 	height:33px;
 }
