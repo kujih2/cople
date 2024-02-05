@@ -46,6 +46,7 @@ public class AppConfig implements WebMvcConfigurer{
 		configurer.setDefinitions(new String[] {
 				"/WEB-INF/tiles-def/main.xml",
 				"/WEB-INF/tiles-def/LKW.xml",
+				"/WEB-INF/tiles-def/LKW2.xml",
 				"/WEB-INF/tiles-def/SHJ.xml",
 				"/WEB-INF/tiles-def/HJW.xml",
 				"/WEB-INF/tiles-def/JJH.xml",
