@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.market.dao.MarketMapper;
+import kr.spring.market.vo.MarketChatRoomVO;
+import kr.spring.market.vo.MarketChatVO;
 import kr.spring.market.vo.MarketVO;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.vo.MemberVO;
@@ -92,6 +94,55 @@ public class MarketServiceImpl implements MarketService{
 		
 	}
 
+	@Override
+	public List<MarketVO> selectChatRoomList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<MarketVO> selectChatRoomList2(int mem_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void insertChatRoom(MarketChatRoomVO chatRoomVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int selectchatRoomNum() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int selectChatNum() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void insertChat(MarketChatVO chatVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<MarketVO> selectChatDetail(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateChatRead(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+	
 	
 
 }

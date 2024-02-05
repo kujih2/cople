@@ -36,6 +36,7 @@ public class AppConfig implements WebMvcConfigurer{
 				.addPathPatterns("/market/write")
 				.addPathPatterns("/market/modify")
 				.addPathPatterns("/market/delete")
+				.addPathPatterns("/market/marketChatRoom")
 				;
 	}
 	

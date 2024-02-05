@@ -62,7 +62,7 @@
 </div>
 <!-- 캐러셀 끝 -->
 	<div class="seller_profile">
-	<img src="${pageContext.request.contextPath}/member/photoView" width="35" height="35" class="my-photo">
+	<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${market.product_seller}" width="35" height="35" class="my-photo">
 		<span class="seller_id">
 			<c:if test="${empty market.seller_nickname}">${market.seller_id }</c:if>
 			${market.seller_nickname}
@@ -105,7 +105,9 @@
 		</div>
 		<div class="content_foot">
 			<span class="report">신고</span>
-			<button class="chat_btn">채팅하기</button>
+			<c:if test="${!empty user && user.id != market.seller_id}">
+			<button class="chat_btn" onclick="location.href='marketChatRoom'">채팅하기</button>
+			</c:if> 
 		</div>
 	</div>
 	<hr width="80%" style="margin:0 auto;">

@@ -142,6 +142,7 @@ public class MarketController {
 								//타일즈설정명,     속성명,  속성값
 		return new ModelAndView("marketDetail","market",vo);
 	}
+	
 	/*=================================
 	 * 장터 글 수정
 	 *=================================*/
@@ -207,5 +208,13 @@ public class MarketController {
 	@RequestMapping("/market/delete")
 	public void delete() {
 		
+	}
+	/*=================================
+	 * 장터 채팅하기
+	 *=================================*/
+	@RequestMapping("/market/marketChatRoom")
+	public String chatRoom(@RequestParam(required=false) int product_num,@RequestParam(required=false) int product_seller) {
+		
+		return "marketChatRoom";
 	}
 }

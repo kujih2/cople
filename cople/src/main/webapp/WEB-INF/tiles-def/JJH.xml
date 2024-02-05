@@ -5,26 +5,39 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="marketList" extends="main">
+    <definition name="marketList" extends="main2">
 	    <put-attribute name="title" value="장터 메인"/>
-	    <put-attribute name="css" value="/WEB-INF/views/template/layout_basic.jsp"/> 
 	    <put-attribute name="css" value="/WEB-INF/views/market/marketCSS.jsp"/> 
     	<put-attribute name="body" value="/WEB-INF/views/market/marketList.jsp"/>    	
     </definition>
-    <definition name="marketWrite" extends="main">
+    <definition name="marketWrite" extends="main2">
 	    <put-attribute name="title" value="글쓰기"/>
 	    <put-attribute name="css" value="/WEB-INF/views/market/marketCSS.jsp"/> 	
     	<put-attribute name="body" value="/WEB-INF/views/market/marketWrite.jsp"/>   
     </definition>
-    <definition name="marketDetail" extends="main">
+    <definition name="marketDetail" extends="main2">
 	    <put-attribute name="title" value="글 상세"/>
 	    <put-attribute name="css" value="/WEB-INF/views/market/marketDetailCSS.jsp"/> 	
     	<put-attribute name="body" value="/WEB-INF/views/market/marketDetail.jsp"/>   
     </definition>
-    <definition name="marketModify" extends="main">
-	    <put-attribute name="title" value="글 상세"/>
+    <definition name="marketModify" extends="main2">
+	    <put-attribute name="title" value="글 수정"/>
 	    <put-attribute name="css" value="/WEB-INF/views/market/marketCSS.jsp"/> 	
     	<put-attribute name="body" value="/WEB-INF/views/market/marketModify.jsp"/>   
+    </definition>
+    
+    <definition name="marketChatRoom" 
+           template="/WEB-INF/views/template/layout_marketChat.jsp">
+    	<put-attribute name="title" value="장터 채팅"/>
+    	<put-attribute name="header"
+    	               value="/WEB-INF/views/template/header.jsp"/>
+    	<put-attribute name="css" value="/WEB-INF/views/market/marketCSS.jsp"/> 
+    	<put-attribute name="nav"
+    	               value="/WEB-INF/views/market/marketChatList.jsp"/>               
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/market/marketChatDetail.jsp"/>
+    	<put-attribute name="footer"
+    	               value="/WEB-INF/views/template/footer.jsp"/>                                             
     </definition>
    
 </tiles-definitions>

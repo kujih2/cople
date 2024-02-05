@@ -96,4 +96,11 @@ UPDATE market_product SET  product_title = #{product_title},
 									    
 </update>
 	
+	
+	
+<!--구매자일 경우 채팅방 조회  -->
+<select id="selectChatRoomList" parameterType="map" resultType="marketChatRoomVO">
+SELECT * FROM
+
+</select>
 </mapper>
