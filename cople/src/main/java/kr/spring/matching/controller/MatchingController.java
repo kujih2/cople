@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +26,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.spring.matching.service.MatchingService;
+import kr.spring.matching.vo.AdviceVO;
 import kr.spring.matching.vo.EmpVO;
+import kr.spring.matching.vo.LetterVO;
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
@@ -33,9 +38,20 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class MatchingController {
+	
+	@ModelAttribute
+	public LetterVO init1() {
+		return new LetterVO();
+	}
+	
+	@ModelAttribute
+	public AdviceVO init2() {
+		return new AdviceVO();
+	}
 
 	@Autowired
-	MatchingService matchingService;
+	private MatchingService matchingService;
+	private MemberService memberService;
 
 	@RequestMapping("/matching/mmain")
 	public String mmain(@RequestParam(defaultValue="1") int currentPage, Model model,
@@ -144,6 +160,7 @@ public class MatchingController {
 		else {
 			EmpVO empVO = matchingService.selectEmp(user.getMem_num());
 			model.addAttribute("empVO",empVO);
+			model.addAttribute("user");
 		}
 
 		return "matching/my_emp_register";
@@ -164,7 +181,9 @@ public class MatchingController {
 		}else {
 			EmpVO empVO = matchingService.selectEmp(user_id);
 			log.debug("<<Emp id >> : " + empVO.getId());
+			log.debug("<<empVO>> : " + empVO);
 			model.addAttribute("empVO",empVO);
+			model.addAttribute("user");
 		}
 
 		return "matching/see_emp_register";
@@ -192,7 +211,88 @@ public class MatchingController {
 
 	}
 	
+	@GetMapping("matching/send_letter")
+	public String send_letter(HttpServletRequest request, HttpSession session, 
+			 int user_id, Model model) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		log.debug("<<MemberVO (login)>> : " + user);
+		log.debug("<<user_id mem_num >> : " + user_id);
 	
-
+		if(user==null) {//로그인 되지 않은 경우
+			model.addAttribute("message", "회원만 이용가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/main/login");
+			
+			return "matching/resultAlert";
+		}else if(user.getAuth()!=1){//로그인, Auth가 1이 아닌 경우
+			model.addAttribute("message","수강생 회원만 이용가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/matching/mmain");
+			
+			return "matchinig/resultAlert";
+		}else {//로그인, Auth가 1인 경우
+			model.addAttribute("login_id", user);
+			model.addAttribute("receive_id", matchingService.selectMember(user_id));
+		}
+		
+		
+		
+		return "matching/send_letter";
+	}
+	
+	@PostMapping("matching/send_letter")
+	public String sendletter_result(HttpServletRequest request, HttpSession session, 
+			Model model, @Valid LetterVO letterVO, BindingResult result) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user==null) {
+			model.addAttribute("message", "회원만 이용 가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/main/login");
+		}else if(user.getAuth()!=1) {
+			model.addAttribute("message", "수강생 회원만 이용가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/matching/mmain");
+		}else {
+			
+			if(result.hasErrors()) {
+				return send_letter(request, session, letterVO.getReceiver(), model);
+			}
+			
+			letterVO.setLetter_ip(request.getRemoteAddr());
+			matchingService.insertLetter(letterVO);
+			
+			model.addAttribute("message", "메세지가 성공적으로 전송되었습니다.");
+			model.addAttribute("url", request.getContextPath() + "matchig/result");
+		}
+		
+		return "matching/resultAlert";
+	}
+	
+	@GetMapping("matching/send_advice")
+	public String send_advice(HttpServletRequest request, HttpSession session, 
+			 int user_id, Model model) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		log.debug("<<MemberVO (login)>> : " + user);
+		log.debug("<<user_id mem_num >> : " + user_id);
+	
+		if(user==null) {//로그인 되지 않은 경우
+			model.addAttribute("message", "회원만 이용가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/main/login");
+			
+			return "matching/resultAlert";
+		}else if(user.getAuth()!=1){//로그인, Auth가 1이 아닌 경우
+			model.addAttribute("message","수강생 회원만 이용가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/matching/mmain");
+			
+			return "matchinig/resultAlert";
+		}else {//로그인, Auth가 1인 경우
+			model.addAttribute("login_id", user);
+			model.addAttribute("receive_id", matchingService.selectMember(user_id));
+		}
+		
+		
+		
+		return "matching/send_advice";
+	}
 
 }

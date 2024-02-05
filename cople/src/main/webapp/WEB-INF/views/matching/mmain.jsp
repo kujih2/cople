@@ -2,234 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SHJ/mmain.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-<style>
-.overlay-text {
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	color: white;
-	font-size: 18px;
-	font-weight: bold;
-	text-align: center;
-	padding: 10px;
-	border-radius: 5px;
-	display: none;
-	/* 배경 스타일 추가 */
-	background-color: rgba(0, 0, 0, 0.7);
-	backdrop-filter: blur(5px); /* 텍스트 배경에 블러 효과 추가 */
-	-webkit-backdrop-filter: blur(5px); /* Safari 지원을 위한 접두사 사용 */
-}
-
-.chart-container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between; /* 또는 필요에 따라 다른 정렬을 사용하세요 */
-}
-
-.chart {
-	width: calc(33.33% - 20px); /* 3개씩 가로로 배치하고 간격을 조절 */
-	margin: 10px;
-}
-
-.chart2 {
-	width: calc(50% - 20px); /* 2개씩 가로로 배치하고 간격을 조절 */
-	margin: 10px;
-}
-
-/* donutchart3과 donutchart6 크기 조절 및 간격 조절 */
-#donutchart3, #donutchart6 {
-	width: calc(50% - 20px);
-	margin-bottom: 10px; /* 설명 텍스트와의 간격 조절 */
-}
-
-/* 설명 텍스트에 대한 스타일 추가 */
-.chart-description {
-	margin-top: -10px; /* 차트와 설명 텍스트 간의 간격을 조절 */
-	font-size: 16px;
-	color: #555;
-	text-align: center;
-}
-
-.echartMain {
-	display: flex;
-}
-
-#container1, #container2 {
-	flex: 1;
-	margin-right: 10px; /* 각 차트 컨테이너 사이의 간격 조절 */
-}
-
-.chart-title {
-	text-align: center; /* 텍스트 가운데 정렬 */
-	font-size: 16px; /* 원하는 폰트 사이즈로 조절 */
-	margin-top: 5px; /* 제목 위쪽 간격 조절 */
-}
- .chartButton {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        background-color: #3498db; /* 배경색 설정, 원하는 색상으로 변경 가능 */
-        color: #ffffff; /* 텍스트 색상 설정, 원하는 색상으로 변경 가능 */
-        border-radius: 5px;
-        border: 2px solid #2980b9; /* 테두리 설정, 원하는 색상으로 변경 가능 */
-        transition: background-color 0.3s, color 0.3s;
-    }
-
-    .chartButton:hover {
-        background-color: #2980b9; /* 마우스 호버 시 배경색 변경 */
-        color: #ffffff; /* 마우스 호버 시 텍스트 색상 변경 */
-    }
-    
-    /*프로필 이미지들의 간격 조절*/
-    .photo_list {
-    margin-right: 25px; /* 원하는 간격으로 조절 */
-    padding-right: 25px;
-    z-index: 5;
-}
-	/*프로필 이미지들을 가로로 나열*/
-	.memberList {
-	    display: flex;
-	    flex-wrap: wrap; /* 필요에 따라 wrap 또는 nowrap 설정 */
-	}
-	
-	/*Swiper slider스타일*/
-	 swiper-container {
-      width: 120%;
-      height: 100%;
-    }
-
-    swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    swiper-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    swiper-container {
-      margin-left: auto;
-      margin-right: auto;
-    }
-/*     .swiper-button-next {
-    width:10%;
-    margin:0 -45px;
-    }
-	.swiper-button-prev {
-	width:10%;
-    margin:0 -45px;
-	} */
-	
-        .profile-dropdown {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
-
-        .profile-dropdown-content {
-            background-color: #fff;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            border-radius: 4px;
-            position: absolute;
-            opacity: 0;
-            top:270px;
-            left:50px;
-            transition:all 0.2s ease-in-out;
-        }
-
-        .profile-image {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            cursor: pointer;
-        }
-
-        .profile-dropdown-content a {
-            color: #333;
-            padding: 12px 16px;
-            display: block;
-            text-decoration: none;
-        }
-
-        .profile-dropdown-content a:hover {
-            background-color: #f9f9f9;
-        }
-
-        .profile-dropdown:hover .profile-dropdown-content {
-        	transform:translateY(-200px);
-            opacity: 1;
-        }
-
-</style>
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/SHJ/register.js"></script>
 <script>
-function emp_register() {
-    var width = '700';
-    var height = '700';
 
-    var left = (window.innerWidth - width) / 2;
-    var top = (window.innerHeight - height) / 2;
-
-    // 팝업 창 열기
-    var popupWindow = window.open("emp_register", "현직자 신청하기", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top + ",scrollbars=yes");
-
-    // 팝업 내용 스타일 조절
-    if (popupWindow) {
-        popupWindow.onload = function () {
-            var popupContent = popupWindow.document.body; // 팝업 창 내용이 들어가는 부분
-            popupContent.style.overflowY = 'auto'; // 세로 스크롤바를 항상 표시하도록 설정
-            popupContent.style.maxHeight = '80vh'; // 팝업 창의 최대 높이를 설정 (가능하면 vh 단위 사용)
-        };
-    }
-}
-function my_emp_register() {
-    var width = '700';
-    var height = '700';
-
-    var left = (window.innerWidth - width) / 2;
-    var top = (window.innerHeight - height) / 2;
-
-    // 팝업 창 열기
-    var popupWindow = window.open("my_emp_register", "나의 프로필 확인하기", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top + ",scrollbars=yes");
-
-    // 팝업 내용 스타일 조절
-    if (popupWindow) {
-        popupWindow.onload = function () {
-            var popupContent = popupWindow.document.body; // 팝업 창 내용이 들어가는 부분
-            popupContent.style.overflowY = 'auto'; // 세로 스크롤바를 항상 표시하도록 설정
-            popupContent.style.maxHeight = '80vh'; // 팝업 창의 최대 높이를 설정 (가능하면 vh 단위 사용)
-        };
-    }
-}
-function see_emp_register(user_id) {
-    var width = '700';
-    var height = '700';
-
-    var left = (window.innerWidth - width) / 2;
-    var top = (window.innerHeight - height) / 2;
-	
-    
-    // 팝업 창 열기
-    var popupWindow = window.open("see_emp_register?user_id="+user_id, "현직자 프로필 확인하기", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top + ",scrollbars=yes");
-
-    // 팝업 내용 스타일 조절
-   
-}
 $(document).ready(function(){
 	
 	$('#moreChart').click(function(){
@@ -257,7 +35,7 @@ $(document).ready(function(){
 </c:if>
 <h2>취업 현황 지도</h2>
 
-<div id="map" style="width: 100%; height: 350px;"></div>
+<div id="map" style="width: 90%; height: 350px;"></div>
 <br>
 
 <h2>현직자 프로필</h2>
@@ -272,8 +50,8 @@ $(document).ready(function(){
 						<img src="${pageContext.request.contextPath}/matching/viewProfile?userNum=${member.mem_num}" width="200" height="200" class="photo_list">
 					    <div class="profile-dropdown-content">
 					        <a class="detail" href="#" onclick="see_emp_register('${member.mem_num}')" data-id="${member.mem_num}">프로필 보기</a>
-					        <a class="detail" href="#">쪽지 보내기</a>
-					        <a class="detail" href="#">첨삭 요청하기</a>
+					        <a class="detail" href="#" onclick="send_letter('${member.mem_num}')" data-id="${member.mem_num}">쪽지 보내기</a>
+					        <a class="detail" href="#" onclick="send_advice('${member.mem_num}')" data-id="${member.mem_num}">첨삭 요청하기</a>
 					    </div>
 					</div>
 				</div>

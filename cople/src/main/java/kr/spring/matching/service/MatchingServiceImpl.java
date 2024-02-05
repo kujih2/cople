@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.matching.dao.MatchingMapper;
 import kr.spring.matching.vo.EmpVO;
+import kr.spring.matching.vo.LetterVO;
 import kr.spring.member.vo.MemberVO;
 
 @Service
@@ -41,6 +42,17 @@ public class MatchingServiceImpl implements MatchingService{
 	@Override
 	public List<MemberVO> selectMemberList() {
 		return matchingMapper.selectMemberList();
+	}
+
+	@Override
+	public MemberVO selectMember(int mem_num) {
+		return matchingMapper.selectMember(mem_num);
+	}
+
+	@Override
+	public void insertLetter(LetterVO letterVO) {
+		matchingMapper.insertLetter(letterVO);
+		
 	}
 
 }

@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
 import kr.spring.member.vo.MemberVO;
-import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;

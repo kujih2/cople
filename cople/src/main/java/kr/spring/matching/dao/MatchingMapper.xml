@@ -97,5 +97,24 @@
 			  
 	</select>
 	
+	<select id="insertLetter" parameterType="LetterVO" >
+		INSERT INTO 
+			letter
+				(letter_num,
+				sender,
+				receiver,
+				letter_content,
+				date_sent,
+				letter_ip)
+			VALUES
+				(
+				letter_seq.nextval,
+				#{sender},
+				#{receiver},
+				#{letter_content},
+				SYSDATE,
+				#{letter_ip}
+				)
+	</select>
 	
 </mapper>

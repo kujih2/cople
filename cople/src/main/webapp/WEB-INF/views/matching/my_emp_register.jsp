@@ -142,12 +142,15 @@
 						 <c:if test="${empVO.salary_status=='1'}">비공개</c:if>
 			</td>
 			<td colspan="5">
-				<c:if test="${empVO.salary=='0'}">~2,600만원</c:if>
-				<c:if test="${empVO.salary=='1'}">2,600~3,000만원</c:if>
-				<c:if test="${empVO.salary=='2'}">3,000~3,400만원</c:if>
-				<c:if test="${empVO.salary=='3'}">3,400~3,800만원</c:if>
-				<c:if test="${empVO.salary=='4'}">3,800~4,200만원</c:if>
-				<c:if test="${empVO.salary=='5'}">4,200만원~</c:if>
+				<c:if test="${empVO.salary_status=='0'}">
+					<c:if test="${empVO.salary=='0'}">~2,600만원</c:if>
+					<c:if test="${empVO.salary=='1'}">2,600~3,000만원</c:if>
+					<c:if test="${empVO.salary=='2'}">3,000~3,400만원</c:if>
+					<c:if test="${empVO.salary=='3'}">3,400~3,800만원</c:if>
+					<c:if test="${empVO.salary=='4'}">3,800~4,200만원</c:if>
+					<c:if test="${empVO.salary=='5'}">4,200만원~</c:if>
+				</c:if>
+				<c:if test="${empVO.salary_status=='1'}">-</c:if>
 			</td>
 		</tr>
 		<tr>
@@ -163,23 +166,15 @@
 			</td>
 		</tr>
 		<tr>
-			<td><label for="edcation_status">학력</label>
-			</td>
+			<td>학력</td>
 			<td colspan="5">
-				<input type="radio" id="education" name="education" value="0">~고졸
-				<input type="radio" id="education" name="education" value="1">전문대졸
-				<input type="radio" id="education" name="education" value="2">대학교졸(수도권) *졸업예정포함
-				<input type="radio" id="education" name="education" value="3">대학교졸(비수도권)
-				<input type="radio" id="education" name="education" value="4">대학원
-				<input type="radio" id="education" name="education" value="5">기타
+				${emoVO.education}
 			</td>
 		</tr>
 		<tr>
-			<td><label for="major_status">전공 유무</label>
-			</td>
+			<td>전공 유무</td>
 			<td colspan="5">
-				<input type="radio" id="major" name="major" value="전공">전공
-				<input type="radio" id="major" name="major" value="비전공">비전공
+				${emoVO.major}
 			</td>
 		</tr>
 		<tr>
@@ -258,6 +253,7 @@
 			<input type="button" value="취소" onclick="closePopup()">
 		</div>
 <br>
+<script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4e592360b98e7e7af7c0620352a4709c&libraries=services"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

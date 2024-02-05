@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import kr.spring.matching.vo.EmpVO;
+import kr.spring.matching.vo.LetterVO;
 import kr.spring.member.vo.MemberVO;
 
 @Mapper
@@ -20,4 +21,9 @@ public interface MatchingMapper {
 	public EmpVO selectEmp(int mem_num);
 	@Select("SELECT * FROM member WHERE auth=2")
 	public List<MemberVO> selectMemberList();
+	@Select("SELECT * FROM member JOIN member_detail USING(mem_num) WHERE mem_num=#{mem_num}")
+	public MemberVO selectMember(int mem_num);
+	
+	//쪽지기능
+	public void insertLetter(LetterVO letterVO);
 }
