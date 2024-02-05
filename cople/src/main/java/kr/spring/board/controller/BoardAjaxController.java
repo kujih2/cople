@@ -3,15 +3,18 @@ package kr.spring.board.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardFavVO;
+import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -121,4 +124,59 @@ public class BoardAjaxController {
 		}
 		return mapJson;
 	}
+	/*===========================
+	 * 댓글 목록 조회
+	 *==========================*/
+	/*@RequestMapping("/commynity/listReply")
+	@ResponseBody
+	public Map<String, Object> getList(
+			@RequestParam(value="pageNum",defaultValue="1")	int currentPage,
+			@RequestParam(value="rowCount",defaultValue="10") int rowCount,
+			@RequestParam int board_num, HttpSession session){
+		log.debug("<<댓글 목록 board_num>> : " + board_num);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("board_num", board_num);
+
+		//전체 레코드수
+		int count = boardService.selectRowCountReply(map);
+		//페이지 처리
+
+
+		return mapJson;
+	}*/
+	
+	/*===========================
+	 * 댓글 작성
+	 *==========================*/
+	@RequestMapping("/board/writeReply")
+	@ResponseBody
+	 public Map<String, String> writeReply(BoardReplyVO boardReplyVO, 
+			 							   HttpSession session, 
+			 							   HttpServletRequest request){
+		 log.debug("<<댓글 등록 BoardReplyVO>> : " + boardReplyVO);
+		 
+		 Map<String, String> mapJson = new HashMap<String, String>();
+		 
+		 MemberVO user = (MemberVO)session.getAttribute("user");
+		 if(user == null) {
+			 //로그인 안됨
+			 mapJson.put("result", "logout");
+		 }else {
+			 //회원번호 등록
+			 boardReplyVO.setMem_num(user.getMem_num());
+			 //ip등록
+			 boardReplyVO.setRe_ip(request.getRemoteAddr());
+			 //댓글 등록
+			 boardService.insertReply(boardReplyVO);
+			 mapJson.put("result", "success");
+		 }
+		 return mapJson;
+	 }
+	/*===========================
+	 * 대댓글 작성
+	 *==========================*/
+	
+	
+	
 }

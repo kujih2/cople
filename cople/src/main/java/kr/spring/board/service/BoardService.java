@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import kr.spring.board.vo.BoardFavVO;
+import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.board.vo.BoardVO;
 
 public interface BoardService {
@@ -28,4 +29,12 @@ public interface BoardService {
 	public void switchFav(BoardFavVO fav);
 	public void updateFav(BoardFavVO fav);
 	public void deleteFav(BoardFavVO boardFav);
+	
+	//댓글
+	public List<BoardReplyVO> selectListReply(Map<String,Object> map);
+	public int selectRowCountReply(Map<String,Object> map);
+	public BoardReplyVO selectReply(int re_num);
+	public void insertReply(BoardReplyVO boardReplyVO);
+	public void insertReplies (BoardReplyVO boardReplyVO);
+	public void updateReply(BoardReplyVO boardReplyVO);
 }

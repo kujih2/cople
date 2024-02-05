@@ -6,6 +6,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/SHH/community.fav.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/SHH/community.reply.js"></script>
 <div class="page-main">
 	<h1><a href="boardList">자유게시판</a></h1>
 	<hr size="1" width="100%">
@@ -21,12 +22,11 @@
 			<c:if test="${board.auth == 9}">관리자</c:if>
 			<br>
 			<c:if test="${!empty board.modify_date}">
-			최근 수정일 : ${board.modify_date}
+			수정됨
 			</c:if>
 			<c:if test="${empty board.modify_date}">
 			작성일 : ${board.reg_date}
 			</c:if>
-			조회 : ${board.hit}
 		</li>
 	</ul>
 	<h1>${board.title}</h1>
@@ -47,11 +47,8 @@
 			<img id="output_hate" class="favicon" data-num="${board.board_num}" data-favStatus="2"
 			src="${pageContext.request.contextPath}/images/hate.png" width="21">
 		</li>
-	</ul>	
-		<%-- 댓글수 --%>
-		
+	</ul>
 	</div>
-	<hr size="1" width="100%">
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_num == board.mem_num}">
 		<input type="button" value="수정" onclick="location.href='boardUpdate?board_num=${board.board_num}'">
@@ -68,12 +65,26 @@
 		</c:if>
 	</div>
 	<hr size="1" width="100%">
+	<ul>
+		<%-- 댓글 + 대댓글 수 --%>
+	</ul>
 	<!-- 댓글 시작 -->
-	
-	<!-- 댓글 목록 출력 -->
-	
-	<!-- 댓글 목록 끝 -->
-	
-	<!-- 댓글 끝 -->
+	<div id="reply_div">
+		<span class="re-title">댓글 달기</span>
+		<form id="re_form">
+			<input type="hidden" name="board_num" 
+			                value="${board.board_num}" id="board_num">
+			<
+			<c:if test="${!empty user}">
+			<div id="re_first">
+				<span class="letter-count">300/300</span>
+			</div>
+			<div id="re_second" class="align-right">
+				<input type="submit" value="전송">
+			</div>
+			</c:if>
+		</form>
+	</div>
+	<!-- 댓글 목록 출력 시작 -->
 </div>
 <!-- 내용 끝 -->	

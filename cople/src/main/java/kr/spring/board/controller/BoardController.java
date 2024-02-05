@@ -97,7 +97,7 @@ public class BoardController {
 		int count = boardService.selectRowCount(map);
 		log.debug("<<board count>> : " + count);
 		
-		PageUtil page = new PageUtil(keyfield, keyword, currentPage, count,5,10, "boardList", "&order="+order);
+		PageUtil page = new PageUtil(keyfield, keyword, currentPage, count,20,5, "boardList", "&order="+order);
 		
 		List<BoardVO> list = null;
 		if(count > 0) {
@@ -181,5 +181,4 @@ public class BoardController {
 		
 		return "redirect:/community/boardList";
 	}
-	
 }

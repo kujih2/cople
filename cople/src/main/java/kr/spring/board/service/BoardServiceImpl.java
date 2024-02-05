@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.board.dao.BoardMapper;
 import kr.spring.board.vo.BoardFavVO;
+import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.board.vo.BoardVO;
 
 @Service
@@ -17,7 +18,9 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private BoardMapper boardMapper;
 	
-	//게시판
+	/*---------------
+	 * 게시판
+	 *---------------*/
 	@Override
 	public List<BoardVO> selectList(Map<String, Object> map) {
 		return boardMapper.selectList(map);
@@ -47,7 +50,9 @@ public class BoardServiceImpl implements BoardService{
 		boardMapper.deleteBoard(board_num);
 	}
 	
-	//좋아요
+	/*---------------
+	 * 좋아요
+	 *---------------*/
 	@Override
 	public BoardFavVO selectFav(BoardFavVO fav) {
 		return boardMapper.selectFav(fav);
@@ -79,6 +84,37 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void deleteFav(BoardFavVO boardFav) {
 		boardMapper.deleteFav(boardFav);
+	}
+	
+	/*---------------
+	 * 댓글
+	 *---------------*/
+	@Override
+	public List<BoardReplyVO> selectListReply(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int selectRowCountReply(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public BoardReplyVO selectReply(int re_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void insertReply(BoardReplyVO boardReplyVO) {
+		boardMapper.insertReply(boardReplyVO);
+	}
+	@Override
+	public void insertReplies(BoardReplyVO boardReplyVO) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void updateReply(BoardReplyVO boardReplyVO) {
+		// TODO Auto-generated method stub
 	}
 	
 }

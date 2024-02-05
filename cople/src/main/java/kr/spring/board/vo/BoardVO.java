@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.validation.constraints.NotBlank;
 
+import kr.spring.util.DurationFromNow;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,8 +21,8 @@ public class BoardVO {
 	@NotBlank
 	private String content;
 	private int hit;
-	private Date reg_date;
-	private Date modify_date;
+	private String reg_date;
+	private String modify_date;
 	private String ip;
 	private int mem_num;
 
@@ -30,4 +31,8 @@ public class BoardVO {
 	private int auth;
 	
 	private int favhate_cnt;//좋아요/싫어요 합
+	
+	public void setReg_date(String reg_date) {
+		this.reg_date = DurationFromNow.getTimeDiffLabel(reg_date);
+	}
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>   
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/SHH.css">
 <div>
 	<div id="main_notice">
 		<h3><a href="${pageContext.request.contextPath}/community/boardNotice">공지사항</a></h3>

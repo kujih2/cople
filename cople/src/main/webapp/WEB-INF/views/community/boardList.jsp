@@ -31,7 +31,7 @@
 	<ul>
 		<li style="border:1px solid #000;">
 			<div>
-				<input type="button" value="새로고침" onclick="location.href='boardList'">
+				<input type="button" value="새로고침" onclick="location.href=location.href">
 				<span>자유게시판</span>
 			</div>
 		</li>
@@ -63,7 +63,11 @@
 				</div>
 				<div class="board_list both">
 					<div>조회 ${board.hit}</div>
-					<div>좋아요 ${board.favhate_cnt}</div>
+					<div>
+						<c:if test="${board.favhate_cnt == 0}">눌러 ${board.favhate_cnt}</c:if>
+						<c:if test="${board.favhate_cnt > 0 }">좋아요 ${board.favhate_cnt}</c:if>
+						<c:if test="${board.favhate_cnt < 0 }">싫어요 ${board.favhate_cnt}</c:if>
+					</div>
 					<div>댓글</div>
 				</div>
 				<hr size="1" width="100%">

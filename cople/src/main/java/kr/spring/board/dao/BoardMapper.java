@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.board.vo.BoardFavVO;
+import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.board.vo.BoardVO;
 
 @Mapper
@@ -45,4 +46,14 @@ public interface BoardMapper {
 		@Delete("DELETE FROM commu_fav WHERE board_num=#{board_num} AND mem_num=#{mem_num}")
 		public void deleteFav(BoardFavVO boardFav);
 		public void deleteFavBoardNum(int board_num);
+		
+	//댓글
+		public List<BoardReplyVO> selectListReply(Map<String,Object> map);
+		public int selectRowCountReply(Map<String,Object> map);
+		public BoardReplyVO selectReply(int re_num);
+		public void insertReply(BoardReplyVO boardReplyVO);
+		public void insertReplies (BoardReplyVO boardReplyVO);
+		public void updateReply(BoardReplyVO boardReplyVO);
+		
+		
 }

@@ -1,28 +1,6 @@
-@charset "UTF-8";
-
-/* 전체 레이아웃
--------------------------*/
-
-
-/* 좌측 메뉴 레이아웃(Admin,MyPage)
--------------------------*/
-#page_nav{
-	float:left;
-	width:25%;
-	min-height:530px;
-}
-#page_body{
-	width:75%;
-	float:left;
-}
-#page_board{
-	width:25%;
-	display:inline-block;
-	margin:0 auto;
-}
-.page_clear{
-	clear:both;
-}
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<Style>
 
 /* 페이지 기본 레이아웃
 -------------------------*/
@@ -277,3 +255,6 @@ form#mre_form{
 
 
 
+
+
+</Style>

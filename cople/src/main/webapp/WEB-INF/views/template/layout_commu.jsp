@@ -16,9 +16,9 @@
 		<div id="main_body">
 			<tiles:insertAttribute name="body" />
 		</div>
-		<div id="main_footer" class="page_clear">
-			<tiles:insertAttribute name="footer" />
-		</div>
+	</div>
+	<div id="main_footer" class="page_clear">
+		<tiles:insertAttribute name="footer" />
 	</div>
 </body>
 </html>
