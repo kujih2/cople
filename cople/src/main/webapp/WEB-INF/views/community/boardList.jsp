@@ -52,8 +52,9 @@
 						<c:if test="${!empty board.nick_name}">${board.nick_name}</c:if>
 					</div>	
 					<div>
-						<c:if test="${board.auth == 1}">유저</c:if>
+						<c:if test="${board.auth == 1}">수강생</c:if>
 						<c:if test="${board.auth == 2}">현직자</c:if>
+						<c:if test="${board.auth == 3}">강사</c:if>
 						<c:if test="${board.auth == 9}">관리자</c:if>
 					</div>
 					<div>${board.reg_date}</div>

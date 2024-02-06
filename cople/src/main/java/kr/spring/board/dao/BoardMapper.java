@@ -49,7 +49,10 @@ public interface BoardMapper {
 		
 	//댓글
 		public List<BoardReplyVO> selectListReply(Map<String,Object> map);
+		@Select("SELECT COUNT(*) FROM commu_reply WHERE board_num=#{board_num}")
 		public int selectRowCountReply(Map<String,Object> map);
+		//댓글 수정,삭제시 작성자 회원번호 구할 때 사용
+		@Select("SELECT * FROM spboard_reply WHERE re_num=#{re_num}")
 		public BoardReplyVO selectReply(int re_num);
 		public void insertReply(BoardReplyVO boardReplyVO);
 		public void insertReplies (BoardReplyVO boardReplyVO);

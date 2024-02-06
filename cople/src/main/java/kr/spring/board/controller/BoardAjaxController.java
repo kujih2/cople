@@ -1,6 +1,8 @@
 package kr.spring.board.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardFavVO;
 import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -124,32 +127,11 @@ public class BoardAjaxController {
 		}
 		return mapJson;
 	}
-	/*===========================
-	 * 댓글 목록 조회
-	 *==========================*/
-	/*@RequestMapping("/commynity/listReply")
-	@ResponseBody
-	public Map<String, Object> getList(
-			@RequestParam(value="pageNum",defaultValue="1")	int currentPage,
-			@RequestParam(value="rowCount",defaultValue="10") int rowCount,
-			@RequestParam int board_num, HttpSession session){
-		log.debug("<<댓글 목록 board_num>> : " + board_num);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("board_num", board_num);
-
-		//전체 레코드수
-		int count = boardService.selectRowCountReply(map);
-		//페이지 처리
-
-
-		return mapJson;
-	}*/
 	
 	/*===========================
 	 * 댓글 작성
 	 *==========================*/
-	@RequestMapping("/board/writeReply")
+	@RequestMapping("/community/writeReply")
 	@ResponseBody
 	 public Map<String, String> writeReply(BoardReplyVO boardReplyVO, 
 			 							   HttpSession session, 
@@ -179,4 +161,44 @@ public class BoardAjaxController {
 	
 	
 	
+	/*===========================
+	 * 댓글 목록 조회
+	 *==========================*/
+	@RequestMapping("/community/listReply")
+	@ResponseBody
+	public Map<String,Object> getList(
+			@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+			@RequestParam(value="rowCount",defaultValue="10") int rowCount,
+			@RequestParam int board_num,HttpSession session){
+			log.debug("<<댓글 목록 board_num>> : " + board_num);
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("board_num", board_num);
+			
+			//전체 레코드수
+			int count = boardService.selectRowCountReply(map);
+			//페이지 처리
+			PageUtil page = new PageUtil(currentPage,count,rowCount);
+			
+			List<BoardReplyVO> list = null;
+			if(count > 0) {
+				map.put("start", page.getStartRow());
+				map.put("end", page.getEndRow());
+				list = boardService.selectListReply(map);
+			}else {
+				list = Collections.emptyList();
+			}
+			
+			Map<String,Object> mapJson = new HashMap<String,Object>();
+			mapJson.put("count", count);
+			mapJson.put("list", list);
+			
+			//로그인한 회원정보 셋팅
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			if(user!=null) {
+				mapJson.put("user_num", user.getMem_num());
+			}		
+			return mapJson;
+		}
+		
 }

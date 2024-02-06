@@ -89,66 +89,57 @@
 	
 	<!-- 댓글 등록 -->
 	<insert id="insertReply" parameterType="boardReplyVO">
-		INSERT INTO commu_reply(
-			re_num, 
-			re_content, 
-			re_ip, 
-			board_num,
-			mem_num)
-		VALUES(
-			commu_reply_seq.nextval,
-			#{re_content},
-			#{re_ip},
-			#{board_num},
-			#{mem_num})	
-		)
-	</insert>
-	
-	<!-- 대댓글 등록 -->
-	<insert id="">
-		INSERT INTO commu_reply(
-			re_num, 
-			re_content,
-			re_group_num,
-			re_group_order,
-			re_depth,
-			re_ip, 
-			board_num,
-			mem_num)
-		VALUES(
-			commu_reply_seq.nextval,
-			#{re_content},
-			#{re_group_num},
-			#{re_group_order},
-			#{re_depth},
-			#{re_ip},
-			#{board_num},
-			#{mem_num})	
-		)
-	</insert>
+    INSERT INTO commu_reply (
+       re_num,
+       re_content,
+       re_ip,
+       board_num,
+       mem_num,
+       re_parent_num
+    )
+    VALUES (
+       commu_reply_seq.nextval,
+       #{re_content},
+       #{re_ip},
+       #{board_num},
+       #{mem_num},
+       <if test="re_parent_num == 0">
+           NULL
+       </if>
+       <if test="re_parent_num != 0">
+           #{re_parent_num}
+       </if>
+    )
+</insert>
 	
 	<!-- 댓글 목록 -->
-	<select id="selectListReply" parameterType="map" resultType="boardReplyVO">
+	<select id="selectListReply" parameterType="map" 
+	                                 resultType="boardReplyVO">
 		SELECT
-		  a.*
+		  *
 		FROM (SELECT
-				re_num,
-				re_content,
-				re_group_num,
-				re_group_order,
-				re_depth,
-				re_rdate,
-				re_mdate,
-				report_status,
-				re_ip, re_isdeleted,
-				board_num, mem_num,
-				id, nick_name
-			  FROM commu_reply
-			  JOIN member USING(mem_num)
-			  WHERE board_num=#{board_num}
-			  ORDER BY re_num DESC)a)
-		<![CDATA[	  
-		WHERE rnum >= #{start} AND rnum <= #{end}	    
+		        a.*,
+		        rownum rnum
+		      FROM (SELECT
+		      		   re_num,
+				       re_parent_num,
+				       re_content,
+				       re_rdate,
+				       re_mdate,
+				       re_isdeleted,
+				       board_num,
+				       mem_num,
+				       id,
+				       nick_name
+				    FROM commu_reply
+				    JOIN member USING(mem_num)
+				    WHERE board_num=#{board_num})a
+			  WHERE re_isdeleted = 0 
+			  START WITH re_parent_num IS NULL
+			  CONNECT BY PRIOR re_num = re_parent_num
+			  ORDER SIBLINGS BY re_num)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
 </mapper>

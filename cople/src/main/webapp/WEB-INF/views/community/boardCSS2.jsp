@@ -12,6 +12,11 @@
 	width:600px;
 	margin:0 auto;
 }
+#page_board{
+	width:25%;
+	display:inline-block;
+	margin:0 auto;
+}
 
 /* 공통 메시지 및 버튼
 -------------------------*/

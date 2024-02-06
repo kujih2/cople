@@ -31,13 +31,11 @@ create table commu_fav(
 create table commu_reply(
  re_num number not null,
  re_content varchar2(900) not null,
- re_group_num number default 0 not null,--댓글 그룹의 번호
- re_group_order number default 0 not null,-- 댓글 그룹내의 순서
+ re_parent_num number,--부모 댓글의 번호
  re_depth number default 0 not null,-- 댓글 들여쓰기
  re_rdate date default sysdate not null,
  re_mdate date,
  re_ip varchar2(40) not null,
- report_status number(1) default 0 not null, -- 기본값:0 (삭제 안된 댓글:0,신고된 댓글:1)
  re_isdeleted number(1) default 0 not null,
  board_num number not null,
  mem_num number not null,
