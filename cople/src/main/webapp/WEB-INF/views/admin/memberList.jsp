@@ -44,8 +44,9 @@
               						<th class="text-center">등급</th>
             					</tr>
             				</thead>
-            				<c:forEach var="member" items="${list}">
+            				
             				<tbody>
+            				<c:forEach var="member" items="${list}">
                 				<tr style="background: white; border-top: 4px solid #eee; border-bottom: 2px solid #eee;">
                   					<td class="text-center">${member.id}</td>
                   					<td class="text-center">${member.name}</td>
@@ -53,15 +54,17 @@
                   					<td class="text-center">${member.email}</td>
                   					<td class="text-center">${member.reg_date}</td>
                   					<td class="text-center">
-                  					<c:if test="${member.auth == 0}">탈퇴</c:if>
-									<c:if test="${member.auth == 1}"></c:if>
-									<c:if test="${member.auth == 2}"></c:if>
-									<c:if test="${member.auth == 3}"></c:if>
-									<c:if test="${member.auth == 9}"></c:if>
+                  						<c:if test="${member.auth == 0}">탈퇴</c:if>
+										<c:if test="${member.auth == 1}">일반회원</c:if>
+										<c:if test="${member.auth == 2}">현직자</c:if>
+										<c:if test="${member.auth == 3}">강사</c:if>
+										<c:if test="${member.auth == 4}">정지</c:if>
+										<c:if test="${member.auth == 9}">관리자</c:if>
                 					</td>
-                				</tr>                 
+                				</tr>
+                				</c:forEach>                 
             				</tbody>
-            				</c:forEach>
+            				
           				</table>
         			</div>
       </div>

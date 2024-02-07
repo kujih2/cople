@@ -84,9 +84,9 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	    return memberMapper.selectRowCount(map);
 	}
+
 
 	
 

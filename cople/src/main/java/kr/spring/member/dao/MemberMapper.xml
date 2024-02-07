@@ -48,34 +48,61 @@
 		WHERE id=#{id}
 	</select>
 	
+	<!-- sql 태그와 include 태그를 이용해 SQL문 재사용 -->
+	<sql id="memberSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<if test="keyfield == 1">
+					id LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					name LIKE '%' || #{keyword} || '%' 
+				</if>
+				<if test="keyfield == 3">
+					phone LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	
 	<!-- 회원 전체 목록/검색 목록 -->
 	<select id="selectList" parameterType="map" resultType="memberVO">
     SELECT
-        m.mem_num,
-        m.id,
-        m.name,
-        md.phone,
-        md.email,
-        md.reg_date
+        *
     FROM (
         SELECT
             a.*,
             rownum rnum
         FROM (
             SELECT
-                mem_num,
-                id,
-                name
-            FROM member
+                m.mem_num,
+                m.id,
+                m.auth,
+                md.name,
+                md.phone,
+                md.email,
+                md.reg_date,
+                md.modify_date
+            FROM
+                member m
+            LEFT OUTER JOIN
+                member_detail md ON m.mem_num = md.mem_num
+            WHERE
+                m.auth = 1  <!-- auth 값이 1인 회원만 선택 -->
             <include refid="memberSearch"></include>
-            <include refid="memberOrder"></include>
+          
         ) a
     )
-    LEFT OUTER JOIN member_detail md ON m.mem_num = md.mem_num
     <![CDATA[
     WHERE rnum >= #{start} AND rnum <= #{end}
     ]]>
 </select>
 
+
+<select id="selectRowCount" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM member 
+    <include refid="memberSearch"></include>
+</select>
 
 </mapper>

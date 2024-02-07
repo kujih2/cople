@@ -251,7 +251,7 @@ public class MemberController {
 	
 	
 	@RequestMapping("/admin/adminMain")
-	public ModelAndView process(
+	public ModelAndView process1(
 			       @RequestParam(value="pageNum",defaultValue="1") int currentPage,
 			       @RequestParam(value="order",defaultValue="1") int order,
 			       String keyfield, String keyword) {
