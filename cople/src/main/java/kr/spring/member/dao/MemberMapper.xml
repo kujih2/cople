@@ -48,4 +48,34 @@
 		WHERE id=#{id}
 	</select>
 	
+	<!-- 회원 전체 목록/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="memberVO">
+    SELECT
+        m.mem_num,
+        m.id,
+        m.name,
+        md.phone,
+        md.email,
+        md.reg_date
+    FROM (
+        SELECT
+            a.*,
+            rownum rnum
+        FROM (
+            SELECT
+                mem_num,
+                id,
+                name
+            FROM member
+            <include refid="memberSearch"></include>
+            <include refid="memberOrder"></include>
+        ) a
+    )
+    LEFT OUTER JOIN member_detail md ON m.mem_num = md.mem_num
+    <![CDATA[
+    WHERE rnum >= #{start} AND rnum <= #{end}
+    ]]>
+</select>
+
+
 </mapper>

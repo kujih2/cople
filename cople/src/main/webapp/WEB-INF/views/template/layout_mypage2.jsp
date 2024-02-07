@@ -26,6 +26,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/header.css">
 
 <!-- fullcalendar CDN -->

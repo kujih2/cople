@@ -30,7 +30,7 @@
     <!-- myPage -->
     <definition name="myPage" template="/WEB-INF/views/template/layout_mypage2.jsp">
     	<put-attribute name="title" value="MyPage"/>
-    	<put-attribute name="header" value="/WEB-INF/views/template/header2.jsp"/> 
+    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/> 
     	<put-attribute name="nav"
     	               value="/WEB-INF/views/template/nav_mypage.jsp"/>               
     	<put-attribute name="body"
@@ -40,17 +40,18 @@
     </definition>
     
     
-    
     <!-- Admin Page -->
     <definition name="adminMain" 
-           template="/WEB-INF/views/template/layout_mypage.jsp">
+           template="/WEB-INF/views/admin/layout_admin.jsp">
     	<put-attribute name="title" value="AdminMain"/>
     	<put-attribute name="header"
-    	               value="/WEB-INF/views/template/header.jsp"/>  
+    	               value="/WEB-INF/views/admin/header_admin.jsp"/>
+    	<put-attribute name="nav"
+    	               value="/WEB-INF/views/admin/side_admin.jsp"/>     
     	<put-attribute name="body"
-    	               value="/WEB-INF/views/main/admin.jsp"/>
+    	               value="/WEB-INF/views/admin/memberList.jsp"/>
     	<put-attribute name="footer"
-    	               value="/WEB-INF/views/template/footer.jsp"/>                                             
+    	               value="/WEB-INF/views/admin/footer_admin.jsp"/>                                             
     </definition>
 </tiles-definitions>
 

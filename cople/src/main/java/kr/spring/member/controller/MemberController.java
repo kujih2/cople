@@ -1,5 +1,9 @@
 package kr.spring.member.controller;
  
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,12 +19,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-
+import kr.spring.board.vo.BoardVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PageUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -98,11 +104,7 @@ public class MemberController {
 				//비밀번호 일치 여부 체크
 				check = member.isCheckedPassword(memberVO.getPasswd());
 			}
-			if(check) {//인증 성공 
-				//====자동로그인 체크 시작===//
-				
-				 
-				//====자동로그인 체크 끝===//
+			if(check) {//인증 성공
 				
 				//인증 성공, 로그인 처리
 				session.setAttribute("user", member);
@@ -137,10 +139,6 @@ public class MemberController {
 	public String processLogout(HttpSession session,HttpServletResponse response) {
 		//로그아웃
 		session.invalidate();
-		//=======자동로그인 처리 시작=========//
-		
-		
-		//=======자동로그인 처리 끝=========//
 		
 		return "redirect:/main/main";
 	}
@@ -161,6 +159,40 @@ public class MemberController {
 		
 		return "myPage";
 	}
+	
+	
+	
+	/*==============================
+	 * 회원정보수정
+	 *==============================*/
+	//회원 정보 수정 폼 호출
+		@GetMapping("/member/update")
+		public String updateForm(@RequestParam int mem_num,Model model) {
+			MemberVO memberVO = memberService.selectMember(mem_num);
+
+			model.addAttribute("memberVO", memberVO);
+			
+			return "memberUpdate";
+		}
+		
+		//수정폼에서 전송된 회원 데이터 처리
+		@PostMapping("/member/update")
+		public String submitUpdate(@Valid MemberVO memberVO, BindingResult result, HttpServletRequest request, Model model) {
+			log.debug("<<회원 정보 수정>> : " + memberVO);
+			
+			if(result.hasErrors()) {
+				MemberVO member = memberService.selectMember(memberVO.getMem_num());
+				memberVO.setMem_num(member.getMem_num());
+				return "memberUpdate";
+			}
+
+			memberService.updateMember(memberVO);
+			
+			model.addAttribute("message", "회원 정보 수정 완료");
+			model.addAttribute("url", request.getContextPath()+"/member/update?mem_num="+memberVO.getMem_num());
+			
+			return "common/resultAlert";
+		}	
 	
 	/*==============================
 	 * 프로필 사진 출력
@@ -217,9 +249,39 @@ public class MemberController {
 		return "calendarMain";
 	}
 	
-	@RequestMapping("/main/admin")
-	public String goAdminPage() {
-		return "adminMain";
+	
+	@RequestMapping("/admin/adminMain")
+	public ModelAndView process(
+			       @RequestParam(value="pageNum",defaultValue="1") int currentPage,
+			       @RequestParam(value="order",defaultValue="1") int order,
+			       String keyfield, String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//전체/검색 레코드수
+		int count = memberService.selectRowCount(map);
+		log.debug("<<count>> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield,keyword,currentPage,
+				                     count,20,10,"list","&order="+order);
+		
+		List<MemberVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start",page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = memberService.selectList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("adminMain");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("page", page.getPage());
+		
+		return mav;
 	}
 	
 }
