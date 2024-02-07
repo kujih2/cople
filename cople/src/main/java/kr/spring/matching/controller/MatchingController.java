@@ -130,7 +130,6 @@ public class MatchingController {
 			return "matching/resultAlert";
 		}else {
 			model.addAttribute(user);
-
 		}
 
 		return "matching/emp_register";
@@ -207,7 +206,7 @@ public class MatchingController {
 		model.addAttribute("message", "글쓰기가 완료되었습니다.");
 		model.addAttribute("url", request.getContextPath()+ "/matching/mmain");
 
-		return "common/resultAlert";
+		return "matching/resultAlert";
 
 	}
 	
@@ -221,7 +220,7 @@ public class MatchingController {
 	
 		if(user==null) {//로그인 되지 않은 경우
 			model.addAttribute("message", "회원만 이용가능합니다.");
-			model.addAttribute("url", request.getContextPath() + "/main/login");
+			model.addAttribute("url", request.getContextPath() + "/member/login");
 			
 			return "matching/resultAlert";
 		}else if(user.getAuth()!=1){//로그인, Auth가 1이 아닌 경우
@@ -230,8 +229,8 @@ public class MatchingController {
 			
 			return "matchinig/resultAlert";
 		}else {//로그인, Auth가 1인 경우
-			model.addAttribute("login_id", user);
-			model.addAttribute("receive_id", matchingService.selectMember(user_id));
+			model.addAttribute("login_user", user);
+			model.addAttribute("receive_user", matchingService.selectMember(user_id));
 		}
 		
 		
@@ -241,27 +240,32 @@ public class MatchingController {
 	
 	@PostMapping("matching/send_letter")
 	public String sendletter_result(HttpServletRequest request, HttpSession session, 
-			Model model, @Valid LetterVO letterVO, BindingResult result) {
+			Model model, @Valid LetterVO letterVO, BindingResult result, int sender, int receiver) {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		if(user==null) {
 			model.addAttribute("message", "회원만 이용 가능합니다.");
-			model.addAttribute("url", request.getContextPath() + "/main/login");
+			model.addAttribute("url", request.getContextPath() + "/member/login");
 		}else if(user.getAuth()!=1) {
 			model.addAttribute("message", "수강생 회원만 이용가능합니다.");
 			model.addAttribute("url", request.getContextPath() + "/matching/mmain");
 		}else {
 			
 			if(result.hasErrors()) {
-				return send_letter(request, session, letterVO.getReceiver(), model);
+				log.debug("<<result.getFieldValue(\"receiver\");>> : " +result.getFieldValue("receiver"));
+				int user_id = Integer.parseInt((String) result.getFieldValue("receiver"));
+				return send_letter(request, session, user_id, model);
 			}
 			
+			
+			letterVO.setSender(sender);
+			letterVO.setReceiver(receiver);
 			letterVO.setLetter_ip(request.getRemoteAddr());
 			matchingService.insertLetter(letterVO);
 			
 			model.addAttribute("message", "메세지가 성공적으로 전송되었습니다.");
-			model.addAttribute("url", request.getContextPath() + "matchig/result");
+			model.addAttribute("url", request.getContextPath() + "mmain");
 		}
 		
 		return "matching/resultAlert";
@@ -277,7 +281,7 @@ public class MatchingController {
 	
 		if(user==null) {//로그인 되지 않은 경우
 			model.addAttribute("message", "회원만 이용가능합니다.");
-			model.addAttribute("url", request.getContextPath() + "/main/login");
+			model.addAttribute("url", request.getContextPath() + "/member/login");
 			
 			return "matching/resultAlert";
 		}else if(user.getAuth()!=1){//로그인, Auth가 1이 아닌 경우
@@ -286,13 +290,43 @@ public class MatchingController {
 			
 			return "matchinig/resultAlert";
 		}else {//로그인, Auth가 1인 경우
-			model.addAttribute("login_id", user);
-			model.addAttribute("receive_id", matchingService.selectMember(user_id));
+			model.addAttribute("login_user", user);
+			model.addAttribute("receive_user", matchingService.selectMember(user_id));
+		}
+
+		return "matching/send_advice";
+	}
+	
+	@PostMapping("matching/send_advice")
+	public String sendletter_result(HttpServletRequest request, HttpSession session, 
+			Model model, @Valid AdviceVO adviceVO, BindingResult result, int sender, int receiver) throws IllegalStateException, IOException {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user==null) {
+			model.addAttribute("message", "회원만 이용 가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/member/login");
+		}else if(user.getAuth()!=1) {
+			model.addAttribute("message", "수강생 회원만 이용가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/matching/mmain");
+		}else {
+			
+			if(result.hasErrors()) {
+				int user_id = Integer.parseInt((String)result.getFieldValue("receiver"));
+				return send_advice(request, session, user_id, model);
+			}
+			
+			adviceVO.setSender(sender);
+			adviceVO.setReceiver(receiver);
+			adviceVO.setAdvice_ip(request.getRemoteAddr());
+			adviceVO.setFilename(FileUtil.createFile(request, adviceVO.getUpload()));
+			matchingService.insertAdvice(adviceVO);
+			
+			model.addAttribute("message", "첨삭 요청이 성공적으로 전송되었습니다.");
+			model.addAttribute("url", request.getContextPath() + "mmain");
 		}
 		
-		
-		
-		return "matching/send_advice";
+		return "matching/resultAlert";
 	}
 
 }

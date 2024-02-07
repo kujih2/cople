@@ -11,15 +11,17 @@
             right: 100%;
             animation: marqueeAnimation 10s linear infinite; /* 애니메이션 속성 설정 */
         }
-@keyframes marqueeAnimation {
+	@keyframes marqueeAnimation {
             to {
                 right: 100%; /* 오른쪽에서 왼쪽으로 이동하는 효과를 위해 right 속성 사용 */
             }
         }
- body {
-            overflow: hidden;
-        }
-
+	 body {
+	            overflow: scroll !imporatant;  overflow-y: scroll !imporatant; 
+	        } 
+	 html{
+	 		overflow: scroll !imporatant;  overflow-y: scroll !imporatant; 
+	 }
     table {
         width: 100%;
         border-collapse: collapse;
@@ -168,23 +170,30 @@
 		<tr>
 			<td>학력</td>
 			<td colspan="5">
-				${emoVO.education}
+				<c:if test="${empVO.education=='0'}">~고졸</c:if>
+				<c:if test="${empVO.education=='1'}">전문대</c:if>
+				<c:if test="${empVO.education=='2'}">대학교(수도권)</c:if>
+				<c:if test="${empVO.education=='3'}">대학교(비수도권)</c:if>
+				<c:if test="${empVO.education=='4'}">대학원</c:if>
+				<c:if test="${empVO.education=='5'}">기타</c:if>
 			</td>
 		</tr>
 		<tr>
 			<td>전공 유무</td>
 			<td colspan="5">
-				${emoVO.major}
+				<c:out value="${empVO.major}" />
 			</td>
 		</tr>
 		<tr>
 			<td><label for="certification_status">취업 당시 보유 자격증</label>
 			</td>
 			<td colspan="5">
-				<input type="radio" id="certification" name="certification" value="0">없음
-				<input type="radio" id="certification" name="certification" value="0">정보처리기사
-				<input type="radio" id="certification" name="certification" value="0">SQLD
-				<input type="radio" id="certification" name="certification" value="0">기타
+				<c:if test="${empVO.certification=='0'}">~고졸</c:if>
+				<c:if test="${empVO.certification=='1'}">전문대</c:if>
+				<c:if test="${empVO.certification=='2'}">대학교(수도권)</c:if>
+				<c:if test="${empVO.certification=='3'}">대학교(비수도권)</c:if>
+				<c:if test="${empVO.certification=='4'}">대학원</c:if>
+				<c:if test="${empVO.certification=='5'}">기타</c:if>
 			</td>
 		</tr>
 		<tr>
@@ -192,13 +201,13 @@
 			</td>
 			<td colspan="5">
 				${empVO.location_api}
-				<input type="radio" id="location" name="location" value="0">구로/가산 디지털단지
-				<input type="radio" id="location" name="location" value="1">강남
-				<input type="radio" id="location" name="location" value="2">판교
-				<input type="radio" id="location" name="location" value="3">DMC(상암)
-				<input type="radio" id="location" name="location" value="4">영등포
-				<input type="radio" id="location" name="location" value="5">시청,종로
-				<input type="radio" id="location" name="location" value="6">기타
+				<input type="radio" name="location" value="0">구로/가산 디지털단지
+				<input type="radio" name="location" value="1">강남
+				<input type="radio" name="location" value="2">판교
+				<input type="radio" name="location" value="3">DMC(상암)
+				<input type="radio" name="location" value="4">영등포
+				<input type="radio" name="location" value="5">시청,종로
+				<input type="radio" name="location" value="6">기타
 			</td>
 		</tr>
 		<tr>

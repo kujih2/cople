@@ -2,6 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <style>
+ body {
+            overflow: scroll !imporatant;  overflow-y: scroll !imporatant; 
+        } 
+ html{
+ 		overflow: scroll !imporatant;  overflow-y: scroll !imporatant; 
+ }
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -50,34 +57,46 @@ form {
     z-index: 2;
 }
 
-.button {
-    margin-top: 20px;
-}
+	.abutton {
+        margin-top: 20px;
+        padding: 10px 20px; /* 버튼 크기 조정을 위한 패딩 */
+        font-size: 16px; /* 버튼 텍스트 크기 조정 */
+        background-color: #4CAF50; /* 전송 버튼의 초록색 배경 */
+        color: #fff; /* 전송 버튼 텍스트의 흰색 색상 */
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .abutton.cancel {
+        background-color: #f44336; /* 취소 버튼의 빨간색 배경 */
+    }
 </style>
 <h2>쪽지 보내기</h2>
 <form:form action="send_letter" method="post" id="send_insert" modelAttribute="letterVO">
-	<input type="hidden" name="sender" value="${login_id}">
-	<input type="hidden" name="receiver" value="${receive_id}">
+	<input type="hidden" name="sender" value="${login_user.mem_num}">
+	<input type="hidden" name="receiver" value="${receive_user.mem_num}">
 	<table style="text-align:center;">
 		<tr>
 			<td colspan="4">보내는 사람</td>
-			<td colspan="4">${login_id.id}</td>
+			<td colspan="4">${login_user.id}</td>
 		</tr>
 		<tr>
 			<td colspan="4">받는 사람</td>
-			<td colspan="4">${receive_id.id}</td>
+			<td colspan="4">${receive_user.id}</td>
 		</tr>
 		<tr>
 			<td colspan="4">내용</td>
 			<td colspan="4">
-				<form:textarea cols="80" rows="10" path="letter_content"/>
+				<form:textarea cols="80" rows="15" path="letter_content"/>
+				<br>
 				<form:errors path="letter_content"  cssClass="error-color"/>
 			</td>
 		</tr>
 	</table>
 	<div class="button" style="text-align:center">
-		<form:button>전송</form:button>
-		<input type="button" value="취소" id="cancleButton">
+		<form:button class="abutton">전송</form:button>
+		<input type="button" value="취소" id="cancleButton" class="abutton cancel">
 	</div>
 </form:form>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

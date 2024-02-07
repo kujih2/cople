@@ -57,8 +57,8 @@ function see_emp_register(user_id) {
 }
 
 function send_letter(user_id) {
-    var width = '700';
-    var height = '700';
+    var width = '600';
+    var height = '430';
 
     var left = (window.innerWidth - width) / 2;
     var top = (window.innerHeight - height) / 2;
@@ -71,14 +71,14 @@ function send_letter(user_id) {
         popupWindow.onload = function () {
             var popupContent = popupWindow.document.body; // 팝업 창 내용이 들어가는 부분
             popupContent.style.overflowY = 'auto'; // 세로 스크롤바를 항상 표시하도록 설정
-            popupContent.style.Height = '100vh'; // 팝업 창의 최대 높이를 설정 (가능하면 vh 단위 사용)
+            popupContent.style.Height = '60vh'; // 팝업 창의 최대 높이를 설정 (가능하면 vh 단위 사용)
         };
     }
 }
 
 function send_advice(user_id) {
     var width = '700';
-    var height = '700';
+    var height = '600';
 
     var left = (window.innerWidth - width) / 2;
     var top = (window.innerHeight - height) / 2;

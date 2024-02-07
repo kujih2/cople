@@ -19,6 +19,7 @@ public class AdviceVO {
 	int letter_num;
 	int sender;
 	int receiver;
+	@NotBlank
 	String advice_content;
 	Date date_sent;
 	Date date_read;
@@ -28,6 +29,5 @@ public class AdviceVO {
 	int advice_complete;
 	String advice_ip;
 	String filename;
-	@NotBlank
 	MultipartFile upload;
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import kr.spring.matching.vo.AdviceVO;
 import kr.spring.matching.vo.EmpVO;
 import kr.spring.matching.vo.LetterVO;
 import kr.spring.member.vo.MemberVO;
@@ -26,4 +27,7 @@ public interface MatchingMapper {
 	
 	//쪽지기능
 	public void insertLetter(LetterVO letterVO);
+	
+	//첨삭기능
+	public void insertAdvice(AdviceVO adviceVO);
 }

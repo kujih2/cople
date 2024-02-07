@@ -117,4 +117,26 @@
 				)
 	</select>
 	
+	<select id="insertAdvice" parameterType="adviceVO" >
+		INSERT INTO 
+			advice
+				(advice_num,
+				sender,
+				receiver,
+				advice_content,
+				date_sent,
+				advice_ip,
+				filename)
+			VALUES
+				(
+				advice_seq.nextval,
+				#{sender},
+				#{receiver},
+				#{advice_content},
+				SYSDATE,
+				#{advice_ip},
+				#{filename}
+				)
+	</select>
+	
 </mapper>

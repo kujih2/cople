@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.matching.dao.MatchingMapper;
+import kr.spring.matching.vo.AdviceVO;
 import kr.spring.matching.vo.EmpVO;
 import kr.spring.matching.vo.LetterVO;
 import kr.spring.member.vo.MemberVO;
@@ -52,6 +53,12 @@ public class MatchingServiceImpl implements MatchingService{
 	@Override
 	public void insertLetter(LetterVO letterVO) {
 		matchingMapper.insertLetter(letterVO);
+		
+	}
+
+	@Override
+	public void insertAdvice(AdviceVO adviceVO) {
+		matchingMapper.insertAdvice(adviceVO);
 		
 	}
 
