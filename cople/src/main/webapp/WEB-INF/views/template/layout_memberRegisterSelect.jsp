@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:getAsString name="title"/></title>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <tiles:insertAttribute name="css" ignore="true"/>
 <tiles:insertAttribute name="js" ignore="true"/>
 </head>

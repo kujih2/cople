@@ -1,5 +1,8 @@
 package kr.spring.member.service;
 
-public interface MemberService2 {
+import kr.spring.member.vo.MemberVO;
 
+public interface MemberService2 {
+	//회원관리 사용자
+	public void insertMember(MemberVO member);
 }

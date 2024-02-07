@@ -31,6 +31,8 @@
 	cursor:pointer;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle box shadow */
 	border:none;
+	overflow:hidden;
+	
 }
 #option1{
 	background-color:#0090f9;
@@ -56,4 +58,18 @@
 #option2 h3{
 	color:black;
 }
+.select-option span{
+	width:350px;
+  	font-size:20px;
+  	font-weight:bold;
+}
+.fade-in-element {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in-element.visible {
+  opacity: 1;
+}
+
 </style>

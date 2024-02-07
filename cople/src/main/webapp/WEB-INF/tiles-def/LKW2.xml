@@ -5,12 +5,25 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="memberRegisterSelect" template="/WEB-INF/views/template/layout_memberRegisterSelect.jsp">
+    <definition name="memberBasic" template="/WEB-INF/views/template/layout_basic2.jsp">
+	    <put-attribute name="title" value="회원가입-선택"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>    	
+    	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>    	
+    </definition> 
+    <definition name="memberRegisterSelect" extends="memberBasic">
 	    <put-attribute name="title" value="회원가입-선택"/>
     	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>    	
     	<put-attribute name="body" value="/WEB-INF/views/member/memberRegisterSelect.jsp"/>
     	<put-attribute name="css" value="/WEB-INF/views/member/memberRegisterSelectCSS.jsp"/>
+    	<put-attribute name="js" value="/WEB-INF/views/member/memberRegisterSelectJS.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>    	
+    </definition> 
+    <definition name="memberRegisterUser" extends="memberRegisterSelect">
+	    <put-attribute name="title" value="회원가입"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/memberRegisterUserForm.jsp"/>
+    	<put-attribute name="css" value="/WEB-INF/views/member/memberRegisterUserFormCSS.jsp"/>
+    	<put-attribute name="js" value="/WEB-INF/views/member/memberRegisterUserFormJS.jsp"/>
+    	
     </definition> 
  
 
