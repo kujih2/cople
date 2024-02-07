@@ -21,7 +21,20 @@
 	<ul>
 		<li>
 			<div class="chat_list">
-				
+				<c:if test="${!empty chatList}">
+					<c:forEach var="chatList" items="${chatList}">
+						<div>
+								<span>${chatList.product_title}</span> 
+								<span>${chatList.product_price}</span>
+								<img src="${pageContext.request.contextPath}/upload/${market.filename0}" width="30" height="30">
+								판매자:<c:if test="${empty chatList.seller_nickname}">${chatList.seller_id}</c:if>
+									 <c:if test="${!empty chatList.seller_nickname}">${chatList.seller_nickname}</c:if>
+						</div>
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty chatList}">
+					<div class="align-center">채팅방이 없습니다.</div>
+				</c:if>
 			</div>
 		</li>
 	</ul>

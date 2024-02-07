@@ -102,7 +102,29 @@ public class MarketServiceImpl implements MarketService{
 	}
 	@Override
 	public List<MarketChatRoomVO> selectChatRoomList(int mem_num) {
-		return marketMapper.selectChatRoomList(mem_num);
+		List<MarketChatRoomVO> list =  marketMapper.selectChatRoomList(mem_num);
+		if (list!=null) {
+			for (MarketChatRoomVO each : list) {
+			        Integer sellerNum = each.getSeller_num();
+			        if (sellerNum != null) {
+			            MemberVO member = memberMapper.selectMember(sellerNum);
+			            if (member != null) {
+			                each.setSeller_id(member.getId());
+			                each.setSeller_nickname(member.getNick_name());
+			            }
+			        }
+		            Integer buyerNum = each.getBuyer_num();
+			        if (sellerNum != null) {
+			            MemberVO member = memberMapper.selectMember(buyerNum);
+			            if (member != null) {
+			                each.setBuyer_id(member.getId());
+			                each.setBuyer_nickname(member.getNick_name());
+			            	}
+			        }
+			        
+				}
+		}
+		return list;
 	}
 	@Override
 	public void insertChatRoom(MarketChatRoomVO chatRoomVO) {

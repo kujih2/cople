@@ -109,16 +109,16 @@ SELECT count(*) FROM
 INSERT INTO market_chatRoom (chatRoom_num,product_num,seller_num,buyer_num)
 				VALUES(market_chatRoom_seq.nextVal,#{product_num},#{seller_num},#{buyer_num})
 </insert>
-<!-- 사용자의 전체 채팅방 조회-->
+<!-- 존재한 채팅방의 번호 조회-->
 <select id="selectChatRoom" parameterType="map" resultType="marketChatRoomVO">
-SELECT * FROM 
+SELECT chatroom_num FROM 
 			market_chatroom 
 			WHERE seller_num = #{seller_num} AND buyer_num = #{mem_num} AND product_num = #{product_num} 
 </select>
-<!-- 특정 채팅방 조회-->
+<!-- 사용자의 전체 채팅방 조회-->
 <select id="selectChatRoomList" parameterType="int" resultType="marketChatRoomVO">
-SELECT * FROM 
-			market_chatroom 
+SELECT chatroom_num,product_num,product_title,filename0,product_price,seller_num,buyer_num FROM 
+			market_chatroom LEFT OUTER JOIN market_product USING(product_num)
 			WHERE seller_num = #{mem_num} OR buyer_num = #{mem_num} ORDER BY chatroom_num DESC
 </select>
 

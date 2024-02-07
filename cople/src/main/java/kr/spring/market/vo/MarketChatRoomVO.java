@@ -10,7 +10,14 @@ import lombok.ToString;
 public class MarketChatRoomVO {
 	private int chatRoom_num;
 	private Integer product_num;
+	private String product_title;
+	private String filename0;
+	private Integer product_price;
 	private Integer seller_num;
+	private String seller_id;
+	private String seller_nickname;
 	private Integer buyer_num;
+	private String buyer_id;
+	private String buyer_nickname;
 
 }
