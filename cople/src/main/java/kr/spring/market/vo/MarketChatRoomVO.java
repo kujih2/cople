@@ -9,8 +9,8 @@ import lombok.ToString;
 @ToString
 public class MarketChatRoomVO {
 	private int chatRoom_num;
-	private int product_num;
-	private int seller_num;
-	private int buyer_num;
+	private Integer product_num;
+	private Integer seller_num;
+	private Integer buyer_num;
 
 }

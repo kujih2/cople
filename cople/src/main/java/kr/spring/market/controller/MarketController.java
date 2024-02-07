@@ -214,9 +214,9 @@ public class MarketController {
 	 * 장터 채팅방 조회 및 생성
 	 *=================================*/
 	@RequestMapping("/market/marketChatRoom")
-	public ModelAndView process(MarketChatRoomVO chatRoomVO,@RequestParam(required=false) Integer product_num,
+	public String process(MarketChatRoomVO chatRoomVO,@RequestParam(required=false) Integer product_num,
 						   @RequestParam(required=false) Integer product_seller,
-						   HttpSession session) {
+						   HttpSession session,Model model) {
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("mem_num",vo.getMem_num());
@@ -227,12 +227,10 @@ public class MarketController {
 		List<MarketChatRoomVO> list = null;
 		if(product_num == null && product_seller == null) { //프로필에서 채팅방 조회 
 			list = marketService.selectChatRoomList(vo.getMem_num());//사용자의 전체 채팅 리스트
+	
+			model.addAttribute("chatList", list);
 			
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("marketChatList");
-			mav.addObject("chatList", list);
-			
-			return mav;
+			return "marketChatRoom";
 		}else {//장터 글에서 채팅방 조회
 			map.put("product_num", product_num);
 			map.put("seller_num", product_seller);
@@ -244,22 +242,19 @@ public class MarketController {
 				int chatRoomNum = chatRoomVO.getChatRoom_num();//해당 채팅방의 채팅내역을 같이 불러오기 위한 채팅방 번호
 				list = marketService.selectChatRoomList(vo.getMem_num());//사용자의 전체 채팅 리스트
 				
-				ModelAndView mav = new ModelAndView();
-				mav.setViewName("marketChatList");
-				mav.addObject("chatRoomNum", chatRoomNum);
-				mav.addObject("chatList", list);
-				return mav;
+				
+				model.addAttribute("chatRoomNum", chatRoomNum);
+				model.addAttribute("chatList", list);
+				return "marketChatRoom";
 			}
 			else {//채팅방이 있다면 채팅방 조회
 				chatRoomVO = marketService.selectChatRoom(map);
 				int chatRoomNum = chatRoomVO.getChatRoom_num();//해당 채팅방의 채팅내역을 같이 불러오기 위한 채팅방 번호
 				list = marketService.selectChatRoomList(vo.getMem_num());//사용자의 전체 채팅 리스트
 				
-				ModelAndView mav = new ModelAndView();
-				mav.setViewName("marketChatList");
-				mav.addObject("chatRoomNum", chatRoomNum);
-				mav.addObject("chatList", list);
-				return mav;
+				model.addAttribute("chatRoomNum", chatRoomNum);
+				model.addAttribute("chatList", list);
+				return "marketChatRoom";
 			}
 		}
 		
