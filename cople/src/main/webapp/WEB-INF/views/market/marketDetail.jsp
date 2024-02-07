@@ -106,7 +106,7 @@
 		<div class="content_foot">
 			<span class="report">신고</span>
 			<c:if test="${!empty user && user.id != market.seller_id}">
-			<button class="chat_btn" onclick="location.href='marketChatRoom'">채팅하기</button>
+			<button class="chat_btn" onclick="location.href='marketChatRoom?product_num=${market.product_num}&product_seller=${product_seller}'">채팅하기</button>
 			</c:if> 
 		</div>
 	</div>

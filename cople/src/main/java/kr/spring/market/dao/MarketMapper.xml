@@ -98,9 +98,22 @@ UPDATE market_product SET  product_title = #{product_title},
 	
 	
 	
-<!--구매자일 경우 채팅방 조회  -->
-<select id="selectChatRoomList" parameterType="map" resultType="marketChatRoomVO">
-SELECT * FROM
-
+<!--구매자일 경우 채팅방 유무 조회  -->
+<select id="selectChatRoomCheck" parameterType="map" resultType="marketChatRoomVO">
+SELECT count(*) FROM 
+			market_chatroom 
+			WHERE product_num = #{product_num} AND seller_num = #{seller_num} AND buyer_num = #{mem_num}
 </select>
+<!-- 채팅방 생성 -->
+<insert id="insertChatRoom" parameterType="MarketChatRoomVO">
+INSERT INTO market_chatRoom (chatRoom_num,product_num,seller_num,buyer_num)
+				VALUES(market_chatRoom_seq.nextVal,#{product_num},#{seller_num},#{buyer_num});
+</insert>
+<!-- 사용자의 전체 체팅방 조회-->
+<select id="selectChatRoomlist" parameterType="int" resultType="marketChatRoomVO">
+SELECT * FROM 
+			market_chatroom 
+			WHERE seller_num = #{mem_num} OR buyer_num = #{mem_num}
+</select>
+
 </mapper>

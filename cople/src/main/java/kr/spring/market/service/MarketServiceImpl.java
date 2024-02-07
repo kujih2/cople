@@ -95,31 +95,19 @@ public class MarketServiceImpl implements MarketService{
 	}
 
 	@Override
-	public List<MarketVO> selectChatRoomList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public int selectChatRoomCheck(Map<String, Object> map) {
+		int check = marketMapper.selectChatRoomCheck(map);
+		
+		return check;
 	}
 	@Override
-	public List<MarketVO> selectChatRoomList2(int mem_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MarketChatRoomVO> selectChatRoomList(int mem_num) {
+		return marketMapper.selectChatRoomList(mem_num);
 	}
 	@Override
 	public void insertChatRoom(MarketChatRoomVO chatRoomVO) {
-		// TODO Auto-generated method stub
+		marketMapper.insertChatRoom(chatRoomVO);
 		
-	}
-
-	@Override
-	public int selectchatRoomNum() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int selectChatNum() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -139,6 +127,13 @@ public class MarketServiceImpl implements MarketService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public MarketChatRoomVO selectChatRoom(Map<String, Object> map) {
+		return marketMapper.selectChatRoom(map);
+	}
+
+	
 
 	
 

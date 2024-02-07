@@ -12,4 +12,5 @@ public class MarketChatRoomVO {
 	private int product_num;
 	private int seller_num;
 	private int buyer_num;
+
 }

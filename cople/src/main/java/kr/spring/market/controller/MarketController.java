@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.market.service.MarketService;
+import kr.spring.market.vo.MarketChatRoomVO;
 import kr.spring.market.vo.MarketVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
@@ -210,11 +211,58 @@ public class MarketController {
 		
 	}
 	/*=================================
-	 * 장터 채팅하기
+	 * 장터 채팅방 조회 및 생성
 	 *=================================*/
 	@RequestMapping("/market/marketChatRoom")
-	public String chatRoom(@RequestParam(required=false) int product_num,@RequestParam(required=false) int product_seller) {
+	public ModelAndView process(MarketChatRoomVO chatRoomVO,@RequestParam(required=false) Integer product_num,
+						   @RequestParam(required=false) Integer product_seller,
+						   HttpSession session) {
+		MemberVO vo = (MemberVO)session.getAttribute("user");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("mem_num",vo.getMem_num());
+		chatRoomVO.setProduct_num(product_num);
+		chatRoomVO.setSeller_num(product_seller);
+		chatRoomVO.setBuyer_num(vo.getMem_num());
 		
-		return "marketChatRoom";
+		List<MarketChatRoomVO> list = null;
+		if(product_num == null && product_seller == null) { //프로필에서 채팅방 조회 
+			list = marketService.selectChatRoomList(vo.getMem_num());//사용자의 전체 채팅 리스트
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("marketChatList");
+			mav.addObject("chatList", list);
+			
+			return mav;
+		}else {//장터 글에서 채팅방 조회
+			map.put("product_num", product_num);
+			map.put("seller_num", product_seller);
+			int check = marketService.selectChatRoomCheck(map);
+			
+			if(check == 0 ) {//채팅방이 없다면 채팅방 생성후 조회
+				marketService.insertChatRoom(chatRoomVO);
+				chatRoomVO = marketService.selectChatRoom(map);
+				int chatRoomNum = chatRoomVO.getChatRoom_num();//해당 채팅방의 채팅내역을 같이 불러오기 위한 채팅방 번호
+				list = marketService.selectChatRoomList(vo.getMem_num());//사용자의 전체 채팅 리스트
+				
+				ModelAndView mav = new ModelAndView();
+				mav.setViewName("marketChatList");
+				mav.addObject("chatRoomNum", chatRoomNum);
+				mav.addObject("chatList", list);
+				return mav;
+			}
+			else {//채팅방이 있다면 채팅방 조회
+				chatRoomVO = marketService.selectChatRoom(map);
+				int chatRoomNum = chatRoomVO.getChatRoom_num();//해당 채팅방의 채팅내역을 같이 불러오기 위한 채팅방 번호
+				list = marketService.selectChatRoomList(vo.getMem_num());//사용자의 전체 채팅 리스트
+				
+				ModelAndView mav = new ModelAndView();
+				mav.setViewName("marketChatList");
+				mav.addObject("chatRoomNum", chatRoomNum);
+				mav.addObject("chatList", list);
+				return mav;
+			}
+		}
+		
+
 	}
 }
