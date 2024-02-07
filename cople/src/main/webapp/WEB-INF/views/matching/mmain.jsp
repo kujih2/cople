@@ -94,7 +94,7 @@ $(document).ready(function(){
 	<div class="chart" id="barchart_values"
 		style="width: 900px; height: 300px;"></div>
 </div>
-
+<br><br><br><br><br>
 
 <script>
 	new Swiper('.swiper-container', {
