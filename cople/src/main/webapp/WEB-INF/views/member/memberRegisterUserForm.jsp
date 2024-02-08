@@ -172,6 +172,7 @@
 			<label for="location_status">지도에서 선택하기</label> <br>
 				<div class="map_wrap">
 					<div id="map" style="width: 430px; height: 270px; position: relative; overflow: hidden;"></div>
+					<p>지도에서 회사의 <b>대략적인</b> 위치를 클릭해주세요!</p>
 					<div class="hAddr">
 					</div>
 					<input type="hidden" id="location_api" name="location_api" value="">
