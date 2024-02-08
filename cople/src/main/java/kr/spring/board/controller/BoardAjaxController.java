@@ -158,7 +158,31 @@ public class BoardAjaxController {
 	/*===========================
 	 * 대댓글 작성
 	 *==========================*/
-	
+	@RequestMapping("/community/replies")
+	@ResponseBody
+	 public Map<String, String> replies(BoardReplyVO boardReplyVO, 
+			 							   HttpSession session, 
+			 							   HttpServletRequest request){
+		 log.debug("<<대댓글 등록 BoardReplyVO>> : " + boardReplyVO);
+		 
+		 Map<String, String> mapJson = new HashMap<String, String>();
+		 
+		 MemberVO user = (MemberVO)session.getAttribute("user");
+		 if(user == null) {
+			 //로그인 안됨
+			 mapJson.put("result", "logout");
+		 }else {
+			 //회원번호 등록
+			 boardReplyVO.setMem_num(user.getMem_num());
+			 //ip등록
+			 boardReplyVO.setRe_ip(request.getRemoteAddr());
+			 boardReplyVO.setRe_depth(1);
+			 //댓글 등록
+			 boardService.insertReplies(boardReplyVO);
+			 mapJson.put("result", "success");
+		 }
+		 return mapJson;
+	 }
 	
 	
 	/*===========================

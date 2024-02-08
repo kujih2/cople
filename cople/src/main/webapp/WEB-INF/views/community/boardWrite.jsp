@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>    
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContetx.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="http://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -17,6 +18,9 @@
 				제목
 				<form:input path="title" placeholder="제목을 입력하세요."/>
 				<form:errors path="title" cssClass="error-color"/>
+				<c:if test="${user.auth == 9}">
+					공지하기<input type="checkbox" name="notice" value="9">
+				</c:if>
 			</li>
 			<li>
 				내용

@@ -69,7 +69,7 @@
 						<c:if test="${board.favhate_cnt > 0 }">좋아요 ${board.favhate_cnt}</c:if>
 						<c:if test="${board.favhate_cnt < 0 }">싫어요 ${board.favhate_cnt}</c:if>
 					</div>
-					<div>댓글</div>
+					<div>댓글 ${board.re_cnt}</div>
 				</div>
 				<hr size="1" width="100%">
 			</c:forEach>

@@ -56,8 +56,10 @@
 	             mem_num,
 	             id,
 	             nick_name,
+	             re_cnt,
 	             NVL(favhate_cnt, 0) as favhate_cnt 
-              FROM commu_board 
+              FROM commu_board
+              LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, board_num FROM commu_reply GROUP BY board_num) USING(board_num) 
               LEFT OUTER JOIN (SELECT
                                   board_num,
                                   SUM(CASE WHEN fav_status = 1 THEN 1 ELSE 0 END) - 
@@ -111,6 +113,31 @@
        </if>
     )
 </insert>
+	
+	<!-- 대댓글 등록 -->
+	<insert id="insertReplies" parameterType="boardReplyVO">
+	INSERT INTO commu_reply (
+	   <if test="re_depth != 0">
+          re_parent_num,
+       </if>
+       re_num,
+       re_depth,
+       re_content,
+       re_ip,
+       board_num,
+       mem_num
+    )
+    VALUES (
+       <if test="re_depth != 0">
+           #{re_parent_num},
+       </if>
+       commu_reply_seq.nextval,
+       #{re_depth},
+       #{re_content},
+       #{re_ip},
+       #{board_num},
+       #{mem_num})
+	</insert>
 	
 	<!-- 댓글 목록 -->
 	<select id="selectListReply" parameterType="map" 

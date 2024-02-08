@@ -30,6 +30,7 @@ public class BoardVO {
 	private String nick_name;
 	private int auth;
 	
+	private int re_cnt;//댓글 개수
 	private int favhate_cnt;//좋아요/싫어요 합
 	
 	public void setReg_date(String reg_date) {

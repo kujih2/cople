@@ -107,7 +107,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	@Override
 	public void insertReplies(BoardReplyVO boardReplyVO) {
-		// TODO Auto-generated method stub
+		boardMapper.insertReplies(boardReplyVO);
 	}
 	@Override
 	public void updateReply(BoardReplyVO boardReplyVO) {

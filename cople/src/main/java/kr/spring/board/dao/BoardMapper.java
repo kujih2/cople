@@ -26,6 +26,7 @@ public interface BoardMapper {
 		@Delete("DELETE FROM commu_board WHERE board_num=#{board_num}")
 		public void deleteBoard(int board_num);
 		
+		
 	//좋아요
 		@Select("SELECT * FROM commu_fav WHERE board_num=#{board_num} AND mem_num=#{mem_num}")
 		public BoardFavVO selectFav(BoardFavVO fav);

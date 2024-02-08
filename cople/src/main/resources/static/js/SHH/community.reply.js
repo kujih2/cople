@@ -44,13 +44,13 @@ $(function(){
 					output += '<li>';
 					
 					if(item.nick_name){
-						output += item.nick_name + '<br>';
+						output += item.nick_name +  '<br>';
 					}else{
 						output += item.id + '<br>';
 					}
 					
 					if(item.re_mdate){
-						output += '<span class="modify-date">최근 수정일 : ' + item.re_mdate + '</span>';
+						output += '<span class="modify-date">최근 수정일 : ' + item.re_mdate +'</span>';
 					}else{
 						output += '<span class="modify-date">등록일 : ' + item.re_rdate + '</span>';
 					}
@@ -231,6 +231,7 @@ $(function(){
 	 * 대댓글 작성
      *-------------------------------*/
 	$(document).on('click','.replies-btn',function(){
+		let board_num = $('#board_num').val();
 		//댓글 번호
 		let re_num = $(this).attr('data-num');
 		//댓글 내용
@@ -238,8 +239,9 @@ $(function(){
 		
 		//답글 작성폼 UI
 		let repliesUI = '<form id="replies">';
-		 	repliesUI += '<input type="hidden" name="re_num" id="mre_num" value="'+re_num+'">';
-			repliesUI += '<textarea rows="3" cols="50" name="re_content" id="mre_content" class="rep-content">'+'</textarea>';
+		    repliesUI += '<input type="hidden" name="board_num" id="board_num" value="'+board_num+'">';
+		    repliesUI += '<input type="hidden" name="re_parent_num" id="re_parent_num" value="'+re_num+'">';
+			repliesUI += '<textarea rows="3" cols="50" name="re_content" id="repelis_content" class="rep-content">'+'</textarea>';
             repliesUI += '<div id="mre_second" class="align-right">';
             repliesUI += ' <input type="submit" value="작성">';
             repliesUI += ' <input type="button" value="취소" class="re-reset">';
@@ -249,22 +251,61 @@ $(function(){
 
 		initRepliesForm();
 		
+		//대댓글폼을 수정하고자하는 데이터가 있는 div에 노출
 		$(this).parents('.item').after(repliesUI);
 		
-		let inputLength = $('#mre_content').val().length;
+		//입력한 글자수 셋팅
+		let inputLength = $('#repelis_content').val().length;
 		let remain = 300 - inputLength;
 		remain += '/300';
 		
+		//문서 객체에 반영
 		$('#mre_first .letter-count').text(remain);
+		
 	});
+	//대댓글폼에서 취소 버튼 클릭시 대댓글폼 초기화
 	$(document).on('click','.re-reset',function(){
 		initRepliesForm();
 	});
+	//대댓글폼 초기화
 	function initRepliesForm(){
 		$('.sub-item').show();
 		$('#replies').remove();
 	}	
+	//대댓글 작성
+	$(document).on('submit','#replies',function(event){
+		if($('#repelis_content').val().trim()==''){
+			alert('내용을 입력하세요');
+			$('#repelis_content').val('').focus();
+			return false;
+		}
+		//폼에 입력한 데이터 반환
+		let form_data = $(this).serialize();
 		
+		//서버와 통신
+		$.ajax({
+			url:'replies',
+			type:'post',
+			data:form_data,
+			dataType:'json',
+			success:function(param){
+				if(param.result == 'logout'){
+					alert('로그인해야 작성할 수 있습니다.');
+				}else if(param.result == 'success'){
+					//폼 초기화
+					initForm();
+					//댓글 작성이 성공하면 새로 삽입한 글을 포함해서
+					//첫번째 페이지의 게시글들을 다시 호출
+					selectList(1);
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});		
+		//기본 이벤트 제거
+		event.preventDefault();
+	});	
 		
 	/*-------------------------------
 	 * 댓글수 표시
