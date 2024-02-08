@@ -7,19 +7,23 @@
 }
 
 .gnb-menu {
-	background:#282828;
-	height:50px;
+	background:white;
+	height:60px;
 	display:flex;
 	justify-content:space-around;
 	align-items:center;
+	border: 2px solid #8581c9;
+	flex-direction: row;
+	width:100%
 }
 
 .gnb-menu a {
-	font-size:24px;
-	color:#fff;
+	font-size:30px;
+	color:#4674e0;
 	text-decoration:none;
 	position:relative;
 	padding:6px 12px;
+	flex-direction: row;
 }
 
 .gnb-menu a::after {

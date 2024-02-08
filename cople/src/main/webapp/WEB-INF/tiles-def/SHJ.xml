@@ -20,7 +20,7 @@
 			value="/WEB-INF/views/matching/myPage/main.jsp" />
 	</definition>
 	
-	<definition name="myPage3" template="/WEB-INF/views/template/layout_mypage3.jsp">
+	<definition name="myPage3" template="/WEB-INF/views/template/layout_mypage4.jsp">
     	<put-attribute name="title" value="MyPage"/>
     	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/> 
     	<put-attribute name="subNav" value="/WEB-INF/views/template/myPage_subnav.jsp"/> 
@@ -28,6 +28,17 @@
     	               value="/WEB-INF/views/template/nav_mypage.jsp"/>               
     	<put-attribute name="body"
     	               value="/WEB-INF/views/template/body_mypage.jsp"/>
+    	<put-attribute name="footer"
+    	               value="/WEB-INF/views/template/footer.jsp"/>                                             
+    </definition>
+	
+	<definition name="myPage4" template="/WEB-INF/views/template/layout_mypage4.jsp">
+    	<put-attribute name="title" value="MyPage"/>
+    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/> 
+    	<put-attribute name="subNav" value="/WEB-INF/views/template/myPage_subnav.jsp"/> 
+    	<put-attribute name="nav"
+    	               value="/WEB-INF/views/template/nav_mypage.jsp"/>               
+    	<put-attribute name="body" value="/WEB-INF/views/template/body_mypage.jsp"/>
     	<put-attribute name="footer"
     	               value="/WEB-INF/views/template/footer.jsp"/>                                             
     </definition>
