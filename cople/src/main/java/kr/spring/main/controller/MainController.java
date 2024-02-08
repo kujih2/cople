@@ -26,5 +26,11 @@ public class MainController {
 		
 		return "main";//타일스 설정명
 	}
+	@RequestMapping("/main/main2")
+	public String main2(Model model) {
+		log.debug("<<메인실행>>");
+		
+		return "main2";//타일스 설정명
+	}
 
 }

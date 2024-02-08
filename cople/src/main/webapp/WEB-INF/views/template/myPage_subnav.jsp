@@ -42,10 +42,9 @@
 	width:100%;
 }
 </style>
-<body>
-	<nav class="gnb-menu">
+
+	<div class="gnb-menu">
 		<a href="">쪽지함</a>
 		<a href="">첨삭관리함</a>
 		<a href="">내가 쓴 글</a>
-	</nav>
-</body>
+	</div>

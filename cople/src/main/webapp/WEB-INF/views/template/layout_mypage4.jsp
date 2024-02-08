@@ -14,10 +14,8 @@
 		<div class="mt-6 px-4 lg:mt-10 lg:px-0">
 			<div class="divide-y divide-gray-500/30 dark:divide-gray-500/70 lg:grid lg:grid-cols-12 lg:divide-x lg:divide-y-0">
 				<tiles:insertAttribute name="nav"/>
-				
-           			 <tiles:insertAttribute name="subNav"/>
-          	
           			<tiles:insertAttribute name="body"/>
+
          	   
 			</div>
 		</div>
@@ -32,6 +30,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/header.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/sub.css">
 
 <!-- fullcalendar CDN -->
  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>

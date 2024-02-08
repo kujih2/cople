@@ -1,6 +1,5 @@
 package kr.spring.member.controller;
  
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -262,8 +261,7 @@ public class MemberController {
 	    map.put("keyword", keyword);
 	    
 	    // auth 값 설정 (adminMain 페이지에 맞는 auth 값 전달)
-	    List<Integer> authValues = Arrays.asList(0, 1); // auth 값을 0과 1로 설정
-	    map.put("authValues", authValues); // authValues 리스트 전달
+	    map.put("auth", 1); 
 	    
 	    //전체/검색 레코드수
 	    int count = memberService.selectRowCount(map);
@@ -300,9 +298,8 @@ public class MemberController {
 	    map.put("keyfield", keyfield);
 	    map.put("keyword", keyword);
 	    
-	    // auth 값 설정 (adminMain 페이지에 맞는 auth 값 전달)
-	    List<Integer> authValues = Arrays.asList(0, 2); // auth 값을 0과 1로 설정
-	    map.put("authValues", authValues); // authValues 리스트 전달
+	    // auth 값 설정 (adminIncumbent 페이지에 맞는 auth 값 전달)
+	    map.put("auth", 2); 
 	    
 	    //전체/검색 레코드수
 	    int count = memberService.selectRowCount(map);
@@ -340,9 +337,8 @@ public class MemberController {
 	    map.put("keyfield", keyfield);
 	    map.put("keyword", keyword);
 	    
-	    // auth 값 설정 (adminMain 페이지에 맞는 auth 값 전달)
-	    List<Integer> authValues = Arrays.asList(0, 3); // auth 값을 0과 1로 설정
-	    map.put("authValues", authValues); // authValues 리스트 전달
+	    // auth 값 설정 (adminTeacher 페이지에 맞는 auth 값 전달)
+	    map.put("auth", 3); 
 	    
 	    //전체/검색 레코드수
 	    int count = memberService.selectRowCount(map);

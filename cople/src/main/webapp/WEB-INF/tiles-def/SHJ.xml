@@ -7,41 +7,22 @@
 <tiles-definitions>
 	<definition name="matchingMain" extends="main2">
 		<put-attribute name="title" value="매칭서비스" />
-		
 		<put-attribute name="body"
 			value="/WEB-INF/views/matching/mmain.jsp" />
 	</definition>
 	
-	<definition name="jobsMain" extends="myPage3">
-		<put-attribute name="title" value="마이페이지-쪽지/첨삭관리" />
-		
-		
-		<put-attribute name="body"
-			value="/WEB-INF/views/matching/myPage/main.jsp" />
-	</definition>
-	
-	<definition name="myPage3" template="/WEB-INF/views/template/layout_mypage4.jsp">
+	 <definition name="jobsMain" template="/WEB-INF/views/template/layout_mypage4.jsp">
     	<put-attribute name="title" value="MyPage"/>
     	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/> 
-    	<put-attribute name="subNav" value="/WEB-INF/views/template/myPage_subnav.jsp"/> 
     	<put-attribute name="nav"
-    	               value="/WEB-INF/views/template/nav_mypage.jsp"/>               
-    	<put-attribute name="body"
-    	               value="/WEB-INF/views/template/body_mypage.jsp"/>
+    	               value="/WEB-INF/views/template/nav_mypage.jsp"/>    
+              	<put-attribute name="body"
+    	               value="/WEB-INF/views/matching/myPage/main.jsp"/>
     	<put-attribute name="footer"
     	               value="/WEB-INF/views/template/footer.jsp"/>                                             
     </definition>
 	
-	<definition name="myPage4" template="/WEB-INF/views/template/layout_mypage4.jsp">
-    	<put-attribute name="title" value="MyPage"/>
-    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/> 
-    	<put-attribute name="subNav" value="/WEB-INF/views/template/myPage_subnav.jsp"/> 
-    	<put-attribute name="nav"
-    	               value="/WEB-INF/views/template/nav_mypage.jsp"/>               
-    	<put-attribute name="body" value="/WEB-INF/views/template/body_mypage.jsp"/>
-    	<put-attribute name="footer"
-    	               value="/WEB-INF/views/template/footer.jsp"/>                                             
-    </definition>
+	
 	
 </tiles-definitions>
 
