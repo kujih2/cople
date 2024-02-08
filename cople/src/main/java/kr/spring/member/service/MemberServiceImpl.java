@@ -77,15 +77,20 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
-	@Override
-	public List<MemberVO> selectList(Map<String, Object> map) {
-		return memberMapper.selectList(map);
-	}
 
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
 	    return memberMapper.selectRowCount(map);
 	}
+
+
+	@Override
+	public List<MemberVO> selectListAdminMain(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return memberMapper.selectListAdminMain(map);
+	}
+
+	
 
 
 	

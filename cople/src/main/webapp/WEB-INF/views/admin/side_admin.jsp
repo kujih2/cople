@@ -9,19 +9,19 @@
         	<span data-localize="sidebar.heading.HEADER">회원관리</span>
         </li>
         <li class="">
-        	<a href="#" title="일반회원 관리">
+        	<a href="${pageContext.request.contextPath}/admin/adminMain" title="일반회원 관리">
             	<em class="icon-people"></em>
                 <span>일반회원 관리</span>
             </a>
         </li>
         <li class="">
-        	<a href="#" title="현직자 관리">
+        	<a href="${pageContext.request.contextPath}/admin/adminIncumbent" title="현직자 관리">
             	<em class="icon-people"></em>
                 <span>현직자 관리</span>
             </a>
         </li>
 		<li class="">
-           <a href="#" title="강사 관리">
+           <a href="${pageContext.request.contextPath}/admin/adminTeacher" title="강사 관리">
             	<em class="icon-people"></em>
                 <span>강사 관리</span>
            </a>

@@ -21,7 +21,7 @@ public interface MemberService {
 		public void updateProfile(MemberVO member);
 		
 	//회원관리 - 관리자
-		public List<MemberVO> selectList(Map<String,Object> map);
+		public List<MemberVO> selectListAdminMain(Map<String,Object> map);
 		public int selectRowCount(Map<String,Object> map);
 
 }

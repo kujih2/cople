@@ -3,7 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <section>
 	<div class="content-wrapper">
-		<header class="content-heading">일반회원 관리
+		<header class="content-heading">현직자 관리
     		<small></small>
 		</header>    
 	</div>
@@ -11,14 +11,12 @@
   		<div class="row">
     		<div class="col-md-12"></div>
   		</div>
-  		
-  		
   		<div id="" class="panel panel-default panel-list-filter">
                 <div class="panel-heading">상세 검색</div>
                 <div class="panel-wrapper collapse in" aria-expanded="true">
                     <div class="panel-body">
                     
-                        <form id="search_form" action="adminMain" method="get">
+                        <form id="search_form" action="adminIncumbent" method="get">
 							<input type="hidden" name="size" value="20">
 							<fieldset>
     							<div class="row">
@@ -43,11 +41,10 @@
                     </div>                  
                 </div>
             </div>
-            
-            
-            
+  		
 		<div class="row">
     		<div class="col-md-12">
+
         		<header class="clearfix pb-lg mb-sm">
                     <div class="pull-left">
                 		<div class="list-total">1페이지</div>
@@ -59,7 +56,7 @@
     		<div class="col-md-12">
       			<div class="panel panel-default">
 					<div class="table-responsive">
-          					<table id="table-ext-1" class="table table-bordered table-hover">
+          				<table id="table-ext-1" class="table table-bordered table-hover">
     					<thead>
                         <tr>
                             <th class="text-center">ID</th>
@@ -98,7 +95,7 @@
 										</c:if>
                                 </td>
                                 <td class="text-center">
-                                <c:if test="${member.auth == 0}">
+                                       <c:if test="${member.auth == 0}">
                                         <div class="label label-success">
                                         	탈퇴
                                         </div>
@@ -111,7 +108,7 @@
                                 </td>
                                 <td class="text-center">${member.reg_date}</td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="" data-original-title="상세 보기 및 수정">
+                                    <a href="/admin/user/USER/update/299554" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="" data-original-title="상세 보기 및 수정">
                                         <em class="fa fa-pencil"></em>
                                     </a>
                                 </td>

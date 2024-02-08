@@ -5,7 +5,7 @@
     <nav role="navigation" class="navbar topnavbar">
         <!-- START navbar header-->
         <div class="navbar-header">
-            <a href="#/" class="navbar-brand">
+            <a href="${pageContext.request.contextPath}/main/main" class="navbar-brand">
                 <div class="brand-logo">
                                     <p style="font-size: 18px; color: white; margin-top:7px;">Coding Hub</p>
                 </div>

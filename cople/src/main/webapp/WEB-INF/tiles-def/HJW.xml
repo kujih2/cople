@@ -53,6 +53,32 @@
     	<put-attribute name="footer"
     	               value="/WEB-INF/views/admin/footer_admin.jsp"/>                                             
     </definition>
+    
+    <definition name="adminIncumbent" 
+           template="/WEB-INF/views/admin/layout_admin.jsp">
+    	<put-attribute name="title" value="adminIncumbent"/>
+    	<put-attribute name="header"
+    	               value="/WEB-INF/views/admin/header_admin.jsp"/>
+    	<put-attribute name="nav"
+    	               value="/WEB-INF/views/admin/side_admin.jsp"/>     
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/admin/adminIncumbent.jsp"/>
+    	<put-attribute name="footer"
+    	               value="/WEB-INF/views/admin/footer_admin.jsp"/>                                             
+    </definition>
+    
+    <definition name="adminTeacher" 
+           template="/WEB-INF/views/admin/layout_admin.jsp">
+    	<put-attribute name="title" value="adminTeacher"/>
+    	<put-attribute name="header"
+    	               value="/WEB-INF/views/admin/header_admin.jsp"/>
+    	<put-attribute name="nav"
+    	               value="/WEB-INF/views/admin/side_admin.jsp"/>     
+    	<put-attribute name="body"
+    	               value="/WEB-INF/views/admin/adminTeacher.jsp"/>
+    	<put-attribute name="footer"
+    	               value="/WEB-INF/views/admin/footer_admin.jsp"/>                                             
+    </definition>
 </tiles-definitions>
 
 

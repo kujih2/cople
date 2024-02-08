@@ -50,24 +50,28 @@
 	
 	<!-- sql 태그와 include 태그를 이용해 SQL문 재사용 -->
 	<sql id="memberSearch">
-		<where>
-			<if test="keyword != null and keyword != ''">
-				<if test="keyfield == 1">
-					id LIKE '%' || #{keyword} || '%'
-				</if>
-				<if test="keyfield == 2">
-					name LIKE '%' || #{keyword} || '%' 
-				</if>
-				<if test="keyfield == 3">
-					phone LIKE '%' || #{keyword} || '%'
-				</if>
-			</if>
-		</where>
-	</sql>
+    <if test="keyword != null and keyword != ''">
+           <choose>
+               <when test="keyfield == 1">
+                   AND id LIKE '%' || #{keyword} || '%'
+               </when>
+               <when test="keyfield == 2">
+                   AND name LIKE '%' || #{keyword} || '%' 
+               </when>
+               <when test="keyfield == 3">
+                   AND phone LIKE '%' || #{keyword} || '%'
+               </when>
+           </choose>
+    </if>
+</sql>
+
+
 	
 	
-	<!-- 회원 전체 목록/검색 목록 -->
-	<select id="selectList" parameterType="map" resultType="memberVO">
+	<!-- memberMapper.xml -->
+    
+    <!-- adminMain 페이지에 대한 쿼리 -->
+<select id="selectListAdminMain" parameterType="map" resultType="memberVO">
     SELECT
         *
     FROM (
@@ -83,15 +87,15 @@
                 md.phone,
                 md.email,
                 md.reg_date,
-                md.modify_date
+                md.modify_date,
+                md.push
             FROM
                 member m
             LEFT OUTER JOIN
                 member_detail md ON m.mem_num = md.mem_num
             WHERE
-                m.auth = 1  <!-- auth 값이 1인 회원만 선택 -->
-            <include refid="memberSearch"></include>
-          
+                m.auth = #{auth} <!-- auth 값이 1인 회원만 선택 -->
+                <include refid="memberSearch"></include>
         ) a
     )
     <![CDATA[
@@ -100,8 +104,13 @@
 </select>
 
 
+    <!-- 추가적인 쿼리나 매핑이 있으면 여기에 작성 -->
+
 <select id="selectRowCount" parameterType="map" resultType="int">
-    SELECT COUNT(*) FROM member 
+    SELECT COUNT(*) FROM member m
+    LEFT OUTER JOIN
+    member_detail md ON m.mem_num = md.mem_num
+    WHERE m.auth = #{auth}
     <include refid="memberSearch"></include>
 </select>
 

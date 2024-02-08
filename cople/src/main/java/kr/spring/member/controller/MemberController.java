@@ -1,5 +1,6 @@
 package kr.spring.member.controller;
  
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -250,39 +251,128 @@ public class MemberController {
 	}
 	
 	
+	// adminMain 페이지 컨트롤러
 	@RequestMapping("/admin/adminMain")
-	public ModelAndView process1(
-			       @RequestParam(value="pageNum",defaultValue="1") int currentPage,
-			       @RequestParam(value="order",defaultValue="1") int order,
-			       String keyfield, String keyword) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
+	public ModelAndView processAdminMain(
+	           @RequestParam(value="pageNum",defaultValue="1") int currentPage,
+	           String keyfield, String keyword) {
 		
-		//전체/검색 레코드수
-		int count = memberService.selectRowCount(map);
-		log.debug("<<count>> : " + count);
-		
-		PageUtil page = new PageUtil(keyfield,keyword,currentPage,
-				                     count,20,10,"list","&order="+order);
-		
-		List<MemberVO> list = null;
-		if(count > 0) {
-			map.put("order", order);
-			map.put("start",page.getStartRow());
-			map.put("end", page.getEndRow());
-			
-			list = memberService.selectList(map);
-		}
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("adminMain");
-		mav.addObject("count", count);
-		mav.addObject("list", list);
-		mav.addObject("page", page.getPage());
-		
-		return mav;
+	    Map<String,Object> map = new HashMap<String,Object>();
+	    map.put("keyfield", keyfield);
+	    map.put("keyword", keyword);
+	    
+	    // auth 값 설정 (adminMain 페이지에 맞는 auth 값 전달)
+	    List<Integer> authValues = Arrays.asList(0, 1); // auth 값을 0과 1로 설정
+	    map.put("authValues", authValues); // authValues 리스트 전달
+	    
+	    //전체/검색 레코드수
+	    int count = memberService.selectRowCount(map);
+	    log.debug("<<count>> : " + count);
+	    
+	    PageUtil page = new PageUtil(keyfield,keyword,currentPage,
+	                                 count,20,10,"list");
+	    
+	    List<MemberVO> list = null;
+	    if(count > 0) {
+	        map.put("start",page.getStartRow());
+	        map.put("end", page.getEndRow());
+	        
+	        // 매퍼에서 selectListAdminMain 사용
+	        list = memberService.selectListAdminMain(map);
+	    }
+	    
+	    ModelAndView mav = new ModelAndView();
+	    mav.setViewName("adminMain");
+	    mav.addObject("count", count);
+	    mav.addObject("list", list);
+	    mav.addObject("page", page.getPage());
+	    
+	    return mav;
+	} 
+
+	// adminIncumbent 페이지 컨트롤러
+	@RequestMapping("/admin/adminIncumbent")
+	public ModelAndView processAdminIncumbent(
+	           @RequestParam(value="pageNum",defaultValue="1") int currentPage,
+	           @RequestParam(value="order",defaultValue="1") int order,
+	           String keyfield, String keyword) {
+	    Map<String,Object> map = new HashMap<String,Object>();
+	    map.put("keyfield", keyfield);
+	    map.put("keyword", keyword);
+	    
+	    // auth 값 설정 (adminMain 페이지에 맞는 auth 값 전달)
+	    List<Integer> authValues = Arrays.asList(0, 2); // auth 값을 0과 1로 설정
+	    map.put("authValues", authValues); // authValues 리스트 전달
+	    
+	    //전체/검색 레코드수
+	    int count = memberService.selectRowCount(map);
+	    log.debug("<<count>> : " + count);
+	    
+	    PageUtil page = new PageUtil(keyfield,keyword,currentPage,
+	                                 count,20,10,"list","&order="+order);
+	    
+	    List<MemberVO> list = null;
+	    if(count > 0) {
+	        map.put("order", order);
+	        map.put("start",page.getStartRow());
+	        map.put("end", page.getEndRow());
+	        
+	        // 매퍼에서 selectListAdminIncumbent 사용
+	        list = memberService.selectListAdminMain(map);
+	    }
+	    
+	    ModelAndView mav = new ModelAndView();
+	    mav.setViewName("adminIncumbent");
+	    mav.addObject("count", count);
+	    mav.addObject("list", list);
+	    mav.addObject("page", page.getPage());
+	    
+	    return mav;
 	}
+
+	// adminTeacher 페이지 컨트롤러
+	@RequestMapping("/admin/adminTeacher")
+	public ModelAndView processAdminTeacher(
+	           @RequestParam(value="pageNum",defaultValue="1") int currentPage,
+	           @RequestParam(value="order",defaultValue="1") int order,
+	           String keyfield, String keyword) {
+	    Map<String,Object> map = new HashMap<String,Object>();
+	    map.put("keyfield", keyfield);
+	    map.put("keyword", keyword);
+	    
+	    // auth 값 설정 (adminMain 페이지에 맞는 auth 값 전달)
+	    List<Integer> authValues = Arrays.asList(0, 3); // auth 값을 0과 1로 설정
+	    map.put("authValues", authValues); // authValues 리스트 전달
+	    
+	    //전체/검색 레코드수
+	    int count = memberService.selectRowCount(map);
+	    log.debug("<<count>> : " + count);
+	    
+	    PageUtil page = new PageUtil(keyfield,keyword,currentPage,
+	                                 count,20,10,"list","&order="+order);
+	    
+	    List<MemberVO> list = null;
+	    if(count > 0) {
+	        map.put("order", order);
+	        map.put("start",page.getStartRow());
+	        map.put("end", page.getEndRow());
+	        
+	        // 매퍼에서 selectListAdminTeacher 사용
+	        list = memberService.selectListAdminMain(map);
+
+	    }
+	    
+	    ModelAndView mav = new ModelAndView();
+	    mav.setViewName("adminTeacher");
+	    mav.addObject("count", count);
+	    mav.addObject("list", list);
+	    mav.addObject("page", page.getPage());
+	    
+	    return mav;
+	} 
+
+
+
 	
 }
 
