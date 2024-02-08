@@ -14,9 +14,14 @@
 		<div class="mt-6 px-4 lg:mt-10 lg:px-0">
 			<div class="divide-y divide-gray-500/30 dark:divide-gray-500/70 lg:grid lg:grid-cols-12 lg:divide-x lg:divide-y-0">
 				<tiles:insertAttribute name="nav"/>
+<<<<<<< HEAD
           			<tiles:insertAttribute name="body"/>
 
+=======
+>>>>>>> branch 'main' of https://github.com/kujih2/cople.git
          	   
+		            <tiles:insertAttribute name="body"/>
+				
 			</div>
 		</div>
 	</main>
