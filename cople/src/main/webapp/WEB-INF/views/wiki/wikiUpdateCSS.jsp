@@ -12,9 +12,8 @@
 .editor-menu{
 	position: fixed;
 	min-width:786px;
-    top: 103px;
+    top: 142px;
 	height:38px;
-	border-bottom:solid 1px #CCCCCC;
 	border-top:solid 1px #CCCCCC;
 	background-color:white;
 	box-sizing:border-box;

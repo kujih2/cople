@@ -11,7 +11,7 @@ $(document).ready(function() {
     });
 	
 	//에디터 메뉴 위치 조절
-    var initialPosition = 103; // Initial fixed position
+    var initialPosition = 142; // Initial fixed position
     var scrollThreshold = 200; // Distance to scroll before the menu stays fixed
 
     $(window).scroll(function() {
