@@ -171,9 +171,8 @@
 				
 			<label for="location_status">지도에서 선택하기</label> <br>
 				<div class="map_wrap">
-					<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+					<div id="map" style="width: 430px; height: 270px; position: relative; overflow: hidden;"></div>
 					<div class="hAddr">
-						<span class="title">지도중심기준 행정동 주소정보</span> <span id="centerAddr"></span>
 					</div>
 					<input type="hidden" id="location_api" name="location_api" value="">
 					<input type="hidden" id="location_api_lat" name="location_api_lat" value="">
