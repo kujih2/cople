@@ -47,4 +47,8 @@ public interface MatchingMapper {
 	public int receivedAdviceCount(int mem_num);
 	@Select("SELECT COUNT(*) FROM advice WHERE sender=#{mem_nmm}")	
 	public int sentAdviceCount(int mem_num);
+	
+	//회원기능
+	@Select("SELECT mem_num FROM member WHERE id=#{id}")
+	public int findMemnumById(String id);
 }

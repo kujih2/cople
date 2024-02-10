@@ -30,7 +30,9 @@ public class StringUtil {
 		if(str == null) return null;
 		
 		return str.replaceAll("<", "&lt;")
-				  .replaceAll(">", "&gt;");
+				  .replaceAll(">", "&gt;")
+				  .replaceAll("<p>", "")
+				  .replaceAll("</p>", "");
 	}
 	/*
 	 * 큰 따옴표 처리

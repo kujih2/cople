@@ -7,6 +7,7 @@
 <tiles-definitions>
 	<definition name="matchingMain" extends="main2">
 		<put-attribute name="title" value="매칭서비스" />
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
 		<put-attribute name="body"
 			value="/WEB-INF/views/matching/mmain.jsp" />
 	</definition>
@@ -38,7 +39,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/letterDetail.jsp"/>
 	</definition>
 	
-	
+	<!-- 나의 첨삭요청함(받은 첨삭요청함) -->
+	<definition name="MyAdviceAction" extends="myPage3">
+		<put-attribute name="title" value="나의 첨삭요청함" />
+		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/advice.jsp"/>
+	</definition>
 
 </tiles-definitions>
 

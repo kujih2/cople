@@ -46,6 +46,7 @@
         }
     </style>
 </head>
+<script src="${pageContext.request.contextPath}/js/SHJ/register.js"></script>
 <body>
     <div class="page-main">
         <h2>쪽지 읽기</h2>
@@ -64,7 +65,7 @@
             </li>
         </ul>
         <div>
-            <input type="button" value="답장" onclick="location.href='${pageContext.request.contextPath}/myPage/letterAnswer?letter_num=${letter.letter_num}&senderId=${sender}'">
+			<a class="answer" href="#" onclick="answer_letter('${sender}')" data-id="${sender}">쪽지 보내기</a>
             <input type="button" value="삭제" onclick="location.href=''">
             <input type="button" value="목록" onclick="location.href=''">
         </div>

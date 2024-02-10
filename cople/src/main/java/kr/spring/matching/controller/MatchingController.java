@@ -209,7 +209,7 @@ public class MatchingController {
 		return "matching/resultAlert";
 
 	}
-	
+	//쪽지보내기
 	@GetMapping("matching/send_letter")
 	public String send_letter(HttpServletRequest request, HttpSession session, 
 			 int user_id, Model model) {
@@ -223,11 +223,6 @@ public class MatchingController {
 			model.addAttribute("url", request.getContextPath() + "/member/login");
 			
 			return "matching/resultAlert";
-		}else if(user.getAuth()!=1){//로그인, Auth가 1이 아닌 경우
-			model.addAttribute("message","수강생 회원만 이용가능합니다.");
-			model.addAttribute("url", request.getContextPath() + "/matching/mmain");
-			
-			return "matchinig/resultAlert";
 		}else {//로그인, Auth가 1인 경우
 			model.addAttribute("login_user", user);
 			model.addAttribute("receive_user", matchingService.selectMember(user_id));
@@ -237,6 +232,7 @@ public class MatchingController {
 		
 		return "matching/send_letter";
 	}
+	
 	
 	@PostMapping("matching/send_letter")
 	public String sendletter_result(HttpServletRequest request, HttpSession session, 

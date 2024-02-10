@@ -113,6 +113,11 @@ public class MatchingServiceImpl implements MatchingService{
 		matchingMapper.readLetter(letter_num);
 		return matchingMapper.selectLetter(letter_num);
 	}
+
+	@Override
+	public int findMemnumById(String id) {
+		return matchingMapper.findMemnumById(id);
+	}
 	
 	
 

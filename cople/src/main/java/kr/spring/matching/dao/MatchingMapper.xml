@@ -191,14 +191,64 @@
 		]]>
 	</select>
 	
+	<!-- id로 memenum 구하기 -->
+	
+	
 	<!-- 받은 쪽지 갯수 -->
 	
 	<!-- 보낸 쪽지 리스트 -->
 	<select id="selectSentLetter" parameterType="map" resultType="letterVO"></select>
 	
+	
+	<sql id="adviceSearch">
+		<where>
+			<if test="keyword!=null and keyword!=''">
+				<if test="keyfield==1">
+					AND sender LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield==2">
+					AND advice_content LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield==3">
+					AND (advice_content LIKE '%' || #{keyword} || '%' OR
+					 sender LIKE '%' || #{keyword} || '%')
+				</if>
+			</if>
+		</where>
+	</sql>
+	
 	<!-- 받은 첨삭 리스트 -->
 	<select id="selectReceivedAdvice" parameterType="map" resultType="adviceVO">
-	
+		SELECT 
+		  *
+		FROM
+			(SELECT
+				a.*, rownum rnum
+			 FROM
+			   (SELECT 
+			   		advice_num, 
+			   		sender,
+			   		receiver,
+			   		<![CDATA[
+				   	 REPLACE(REPLACE(advice_content,'<','&lt;'),'>', '&gt;')advice_content,
+			   		]]>
+			   		date_sent,
+			   		date_read,
+			   		member.id AS id
+			    FROM 
+			        advice
+			    JOIN 
+			    	member
+			    	ON advice.sender=member.mem_num
+			    WHERE 
+			    	receiver=#{receiver}
+			    	<include refid="adviceSearch"></include>
+			   	ORDER BY advice_num DESC,
+			   			 date_read NULLS FIRST,
+			   			 date_read DESC)a)
+		<![CDATA[
+		WHERE rnum>= #{start} AND rnum<= #{end}
+		]]>
 	</select>
 	
 	<!-- 보낸 첨삭 리스트 -->

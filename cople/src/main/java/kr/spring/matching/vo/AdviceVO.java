@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @ToString
 public class AdviceVO {
-	int letter_num;
+	int advice_num;
 	int sender;
 	int receiver;
 	@NotBlank
@@ -30,4 +30,6 @@ public class AdviceVO {
 	String advice_ip;
 	String filename;
 	MultipartFile upload;
+	
+	String id;
 }
