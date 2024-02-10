@@ -31,6 +31,9 @@
 								<img src="${pageContext.request.contextPath}/upload/${chatList.filename0}" width="30" height="30">
 								판매자:<c:if test="${empty chatList.seller_nickname}">${chatList.seller_id}</c:if>
 									 <c:if test="${!empty chatList.seller_nickname}">${chatList.seller_nickname}</c:if>
+								구매자:<c:if test="${empty chatList.buyer_nickname}">${chatList.buyer_id}</c:if>
+									 <c:if test="${!empty chatList.buyer_nickname}">${chatList.buyer_nickname}</c:if>
+								
 						</div>
 					</c:forEach>
 				</c:if>
