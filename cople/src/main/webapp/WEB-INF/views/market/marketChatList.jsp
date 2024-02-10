@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <div class="side-bar">
 	<ul>
 		<li>
@@ -23,10 +24,11 @@
 			<div class="chat_list">
 				<c:if test="${!empty chatList}">
 					<c:forEach var="chatList" items="${chatList}">
-						<div>
+						<div class="chatListBox">
+								<input type="hidden" class="chatRoomNum" value="${chatList.chatRoom_num}">
 								<span>${chatList.product_title}</span> 
 								<span>${chatList.product_price}</span>
-								<img src="${pageContext.request.contextPath}/upload/${market.filename0}" width="30" height="30">
+								<img src="${pageContext.request.contextPath}/upload/${chatList.filename0}" width="30" height="30">
 								판매자:<c:if test="${empty chatList.seller_nickname}">${chatList.seller_id}</c:if>
 									 <c:if test="${!empty chatList.seller_nickname}">${chatList.seller_nickname}</c:if>
 						</div>

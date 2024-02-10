@@ -13,7 +13,9 @@ public class MarketChatVO {
 	private int chat_num;
 	private int chatRoom_num;
 	private int mem_num;
+	private String mem_id;
+	private String mem_nickname;
 	private String chat_message;
-	private Date chat_regDate;
+	private String chat_regDate;
 	private int chat_readCheck;
 }

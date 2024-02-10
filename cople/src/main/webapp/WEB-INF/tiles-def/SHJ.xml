@@ -10,20 +10,36 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/matching/mmain.jsp" />
 	</definition>
+
+	<definition name="MyActionMain" extends="myPage3">
+		<put-attribute name="title" value="마이페이지-나의 활동" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/matching/myPage/main.jsp" />
+	</definition>
+	<definition name="myPage3"
+		template="/WEB-INF/views/template/layout_mypage3.jsp">
+		<put-attribute name="title" value="MyPage" />
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
+		<put-attribute name="subNav" value="/WEB-INF/views/template/myPage_subnav.jsp" />
+		<put-attribute name="nav" value="/WEB-INF/views/template/nav_mypage.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/template/body_mypage.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+	</definition>
 	
-	 <definition name="jobsMain" template="/WEB-INF/views/template/layout_mypage4.jsp">
-    	<put-attribute name="title" value="MyPage"/>
-    	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/> 
-    	<put-attribute name="nav"
-    	               value="/WEB-INF/views/template/nav_mypage.jsp"/>    
-              	<put-attribute name="body"
-    	               value="/WEB-INF/views/matching/myPage/main.jsp"/>
-    	<put-attribute name="footer"
-    	               value="/WEB-INF/views/template/footer.jsp"/>                                             
-    </definition>
+	<!-- 나의 쪽지함(받은 쪽지함) -->
+	<definition name="MyLetterAction" extends="myPage3">
+		<put-attribute name="title" value="나의 쪽지함" />
+		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/letter.jsp"/>
+	</definition>
+	
+	<!-- 나의 쪽지함(받은 쪽지함) -->
+	<definition name="LetterDetail" extends="myPage3">
+		<put-attribute name="title" value="쪽지읽기" />
+		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/letterDetail.jsp"/>
+	</definition>
 	
 	
-	
+
 </tiles-definitions>
 
 

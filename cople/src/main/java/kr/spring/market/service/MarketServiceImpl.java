@@ -134,25 +134,58 @@ public class MarketServiceImpl implements MarketService{
 
 	@Override
 	public void insertChat(MarketChatVO chatVO) {
-		// TODO Auto-generated method stub
+		marketMapper.insertChat(chatVO);
 		
 	}
 
-	@Override
-	public List<MarketVO> selectChatDetail(Map<String, Integer> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateChatRead(Map<String, Integer> map) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public MarketChatRoomVO selectChatRoom(Map<String, Object> map) {
 		return marketMapper.selectChatRoom(map);
+	}
+
+	@Override
+	public MarketChatRoomVO selectChatRoomDetail(int chatRoom_num) {
+		MarketChatRoomVO vo = marketMapper.selectChatRoomDetail(chatRoom_num);
+		if(vo.getSeller_num() != null) {
+			 MemberVO member = memberMapper.selectMember(vo.getSeller_num());
+	            if (member != null) {
+	                vo.setSeller_id(member.getId());
+	                vo.setSeller_nickname(member.getNick_name());
+	            }
+		}
+		if(vo.getBuyer_num() != null) {
+			MemberVO member = memberMapper.selectMember(vo.getBuyer_num());
+			if (member != null) {
+				vo.setBuyer_id(member.getId());
+				vo.setBuyer_nickname(member.getNick_name());
+			}
+		}
+		return vo;
+	}
+
+	@Override
+	public List<MarketChatVO> selectChatDetail(Map<String,Integer> map) {
+		
+		marketMapper.updateChatRead(map);
+		
+		List<MarketChatVO> list = marketMapper.selectChatDetail(map);
+		if (list!=null) {
+			for (MarketChatVO each : list) {
+			        Integer memNum = each.getMem_num();
+			        if (memNum != null) {
+			            MemberVO member = memberMapper.selectMember(memNum);
+			            if (member != null) {
+			                each.setMem_id(member.getId());
+			                each.setMem_nickname(member.getNick_name());
+			            }
+			        }
+		            
+			        
+				}
+		}
+		
+		return list;
 	}
 
 	

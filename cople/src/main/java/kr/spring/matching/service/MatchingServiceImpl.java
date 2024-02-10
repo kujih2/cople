@@ -62,4 +62,58 @@ public class MatchingServiceImpl implements MatchingService{
 		
 	}
 
+	@Override
+	public List<LetterVO> selectReceivedLetter(Map<String,Object> map) {
+		return matchingMapper.selectReceivedLetter(map);
+	}
+
+	@Override
+	public List<LetterVO> selectSentLetter(Map<String,Object> map) {
+		return matchingMapper.selectSentLetter(map);
+	}
+
+
+	@Override
+	public int receivedLetterCount(int mem_num) {
+		return matchingMapper.receivedLetterCount(mem_num);
+	}
+
+	@Override
+	public int sentLetterCount(int mem_num) {
+		return matchingMapper.sentLetterCount(mem_num);
+	}
+
+	@Override
+	public List<AdviceVO> selectReceivedAdvice(Map<String,Object> map) {
+		return matchingMapper.selectReceivedAdvice(map);
+	}
+
+	@Override
+	public List<AdviceVO> selectSentAdvice(Map<String,Object> map) {
+		return matchingMapper.selectSentAdvice(map);
+	}
+
+	@Override
+	public AdviceVO selectAdvice(int advice_num) {
+		return matchingMapper.selectAdvice(advice_num);
+	}
+
+	@Override
+	public int receivedAdviceCount(int mem_num) {
+		return matchingMapper.receivedAdviceCount(mem_num);
+	}
+
+	@Override
+	public int sentAdviceCount(int mem_num) {
+		return matchingMapper.sentAdviceCount(mem_num);
+	}
+
+	@Override
+	public LetterVO readLetter(int letter_num) {
+		matchingMapper.readLetter(letter_num);
+		return matchingMapper.selectLetter(letter_num);
+	}
+	
+	
+
 }

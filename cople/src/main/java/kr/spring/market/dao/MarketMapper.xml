@@ -121,5 +121,22 @@ SELECT chatroom_num,product_num,product_title,filename0,product_price,seller_num
 			market_chatroom LEFT OUTER JOIN market_product USING(product_num)
 			WHERE seller_num = #{mem_num} OR buyer_num = #{mem_num} ORDER BY chatroom_num DESC
 </select>
+<!-- 선택한 채팅방의 상품 내용 구하기 -->
+<select id="selectChatRoomDetail" parameterType="int" resultType="marketChatRoomVO">
+SELECT chatroom_num,product_num,product_title,filename0,product_price,seller_num,buyer_num,product_sale FROM 
+			market_chatroom LEFT OUTER JOIN market_product USING(product_num)
+			WHERE chatroom_num = #{chatRoom_num}
+</select>
 
+<!-- 선택한 채팅방의 채팅 내역 구하기 -->
+<select id="selectChatDetail" parameterType="integer" resultType="marketChatVO">
+SELECT * FROM market_chat WHERE chatRoom_num = #{chatRoom_num} ORDER BY chat_regDate
+</select>
+<update id="updateChatRead" parameterType="integer">
+	UPDATE market_chat SET chat_readCheck = 0 WHERE chatRoom_num = #{chatRoom_num} AND mem_num != #{mem_num}
+</update>
+<insert id="insertChat" parameterType="marketChatVO">
+  INSERT INTO market_chat(chat_num, chatRoom_num, mem_num, chat_message) 
+  VALUES (market_chat_seq.nextval, #{chatRoom_num}, #{mem_num}, #{chat_message})
+</insert>
 </mapper>

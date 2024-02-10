@@ -44,7 +44,7 @@
 </style>
 
 	<div class="gnb-menu">
-		<a href="">쪽지함</a>
-		<a href="">첨삭관리함</a>
+		<a href="/myPage/myLetter">쪽지함</a>
+		<a href="/myPage/myAdvice">첨삭관리함</a>
 		<a href="">내가 쓴 글</a>
 	</div>
