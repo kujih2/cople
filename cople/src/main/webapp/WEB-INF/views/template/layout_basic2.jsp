@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title><tiles:getAsString name="title"/></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/layout_basic2.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/sub.css">
+
 <tiles:insertAttribute name="css" ignore="true"/>
 <tiles:insertAttribute name="js" ignore="true"/>
 </head>
