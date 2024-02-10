@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.market.service.MarketService;
 import kr.spring.market.vo.MarketChatRoomVO;
+import kr.spring.market.vo.MarketChatVO;
 import kr.spring.market.vo.MarketVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
@@ -260,4 +262,60 @@ public class MarketController {
 		
 
 	}
+	/*=================================
+	 * 장터 채팅메시지 조회
+	 *=================================*/
+	//채팅 메시지 페이지 호출
+		@RequestMapping("/market/marketChatDetailAjax")
+		@ResponseBody
+		public Map<String,Object> talkDetail(@RequestParam int chatRoom_num,
+				                HttpSession session) {
+			Map<String,Object> mapAjax = new HashMap<String,Object>();
+			
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			if(user==null) {//로그인이 되지 않은 경우
+				mapAjax.put("result", "logout");
+			}else {//로그인 된 경우
+				Map<String,Integer> map = new HashMap<String,Integer>();
+				map.put("chatRoom_num", chatRoom_num);
+				map.put("mem_num", user.getMem_num());
+				
+				MarketChatRoomVO product_detail = marketService.selectChatRoomDetail(chatRoom_num);//해당 채팅방의 거래 상품 정보
+				log.debug("<<product_detail>> :" + product_detail);
+				List<MarketChatVO> list = marketService.selectChatDetail(map);
+				
+				mapAjax.put("result", "success");
+				mapAjax.put("product_detail", product_detail);
+				mapAjax.put("list", list);
+				mapAjax.put("user_num", user.getMem_num());			
+			}		
+			
+			
+			return mapAjax;
+		
+		}
+		
+		//채팅 메시지 전송
+		@RequestMapping("/market/writeChatAjax")
+		@ResponseBody
+		public Map<String,Object> writeChatAjax(MarketChatVO vo, HttpSession session){
+			
+			Map<String,Object> mapAjax = new HashMap<String,Object>();
+			
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			if(user==null) {//로그인이 되지 않은 경우
+				mapAjax.put("result", "logout");
+			}else {//로그인 된 경우
+				vo.setMem_num(user.getMem_num());
+				
+				log.debug("<<채팅 메시지 등록 TalkVO>> : " + vo);
+				marketService.insertChat(vo);
+				
+				mapAjax.put("result", "success");
+			}
+			return mapAjax;
+		}
+	
+	
+	
 }

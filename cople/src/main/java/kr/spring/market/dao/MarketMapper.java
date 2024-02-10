@@ -22,9 +22,10 @@ public interface MarketMapper {
     public void deleteFile(int product_num);
 	//관심목록
    //채팅
-    public MarketChatRoomVO selectChatRoom(Map<String,Object> map);//특정 채팅방의 정보 조회
+    public MarketChatRoomVO selectChatRoom(Map<String,Object> map);//존재한 채팅방의 번호 조회
     public	int selectChatRoomCheck(Map<String,Object> map); //사용자가 구매자일 경우 채팅방 유무 조회
     public List<MarketChatRoomVO> selectChatRoomList(int mem_num); //사용자의 전체 채팅방 조회
+    public	MarketChatRoomVO selectChatRoomDetail(int chatRoom_num); //선택된 채팅방의 상품정보 구하기
     public void insertChatRoom(MarketChatRoomVO chatRoomVO); //채팅방 생성
  
 

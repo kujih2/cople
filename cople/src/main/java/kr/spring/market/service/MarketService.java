@@ -22,10 +22,10 @@ public interface MarketService {
 	    public	int selectChatRoomCheck(Map<String,Object> map); //사용자가 구매자일 경우 채팅방 유무 조회
 	    public List<MarketChatRoomVO> selectChatRoomList(int mem_num); //사용자의 전체 채팅방 조회
 	    public void insertChatRoom(MarketChatRoomVO chatRoomVO); //채팅방 생성
+	    public	MarketChatRoomVO selectChatRoomDetail(int chatRoom_num); //선택된 채팅방의 상품정보 구하기
 	 
 
 	  	public void insertChat(MarketChatVO chatVO);//채팅 메시지 등록
-	  	public List<MarketVO> selectChatDetail(Map<String,Integer> map);//채팅 메시지 읽기
-	  	public void updateChatRead(Map<String,Integer> map);//읽은 채팅은 읽음으로 바꾸기
+	  	public List<MarketChatVO> selectChatDetail(Map<String,Integer> map);//채팅 메시지 읽기
 	  	
 }

@@ -19,5 +19,6 @@ public class MarketChatRoomVO {
 	private Integer buyer_num;
 	private String buyer_id;
 	private String buyer_nickname;
+	private int product_sale;
 
 }
