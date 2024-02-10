@@ -207,12 +207,12 @@
 			<span></span><br>
 			<input class="register-input" type="hidden" name="certification" id="certification">
 			<div class="multiple-choice">
-				<div data-index="0">없음</div>
-				<div data-index="1">정보처리기사(필기)</div>
-				<div data-index="2">정보처리기사(실기)</div>
-				<div data-index="3">SQLD</div>
-				<div data-index="4">AWS</div>
-				<div data-index="5">기타</div>
+				<div class="non-multiple" data-index="0">없음</div>
+				<div class="allow-multiple" data-index="1">정보처리기사(필기)</div>
+				<div class="allow-multiple" data-index="2">정보처리기사(실기)</div>
+				<div class="allow-multiple" data-index="3">SQLD</div>
+				<div class="allow-multiple" data-index="4">AWS</div>
+				<div class="allow-multiple" data-index="5">기타</div>
 			</div>
 
 			<label for="location">취업회사 지역</label>

@@ -170,10 +170,31 @@ $(document).ready(function() {
 		$(this).css("color","white");
 		$(this).parent().prev().val($(this).data('index'))
 	});
-	$('.multiple-choice div').click(function(){
+	$('.allow-multiple').click(function(){
 		if($(this).hasClass('chosen-box')){
 			$(this).removeClass('chosen-box')
 		}else{
+			$(this).addClass('chosen-box');
+			$('.non-multiple').removeClass('chosen-box');
+		}
+		var chosenBoxes = $('.chosen-box');
+		var totalChosen = '';
+		$(this).parent().prev().val('');
+		for(var i = 0; i< chosenBoxes.length; i++){
+			if(i==0){
+				totalChosen += $(chosenBoxes[i]).data('index');
+			}else{
+				totalChosen += ","+$(chosenBoxes[i]).data('index');
+			
+			}
+		}
+			$(this).parent().prev().val(totalChosen);
+	});
+	$('.non-multiple').click(function(){
+		if($(this).hasClass('chosen-box')){
+			$(this).removeClass('chosen-box')
+		}else{
+			$('.allow-multiple').removeClass('chosen-box');
 			$(this).addClass('chosen-box');
 		}
 		var chosenBoxes = $('.chosen-box');
