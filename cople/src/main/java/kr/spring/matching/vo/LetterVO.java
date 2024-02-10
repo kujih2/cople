@@ -25,4 +25,6 @@ public class LetterVO {
 	int receive_del;
 	String letter_ip;
 	String letter_status;
+	
+	String id;
 }

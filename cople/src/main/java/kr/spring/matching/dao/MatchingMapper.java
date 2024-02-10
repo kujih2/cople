@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.matching.vo.AdviceVO;
 import kr.spring.matching.vo.EmpVO;
@@ -27,7 +28,23 @@ public interface MatchingMapper {
 	
 	//쪽지기능
 	public void insertLetter(LetterVO letterVO);
-	
+	public List<LetterVO> selectReceivedLetter(Map<String,Object> map);
+	public List<LetterVO> selectSentLetter(Map<String,Object> map);
+	@Select("SELECT * FROM letter WHERE letter_num=#{letter_num}")
+	public LetterVO selectLetter(int letter_num);
+	@Select("SELECT COUNT(*) FROM letter WHERE receiver=#{mem_nmm}")
+	public int receivedLetterCount(int mem_num);
+	@Update("UPDATE letter SET date_read= CASE WHEN date_read IS NULL THEN SYSDATE ELSE date_read END WHERE letter_num=#{letter_num}")
+	public void readLetter(int letter_num);
+	@Select("SELECT COUNT(*) FROM letter WHERE sender=#{mem_nmm}")
+	public int sentLetterCount(int mem_num);
 	//첨삭기능
 	public void insertAdvice(AdviceVO adviceVO);
+	public List<AdviceVO> selectReceivedAdvice(Map<String,Object> map);
+	public List<AdviceVO> selectSentAdvice(Map<String,Object> map);
+	public AdviceVO selectAdvice(int advice_num);
+	@Select("SELECT COUNT(*) FROM advice WHERE receiver=#{mem_nmm}")	
+	public int receivedAdviceCount(int mem_num);
+	@Select("SELECT COUNT(*) FROM advice WHERE sender=#{mem_nmm}")	
+	public int sentAdviceCount(int mem_num);
 }
