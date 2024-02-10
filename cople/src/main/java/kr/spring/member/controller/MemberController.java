@@ -115,7 +115,7 @@ public class MemberController {
 				log.debug("<<au_id>> : " + member.getAu_id());
 				
 			
-					return "redirect:/main/main";
+					return "redirect:/main/main2";
 				
 			}
 			//인증 실패
@@ -140,7 +140,7 @@ public class MemberController {
 		//로그아웃
 		session.invalidate();
 		
-		return "redirect:/main/main";
+		return "redirect:/main/main2";
 	}
 	
 	/*==============================

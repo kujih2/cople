@@ -6,7 +6,7 @@
 
 <div id="header">
 	<div id="header_nav_logo">
-			<a href="${pageContext.request.contextPath}/main/main">
+			<a href="${pageContext.request.contextPath}/main/main2">
 				<span style="display:none;">Coding hub</span>
 				<img id="logo" src="${pageContext.request.contextPath}/images/logo.png" alt="CodingHub Logo">
 			</a>

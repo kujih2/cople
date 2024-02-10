@@ -27,8 +27,8 @@
 
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/sub.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/header.css">
-
 <!-- fullcalendar CDN -->
  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
 

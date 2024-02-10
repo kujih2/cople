@@ -123,9 +123,9 @@ form#register_form{
 }
 .file-list{
 	position:absolute;
-	margin-left:120px;
-	margin-top:-80px;
-	width:280px;
+	margin-left:0;
+	margin-top:0;
+	width:max-content;
 }
 .file-list .pr-image{
 	margin-left:8px;
@@ -135,21 +135,7 @@ form#register_form{
 	float:left;
 	margin-left:10px;
 }
-.delete-button{
-	position:absolute;
-	margin-top:-55px;
-	margin-left:55px;
-	width:18px;
-	height:20px;
-	background-color:black;
-	color:white;
-	font-size:16px;
-	text-align:center;
-	padding-top:-5px;
-	font-weight:bold;
-	border-radius:3px;
-	cursor:pointer;
-}
+
 .valid-message{
 	color:red;
 }
@@ -166,14 +152,7 @@ form#register_form{
 }
 /* 장터 목록
 -------------------------*/
-#market_keyword{
-	width:400px;
-	height:40px;
-	border-radius:5px;
-	text-align:center;
-	border:3px solid gray;
-	margin-right:15px;
-}
+
 .market-search{
 	width:80px;	
 }
