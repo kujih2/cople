@@ -5,194 +5,266 @@
 
 <div id="main_content">
 	<h2 class="align-center">CodingHub에 오신것을 환영합니다!</h2>
-	<form action="registerUser2" id="member_register_auth_index">
-		<input type="hidden" name="auth_index" value="${auth_index}">
-	</form>
-	<form:form action="registerUser2" id="member_register" modelAttribute="memberVO">
-		<form:errors element="div" cssClass="error-color" />
-			<div class="text-between-lines">
-			  <span class="line"></span>
-			  회원가입에 필요한 기본정보를 입력해주세요
-			  <span class="line"></span>
-			</div><br>
-			
-			<form:label path="id">아이디</form:label>
-			<input type="button" id="confirmId" value="ID중복체크" class="default-btn">
-			<span id="message_id"></span><br>
-			<form:input path="id" placeholder="영문,숫자만 4~12자" autocomplete="off" /><br>
-			<form:errors path="id" cssClass="error-color" />
-					
-					
-			<form:label path="name">이름</form:label><br>
-			<form:input path="name"/><br>
-			<form:errors path="name" cssClass="error-color" />
-			
-			<form:label path="nick_name">닉네임</form:label><br>
-			<form:input	path="nick_name" /><br>
-			
-			<form:label path="passwd">비밀번호</form:label><br>
-			<form:password path="passwd" placeholder="영문,숫자만 4~12자" /><br>
-			<form:errors path="passwd" cssClass="error-color" />
-			
-			<form:label path="phone">전화번호</form:label><br>
-			<form:input path="phone" /><br>
-			<form:errors path="phone" cssClass="error-color" />
-			
-			<form:label path="email">이메일</form:label><br>
-			<form:input path="email" /><br>
-			<form:errors path="email" cssClass="error-color" />
-			
-			
-			<form:label path="birth">생년월일</form:label><br>
-			<form:input path="birth" /> <form:errors path="birth" cssClass="error-color" /><br>
-			
-			<form:label path="zipcode">우편번호</form:label>
-			<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="default-btn" id="zipcode_btn"><br>
-			<form:input path="zipcode" /><br>
-			<form:errors path="zipcode" cssClass="error-color" />
-			
-			<form:label path="address1">주소</form:label><br>
-			<form:input path="address1" /><br>
-			<form:errors path="address1" cssClass="error-color" />
-			
-			<form:label path="address2">상세주소</form:label><br>
-			<form:input path="address2" /><br>
-			<form:errors path="address2" cssClass="error-color" />
-			
-			<form:label path="gender">성별</form:label><br>
-			<input type="radio" name="gender" value="1">남자
-			<input type="radio" name="gender" value="2">여자<br>
-			
-			<form:label path="push">알림수신여부</form:label><br>
-			<input type="radio" name="push" value="1">예
-			<input type="radio" name="push" value="2">아니오<br>
-			
-			<form:label path="certify_photo_name">
-			<c:if test="${auth_index==1}">수강생 인증사진</c:if>
-			<c:if test="${auth_index==2}">수강생 인증사진</c:if>
-			<c:if test="${auth_index==3}">현직자 인증사진</c:if>
-			</form:label><br>
-			<input type="file" name="certify_photo_name" id="certify_photo_name"><br>
 
-	</form:form>
+	<form action="registerUser1" id="member_register" enctype="multipart/form-data">
+		<input type="hidden" name="auth_index" value="${auth_index}">
+		<div class="text-between-lines">
+			<span class="line"></span>
+				회원가입에 필요한 기본정보를 입력해주세요
+			<span class="line"></span>
+		</div><br>
+			
+		<label for="id">아이디</label>
+		<span id="message_id"></span><br>
+		<input class="register-input" type="text" placeholder="영문,숫자만 4~12자" autocomplete="off" id="id" name="id" /><br>
+		
+					
+					
+		<label for="name">이름</label>
+		<span></span><br>
+		<input class="register-input" type="text" id="name" name="name"/><br>
+			
+		<label for="nick_name">닉네임</label>
+		<span></span><br>
+		<input class="register-input" type="text" id="nick_name" name="nick_name"/><br>
+			
+		<label for="passwd">비밀번호</label>
+		<span></span><br>
+		<input class="register-input" type="password" id="passwd" placeholder="영문,숫자만 4~12자" name="passwd"/><br>
+		
+		<label for="phone">전화번호</label>
+		<span></span><br>
+		<input class="register-input" type="text" id="phone" name="phone"/><br>
+			
+		<label for="email">이메일</label>
+		<span></span><br>
+		<input class="register-input" type="text" id="email" name="email"/><br>
+			
+			
+		<label for="birth">생년월일</label>
+		<span></span><br>
+		<input class="register-input" type="text" id="birth" name="birth"/><br>
+			
+		<label for="zipcode">우편번호</label>
+		<span></span>
+		<input class="register-input" type="text" id="zipcode" name="zipcode"/><br>
+			
+		<label for="address1">주소</label>
+		<span></span><br>
+		<input class="register-input" type="text" id="address1" name="address1"/><br>
+			
+		<label for="address2">상세주소</label>
+		<span></span><br>
+		<input class="register-input" type="text" id="address2" name="address2"/><br>
+			
+		<label for="gender">성별</label>
+		<span></span><br>
+		<input class="register-input" type="hidden" name="gender" id="gender">
+		<div class="select-box">
+			<div data-index="M">남자</div>
+			<div data-index="F">여자</div>
+		</div>
+			
+		<label for="push">알림수신여부</label>
+		<span></span><br>
+		<input class="register-input" type="hidden" name="push" id="push">
+		<div class="select-box">
+			<div data-index="Y">예</div>
+			<div data-index="N">아니오</div>
+		</div>
+			
+		<label for="certify_photo_name">
+		<c:if test="${auth_index==1}">수강생 인증사진</c:if>
+		<c:if test="${auth_index==2}">수강생 인증사진</c:if>
+		<c:if test="${auth_index==3}">강사 인증사진</c:if>
+		</label>
+		<span></span><br>
+		<div class="file-select-container" id="file-select-container1">
+			<div class="file-select" id="file-select1">파일 선택</div>
+			<div class="uploaded-file" id="uploaded_file1">선택된 파일이 없습니다.</div>
+		</div>
+		<input type="file" name="uploaded_certify_photo" id="uploaded_certify_photo" style="display:none;"><br>
+
+	</form>
 	<c:if test="${auth_index==2}">
 
-		<form action="empInsert" method="post" enctype="multipart/form-data">
+		<form action="registerUser2" method="post" enctype="multipart/form-data" id="emp_register">
+			<input type="hidden" name="auth_index" value="${auth_index}">		
+			<input type="hidden" name="mem_num" id="mem_num">
 			<div class="text-between-lines">
 			  <span class="line"></span>
 			  취업 정보를 입력해주세요
 			  <span class="line"></span>
 			</div><br>
 			
-			<label for="comsize">회사규모</label><br>
-			<input type="radio" id="comsize" name="comsize" value="스타트업">스타트업
-			<input type="radio" id="comsize" name="comsize" value="중소">중소
-			<input type="radio" id="comsize" name="comsize" value="중견">중견
-			<input type="radio" id="comsize" name="comsize" value="대기업">대기업<br>
+			<label for="comsize">회사규모</label>
+			<span></span><br>
+			<input class="register-input" type="hidden" name="comsize" id="comsize">
+			<div class="select-box">
+				<div data-index="스타트업">스타트업</div>
+				<div data-index="중소">중소</div>
+				<div data-index="중견">중견</div>
+				<div data-index="대기업">대기업</div>
+			</div>
+
 			
-			<label for="compeople_status">기업인력규모</label><br>
-			<input type="radio" id="compeople" name="compeople" value="5~10인">5~10인
-			<input type="radio" id="compeople" name="compeople" value="10~30인">10~30인
-			<input type="radio" id="compeople" name="compeople" value="30~50인">30~50인
-			<input type="radio" id="compeople" name="compeople" value="50~100인">50~100인
-			<input type="radio" id="compeople" name="compeople" value="100인 이상">100인 이상<br>
+			<label for="compeople">기업인력규모</label>
+			<span></span><br>
+			<input class="register-input" type="hidden" name="compeople" id="compeople">
+			<div class="select-box">
+				<div data-index="5~10인">5~10인</div>
+				<div data-index="10~30인">10~30인</div>
+				<div data-index="30~50인">30~50인</div>
+				<div data-index="50~100인">50~100인</div>
+			</div>
+			<label for="field">지원분야</label>
+			<span></span><br>
+			<input class="register-input" type="hidden" name="field" id="field">
+			<div class="select-box">
+				<div data-index="0">SI</div>
+				<div data-index="1">SM</div>
+				<div data-index="2">솔루션</div>
+				<div data-index="3">서비스</div>
+				<div data-index="4">기타</div>
+				<div data-index="5">기타(非IT)</div>
+			</div>
 
-			<label for="field_status">지원분야</label><br>
-			<input type="radio" id="field" name="field" value="0">SI 
-			<input type="radio" id="field" name="field" value="1">SM
-			<input type="radio" id="field" name="field" value="2">솔루션
-			<input type="radio" id="field" name="field" value="3">서비스
-			<input type="radio" id="field" name="field" value="4">기타
-			<input type="radio" id="field" name="field"	value="5">기타(非IT)<br>
-
-			<label for="role_status">직무</label><br>
-			<input type="radio" id="role" name="role" value="0">백엔드
-			<input type="radio" id="role" name="role" value="1">프론트엔드
-			<input type="radio" id="role" name="role" value="2">풀스택
-			<input type="radio" id="role" name="role" value="3">데브옵스
-			<input type="radio" id="role" name="role" value="4">임베디드
-			<input type="radio" id="role" name="role" value="5">DBA
-			<input type="radio" id="role" name="role" value="6">기타<br>
+			<label for="role">직무</label>
+			<span></span><br>
+			<input class="register-input" type="hidden" name="role" id="role">
+			<div class="select-box">
+				<div data-index="0">백엔드</div>
+				<div data-index="1">프론트엔드</div>
+				<div data-index="2">풀스택</div>
+				<div data-index="3">데브옵스</div>
+				<div data-index="4">임베디드</div>
+				<div data-index="5">DBA</div>
+				<div data-index="6">기타</div>
+			</div>
 				
-			<label for="career_status">지원형태</label><br>
-			<input type="radio" id="career" name="career" value="신입">신입
-			<input type="radio" id="career"	name="career" value="중고신입">중고신입
-			<input type="radio" id="career" name="career" value="기타">기타<br>
-			
-			<label for="salary_status">연봉</label>
-			<select id="salary_status" name="salary_status">
-				<option value="0">공개</option>
-				<option value="1">비공개</option>
-			</select><br>
-			
-			<input type="radio" id="salary" name="salary" value="0">~2,600만원
-			<input type="radio" id="salary" name="salary" value="1">2,600~3,000만원
-			<input type="radio" id="salary" name="salary" value="2">3,000~3,400만원
-			<input type="radio" id="salary" name="salary" value="3">3,400~3,800만원
-			<input type="radio" id="salary" name="salary" value="4">3,800~4,200만원
-			<input type="radio" id="salary" name="salary" value="5">4,200만원~<br>
-			
-			<label for="periodtime_status">수료 후 준비기간</label><br>
-			<input type="radio" id="periodtime" name="periodtime" value="0">수료 전
-			<input type="radio" id="periodtime" name="periodtime" value="1">수료 후 1개월 이내
-			<input type="radio" id="periodtime" name="periodtime" value="2">수료 후 1개월~3개월
-			<input type="radio" id="periodtime" name="periodtime" value="3">수료 후 3개월~6개월
-			<input type="radio" id="periodtime" name="periodtime" value="4">수료 후 6개월~1년
-			<input type="radio" id="periodtime" name="periodtime" value="5">수료 후 1년~<br>
-			
-			<label for="edcation_status">학력</label><br>
-			<input type="radio" id="education" name="education" value="0">~고졸
-			<input type="radio" id="education" name="education" value="1">전문대졸
-			<input type="radio" id="education" name="education" value="2">대학교졸(수도권) *졸업예정포함
-			<input type="radio" id="education" name="education" value="3">대학교졸(비수도권)
-			<input type="radio" id="education" name="education" value="4">대학원
-			<input type="radio" id="education" name="education" value="5">기타<br>
-			
-			<label for="major_status">전공 유무</label><br>
-			<input type="radio" id="major" name="major" value="전공">전공
-			<input type="radio" id="major" name="major" value="비전공">비전공<br>
-			
-			<label for="certification_status">취업 당시 보유 자격증</label><br>
-			<input type="checkbox" id="certification" name="certification" value="0">없음
-			<input type="checkbox" id="certification" name="certification" value="1">정보처리기사(필기)
-			<input type="checkbox" id="certification" name="certification" value="2">정보처리기사(실기)
-			<input type="checkbox" id="certification" name="certification" value="3">SQLD
-			<input type="checkbox" id="certification" name="certification" value="4">AWS
-			<input type="checkbox" id="certification" name="certification" value="5">기타<br>
+			<label for="career">지원형태</label>
+			<span></span><br>
+			<input class="register-input" type="hidden" name="career" id="career">
+			<div class="select-box">
+				<div data-index="신입">신입</div>
+				<div data-index="중고신입">중고신입</div>
+				<div data-index="기타">기타</div>
+			</div>
 
-			<label for="location_status">취업회사 지역</label><br>
-			<input type="radio" id="location" name="location" value="0">구로/가산 디지털단지
-			<input type="radio" id="location" name="location" value="1">강남
-			<input type="radio" id="location" name="location" value="2">판교
-			<input type="radio" id="location" name="location" value="3">DMC(상암)
-			<input type="radio" id="location" name="location" value="4">영등포
-			<input type="radio" id="location" name="location" value="5">시청,종로
-			<input type="radio" id="location" name="location" value="6">기타<br>
+			
+			<label for="salary_status">연봉 공개 여부</label>
+			<span></span>
+			<input class="register-input" type="hidden" name="salary_status" id="salary_status">
+			<div class="select-box">
+				<div data-index="0">공개</div>
+				<div data-index="1">비공개</div>
+			</div>
+			<label for="salary">연봉(만원)</label>
+			<span></span>
+			<input class="register-input" type="hidden" name="salary" id="salary">
+			<div class="select-box">
+				<div data-index="0">~2,600</div>
+				<div data-index="1">2,600~3,000</div>
+				<div data-index="2">3,000~3,400</div>
+				<div data-index="3">3,400~3,800</div>
+				<div data-index="4">3,800~4,200</div>
+				<div data-index="5">4,200~</div>
+			</div>
+			
+			<label for="periodtime">수료 후 준비기간</label>
+			<span></span><br>
+			<input class="register-input" type="hidden" name="periodtime" id="periodtime">
+			<div class="select-box">
+				<div data-index="0">수료 전</div>
+				<div data-index="1">1개월 이내</div>
+				<div data-index="2">1~3개월</div>
+				<div data-index="3">3~6개월</div>
+				<div data-index="4">6~12개월</div>
+				<div data-index="5">12개월 이상</div>
+			</div>
+			
+			<label for="education">학력(*졸업예정 포함)</label>
+			<span></span><br>
+			<input class="register-input" type="hidden" name="education" id="education">
+			<div class="select-box">
+				<div data-index="0">~고졸</div>
+				<div data-index="1">전문대졸</div>
+				<div data-index="2">대졸(수도권)</div>
+				<div data-index="3">대졸(지방)</div>
+				<div data-index="4">대학원</div>
+				<div data-index="5">기타</div>
+			</div>
+			
+			<label for="major">전공 유무</label>
+			<span></span><br>
+			<input class="register-input" type="hidden" name="major" id="major">
+			<div class="select-box">
+				<div data-index="전공">전공</div>
+				<div data-index="비전공">비전공</div>
+			</div>
+			
+			<label for="certification">취업 당시 보유 자격증</label>
+			<span></span><br>
+			<input class="register-input" type="hidden" name="certification" id="certification">
+			<div class="multiple-choice">
+				<div data-index="0">없음</div>
+				<div data-index="1">정보처리기사(필기)</div>
+				<div data-index="2">정보처리기사(실기)</div>
+				<div data-index="3">SQLD</div>
+				<div data-index="4">AWS</div>
+				<div data-index="5">기타</div>
+			</div>
+
+			<label for="location">취업회사 지역</label>
+			<span></span><br>
+			<input class="register-input" type="hidden" name="location" id="location">
+			<div class="select-box">
+				<div data-index="0">구로/가산<br>디지털단지</div>
+				<div data-index="1">강남</div>
+				<div data-index="2">판교</div>
+				<div data-index="3">DMC(상암)</div>
+				<div data-index="4">영등포</div>
+				<div data-index="5">시청,종로</div>
+				<div data-index="6">기타</div>
+			</div>
+
 				
-			<label for="location_status">지도에서 선택하기</label> <br>
+			<label for="location_status">지도에서 선택하기</label>
+			<span></span><br>
 				<div class="map_wrap">
-					<div id="map" style="width: 430px; height: 270px; position: relative; overflow: hidden;"></div>
-					<p>지도에서 회사의 <b>대략적인</b> 위치를 클릭해주세요!</p>
+					<div id="map" style="width: 100%; height: 300px; position: relative; overflow: hidden;"></div>
 					<div class="hAddr">
+						<span class="title" style="display:none;">지도중심기준 행정동 주소정보</span>
+        				<span id="centerAddr" style="display:none;"></span>
 					</div>
 					<input type="hidden" id="location_api" name="location_api" value="">
 					<input type="hidden" id="location_api_lat" name="location_api_lat" value="">
 					<input type="hidden" id="location_api_lng" name="location_api_lng" value="">
 				</div>
+				<br>
+			<label for="workstart_status">취업일시</label>
+			<span></span><br>
+			<div id="workstart_container">
+				<input type="month" id="workstart" name="workstart" value=""><br>
+				<input class="register-input" type="hidden" name="workstart_status" id="workstart_status">
+				<div class="select-box" id="workstart_box">
+					<div data-index="0">공개</div>
+					<div data-index="1">비공개</div>
+				</div>
+			</div>
 			
-			<label for="workstart_status">취업일시</label> <br>
-			<select id="workstart_status" name="workstart_status">
-					<option value="0">공개</option>
-					<option value="1">비공개</option>
-			</select> <br>
-			<input type="month" id="workstart" name="workstart" value="취업일시"><br>
-			
-			<label for="filename">합격인증</label> <br>
-			최종합격 문자/메일 혹은 명함을 첨부해주세요!
-			<input type="file" id="upload" name="upload"><br>
+			<label for="filename">합격인증</label>
+			<span></span><br>
+			<span id="certify_instructor">최종합격 문자/메일 혹은 명함을 첨부해주세요!</span>
+		<div class="file-select-container" id="file-select-container2">
+			<div class="file-select">파일 선택</div>
+			<div class="uploaded-file" id="uploaded_file2">선택된 파일이 없습니다.</div>
+		</div>
+			<input type="file" id="upload" name="upload" style="display:none;"><br>
 				
-			<label for="advice">후배 쌍용인들에게 조언 한 마디!</label><br>
-			<textarea cols="50" rows="5" id="advice" name="advice"></textarea>
+			<label for="advice">후배 쌍용인들에게 조언 한 마디!</label>
+			<span></span><br>
+			<input type="text" id="advice" name="advice">
 				
 		</form>
 

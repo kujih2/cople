@@ -4,5 +4,5 @@ import kr.spring.member.vo.MemberVO;
 
 public interface MemberService2 {
 	//회원관리 사용자
-	public void insertMember(MemberVO member);
+	public MemberVO insertMember(MemberVO member);
 }

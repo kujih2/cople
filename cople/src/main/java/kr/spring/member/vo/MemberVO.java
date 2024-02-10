@@ -49,6 +49,7 @@ public class MemberVO {
 	private byte[] photo;
 	private String photo_name;
 	private String certify_photo_name;
+	private MultipartFile uploaded_certify_photo;
 	private int market_score;
 	private Date reg_date;
 	private Date modify_date;

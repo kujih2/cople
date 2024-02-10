@@ -27,7 +27,7 @@
 		   #{address1},
 		   #{address2},
 		   #{push},
-		   #{certify_photo_name}
+		   #{certify_photo_name,jdbcType=VARCHAR}
 		   )   
 	</insert>
 </mapper>

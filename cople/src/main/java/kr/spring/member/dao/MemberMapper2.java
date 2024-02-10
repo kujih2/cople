@@ -9,7 +9,7 @@ import kr.spring.member.vo.MemberVO;
 public interface MemberMapper2 {
 	@Select("SELECT member_seq.nextval FROM dual")
 	public int selectMem_num();
-	@Insert("INSERT INTO member (mem_num,id,nick_name) VALUES (#{mem_num},#{id},#{nick_name})")
+	@Insert("INSERT INTO member (mem_num,id,nick_name,auth) VALUES (#{mem_num},#{id},#{nick_name},5)")
 	public void insertMember(MemberVO member);
 	public void insertMember_detail(MemberVO member);
 }
