@@ -15,14 +15,13 @@
 </head>
 <body>
 <div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+    <div id="map" style="width:100%;height:80%;position:relative;overflow:hidden; margin-top:10px;"></div>
     <div class="hAddr">
         <span class="title">지도중심기준 행정동 주소정보</span>
         <span id="centerAddr"></span>
     </div>
     <div style="margin-top:20px; text-align:center;">
     	<span><b>선택한 곳의 상세 장소명을 입력해주세요.</b><small> 예)강남역 1번출구,교보타워 앞</small></span><br>
-    	
 		<input type="text" name="detail" id="detail"> 
 		<input type="button" value="등록" id="submit_btn">  
 		<input type="button" value="취소" id="reset_btn">  

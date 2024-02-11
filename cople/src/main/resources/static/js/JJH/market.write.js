@@ -46,7 +46,7 @@ var count = 0;
 				//console.log("check fileNo:", fileNo);
 				// 목록 추가
            		 let htmlData = '';
-            	 htmlData += '<li id="photo' + fileNo + '" class="filebox">';
+            	 htmlData += '<li id="photo' + fileNo + '" class="filebox" style="display: inline-block;">';
                  htmlData += '<input type="hidden" name="fileName'+ count +'" value="'+ file +'">' ;
 			     htmlData += '<img width="50" height="50" class="pr-photo' + fileNo + ' pr-image" > <button type="button" style="background-color: rgb(25, 25, 25);" class="delete-button" data-num="'+fileNo+'" >x</div>';
                  htmlData += '</div>';

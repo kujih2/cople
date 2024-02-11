@@ -23,6 +23,7 @@
 	</div>
 </div>
 </body>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/main.css">
 <script type="module" src="${pageContext.request.contextPath}/js/LKW/index.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/door1.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/sub.css">

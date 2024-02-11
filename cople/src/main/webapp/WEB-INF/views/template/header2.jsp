@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/main.css">
+<div id="__next">
+
 <!-- 상단시작 -->
 	<header class="sticky top-0 z-20 flex h-16 items-center border-b border-b-gray-500/30 bg-white py-5 text-sm font-medium leading-6 dark:border-b-gray-500/70 dark:bg-gray-800" data-headlessui-state="">
 		<nav aria-label="Global" class="mx-auto flex w-full max-w-7xl px-4 lg:px-0">
@@ -92,5 +94,5 @@
 				</div>
 			</nav>
 		</header>
-
+</div>
 <!-- 상단끝 -->
