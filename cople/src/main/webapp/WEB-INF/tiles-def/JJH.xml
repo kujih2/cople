@@ -10,11 +10,10 @@
 	     <put-attribute name="header" value="/WEB-INF/views/template/header2.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/market/marketList2.jsp"/>    	
     </definition>
-    <definition name="marketWrite" template="/WEB-INF/views/market2/layout_marketWrite.jsp">
+     <definition name="marketWrite" extends="main2">
 	    <put-attribute name="title" value="글쓰기"/>
-	    <put-attribute name="header" value="/WEB-INF/views/template/header2.jsp"/>
-	    <put-attribute name="nav" value="/WEB-INF/views/market2/marketWriteNav.jsp"/>
-    	<put-attribute name="body" value="/WEB-INF/views/market/marketWrite2.jsp"/>   
+	     <put-attribute name="css" value="/WEB-INF/views/market/marketCSS.jsp"/> 	
+    	<put-attribute name="body" value="/WEB-INF/views/market/marketWrite.jsp"/>   
     </definition>
     <definition name="marketDetail" extends="main2">
 	    <put-attribute name="title" value="글 상세"/>

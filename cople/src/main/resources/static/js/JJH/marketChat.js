@@ -5,7 +5,7 @@ $(function(){
 		var chatRoomNum = $(this).find('.chatRoomNum').val();;
 		$('#chatRoom_num').val(chatRoomNum);
 		
-		selectMsg();
+		connectWebSocket();//웹소켓 생성
 
 		
 });
@@ -55,7 +55,7 @@ $(function(){
 			success:function(param){
 				if(param.result == 'logout'){
 					alert('로그인 후 사용하세요!');
-					
+					message_socket.close();
 				}else if(param.result == 'success'){
 					
 					//메시지 표시 UI 초기화
@@ -111,13 +111,13 @@ $(function(){
 					});
 				}else{
 					alert('채팅 메시지 읽기 오류 발생');
-					
+					message_socket.close();
 				
 				}
 			},
 			error:function(){
 				alert('네트워크 오류 발생');
-				
+				message_socket.close();
 				
 			}
 		});
@@ -153,15 +153,15 @@ $(function(){
 			success:function(param){
 				if(param.result == 'logout'){
 					alert('로그인해야 작성할 수 있습니다.');
-					
+					message_socket.close();
 				}else if(param.result == 'success'){
 					//폼 초기화
 					$('#message').val('').focus();
 					//메시지가 저장되었다고 소켓에 신호를 보냄
-					
+					message_socket.send('msg:');
 				}else{
 					alert('채팅 메시지 등록 오류');
-					
+					message_socket.close();
 				}
 			},
 			error:function(){
