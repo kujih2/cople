@@ -22,7 +22,37 @@
 </div>
 </body>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/sub.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/HJW/market.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/JJH/market.write.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.category0').click(function(){
+		$('#category').val(0);
+		$(this).css({"font-weight": "bold", "color": "black"});
+		$('.category1').css({"font-weight": "normal", "color": "gray"});
+		$('#search_form').submit();
+	});
+	$('.category1').click(function(){
+		$('#category').val(1);
+		$(this).css({"font-weight": "bold", "color": "black"});
+		$('.category0').css({"font-weight": "normal", "color": "gray"});
+		$('#search_form').submit();
+	});
+	
+	$('.list-box:gt(3)').each(function(index) {
+	      $(this).after('<br>');
+	    });
+	//검색 유효성 체크
+	$('#submit-btn').click(function(){
+		if($('#market_keyword').val().trim()==''){
+			alert('검색어를 입력하세요!');
+			$('#market_keyword').val('').focus();
+			return false;
+		}
+		$('#search_form').submit();
+	});//end of submit
+	
+});
+</script>
 </html>

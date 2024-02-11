@@ -27,11 +27,11 @@
 						<div class="ProductNewstyle__Content-sc-7fge4a-7 nqDMw">
 							<ul class="sc-jKVCRD czzFIC">
 								<li class="sc-kaNhvL bgRkND">이미지 등록										
-								<form:input path="upload" type="file" accept="image/jpg, image/jpeg, image/png" class="camera-click"></form:input>								
+								<form:label path="upload" class="camera-click"><img src="${pageContext.request.contextPath}/images/camera_icon.svg" width="50"></form:label>								
 									<li class="sc-LKuAh dnaPgQ">
 										<div class="file-list"></div>
 										<input class="sc-LKuAh dnaPgQ" type="hidden" name="count" id="photo_count">
-										<input class="sc-LKuAh dnaPgQ hidden" type="file" id="upload" name="upload" class="hide" accept="image/gif,image/png,image/jpeg"  multiple>
+										<input class="sc-LKuAh dnaPgQ hidden" type="file" id="upload" name="upload" accept="image/gif,image/png,image/jpeg"  multiple>
 										<input class="sc-LKuAh dnaPgQ" type="hidden" name="count" id="photo_count">
 																						
 									</li>
