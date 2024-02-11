@@ -1,0 +1,116 @@
+@charset "UTF-8";
+*, :after, :before {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+}
+
+.sm\:flex {
+    display: flex;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.border-violet-500 {
+    --tw-border-opacity: 1;
+    border-color: rgb(134 84 246/var(--tw-border-opacity));
+}
+
+.border-3 {
+    border-width: 3px;
+}
+
+
+.rounded-2xl {
+    border-radius: 1rem;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.my-9 {
+    margin-top: 2.25rem;
+    margin-bottom: 2.25rem;
+}
+
+.relative {
+    position: relative;
+}
+
+
+.py-6{
+	padding-top:1.5rem;
+	padding-bottom:1.5rem;
+}
+.overflow-hidden {
+    overflow: hidden;
+}
+.w-full {
+    width: 100%;
+}
+.h-full {
+    height: 100%;
+}
+.relative {
+    position: relative;
+}
+
+.w-\[216px\] {
+    width: 216px;
+}
+.right-20 {
+    right: 5rem;
+}
+.-bottom-5 {
+    bottom: -1.25rem;
+}
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+
+
+
+
+
+
+/* 현직자 */
+
+.main_container__H2cvg {
+    position: relative;
+}
+.search_searchWrapper__gYQXu {
+    width: 100vw;
+    background: #f4f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.global_mainTitle__pxyIm {
+    color: #000;
+    white-space: pre-wrap;
+    font-family: SpoqaHanSansNeo,serif;
+    font-weight: 500;
+    font-size: 40px;
+    margin-bottom: 0;
+    line-height: 1.4;
+    margin-top: 100px;
+    text-align: center;
+}
+.search_searchWrapper__gYQXu .search_listWrapper__6N4FN {
+    display: flex;
+    flex-direction: row;
+}
