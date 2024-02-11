@@ -5,14 +5,12 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name="matchingMain" extends="main2">
+	<definition name="matchingMain" template="/WEB-INF/views/template/layout_matching.jsp">
 		<put-attribute name="title" value="매칭서비스" />
-		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/views/template/header2.jsp"/>
 		<put-attribute name="body"
-			value="/WEB-INF/views/matching/mmain.jsp" />
+			value="/WEB-INF/views/matching/mmain2.jsp" />
 	</definition>
-	
-	
 
 	<definition name="MyActionMain" extends="myPage3">
 		<put-attribute name="title" value="마이페이지-나의 활동" />
@@ -35,34 +33,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/letter.jsp"/>
 	</definition>
 	
-	<!-- 나의 쪽지함(보낸 쪽지함) -->
-	<definition name="MySentLetterAction" extends="myPage3">
-		<put-attribute name="title" value="나의 쪽지함" />
-		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/sentLetter.jsp"/>
-	</definition>
-	
-	<!-- 받은 쪽지 상세 -->
+	<!-- 나의 쪽지함(받은 쪽지함) -->
 	<definition name="LetterDetail" extends="myPage3">
 		<put-attribute name="title" value="쪽지읽기" />
 		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/letterDetail.jsp"/>
-	</definition>
-	
-	<!-- 보낸 쪽지 상세 -->
-	<definition name="LetterSentDetail" extends="myPage3">
-		<put-attribute name="title" value="쪽지읽기" />
-		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/letterSentDetail.jsp"/>
 	</definition>
 	
 	<!-- 나의 첨삭요청함(받은 첨삭요청함) -->
 	<definition name="MyAdviceAction" extends="myPage3">
 		<put-attribute name="title" value="나의 첨삭요청함" />
 		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/advice.jsp"/>
-	</definition>
-
-	<!-- 첨삭 상세 -->
-	<definition name="AdviceDetail" extends="myPage3">
-		<put-attribute name="title" value="쪽지읽기" />
-		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/adviceDetail.jsp"/>
 	</definition>
 
 </tiles-definitions>

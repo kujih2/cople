@@ -71,12 +71,11 @@
         background-color: #3498db; /* 배경색 설정, 원하는 색상으로 변경 가능 */
         color: #ffffff; /* 텍스트 색상 설정, 원하는 색상으로 변경 가능 */
         border-radius: 5px;
-        border: 2px solid #2980b9; /* 테두리 설정, 원하는 색상으로 변경 가능 */
         transition: background-color 0.3s, color 0.3s;
     }
 
     .chartButton:hover {
-        background-color: #2980b9; /* 마우스 호버 시 배경색 변경 */
+        background-color: #8654F6; /* 마우스 호버 시 배경색 변경 */
         color: #ffffff; /* 마우스 호버 시 텍스트 색상 변경 */
     }
     
