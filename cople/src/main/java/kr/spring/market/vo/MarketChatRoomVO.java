@@ -20,5 +20,6 @@ public class MarketChatRoomVO {
 	private String buyer_id;
 	private String buyer_nickname;
 	private int product_sale;
+	private int chat_count;
 
 }

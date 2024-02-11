@@ -26,13 +26,16 @@
 					<c:forEach var="chatList" items="${chatList}">
 						<div class="chatListBox">
 								<input type="hidden" class="chatRoomNum" value="${chatList.chatRoom_num}">
-								<span>${chatList.product_title}</span> 
-								<span>${chatList.product_price}</span>
-								<img src="${pageContext.request.contextPath}/upload/${chatList.filename0}" width="30" height="30">
-								판매자:<c:if test="${empty chatList.seller_nickname}">${chatList.seller_id}</c:if>
+								<span class="chat_title">${chatList.product_title}</span> 
+								<span class="chat_price"><fmt:formatNumber value="${chatList.product_price}" pattern="#,###" /> 원</span>
+								<br>
+								<b>판매자:</b><c:if test="${empty chatList.seller_nickname}">${chatList.seller_id}</c:if>
 									 <c:if test="${!empty chatList.seller_nickname}">${chatList.seller_nickname}</c:if>
-								구매자:<c:if test="${empty chatList.buyer_nickname}">${chatList.buyer_id}</c:if>
+								<b>구매자:</b><c:if test="${empty chatList.buyer_nickname}">${chatList.buyer_id}</c:if>
 									 <c:if test="${!empty chatList.buyer_nickname}">${chatList.buyer_nickname}</c:if>
+									 <img src="${pageContext.request.contextPath}/upload/${chatList.filename0}" width="30" height="30">
+									<div class="chat_count">${chatList.chat_count}</div>
+									<div class="chat_delete">x</div>
 								
 						</div>
 					</c:forEach>

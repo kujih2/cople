@@ -2,7 +2,7 @@ $(function(){
 	let message_socket; //웹소켓 식별자
 	
 	$('.chatListBox').click(function(){
-		var chatRoomNum = $(this).find('.chatRoomNum').val();;
+		var chatRoomNum = $(this).find('.chatRoomNum').val();
 		$('#chatRoom_num').val(chatRoomNum);
 		
 		connectWebSocket();//웹소켓 생성
@@ -62,14 +62,22 @@ $(function(){
 					$('#chatting_message').empty();
 					$('#product_detail').empty();
 						let output_product ='';
+						let saleCommit = '';
 					$(param.product_detail).each(function(index,item){
-						let product_sale = '판매중';
+						let product_sale = '';
 						if(item.product_sale==1){
-							product_sale == '판매 완료'
+							product_sale = '판매 완료';
 						}
+						else{
+							product_sale = '판매중';
+							if(item.seller_num == param.user_num){
+								saleCommit += '<div class="saleCommit">구매확정요청하기</div>';
+							}
+						}
+						
 						output_product += '<div class="product_detailBox"> <span class="title">'+item.product_title+'</span> <br>';
 						output_product +='<span class="price">'+item.product_price+' 원</span>';
-						output_product += '<div class="sale">'+product_sale+'</div>';
+						output_product += '<div class="sale">'+product_sale+'</div>'+saleCommit;
 						output_product += '<img src="/upload/'+item.filename0+'" width="70" height="70"></div>';
 						$('#product_detail').append(output_product);
 					});
@@ -97,6 +105,10 @@ $(function(){
 							}
 							output += '<div class="item">';
 							output += item.chat_readCheck + '<span>' + item.chat_message.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';
+							//구매확정요청메시지 
+							if(item.chat_saleCommit == 1 && item.mem_num != param.user_num){
+								output += '<div class="saleCommit2">구매확정</div>';
+							}
 							//시간 추출
 							output += '<div class="align-right">'+item.chat_regDate.split(' ')[1]+'</div>';
 							output += '</div>';
@@ -173,5 +185,111 @@ $(function(){
 		//기본 이벤트 제거
 		event.preventDefault();
 	});
+	
+	//판매자가 구매확정요청 버튼 클릭시
+	$(document).on('click', '.saleCommit', function(event) {
+		
+		if(confirm("구매자에게 구매확정을 요청하시겠습니까?")){
+					//서버와 통신
+				$.ajax({
+					url:'../market/saleCommitAjax',
+					type:'post',
+					data:{chatRoom_num:$('#chatRoom_num').val()},
+					dataType:'json',
+					success:function(param){
+						if(param.result == 'logout'){
+							alert('로그인해야 작성할 수 있습니다.');
+							message_socket.close();
+						}else if(param.result == 'success'){
+							//폼 초기화
+							$('#message').val('').focus();
+							//메시지가 저장되었다고 소켓에 신호를 보냄
+							message_socket.send('msg:');
+						}else{
+							alert('채팅 메시지 등록 오류');
+							message_socket.close();
+						}
+					},
+					error:function(){
+						alert('네트워크 오류');
+				
+					}
+				});	
+		//기본 이벤트 제거
+		event.preventDefault();
+		}else{
+		
+		}
+		
+	});
+	
+	
+	//판매자가 구매확정요청 버튼 클릭시
+	$(document).on('click', '.saleCommit2', function(event) {
+		
+		if(confirm("해당 상품을 구매확정 하시겠습니까?")){
+					//서버와 통신
+				$.ajax({
+					url:'../market/saleCommit2Ajax',
+					type:'post',
+					data:{chatRoom_num:$('#chatRoom_num').val()},
+					dataType:'json',
+					success:function(param){
+						if(param.result == 'logout'){
+							alert('로그인해야 작성할 수 있습니다.');
+							message_socket.close();
+						}else if(param.result == 'success'){
+							//폼 초기화
+							$('#message').val('').focus();
+							//메시지가 저장되었다고 소켓에 신호를 보냄
+							message_socket.send('msg:');
+						}else{
+							alert('채팅 메시지 등록 오류');
+							message_socket.close();
+						}
+					},
+					error:function(){
+						alert('네트워크 오류');
+				
+					}
+				});	
+		//기본 이벤트 제거
+		event.preventDefault();
+		alert('구매가 확정되었습니다.');
+		}else{
+		
+		}
+		
+	});
+	//채팅방 나가기
+	$('.chat_delete').click(function(){
+	if(confirm("채팅방을 나가시겠습니까? (해당 채팅방에서의 채팅내역이 전부 사라집니다.)")){
+		let chatRoomNum = $('.chatRoomNum').val();
+		$.ajax({
+					url:'../market/deleteChatRoom',
+					type:'post',
+					data:{chatRoom_num:chatRoomNum},
+					dataType:'json',
+					success:function(param){
+						if(param.result == 'logout'){
+							alert('로그인해야 작성할 수 있습니다.');
+							message_socket.close();
+						}else if(param.result == 'success'){
+							alert('채팅방을 나갔습니다.');
+							 window.location.href = "marketChatRoom";
+						}else{
+							alert('채팅 메시지 등록 오류');
+						}
+					},
+					error:function(){
+						alert('네트워크 오류');
+				
+					}
+				});	
+		
+	}else{
+		
+	}
+});
 	
 });

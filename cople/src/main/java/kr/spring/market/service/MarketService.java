@@ -26,6 +26,10 @@ public interface MarketService {
 	 
 
 	  	public void insertChat(MarketChatVO chatVO);//채팅 메시지 등록
+	  	public void insertCommitChat(MarketChatVO chatVO);//구매확정요청 채팅 메시지 등록
 	  	public List<MarketChatVO> selectChatDetail(Map<String,Integer> map);//채팅 메시지 읽기
+		public void updateProductSale(int product_num);//구매한 상품 판매완료로 바꾸기
+		
+		public void deleteChatRoom(int chatRoom_num); //채팅방 삭제
 	  	
 }

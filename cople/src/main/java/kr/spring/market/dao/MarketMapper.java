@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
 import kr.spring.market.vo.MarketChatRoomVO;
 import kr.spring.market.vo.MarketChatVO;
 import kr.spring.market.vo.MarketVO;
@@ -31,7 +34,14 @@ public interface MarketMapper {
 
 	
   	public void insertChat(MarketChatVO chatVO);//채팅 메시지 등록
+  	public void insertCommitChat(MarketChatVO chatVO);//구매확정요청 채팅 메시지 등록
   	public List<MarketChatVO> selectChatDetail(Map<String,Integer> map);//채팅 메시지 읽기
+  	@Select("SELECT COUNT(*) FROM market_chat WHERE chatRoom_num=#{chatRoom_num} AND mem_num != #{mem_num} AND chat_readCheck = 1")
+  	public int selectCountChat(@Param(value="chatRoom_num")int chatRooom_num,@Param(value="mem_num")int mem_num);
   	public void updateChatRead(Map<String,Integer> map);//읽은 채팅은 읽음으로 바꾸기
+  	public void updateProductSale(int product_num);//구매한 상품 판매완료로 바꾸기
+  	
+  	public void deleteChat(int chatRoom_num);
+  	public void deleteChatRoom(int chatRoom_num); //채팅방 삭제
   	
 }

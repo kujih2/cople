@@ -8,7 +8,6 @@
 	</div>
 		
 	<div id="chatting_message"></div>
-	
 	<form method="post" id="detail_form">
 		<input type="hidden" name="chatRoom_num" id="chatRoom_num"
 		                                value="${chatRoomNum}">

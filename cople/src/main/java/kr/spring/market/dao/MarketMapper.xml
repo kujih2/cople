@@ -132,11 +132,30 @@ SELECT chatroom_num,product_num,product_title,filename0,product_price,seller_num
 <select id="selectChatDetail" parameterType="integer" resultType="marketChatVO">
 SELECT * FROM market_chat WHERE chatRoom_num = #{chatRoom_num} ORDER BY chat_regDate
 </select>
+<!-- 채팅 내역 읽음 처리 -->
 <update id="updateChatRead" parameterType="integer">
 	UPDATE market_chat SET chat_readCheck = 0 WHERE chatRoom_num = #{chatRoom_num} AND mem_num != #{mem_num}
 </update>
+<!-- 채팅 추가 -->
 <insert id="insertChat" parameterType="marketChatVO">
   INSERT INTO market_chat(chat_num, chatRoom_num, mem_num, chat_message) 
   VALUES (market_chat_seq.nextval, #{chatRoom_num}, #{mem_num}, #{chat_message})
 </insert>
+<!-- 구매확정 채팅 추가 -->
+<insert id="insertCommitChat" parameterType="marketChatVO">
+  INSERT INTO market_chat(chat_num, chatRoom_num, mem_num, chat_message,chat_saleCommit) 
+  VALUES (market_chat_seq.nextval, #{chatRoom_num}, #{mem_num}, #{chat_message},#{chat_saleCommit})
+</insert>
+<!-- 판매상태 바꾸기 (판매중->판매완료) -->
+<update id="updateProductSale" parameterType="integer">
+	UPDATE market_product SET product_sale = 1 WHERE product_num = #{product_num}
+</update>
+<!--채팅내역 삭제 -->
+<delete id="deleteChat" parameterType="integer">
+	DELETE FROM market_chat WHERE chatroom_num = #{chatRoom_num}
+</delete>
+<!--채팅방 삭제 -->
+<delete id="deleteChatRoom" parameterType="integer">
+	DELETE FROM market_chatroom WHERE chatroom_num = #{chatRoom_num}
+</delete>
 </mapper>

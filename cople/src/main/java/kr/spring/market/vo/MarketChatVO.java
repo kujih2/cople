@@ -1,6 +1,5 @@
 package kr.spring.market.vo;
 
-import java.sql.Date;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,4 +17,5 @@ public class MarketChatVO {
 	private String chat_message;
 	private String chat_regDate;
 	private int chat_readCheck;
+	private int chat_saleCommit;//구매확정요청 메시지 인지 판별
 }

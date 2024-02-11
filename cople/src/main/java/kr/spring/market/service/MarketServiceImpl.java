@@ -121,7 +121,8 @@ public class MarketServiceImpl implements MarketService{
 			                each.setBuyer_nickname(member.getNick_name());
 			            	}
 			        }
-			        
+			        int chatRoom_num = each.getChatRoom_num();
+			        each.setChat_count( marketMapper.selectCountChat(chatRoom_num, mem_num));  
 				}
 		}
 		return list;
@@ -186,6 +187,25 @@ public class MarketServiceImpl implements MarketService{
 		}
 		
 		return list;
+	}
+
+	@Override
+	public void insertCommitChat(MarketChatVO chatVO) {
+		marketMapper.insertCommitChat(chatVO);
+		
+	}
+
+	@Override
+	public void updateProductSale(int product_num) {
+		marketMapper.updateProductSale(product_num);
+		
+	}
+
+	@Override
+	public void deleteChatRoom(int chatRoom_num) {
+		marketMapper.deleteChat(chatRoom_num);
+		marketMapper.deleteChatRoom(chatRoom_num);
+		
 	}
 
 	

@@ -244,7 +244,6 @@ public class MarketController {
 				int chatRoomNum = chatRoomVO.getChatRoom_num();//해당 채팅방의 채팅내역을 같이 불러오기 위한 채팅방 번호
 				list = marketService.selectChatRoomList(vo.getMem_num());//사용자의 전체 채팅 리스트
 				
-				
 				model.addAttribute("chatRoomNum", chatRoomNum);
 				model.addAttribute("chatList", list);
 				return "marketChatRoom";
@@ -315,7 +314,71 @@ public class MarketController {
 			}
 			return mapAjax;
 		}
+		//구매확정 요청 채팅 메시지 전송
+		@RequestMapping("/market/saleCommitAjax")
+		@ResponseBody
+		public Map<String,Object> chatCommitAjax(MarketChatVO vo, HttpSession session,@RequestParam int chatRoom_num){
+			
+			Map<String,Object> mapAjax = new HashMap<String,Object>();
+			
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			if(user==null) {//로그인이 되지 않은 경우
+				mapAjax.put("result", "logout");
+			}else {//로그인 된 경우
+				vo.setMem_num(user.getMem_num());
+				vo.setChatRoom_num(chatRoom_num);
+				vo.setChat_message("판매자가 구매확정을 요청합니다.버튼을 누르면 구매가 확정됩니다.");
+				vo.setChat_saleCommit(1);		
+				
+				log.debug("<<구매확정 요청 채팅 메시지 등록 >> : " + vo);
+				marketService.insertCommitChat(vo);
+				
+				mapAjax.put("result", "success");
+			}
+			return mapAjax;
+		}
 	
-	
-	
+		//구매확정 요청 채팅 메시지 전송
+				@RequestMapping("/market/saleCommit2Ajax")
+				@ResponseBody
+				public Map<String,Object> chatCommit2Ajax(MarketChatVO vo, HttpSession session,@RequestParam int chatRoom_num){
+					
+					Map<String,Object> mapAjax = new HashMap<String,Object>();
+					
+					MemberVO user = (MemberVO)session.getAttribute("user");
+					if(user==null) {//로그인이 되지 않은 경우
+						mapAjax.put("result", "logout");
+					}else {//로그인 된 경우
+						vo.setMem_num(user.getMem_num());
+						vo.setChatRoom_num(chatRoom_num);
+						vo.setChat_message("구매자가 구매를 확정했습니다.");	
+						
+						MarketChatRoomVO chatRoomVO = marketService.selectChatRoomDetail(chatRoom_num);
+						int product_num = chatRoomVO.getProduct_num();
+						
+						log.debug("<<구매확정 채팅 메시지 등록 >> : " + vo);
+						marketService.insertChat(vo);
+						//판매상태 업데이트
+						marketService.updateProductSale(product_num);
+						mapAjax.put("result", "success");
+					}
+					return mapAjax;
+				}
+     /*=================================
+      * 장터 채팅방 삭제 및 채팅 내역 삭제
+      *=================================*/
+	 @RequestMapping("/market/deleteChatRoom")
+	 @ResponseBody
+	 public Map<String,Object> deleteChatRoom(HttpSession session,@RequestParam int chatRoom_num) {
+		 Map<String,Object> mapAjax = new HashMap<String,Object>();
+			
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			if(user==null) {//로그인이 되지 않은 경우
+				mapAjax.put("result", "logout");
+			}else {//로그인 된 경우
+			     marketService.deleteChatRoom(chatRoom_num);//채팅방,채팅내역 삭제
+				mapAjax.put("result", "success");
+			}
+			return mapAjax;
+	 }
 }
