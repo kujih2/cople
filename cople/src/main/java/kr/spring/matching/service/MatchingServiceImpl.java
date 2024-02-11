@@ -3,6 +3,8 @@ package kr.spring.matching.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -109,14 +111,33 @@ public class MatchingServiceImpl implements MatchingService{
 	}
 
 	@Override
-	public LetterVO readLetter(int letter_num) {
-		matchingMapper.readLetter(letter_num);
+	public LetterVO readLetter(int letter_num, HttpSession session) {
+		
+		MemberVO receiverVO = (MemberVO)session.getAttribute("user");
+		int receiver_memnum = receiverVO.getMem_num();
+		LetterVO letter = matchingMapper.selectLetter(letter_num);
+		if(receiver_memnum==letter.getReceiver()) {
+			matchingMapper.readLetter(letter_num);
+		}
+		
 		return matchingMapper.selectLetter(letter_num);
 	}
 
 	@Override
 	public int findMemnumById(String id) {
 		return matchingMapper.findMemnumById(id);
+	}
+
+	@Override
+	public AdviceVO readAdvice(int advice_num, HttpSession session) {
+		
+		MemberVO receiverVO = (MemberVO)session.getAttribute("user");
+		int receiver_memnum = receiverVO.getMem_num();
+		AdviceVO adviceVO = matchingMapper.selectAdvice(advice_num);
+		if(receiver_memnum == adviceVO.getReceiver()) {
+			matchingMapper.readAdvice(advice_num);
+		}
+		return matchingMapper.selectAdvice(advice_num);
 	}
 	
 	

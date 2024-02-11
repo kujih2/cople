@@ -38,15 +38,21 @@ public interface MatchingMapper {
 	public void readLetter(int letter_num);
 	@Select("SELECT COUNT(*) FROM letter WHERE sender=#{mem_nmm}")
 	public int sentLetterCount(int mem_num);
+	//보낸쪽지
+	
+	
 	//첨삭기능
 	public void insertAdvice(AdviceVO adviceVO);
 	public List<AdviceVO> selectReceivedAdvice(Map<String,Object> map);
 	public List<AdviceVO> selectSentAdvice(Map<String,Object> map);
+	@Select("SELECT * FROM advice WHERE advice_num=#{advice_num}")
 	public AdviceVO selectAdvice(int advice_num);
 	@Select("SELECT COUNT(*) FROM advice WHERE receiver=#{mem_nmm}")	
 	public int receivedAdviceCount(int mem_num);
 	@Select("SELECT COUNT(*) FROM advice WHERE sender=#{mem_nmm}")	
 	public int sentAdviceCount(int mem_num);
+	@Update("UPDATE advice SET date_read= CASE WHEN date_read IS NULL THEN SYSDATE ELSE date_read END WHERE advice_num=#{advice_num}")
+	public void readAdvice(int advice_num);
 	
 	//회원기능
 	@Select("SELECT mem_num FROM member WHERE id=#{id}")

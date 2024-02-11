@@ -7,7 +7,7 @@
 	<h2 class="align-center">CodingHub에 오신것을 환영합니다!</h2>
 
 	<form action="registerUser1" id="member_register" enctype="multipart/form-data">
-		<input type="hidden" name="auth_index" value="${auth_index}">
+		<input type="hidden" name="auth_index" value="${auth_index}" id="auth_index">
 		<div class="text-between-lines">
 			<span class="line"></span>
 				회원가입에 필요한 기본정보를 입력해주세요
@@ -18,8 +18,6 @@
 		<span id="message_id"></span><br>
 		<input class="register-input" type="text" placeholder="영문,숫자만 4~12자" autocomplete="off" id="id" name="id" /><br>
 		
-					
-					
 		<label for="name">이름</label>
 		<span></span><br>
 		<input class="register-input" type="text" id="name" name="name"/><br>
@@ -106,7 +104,6 @@
 				<div data-index="중견">중견</div>
 				<div data-index="대기업">대기업</div>
 			</div>
-
 			
 			<label for="compeople">기업인력규모</label>
 			<span></span><br>
@@ -150,7 +147,6 @@
 				<div data-index="중고신입">중고신입</div>
 				<div data-index="기타">기타</div>
 			</div>
-
 			
 			<label for="salary_status">연봉 공개 여부</label>
 			<span></span>
@@ -227,7 +223,6 @@
 				<div data-index="5">시청,종로</div>
 				<div data-index="6">기타</div>
 			</div>
-
 				
 			<label for="location_status">지도에서 선택하기</label>
 			<span></span><br>
@@ -265,9 +260,7 @@
 			<label for="advice">후배 쌍용인들에게 조언 한 마디!</label>
 			<span></span><br>
 			<input type="text" id="advice" name="advice">
-				
 		</form>
-
 
 		<br>
 		<script type="text/javascript"

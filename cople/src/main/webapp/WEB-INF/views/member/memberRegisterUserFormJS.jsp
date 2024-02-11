@@ -22,6 +22,14 @@ $(document).ready(function() {
 				$('label[for="' + items[i].id + '"]').next('span').text('');
 			}
 		}
+		if(idChecked==0){
+			$('label[for="id"]').next().text('중복된 아이디 입니다.')[0].scrollIntoView();
+			return;
+		}
+		if(!/^[A-Za-z0-9]{4,12}$/.test($('#id').val())){
+			$('label[for="id"]').next().text('영문,숫자만 4~12자 입력해야합니다.')[0].scrollIntoView()
+			return;
+		}
 		if(!/^[A-Za-z0-9]{4,12}$/.test($('#passwd').val())){
 			$('label[for="passwd"]').next().text('영문,숫자만 4~12자 입력해야합니다.')[0].scrollIntoView()
 			return;
@@ -42,22 +50,27 @@ $(document).ready(function() {
 			$('label[for="certify_photo_name"]').next().text('파일을 업로드해야 합니다')[0].scrollIntoView()
 			return;
 		}
-		if($('#upload')[0].files.length==0){
-			$('label[for="filename"]').next().text('파일을 업로드해야 합니다')[0].scrollIntoView()
-			return;
+		
+		if($('#auth_index').val()==2){
+			if($('#upload')[0].files.length==0){
+				$('label[for="filename"]').next().text('파일을 업로드해야 합니다')[0].scrollIntoView()
+				return;
+			}
+			if($('#location_api').val()==''){
+				$('label[for="location_status"]').next().text('위치를 선택해야 합니다.')[0].scrollIntoView()
+				return;
+			}
+			if($('#advice').val()==''){
+				$('label[for="advice"]').next().text('한마디 해주세요!')[0].scrollIntoView()
+				return;
+			}
+			if($('#workstart').val()=== "" ){
+				$('label[for="workstart_status"]').next().text('일시를 선택해야 합니다')[0].scrollIntoView()
+				return;
+			}
 		}
-		if($('#location_api').val()==''){
-			$('label[for="location_status"]').next().text('위치를 선택해야 합니다.')[0].scrollIntoView()
-			return;
-		}
-		if($('#advice').val()==''){
-			$('label[for="advice"]').next().text('한마디 해주세요!')[0].scrollIntoView()
-			return;
-		}
-		if($('#workstart').val()=== "" ){
-			$('label[for="workstart_status"]').next().text('일시를 선택해야 합니다')[0].scrollIntoView()
-			return;
-		}
+		
+
 
 
 		
@@ -135,6 +148,7 @@ $(document).ready(function() {
 					success:function(param){
 						if(param.result == 'idNotFound'){
 							document.getElementById('message_id').textContent = ''
+							idChecked=1;
 						}else if(param.result == 'idDuplicated'){
 							document.getElementById('message_id').textContent = '중복된 ID'
 						}
