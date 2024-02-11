@@ -31,24 +31,18 @@
 	<table class="striped-table">
 		<tr>
 			<td class="align-center">보낸사람</td>
-			<td class="align-center" width="400">내용</td>
 			<td class="align-center">날짜</td>
 			<td class="align-center">읽은 날짜</td>
 		</tr>
 		<c:forEach var="advice" items="${list}">
 		<tr>
 			<td class="align-center">
-				<a href="${pageContext.request.contextPath}/myPage/adviceDetail?letter_num=${advice.advice_num}">
+				<a href="${pageContext.request.contextPath}/myPage/adviceDetail?advice_num=${advice.advice_num}">
 				${advice.id}
 				</a>
 			</td>
 			<td class="align-center">
-				<a href="${pageContext.request.contextPath}/myPage/adviceDetail?letter_num=${advice.advice_num}">
-			${advice.advice_content}
-				</a>
-			</td>
-			<td class="align-center">
-				<a href="${pageContext.request.contextPath}/myPage/adviceDetail?letter_num=${advice.advice_num}">
+				<a href="${pageContext.request.contextPath}/myPage/adviceDetail?advice_num=${advice.advice_num}">
 			${advice.date_sent}
 				</a>
 			</td>

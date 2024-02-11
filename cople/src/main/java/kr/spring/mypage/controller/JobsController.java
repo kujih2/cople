@@ -1,5 +1,6 @@
 package kr.spring.mypage.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import kr.spring.matching.vo.AdviceVO;
 import kr.spring.matching.vo.LetterVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -63,7 +65,7 @@ public class JobsController {
 	 * 
 	 * return "MyLetterAction"; }
 	 */
-	
+	//받은쪽지 리스트
 	@RequestMapping("/myPage/myLetter")
 	public ModelAndView receivedLetter(@RequestParam(value="pageNum",defaultValue="1") int currentPage, HttpSession session,
 									String keyfield, String keyword) {
@@ -98,6 +100,41 @@ public class JobsController {
 		
 		return mav;
 	}
+	//보낸쪽지 리스트
+	@RequestMapping("/myPage/myLetterSent")
+	public ModelAndView sentLetter(@RequestParam(value="pageNum",defaultValue="1") int currentPage, HttpSession session,
+									String keyfield, String keyword) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		int mem_num = user.getMem_num();
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("sender", mem_num);
+		
+		int count = matchingService.sentLetterCount(mem_num);
+		log.debug("<<letter Count >> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield, keyword, currentPage, count, 20, 10, "MyLetterAction");
+		
+		List<LetterVO> list = null;
+		if(count>0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = matchingService.selectSentLetter(map);
+			log.debug("<<LetterVO list >> : " + list);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",list);
+		mav.addObject("count",count);
+		mav.addObject("page",page.getPage());
+		mav.setViewName("MySentLetterAction");
+		
+		return mav;
+	}
 	
 	@RequestMapping("/myPage/letterDetail")
 	public String letterDetail(HttpSession session, Model model, HttpServletRequest request, int letter_num) {
@@ -112,7 +149,7 @@ public class JobsController {
 		}
 		
 		log.debug("<<LetterDetail user >> : " + user);
-			LetterVO letterVO = matchingService.readLetter(letter_num);
+			LetterVO letterVO = matchingService.readLetter(letter_num, session);
 			log.debug("<<LetterDetail letterVO >> : " + letterVO);
 			String sender = memberService.selectMember(letterVO.getSender()).getId();
 			String receiver = memberService.selectMember(letterVO.getReceiver()).getId();
@@ -127,6 +164,36 @@ public class JobsController {
 			model.addAttribute("letter_num", letter_num);
 			
 			return "LetterDetail";	
+	}
+	
+	@RequestMapping("/myPage/letterSentDetail")
+	public String letterSentDetail(HttpSession session, Model model, HttpServletRequest request, int letter_num) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user==null) {
+			model.addAttribute("message", "회원만 이용 가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/member/login");
+
+			return "matching/resultAlert";
+		}
+		
+		log.debug("<<LetterDetail user >> : " + user);
+			LetterVO letterVO = matchingService.readLetter(letter_num, session);
+			log.debug("<<LetterDetail letterVO >> : " + letterVO);
+			String sender = memberService.selectMember(letterVO.getSender()).getId();
+			String receiver = memberService.selectMember(letterVO.getReceiver()).getId();
+			log.debug("<<LetterDetail sender >> : " + sender);
+			
+			model.addAttribute("letter", letterVO);
+			model.addAttribute("sender", sender);
+			model.addAttribute("receiver", receiver);
+			log.debug("<<user.getId >> : " + user.getId());
+			String userId = user.getId();
+			model.addAttribute("userId", userId);
+			model.addAttribute("letter_num", letter_num);
+			
+			return "LetterSentDetail";	
 	}
 	
 	@GetMapping("/myPage/letterAnswer")
@@ -246,4 +313,95 @@ public class JobsController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/myPage/adviceDetail")
+	public String adviceDetail(HttpSession session, Model model, HttpServletRequest request, int advice_num) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user==null) {
+			model.addAttribute("message", "회원만 이용 가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/member/login");
+
+			return "matching/resultAlert";
+		}
+		
+		log.debug("<<adviceDetail user >> : " + user);
+			AdviceVO adviceVO = matchingService.readAdvice(advice_num, session);
+			log.debug("<<adviceDetail adviceVO >> : " + adviceVO);
+			String sender = memberService.selectMember(adviceVO.getSender()).getId();
+			String receiver = memberService.selectMember(adviceVO.getReceiver()).getId();
+			log.debug("<<LetterDetail sender >> : " + sender);
+			
+			model.addAttribute("advice", adviceVO);
+			model.addAttribute("sender", sender);
+			model.addAttribute("receiver", receiver);
+			log.debug("<<user.getId >> : " + user.getId());
+			String userId = user.getId();
+			model.addAttribute("userId", userId);
+			model.addAttribute("advice_num", advice_num);
+			
+			return "AdviceDetail";	
+	}
+	
+	//첨삭답장하기
+		@GetMapping("myPage/answer_advice")
+		public String answer_advice(HttpServletRequest request, HttpSession session, 
+				String user_id, Model model) {
+
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			log.debug("<<MemberVO (login)>> : " + user);
+			log.debug("<<user_id mem_num >> : " + user_id);
+
+			if(user==null) {//로그인 되지 않은 경우
+				model.addAttribute("message", "회원만 이용가능합니다.");
+				model.addAttribute("url", request.getContextPath() + "/member/login");
+
+				return "matching/resultAlert";
+			}else {//로그인, Auth가 1인 경우
+				model.addAttribute("login_user", user);
+				model.addAttribute("receive_user", user_id);
+			}
+
+			return "matching/answer_advice";
+		}
+		
+	//첨삭답장하기
+	@PostMapping("myPage/answer_advice")
+	public String sendletter_result(HttpServletRequest request, HttpSession session, 
+			Model model, @Valid AdviceVO adviceVO, BindingResult result, int sender, String receiverId) throws IllegalStateException, IOException {
+
+		MemberVO user = (MemberVO)session.getAttribute("user");
+
+		if(user==null) {
+			model.addAttribute("message", "회원만 이용 가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/member/login");
+		}else {
+
+			if(result.hasErrors()) {
+				log.debug("<<result.getFieldValue(\"receiver\");>> : " +result.getFieldValue("receiver"));
+
+				for (FieldError error : result.getFieldErrors()) {
+					log.error("Field: " + error.getField() + ", Error: " + error.getDefaultMessage());
+				}
+
+				return answer_letter(request, session, receiverId, model);
+			}
+
+			log.debug("<<여기까지?>>");
+			int receiverMem_num = matchingService.findMemnumById(receiverId);
+
+			adviceVO.setSender(sender);
+			adviceVO.setReceiver(receiverMem_num);
+			adviceVO.setAdvice_ip(request.getRemoteAddr());
+			adviceVO.setFilename(FileUtil.createFile(request, adviceVO.getUpload()));
+			matchingService.insertAdvice(adviceVO);
+
+			model.addAttribute("message", "메세지가 성공적으로 전송되었습니다.");
+			model.addAttribute("url", request.getContextPath() + "myAdvice");
+		}
+
+		return "matching/resultAlert";
+	}
+
 }

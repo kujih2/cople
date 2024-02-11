@@ -3,7 +3,7 @@ package kr.spring.matching.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
+import javax.servlet.http.HttpSession;
 
 import kr.spring.matching.vo.AdviceVO;
 import kr.spring.matching.vo.EmpVO;
@@ -25,7 +25,7 @@ public interface MatchingService {
 	public List<LetterVO> selectSentLetter(Map<String,Object> map);
 	public int receivedLetterCount(int mem_num);
 	public int sentLetterCount(int mem_num);
-	public LetterVO readLetter(int letter_num);
+	public LetterVO readLetter(int letter_num, HttpSession session);
 	//회원찾기
 	public int findMemnumById(String id);
 	//첨삭기능
@@ -35,5 +35,6 @@ public interface MatchingService {
 	public AdviceVO selectAdvice(int advice_num);
 	public int receivedAdviceCount(int mem_num);
 	public int sentAdviceCount(int mem_num);
+	public AdviceVO readAdvice(int advice_num, HttpSession session);
 	
 }

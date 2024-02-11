@@ -191,15 +191,62 @@
 		]]>
 	</select>
 	
+	<sql id="letterSentSearch">
+		<where>
+			<if test="keyword!=null and keyword!=''">
+				<if test="keyfield==1">
+					AND receiver LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield==2">
+					AND letter_content LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield==3">
+					AND (letter_content LIKE '%' || #{keyword} || '%' OR
+					 receiver LIKE '%' || #{keyword} || '%')
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 보낸 쪽지 리스트 -->
+	<select id="selectSentLetter" parameterType="map" resultType="letterVO">
+		SELECT 
+		  *
+		FROM
+			(SELECT
+				a.*, rownum rnum
+			 FROM
+			   (SELECT 
+			   		letter_num, 
+			   		sender,
+			   		receiver,
+			   		<![CDATA[
+				   	 REPLACE(REPLACE(letter_content,'<','&lt;'),'>', '&gt;')letter_content,
+			   		]]>
+			   		date_sent,
+			   		date_read,
+			   		member.id AS id
+			    FROM 
+			        letter
+			    JOIN 
+			    	member
+			    	ON letter.receiver=member.mem_num
+			    WHERE 
+			    	sender=#{sender}
+			    	<include refid="letterSentSearch"></include>
+			   	ORDER BY letter_num DESC,
+			   			 date_read NULLS FIRST,
+			   			 date_read DESC)a)
+		<![CDATA[
+		WHERE rnum>= #{start} AND rnum<= #{end}
+		]]>
+	</select>
+	
 	<!-- id로 memenum 구하기 -->
 	
 	
 	<!-- 받은 쪽지 갯수 -->
-	
-	<!-- 보낸 쪽지 리스트 -->
-	<select id="selectSentLetter" parameterType="map" resultType="letterVO"></select>
-	
-	
+		
 	<sql id="adviceSearch">
 		<where>
 			<if test="keyword!=null and keyword!=''">
@@ -256,8 +303,6 @@
 	
 	</select>
 	
-	<!-- 첨삭 상세 -->
-	<select id="selectAdvice" parameterType="integer" resultType="adviceVO">
-	</select>
+	
 	
 </mapper>

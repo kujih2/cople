@@ -12,9 +12,9 @@
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield" style="height:44px;">
-					<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>보낸사람</option>
+					<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>받은사람</option>
 					<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>내용</option>
-					<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>보낸사람+내용</option>
+					<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>받은사람+내용</option>
 				</select>
 			</li>
 			<li>
@@ -28,12 +28,12 @@
 	</form>
 	<br><br>
 	<c:if test="${count == 0}">
-	<div class="result-display">받은 쪽지함이 비었습니다.</div>
+	<div class="result-display">보낸 쪽지함이 비었습니다.</div>
 	</c:if>
 	<c:if test="${count >0 }">
 	<table class="striped-table">
 		<tr>
-			<td class="align-center">보낸사람</td>
+			<td class="align-center">받은사람</td>
 			<td class="align-center" width="400">내용</td>
 			<td class="align-center">날짜</td>
 			<td class="align-center">읽은 날짜</td>
@@ -41,17 +41,17 @@
 		<c:forEach var="letter" items="${list}">
 		<tr>
 			<td class="align-center">
-				<a href="${pageContext.request.contextPath}/myPage/letterDetail?letter_num=${letter.letter_num}">
+				<a href="${pageContext.request.contextPath}/myPage/letterSentDetail?letter_num=${letter.letter_num}">
 				${letter.id}
 				</a>
 			</td>
 			<td class="align-center">
-				<a href="${pageContext.request.contextPath}/myPage/letterDetail?letter_num=${letter.letter_num}">
+				<a href="${pageContext.request.contextPath}/myPage/letterSentDetail?letter_num=${letter.letter_num}">
 			${letter.letter_content}
 				</a>
 			</td>
 			<td class="align-center">
-				<a href="${pageContext.request.contextPath}/myPage/letterDetail?letter_num=${letter.letter_num}">
+				<a href="${pageContext.request.contextPath}/myPage/letterSentDetail?letter_num=${letter.letter_num}">
 			${letter.date_sent}
 				</a>
 			</td>
