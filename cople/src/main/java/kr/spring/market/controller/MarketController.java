@@ -443,6 +443,7 @@ public class MarketController {
 					mav.addObject("mem_num", mem_num);
 					mav.addObject("memVO", memVO);
 					mav.addObject("list", list);
+					mav.addObject("pcategory",pcategory);
 				
 					return mav;
 			}

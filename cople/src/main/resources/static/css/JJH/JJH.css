@@ -101,6 +101,7 @@ form#register_form{
 	border-radius:5px;
 	cursor:pointer;
 	background-color:white;
+	margin-left:10px;
 }
 .market_photo span{
 	position:absolute;
@@ -131,7 +132,9 @@ form#register_form{
 	width:280px;
 }
 .file-list .pr-image{
-	margin-left:8px;
+	margin-left:17px;
+	width:50px;
+	height:50px;
 }
 .file-list .filebox{
 	position:relative;
@@ -142,7 +145,7 @@ form#register_form{
 }
 .delete-button{
 	position:absolute;
-	margin-top:-55px;
+	margin-top:-65px;
 	margin-left:55px;
 	width:18px;
 	height:20px;
@@ -577,6 +580,7 @@ span.category1{
 .profile-content{
 	margin:0 auto;
 	overflow:auto;
+	height:400px;
 	margin-top:50px;
 }
 .profileListBox{

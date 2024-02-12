@@ -7,7 +7,7 @@
 		<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${mem_num}" width="150" height="150" class="my-photo">
 		<h2> <span style="font-size:30px;"><c:if test="${empty memVO.nick_name}">${memVO.id}</c:if> <c:if test="${!empty memVO.nick_name}">${memVO.nick_name}</c:if></span> 님의 장터 프로필</h2>
 		<div class="profile_category">
-  			<span class="pcategory" onclick="location.href='marketProfile?pcategory=0&mem_num=${mem_num}'">내가 올린 상품</span>/<span class="pcategory" onclick="location.href='marketProfile?pcategory=1&mem_num=${mem_num}'">내가 판매한 상품</span>/<span class="pcategory" onclick="location.href='marketProfile?pcategory=2&mem_num=${mem_num}'">내가 구매한 상품</span>
+  			<span class="pcategory" onclick="location.href='marketProfile?pcategory=0&mem_num=${mem_num}'" <c:if test="${pcategory!=null && pcategory == 0 }">style="font-weight:bold; color:black;"</c:if>>내가 올린 상품</span>/<span class="pcategory" onclick="location.href='marketProfile?pcategory=1&mem_num=${mem_num}'"<c:if test="${pcategory!=null && pcategory == 1 }">style="font-weight:bold; color:black;"</c:if>>내가 판매한 상품</span>/<span class="pcategory" onclick="location.href='marketProfile?pcategory=2&mem_num=${mem_num}'"<c:if test="${pcategory!=null && pcategory == 2 }">style="font-weight:bold; color:black;"</c:if>>내가 구매한 상품</span>
   		</div>
 	</div>
 	<div class="profile-content">
