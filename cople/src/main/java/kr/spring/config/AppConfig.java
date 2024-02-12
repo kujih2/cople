@@ -42,6 +42,7 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 				.addPathPatterns("/market/modify")
 				.addPathPatterns("/market/delete")
 				.addPathPatterns("/market/marketChatRoom")
+				.addPathPatterns("/market/marketProfile")
 				;
 	}
 	

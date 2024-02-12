@@ -93,8 +93,17 @@
 판매자 장터 프로필
 =========================================
 */
+.market_writeMain{
+	padding: 10px 150px;
+	width:70%;
+	margin:0 auto;
+	margin-top:50px;
+	margin-bottom:200px;
+	background-color:white;
+	border-radius:10px;
+}
 .seller_profile{
-	margin-left:70px;
+	margin-left:100px;
 	padding-top:30px;
 	position:relative;
 	text-align:center;
@@ -103,18 +112,19 @@
 	font-weight:bold;
 }
 .seller_profile img{
-	margin-left:50px;
+	margin-left:-300px;
 	position:absolute;
 }
 .seller_profile .seller_id{
-	margin-left:-270px;
+	margin-left:-240px;
+	font-size:25px;
 }
 .seller_profile .score_box{
 	width:100px;
 	margin-left:100px;
 }
 .detail_main{
-	margin-top:10px;
+	margin-top:20px;
 	margin-left:100px;
 	margin-bottom:10px;
 }
@@ -135,7 +145,11 @@
 	font-weight:bold;
 }
 .detail_content{
-	padding:30px 50px 50px 80px ;
+	border:1px solid gray;
+	padding-left:10px;
+	border-radius:10px;
+	width:600px;
+	min-height:250px;
 }
 .content_foot{
 	margin-top:8px;
@@ -146,7 +160,7 @@
 	color:gray;
 }
 .content_foot .chat_btn{
-	margin-left:600px;
+	margin-left:500px;
 	border: 1px solid skyblue;
 	background-color:skyblue;
 	color:white;
@@ -172,31 +186,20 @@
 	font-size:15px;
 	font-weight:bold;
 }
-
-.modify_box{
-	margin-left:700px;
-	margin-bottom:10px;
-	margin-top:-30px;
+#product_place{
+	font-size:20px;
 }
-.modify_box #modify_btn{
-	border: 1px solid skyblue;
+#product_placeDetail{
+	font-size:20px;
+}
+#delete_btn{
+	margin-left:600px;
+	width:80px;
+	height:30px;
 	background-color:skyblue;
 	color:white;
-	font-weight:bold;
-	width:60px;
-	height:20px;
 	border-radius:5px;
+	font-size:15px;
 }
-.modify_box #delete_btn{
-	border: 1px solid skyblue;
-	background-color:skyblue;
-	color:white;
-	font-weight:bold;
-	width:60px;
-	height:20px;
-	border-radius:5px;
-}
-
-
 
 

@@ -196,8 +196,8 @@ public class MarketServiceImpl implements MarketService{
 	}
 
 	@Override
-	public void updateProductSale(int product_num) {
-		marketMapper.updateProductSale(product_num);
+	public void updateProductSale(Map<String,Integer> map) {
+		marketMapper.updateProductSale(map);
 		
 	}
 
@@ -218,6 +218,24 @@ public class MarketServiceImpl implements MarketService{
 		}
 	
 	 marketMapper.deleteProductChatRoom(product_num);
+	}
+
+	@Override
+	public List<MarketVO> selectProfileProduct(Map<String, Object> map) {
+		List<MarketVO> list = marketMapper.selectProfileProduct(map);
+		if (list!=null) {
+			for (MarketVO each : list) {
+		        Integer sellerNum = each.getProduct_seller();
+		        if (sellerNum != null) {
+		            MemberVO member = memberMapper.selectMember(sellerNum);
+		            if (member != null) {
+		                each.setSeller_id(member.getId());
+		               each.setSeller_nickname(member.getNick_name());
+		            }
+		        }
+		    }
+		}
+		return list;
 	}
 
 	

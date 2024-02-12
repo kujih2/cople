@@ -146,11 +146,15 @@ var count = 0;
 		$("#product_category").val(0);
 		$('#product_price').attr('type','text');
 		$('#product_price').val('');
+		$(this).css({"background-color": "skyblue","color" : "white","font-weight":"bold"});
+		$('.share-button').css({"background-color": "white","color" : "gray"});
 	});
 	$('.share-button').click(function(){
 		$("#product_category").val(1);
 		$('#product_price').attr('type','hidden');
 		$('#product_price').val(0);
+		$(this).css({"background-color": "skyblue","color" : "white","font-weight":"bold"});
+		$('.sale-button').css({"background-color": "white","color" : "gray"});
 		
 	});
 

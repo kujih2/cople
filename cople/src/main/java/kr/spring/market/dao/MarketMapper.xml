@@ -150,8 +150,8 @@ SELECT * FROM market_chat WHERE chatRoom_num = #{chatRoom_num} ORDER BY chat_reg
   VALUES (market_chat_seq.nextval, #{chatRoom_num}, #{mem_num}, #{chat_message},#{chat_saleCommit})
 </insert>
 <!-- 판매상태 바꾸기 (판매중->판매완료) -->
-<update id="updateProductSale" parameterType="integer">
-	UPDATE market_product SET product_sale = 1 WHERE product_num = #{product_num}
+<update id="updateProductSale" parameterType="map">
+	UPDATE market_product SET product_sale = 1,product_buyer=#{product_buyer} WHERE product_num = #{product_num}
 </update>
 <!--채팅내역 삭제 -->
 <delete id="deleteChat" parameterType="integer">
@@ -171,4 +171,33 @@ SELECT chatroom_num FROM
 <delete id="deleteProductChatRoom" parameterType="int">
 	DELETE FROM market_chatroom WHERE product_num = #{product_num}
 </delete>
+<!-- 마켓프로필 메뉴 조회 -->
+<sql id="profileMenu">
+    <where>
+        <choose>
+            <when test="pcategory == 0">	
+                product_seller=#{mem_num}
+            </when>
+            <when test="pcategory == 1">	
+                product_seller=#{mem_num} AND product_sale=1
+            </when>
+            <when test="pcategory == 2">
+               product_buyer=#{mem_num}
+            </when>
+        </choose>
+    </where>
+ </sql>
+ 
+    <select id="selectProfileProduct" parameterType="map" resultType="marketVO">
+    	SELECT * FROM market_product <include refid="profileMenu"></include> ORDER BY product_regdate
+    </select>
+
+
+
+
+
+
+
+
+
 </mapper>

@@ -44,12 +44,12 @@
 							</c:if>
 							<c:if test="${!empty user}">
 								<button class="sc-eXEjpC BltZS" >
-									<img src="${pageContext.request.contextPath}/member/photoView" width="23" height="24" alt="내상점버튼 이미지">
+									<img src="${pageContext.request.contextPath}/member/photoView" width="23" height="24" alt="내상점버튼 이미지" onclick="location.href='marketProfile?mem_num=${user.mem_num}'">
 										<c:if test="${empty user.nick_name}">
-											<p>${user.id}</p>
+											<p onclick="location.href='marketProfile?mem_num=${user.mem_num}'">${user.id}</p>
 										</c:if>
 										<c:if test="${!empty user.nick_name}">
-											<p>${user.nick_name}</p>
+											<p onclick="location.href='marketProfile?mem_num=${user.mem_num}'">${user.nick_name}</p>
 										</c:if>
 								</button>
 							</c:if>
@@ -66,10 +66,10 @@
 							<form action="list" id="search_form"  method="get">
 							<div class="category-box">
   							<c:if test="${category == 0}">
-  								<span class="category0">중고 상품</span>/<span class="category1">나눔 상품</span>
+  								<span class="category0" style="color:black;font-weight:bold;cursor:pointer;">중고 상품</span>/<span class="category1" style="color:gray;font-weight:none;cursor:pointer;">나눔 상품</span>
   							</c:if>
   							<c:if test="${category == 1}">
-  								<span class="category0" style="color:gray;font-weight:none">중고 상품</span>/<span class="category1" style="color:black;font-weight:bold">나눔 상품</span>
+  								<span class="category0" style="color:gray;font-weight:none;cursor:pointer;">중고 상품</span>/<span class="category1" style="color:black;font-weight:bold;cursor:pointer;">나눔 상품</span>
   							</c:if>
   								<input type="hidden" name="category" id="category" value="${category}">
   							</div>

@@ -10,7 +10,7 @@
 	     <put-attribute name="header" value="/WEB-INF/views/template/header2.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/market/marketList2.jsp"/>    	
     </definition>
-     <definition name="marketWrite" extends="main2">
+     <definition name="marketWrite"  extends="main2">
 	    <put-attribute name="title" value="글쓰기"/>
 	     <put-attribute name="css" value="/WEB-INF/views/market/marketCSS.jsp"/> 	
     	<put-attribute name="body" value="/WEB-INF/views/market/marketWrite.jsp"/>   
@@ -20,11 +20,12 @@
 	    <put-attribute name="css" value="/WEB-INF/views/market/marketDetailCSS.jsp"/> 	
     	<put-attribute name="body" value="/WEB-INF/views/market/marketDetail.jsp"/>   
     </definition>
-    <definition name="marketModify" extends="main2">
-	    <put-attribute name="title" value="글 수정"/>
+    <definition name="marketProfile" extends="main2">
+	    <put-attribute name="title" value="장터 프로필"/>
 	    <put-attribute name="css" value="/WEB-INF/views/market/marketCSS.jsp"/> 	
-    	<put-attribute name="body" value="/WEB-INF/views/market/marketModify.jsp"/>   
+    	<put-attribute name="body" value="/WEB-INF/views/market/marketProfile.jsp"/>   
     </definition>
+   
     
     <definition name="marketChatRoom" 
            template="/WEB-INF/views/template/layout_marketChat.jsp">

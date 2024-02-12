@@ -61,30 +61,22 @@
     </div>
 </div>
 <!-- 캐러셀 끝 -->
+<div class="market_writeMain">
 	<div class="seller_profile">
-	<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${market.product_seller}" width="35" height="35" class="my-photo">
+	<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${market.product_seller}" width="50" height="50" class="my-photo">
 		<span class="seller_id">
 			<c:if test="${empty market.seller_nickname}">${market.seller_id }</c:if>
 			${market.seller_nickname}
 		</span>
 		<br>
-		<div class="score_box">
-		<c:if test="${market.market_score > 30}">
-				<span style=" color:blue; font-weight:bold; margin-left:-10px;">${market.market_score}점 </span>
-				<span class="score_desc">장터점수</span>
-			</c:if>
-			<c:if test="${market.market_score < 30}">
-				<span style=" color:red; font-weight:bold; margin-left:-10px;">${market.market_score}점 </span>
-				<span class="score_desc">장터점수</span>
-			</c:if>
-		</div>
+		
 	</div>
 	<c:if test="${!empty user && user.id .equals(market.seller_id)}">
 			<div class="modify_box">
 				<button id="delete_btn" onclick="location.href='delete?product_num=${market.product_num}'">글 삭제</button>
 			</div>
 		</c:if>
-	<hr width="80%" style="margin:0 auto;">
+	<hr width="80%" style="margin:0 auto; color:black;">
 	<div class="detail_main">
 		<div class="detail_title">
 			<span class="title_span">${market.product_title}</span>
@@ -102,7 +94,6 @@
 				${market.product_content}
 		</div>
 		<div class="content_foot">
-			<span class="report">신고</span>
 			<c:if test="${!empty user && user.id != market.seller_id}">
 			<button class="chat_btn" onclick="location.href='marketChatRoom?product_num=${market.product_num}&product_seller=${market.product_seller}'">채팅하기</button>
 			</c:if> 
@@ -114,7 +105,7 @@
 <div class="detail_map">
 <h2>거래 희망 장소</h2>
 <div class="detail_address">
-	<span id="product_place">${market.product_place}</span>
+	<span id="product_place">${market.product_place}</span><br>
 	<span id="product_placeDetail">${market.product_placeDetail}</span>
 </div>
 <div id="map" style="width:100%;height:350px;"></div>
@@ -161,7 +152,7 @@ geocoder.addressSearch($('#product_place').text(), function(result, status) {
 	</div>
 </c:if>
 </div>
-
+</div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/JJH/market.detail.js"></script>
 

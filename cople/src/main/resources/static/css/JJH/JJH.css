@@ -100,12 +100,14 @@ form#register_form{
 	border: 1px solid gray;
 	border-radius:5px;
 	cursor:pointer;
+	background-color:white;
 }
 .market_photo span{
 	position:absolute;
 	clear:both;
 	text-align:center;
-	padding-left:11px;
+	margin-left:-7px;
+	margin-top:-7px;
 	margin-top:40px;
 }
 .camera-click{
@@ -119,23 +121,40 @@ form#register_form{
 	display:none;
 }
 .market_photo img{
-	margin-left:10px;
+	margin-left:-10px;
+	margin-top:-20px;
 }
 .file-list{
 	position:absolute;
-	margin-left:0;
-	margin-top:0;
-	width:max-content;
+	margin-left:120px;
+	margin-top:-80px;
+	width:280px;
 }
 .file-list .pr-image{
 	margin-left:8px;
 }
 .file-list .filebox{
 	position:relative;
+	width:50px;
+	height:50px;
 	float:left;
 	margin-left:10px;
 }
-
+.delete-button{
+	position:absolute;
+	margin-top:-55px;
+	margin-left:55px;
+	width:18px;
+	height:20px;
+	background-color:black;
+	color:white;
+	font-size:16px;
+	text-align:center;
+	padding-top:-5px;
+	font-weight:bold;
+	border-radius:3px;
+	cursor:pointer;
+}
 .valid-message{
 	color:red;
 }
@@ -329,6 +348,9 @@ span.category1{
 	border-radius:15px;
 	color:gray;
 }
+.selected{
+	background-color: lightgreen;
+}
 /* 채팅창
 -------------------------*/
 .chat_detail{
@@ -511,4 +533,69 @@ span.category1{
 	cursor:pointer;
 }
 
+
+
+
+
+
+/*마켓 프로필*/
+.profile-main{
+	width:70%;
+	margin:0 auto;
+	height:800px;
+	margin-bottom:30px;
+	border:1px solid gray;
+	background-color:white;
+}
+.market-profile{
+	position:relative;
+	width:90%;
+	margin-left:50px;
+	margin-right:50px;
+	margin-top:50px;
+	border-bottom:1px solid black;
+}
+.market-profile img{
+	margin-left:200px;
+	border-radius:150px;
+	border:1px solid gray;
+}
+.market-profile h2{
+  position:absolute;
+  margin-left:400px;
+  margin-top:-100px;
+}
+.profile_category{
+	text-align:center;
+	font-size:25px;
+	margin-bottom:20px;
+	color:gray;
+}
+.pcategory{
+	cursor:pointer;
+}
+.profile-content{
+	margin:0 auto;
+	overflow:auto;
+	margin-top:50px;
+}
+.profileListBox{
+	position:relative;
+	border:1px solid black;
+	width:70%;
+	height:80px;
+	margin:0 auto;
+	padding-left:280px;
+	padding-top:10px;
+	cursor:pointer;
+}
+.profileListBox img{
+	position:absolute;
+	margin-left:100px;
+	margin-top:-20px;
+}
+.profile_title{
+	font-weight:bold;
+	font-size:20px;
+}
 

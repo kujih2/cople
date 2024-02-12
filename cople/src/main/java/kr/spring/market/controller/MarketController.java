@@ -23,6 +23,7 @@ import kr.spring.market.service.MarketService;
 import kr.spring.market.vo.MarketChatRoomVO;
 import kr.spring.market.vo.MarketChatVO;
 import kr.spring.market.vo.MarketVO;
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
@@ -34,6 +35,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MarketController {
 	@Autowired
 	private MarketService marketService;
+	@Autowired
+	private MemberService memberService;
 
 	
 	/*=================================
@@ -377,6 +380,8 @@ public class MarketController {
 					if(user==null) {//로그인이 되지 않은 경우
 						mapAjax.put("result", "logout");
 					}else {//로그인 된 경우
+						Map<String,Integer> map = new HashMap<String,Integer>();
+						
 						vo.setMem_num(user.getMem_num());
 						vo.setChatRoom_num(chatRoom_num);
 						vo.setChat_message("구매자가 구매를 확정했습니다.");	
@@ -384,10 +389,13 @@ public class MarketController {
 						MarketChatRoomVO chatRoomVO = marketService.selectChatRoomDetail(chatRoom_num);
 						int product_num = chatRoomVO.getProduct_num();
 						
+						map.put("product_buyer", user.getMem_num());
+						map.put("product_num", product_num);
+						
 						log.debug("<<구매확정 채팅 메시지 등록 >> : " + vo);
 						marketService.insertChat(vo);
 						//판매상태 업데이트
-						marketService.updateProductSale(product_num);
+						marketService.updateProductSale(map);
 						mapAjax.put("result", "success");
 					}
 					return mapAjax;
@@ -408,5 +416,37 @@ public class MarketController {
 				mapAjax.put("result", "success");
 			}
 			return mapAjax;
+	 }
+	 
+     /*=================================
+      * 장터프로필-입장
+      *=================================*/
+	 @RequestMapping("/market/marketProfile")
+	 public ModelAndView marketProfile(@RequestParam(required=false) Integer pcategory,@RequestParam int mem_num) {
+		 Map<String,Object> map = new HashMap<String,Object>();
+			if(pcategory==null) {
+				MemberVO memVO =  memberService.selectMember(mem_num);
+				 ModelAndView mav = new ModelAndView();
+					mav.setViewName("marketProfile");
+					mav.addObject("mem_num", mem_num);
+					mav.addObject("memVO", memVO);
+				
+					return mav;
+			}else {
+				map.put("pcategory", pcategory);
+				map.put("mem_num", mem_num);
+				
+				List<MarketVO> list= marketService.selectProfileProduct(map);
+				MemberVO memVO =  memberService.selectMember(mem_num);
+				 ModelAndView mav = new ModelAndView();
+					mav.setViewName("marketProfile");
+					mav.addObject("mem_num", mem_num);
+					mav.addObject("memVO", memVO);
+					mav.addObject("list", list);
+				
+					return mav;
+			}
+			
+		
 	 }
 }

@@ -5,6 +5,7 @@
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/JJH/market.write.js"></script>
+<link href="${pageContext.request.contextPath}/css/layout.css" rel="stylesheet" type="text/css" />
 <div class="page-main">
 <h1>상품 등록</h1>
 	<form:form action="write" modelAttribute="marketVO" id="register_form"
@@ -40,8 +41,8 @@
 					<form:label path="product_category"><h2>거래 방식</h2></form:label>
 				</li>
 				<li>
-					<input type="button" value="판매하기" class="sale-button">
-					<input type="button" value="나눔하기" class="share-button">
+					<input type="button" value="판매하기" class="sale-button" style="background-color:skyblue;color:white;font-weight:bold; border-radius:5px; cursor:pointer;">
+					<input type="button" value="나눔하기" class="share-button" style="background-color:white;color:gray; border-radius:5px;cursor:pointer;">
 					<form:input path="product_category"  type="hidden"/>
 				</li>
 				<li>
@@ -75,8 +76,8 @@
 			</ul>
 		</div>
 		<div class="align-center clear">
-			<form:button>작성 완료</form:button>
-			<input type="button" value="작성 취소" onclick="location.href='list?category=0'">
+			<form:button style="background-color:skyblue; border-radius:5px;color:white;font-weight:bold;">작성 완료</form:button>
+			<input type="button" value="작성 취소" onclick="location.href='list?category=0'" style="background-color:white; border-radius:5px;color:black;font-weight:bold;cursor:pointer;">
 		</div>	
 	</form:form>
 </div>
@@ -84,5 +85,3 @@
 <div class="hide">
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/market/marketMap.jsp"/>
 </div>
-                               
-	                                     

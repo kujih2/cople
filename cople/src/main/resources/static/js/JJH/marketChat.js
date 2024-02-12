@@ -8,6 +8,13 @@ $(function(){
 		$('#chatting_message').show();
 		$('#textareaBox').show();
 		$('.chatStart').hide();
+		
+		// 이전에 선택한 div의 배경색을 원래대로 돌리기
+            $('.selected').removeClass('selected');
+            
+        // 현재 클릭한 div에 배경색 추가
+            $(this).addClass('selected');
+		
 		connectWebSocket();//웹소켓 생성
 
 		

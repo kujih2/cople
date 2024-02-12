@@ -23,8 +23,8 @@
     <div style="margin-top:20px; text-align:center;">
     	<span><b>선택한 곳의 상세 장소명을 입력해주세요.</b><small> 예)강남역 1번출구,교보타워 앞</small></span><br>
 		<input type="text" name="detail" id="detail"> 
-		<input type="button" value="등록" id="submit_btn">  
-		<input type="button" value="취소" id="reset_btn">  
+		<input type="button" value="등록" id="submit_btn" style="background-color:skyblue; border-radius:5px;color:white;font-weight:bold;cursor:pointer;">  
+		<input type="button" value="취소" id="reset_btn" style="background-color:white; border-radius:5px;color:black;font-weight:bold;cursor:pointer;">  
     </div>
 </div>
 </body>
