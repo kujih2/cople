@@ -368,8 +368,8 @@ span.category1{
 	margin-left:350px;
 	margin-bottom:30px;
 	padding:10px;
-	width:80px;
-	height:20px;
+	width:100px;
+	height:35px;
 	border-radius:5px;
 	background-color:skyblue;
 }
@@ -382,7 +382,7 @@ span.category1{
 	margin-bottom:30px;
 	padding:10px;
 	width:80px;
-	height:20px;
+	height:35px;
 	border-radius:5px;
 	background-color:orange;
 	cursor:pointer;
@@ -402,24 +402,46 @@ span.category1{
   width: 500px; 
   height: 120px; 
   resize: none;
-  margin-left:40px;
+  margin-left:140px;
   border-radius:6px;
 }
 #message_btn{
 	position:absolute;
 	margin:0 auto;
-	margin-left:450px;
+	margin-left:550px;
 	margin-top:-50px;
 }
 #message_btn input[type=submit]{
 	width:80px;
 	height:30px;
+	cursor:pointer;
+}
+.chatStart{
+	border:1px solid #adb5bd;
+	width:250px;
+	height:250px;
+	font-weight:bold;
+	margin:0 auto;
+	text-align:center;
+	padding-top:100px;
+	margin-top:130px;
+	border-radius:15px;
+	color:#adb5bd;
+}
+.chat_Readcount{
+	background-color:red;
+	margin-bottom:-20px;
+	text-align:center;
+	font-size:8px;
+	width:20px;
+	border-radius:10px;
+	color:white;
 }
 /* 채팅하기
 -------------------------*/
 #chatting_message{
 	border:1px solid black;
-	width:95%;
+	width:85%;
 	height:200px;
 	margin:0 auto;
 	padding:10px;

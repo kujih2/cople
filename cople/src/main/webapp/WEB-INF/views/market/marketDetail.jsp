@@ -81,8 +81,7 @@
 	</div>
 	<c:if test="${!empty user && user.id .equals(market.seller_id)}">
 			<div class="modify_box">
-				<button id="modify_btn" onclick="location.href='modify?product_num='+${market.product_num}">글 수정</button>
-				<button id="delete_btn" onclick="">글 삭제</button>
+				<button id="delete_btn" onclick="location.href='delete?product_num=${market.product_num}'">글 삭제</button>
 			</div>
 		</c:if>
 	<hr width="80%" style="margin:0 auto;">
@@ -90,7 +89,6 @@
 		<div class="detail_title">
 			<span class="title_span">${market.product_title}</span>
 			<c:if test="${empty market.product_modifyDate}"><span class="reg_date">작성일 : ${market.product_regDate}</span></c:if>
-			<c:if test="${!empty market.product_modifyDate}"><span class="reg_date">수정일 : ${market.product_modifyDate}</span></c:if>
 		</div>
 		<div class="detail_price">
 			<c:if test="${market.product_price != 0}">

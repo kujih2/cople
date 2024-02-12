@@ -84,7 +84,7 @@ public class MarketServiceImpl implements MarketService{
 
 	@Override
 	public void deleteMarket(int product_num) {
-		// TODO Auto-generated method stub
+		 marketMapper.deleteMarket(product_num);
 		
 	}
 
@@ -206,6 +206,18 @@ public class MarketServiceImpl implements MarketService{
 		marketMapper.deleteChat(chatRoom_num);
 		marketMapper.deleteChatRoom(chatRoom_num);
 		
+	}
+
+	@Override
+	public void deleteProductChatRoom(int product_num) {
+	List<MarketChatRoomVO> list = 	marketMapper.selectDeleteChatRoom(product_num);
+	if (list!=null) {
+		for (MarketChatRoomVO each : list) {
+	            marketMapper.deleteChat(each.getChatRoom_num()); 
+			}
+		}
+	
+	 marketMapper.deleteProductChatRoom(product_num);
 	}
 
 	

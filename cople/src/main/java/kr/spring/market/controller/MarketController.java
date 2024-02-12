@@ -209,8 +209,36 @@ public class MarketController {
 	 * 장터 글 삭제
 	 *=================================*/
 	@RequestMapping("/market/delete")
-	public void delete() {
+	public String delete(@RequestParam Integer product_num,Model model,HttpServletRequest request) {
 		
+		//DB에 저장된 파일 정보 구하기
+				MarketVO vo = marketService.selectMarketDetail(product_num);
+		
+				//상품이 포함된 채팅방 삭제
+				marketService.deleteProductChatRoom(product_num);
+				//글 삭제
+				marketService.deleteMarket(product_num);
+				if(vo.getFilename0() != null) {
+					//파일 삭제
+					FileUtil.removeFile(request, vo.getFilename0());
+				}
+				if(vo.getFilename1() != null) {
+					//파일 삭제
+					FileUtil.removeFile(request, vo.getFilename0());
+				}
+				if(vo.getFilename2() != null) {
+					//파일 삭제
+					FileUtil.removeFile(request, vo.getFilename0());
+				}
+				if(vo.getFilename3() != null) {
+					//파일 삭제
+					FileUtil.removeFile(request, vo.getFilename0());
+				}
+				
+				
+		model.addAttribute("message","글삭제가 완료되었습니다.");
+		model.addAttribute("url",request.getContextPath()+"/market/list?category=0");
+		return "common/resultAlert";
 	}
 	/*=================================
 	 * 장터 채팅방 조회 및 생성

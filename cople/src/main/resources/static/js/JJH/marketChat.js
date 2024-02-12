@@ -5,6 +5,9 @@ $(function(){
 		var chatRoomNum = $(this).find('.chatRoomNum').val();
 		$('#chatRoom_num').val(chatRoomNum);
 		
+		$('#chatting_message').show();
+		$('#textareaBox').show();
+		$('.chatStart').hide();
 		connectWebSocket();//웹소켓 생성
 
 		
@@ -104,7 +107,8 @@ $(function(){
 								output += item.mem_id;
 							}
 							output += '<div class="item">';
-							output += item.chat_readCheck + '<span>' + item.chat_message.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';
+							output += '<span>' + item.chat_message.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';
+							output += '<div class="chat_Readcount">'+item.chat_readCheck + '</div>';
 							//구매확정요청메시지 
 							if(item.chat_saleCommit == 1 && item.mem_num != param.user_num){
 								output += '<div class="saleCommit2">구매확정</div>';
@@ -168,7 +172,7 @@ $(function(){
 					message_socket.close();
 				}else if(param.result == 'success'){
 					//폼 초기화
-					$('#message').val('').focus();
+					$('#chat_message').val('').focus();
 					//메시지가 저장되었다고 소켓에 신호를 보냄
 					message_socket.send('msg:');
 				}else{

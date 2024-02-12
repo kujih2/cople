@@ -95,7 +95,10 @@ UPDATE market_product SET  product_title = #{product_title},
 				WHERE product_num = ${product_num}
 									    
 </update>
-	
+<!--장터 글 삭제 -->
+<delete id="deleteMarket" parameterType="integer">
+	DELETE FROM market_product WHERE product_num = #{product_num}
+</delete>	
 	
 	
 <!--구매자일 경우 채팅방 유무 조회  -->
@@ -157,5 +160,15 @@ SELECT * FROM market_chat WHERE chatRoom_num = #{chatRoom_num} ORDER BY chat_reg
 <!--채팅방 삭제 -->
 <delete id="deleteChatRoom" parameterType="integer">
 	DELETE FROM market_chatroom WHERE chatroom_num = #{chatRoom_num}
+</delete>
+<!-- 삭제할 상품이 포함된 채팅방의 번호 구하기 -->
+<select id="selectDeleteChatRoom" parameterType="int" resultType="marketChatRoomVO">
+SELECT chatroom_num FROM 
+			market_chatroom 
+			WHERE product_num = #{product_num}
+</select>
+<!-- 삭제할 상품이 포함된 채팅방 삭제 -->
+<delete id="deleteProductChatRoom" parameterType="int">
+	DELETE FROM market_chatroom WHERE product_num = #{product_num}
 </delete>
 </mapper>

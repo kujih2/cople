@@ -41,7 +41,10 @@ public interface MarketMapper {
   	public void updateChatRead(Map<String,Integer> map);//읽은 채팅은 읽음으로 바꾸기
   	public void updateProductSale(int product_num);//구매한 상품 판매완료로 바꾸기
   	
-  	public void deleteChat(int chatRoom_num);
+  	public void deleteChat(int chatRoom_num);//채팅글 삭제
   	public void deleteChatRoom(int chatRoom_num); //채팅방 삭제
+  	
+  	public List<MarketChatRoomVO> selectDeleteChatRoom(int product_num);//삭제할 상품의 채팅글 삭제를 위한 해당 상품을 포함한 채팅방들의 번호를 조회 
+  	public void deleteProductChatRoom(int product_num); //삭제할 상품의 채팅방 삭제
   	
 }

@@ -30,7 +30,7 @@
            template="/WEB-INF/views/template/layout_marketChat.jsp">
     	<put-attribute name="title" value="장터 채팅"/>
     	<put-attribute name="header"
-    	               value="/WEB-INF/views/template/header.jsp"/>
+    	               value="/WEB-INF/views/template/header2.jsp"/>
     	<put-attribute name="css" value="/WEB-INF/views/market/marketCSS.jsp"/> 
     	<put-attribute name="nav"
     	               value="/WEB-INF/views/market/marketChatList.jsp"/>               
