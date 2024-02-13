@@ -18,7 +18,7 @@ $(function(){
 		
 		$.ajax({
 			url:'listReply',
-			type:'get',
+			type:'post',
 			data:{pageNum:pageNum,rowCount:rowCount,board_num:$('#board_num').val()},
 			dataType:'json',
 			success:function(param){
@@ -45,19 +45,29 @@ $(function(){
 					output += '<ul class="detail-info">';
 					output += '<li>';
 					output += '<img src="../member/viewProfile?mem_num='+item.mem_num+'" width="40" height="40" class="my-photo">';
-					output += '</li>';
-					output += '<li>';
+					
+					if(item.auth == 1) {
+					    output += '<b>수강생 - </b>';
+					}else if(item.auth == 2) {
+					    output += '<b>현직자 - </b>';
+					}else if(item.auth == 3) {
+					    output += '<b>강사 - </b>';
+					}else if(item.auth == 9) {
+					    output += '<b>관리자 - </b>';
+					}else {
+					    output += '<b>유저 - </b>';
+					}
 					
 					if(item.nick_name){
-						output += item.nick_name +  '<br>';
+						output += '<b>' + item.nick_name + "  " + '</b>';
 					}else{
-						output += item.id + '<br>';
+						output += '<b>' + item.id + "  " + '</b>';
 					}
 					
 					if(item.re_mdate){
-						output += '<span class="modify-date">최근 수정일 : ' + item.re_mdate +'</span>';
+						output += '<span class="modify-date">수정됨 ' + '</span>';
 					}else{
-						output += '<span class="modify-date">등록일 : ' + item.re_rdate + '</span>';
+						output += '<span class="modify-date">' + item.re_rdate + '</span>';
 					}
 					
 					output += '</li>';
@@ -68,8 +78,9 @@ $(function(){
 					output += ' <input type="button" data-num="'+item.re_num+'" value="답글달기" id="replies-btn" class="commu-btn">';
 					if(param.user_num==item.mem_num){
 						//로그인한 회원번호와 댓글 작성자 회원번호와 같으면
-						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" id="modify-btn" class="commu-btn">';
 						output += ' <input type="button" data-num="'+item.re_num+'" value="삭제" id="delete-btn" class="commu-btn">';
+						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" id="modify-btn" class="commu-btn">';
+						
 					}
 					
 					output += '<hr size="1" noshade>';
@@ -184,7 +195,7 @@ $(function(){
 		
 	});
 	//수정폼에서 취소 버튼 클릭시 수정폼 초기화
-	$(document).on('click','.re-reset',function(){
+	$(document).on('click','#re-reset',function(){
 		initModifyForm();
 	});
 	//댓글 수정폼 초기화
@@ -214,8 +225,6 @@ $(function(){
 				}else if(param.result=='success'){
 					//내용 읽기
 					$('#mre_form').parent().find('p').html($('#mre_content').val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>'));
-					//최근 수정일 처리
-					$('#mre_form').parent().find('.modify-date').text('최근 수정일 : 5초미만');
 					//수정폼 초기화
 					initModifyForm();
 				}else if(param.result=='wrongAccess'){
@@ -313,15 +322,69 @@ $(function(){
 	});	
 		
 	/*-------------------------------
+	 * 댓글 등록, 수정 공통
+     *-------------------------------*/
+	//textarea에 내용 입력시 글자수 체크
+	$(document).on('keyup','textarea',function(){
+		//입력한 글자수 구하기
+		let inputLength = $(this).val().length;
+		
+		if(inputLength>300){//300자를 넘어선 경우
+			$(this).val($(this).val().substring(0,300));
+		}else{//300자 이하인 경우
+			//남은 글자수 구하기
+			let remain = 300 - inputLength;
+			remain += '/300';
+			if($(this).attr('id')=='re_content'){
+				//등록폼 글자수
+				$('#re_first .letter-count').text(remain);
+			}else if($(this).attr('id')=='mre_content'){
+				//수정폼 글자수
+				$('#mre_first .letter-count').text(remain);
+			}
+		}
+	});	
+	/*-------------------------------
+	 * 댓글 삭제
+     *-------------------------------*/
+	$(document).on('click','#delete-btn',function(){
+		//댓글 번호 
+		let re_num = $(this).attr('data-num');
+		
+		//서버와 통신
+		$.ajax({
+			url:'deleteReply',
+			type:'post',
+			data:{re_num:re_num},
+			dataType:'json',
+			success:function(param){
+				if(param.result == 'logout'){
+					alert('로그인해야 삭제할 수 있습니다.');
+				}else if(param.result == 'success'){
+					alert('삭제 완료!');
+					selectList(1);
+				}else if(param.result == 'wrongAccess'){
+					alert('타인의 글을 삭제할 수 없습니다.');
+				}else{
+					alert('댓글 삭제 오류 발생');
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생!');
+			}
+		});		
+	});
+		
+	/*-------------------------------
 	 * 댓글수 표시
      *-------------------------------*/
 	function displayReplyCount(param){
 		let count = param.count;
 		let output;
 		if(count>0){
-			output = '댓글수('+count+')';
+			output = count;
 		}else{
-			output = '댓글수(0)';
+			output = '0';
 		}
 		//문서 객체의 추가
 		$('#output_rcount').text(output);

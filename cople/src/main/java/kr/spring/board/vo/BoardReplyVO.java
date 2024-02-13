@@ -22,6 +22,7 @@ public class BoardReplyVO {
 	
 	private String id;
 	private String nick_name;
+	private int auth;
 	
 	public void setRe_rdate(String re_rdate) {
 		this.re_rdate = DurationFromNow.getTimeDiffLabel(re_rdate);

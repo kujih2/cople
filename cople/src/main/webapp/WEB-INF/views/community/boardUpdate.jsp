@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 내용 시작 -->
 <script type="text/javascript" src="${pageContetx.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="hrrp://stackpath.bootstrapcnd.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContetx.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContetx.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
@@ -44,8 +44,8 @@
 			</li>
 		</ul>
 		<div class="align-center">
-			<form:button>전송</form:button>
-			<input type="button" value="글 상세" 
+			<form:button class="commu-btn" >전송</form:button>
+			<input class="commu-btn" type="button" value="글 상세" 
 			   onclick="location.href='boardDetail?board_num=${boardVO.board_num}'">
 		</div>	
 	</form:form>

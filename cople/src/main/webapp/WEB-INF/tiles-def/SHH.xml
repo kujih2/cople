@@ -23,6 +23,7 @@
     	<put-attribute name="body" value="/WEB-INF/views/community/boardDetail.jsp"/>
     </definition>
     <definition name="boardUpdate" extends="commuMain">
+    	<put-attribute name="css" value="/WEB-INF/views/community/boardCSS.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/community/boardUpdate.jsp"/>
     </definition>
 </tiles-definitions>

@@ -34,5 +34,6 @@ public interface BoardService {
 	public void insertReply(BoardReplyVO boardReplyVO);
 	public void insertReplies (BoardReplyVO boardReplyVO);
 	public void updateReply(BoardReplyVO boardReplyVO);
+	public void deleteReply(int re_num);
 	
 }

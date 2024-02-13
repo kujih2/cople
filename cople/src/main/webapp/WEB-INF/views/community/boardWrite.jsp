@@ -45,8 +45,8 @@
 		</ul>
 		</div>
 		<div class="align-center">
-			<form:button>전송</form:button>
-			<input type="button" value="목록" onclick="location.href='boardList'">
+			<form:button class="commu-btn">전송</form:button>
+			<input class="commu-btn" type="button" value="목록" onclick="location.href='boardList'">
 		</div>
 	</form:form>
 </div>

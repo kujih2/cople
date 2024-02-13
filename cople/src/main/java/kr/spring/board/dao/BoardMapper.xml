@@ -157,7 +157,8 @@
 				       board_num,
 				       mem_num,
 				       id,
-				       nick_name
+				       nick_name,
+				       auth
 				    FROM commu_reply
 				    JOIN member USING(mem_num)
 				    WHERE board_num=#{board_num})a

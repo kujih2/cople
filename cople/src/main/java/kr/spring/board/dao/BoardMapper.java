@@ -51,11 +51,17 @@ public interface BoardMapper {
 		public List<BoardReplyVO> selectListReply(Map<String,Object> map);
 		@Select("SELECT COUNT(*) FROM commu_reply WHERE board_num=#{board_num}")
 		public int selectRowCountReply(Map<String,Object> map);
-		//댓글 수정,삭제시 작성자 회원번호 구할 때 사용
-		@Select("SELECT * FROM spboard_reply WHERE re_num=#{re_num}")
-		public BoardReplyVO selectReply(int re_num);
-		public void insertReply(BoardReplyVO boardReplyVO);
-		public void insertReplies (BoardReplyVO boardReplyVO);
-		public void updateReply(BoardReplyVO boardReplyVO);
+		 //댓글 수정,삭제시 작성자 회원번호 구할 때 사용
+		 @Select("SELECT * FROM commu_reply WHERE re_num=#{re_num}")
+		 public BoardReplyVO selectReply(int re_num);
+		 public void insertReply(BoardReplyVO boardReply);
+		 public void insertReplies(BoardReplyVO boardReply);
+		 @Update("UPDATE commu_reply SET re_content=#{re_content},re_ip=#{re_ip},re_mdate=SYSDATE WHERE re_num=#{re_num}")
+		 public void updateReply(BoardReplyVO boardReply);
+		 @Delete("DELETE FROM commu_reply WHERE re_num=#{re_num}")
+		 public void deleteReply(int re_num);
+		 //부모글 삭제시 댓글이 존재하면 부모글 삭제전 댓글 삭제
+		 @Delete("DELETE FROM commu_reply WHERE board_num=#{board_num}")
+		 public void deleteReplyByBoardNum(int board_num);
 	
 }

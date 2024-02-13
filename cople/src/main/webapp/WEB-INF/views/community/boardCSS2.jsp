@@ -38,7 +38,11 @@
 	padding-right: 40px;
 	padding-bottom: 40px;
 }
-
+textarea{
+	resize: none;
+	border-radius: 10px;
+	border:3px solid #d7dadb;
+}
 /* 공통 메시지 및 버튼
 -------------------------*/
 .result-display{
@@ -203,6 +207,18 @@ form#register_form ul, form#update_form ul{
 }
 /*게시판 글 상세
 ---------------------*/
+.response img{
+	position:relative;
+	top:5px;
+}
+.void{
+	letter-spacing:10px;
+}
+.commu_img{
+	position:relative;
+	top:4.5px;
+}
+
 .title-detail{
 	font-weight:bold;
 	font-size:27pt;
@@ -259,9 +275,9 @@ span.letter-count{
 	color:#999;
 }
 textarea.rep-content{
-	width:90%;
-	height:50px;
-	margin:10px 10px;
+	width:95%;
+	height:70px;
+	margin:1px 1px;
 }
 div#re_first,div#mre_first{
 	float:left;
@@ -309,12 +325,18 @@ div.editable {
    margin-right:10px;
 }
 
+/*댓글*/
+.sub_item{
+	padding-top:10px;
+}
 
-
-
-
-
-
+#modify-btn{
+	float:right;
+}
+#delete-btn{
+	margin-left:10px;
+	float:right;
+}
 
 
 </Style>

@@ -111,7 +111,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 	@Override
 	public void updateReply(BoardReplyVO boardReplyVO) {
-		// TODO Auto-generated method stub
+		boardMapper.updateReply(boardReplyVO);
+	}
+	@Override
+	public void deleteReply(int re_num) {
+		boardMapper.deleteReply(re_num);
+		
 	}
 	
 }
