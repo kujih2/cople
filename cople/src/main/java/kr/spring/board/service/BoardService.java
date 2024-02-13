@@ -35,7 +35,4 @@ public interface BoardService {
 	public void insertReplies (BoardReplyVO boardReplyVO);
 	public void updateReply(BoardReplyVO boardReplyVO);
 	
-	//마이 페이지
-	public List<BoardVO> selectWriter(Map<String,Object> map);
-	public int selectWriterRowCount(Map<String,Object> map);
 }

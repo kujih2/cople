@@ -17,6 +17,7 @@
 	padding-bottom: 40px;
 	margin:0 auto;/*중앙 정렬*/
 	margin-bottom:100px;
+	list-style-type: none;
 }
 .page-one{
 	width:600px;
@@ -52,12 +53,13 @@
 .error-color{
 	color:#ff0000;
 }
-.default-btn{
-	padding:5px 20px;
-	border:1px solid #09aa5c;
-	border-radius:2px;
+.commu-btn{
+	padding:5px 10px;
+	border:3px solid #4fa1e0;
+	border-radius:5px;
 	color:#fff;
-	background-color:#09aa5c;
+	background-color:#4fa1e0;
+	font-size:11pt;
 	font-weight:bold;
 	cursor:pointer;
 }
@@ -117,22 +119,29 @@ ul.search li{
 .sub-btn {
 	height:40px;
 	width:90px;
-	border:2px solid #bdbdbd;
-	border-radius:10px;
+	background-color:#4fa1e0;
+	border:2px solid #4fa1e0;
+	border-radius:5px;
 	font-weight: bold;
 	font-size:11pt;
 	margin-right:5px;
+	color:white;
 	cursor: pointer;
 }
 .sub-btn2 {
 	width:90px;
 	border:2px solid #bdbdbd;
-	border-radius:10px;
+	border-radius:5px;
 	font-weight: bold;
 	font-size:11pt;
 	padding-left:10px;
 	cursor: pointer;
 }
+hr {
+	border: 0;
+    height: 2px;
+    background: #ccc;}
+
 /*게시판 목록
 -----------------------*/
 form#search_form #order{
@@ -149,7 +158,7 @@ form#search_form #order{
 	position: relative;
     top:30px;
 }
-.title-elements span {
+.title-elements span{
 	font-weight:bold;
 	font-size:30pt;
 	color:#757575;
@@ -168,7 +177,7 @@ div.board_list div img{
 	top: 2px;
 }
 
-div.both{
+.both{
 	clear:both;
 }
 .refresh-button {
@@ -194,6 +203,12 @@ form#register_form ul, form#update_form ul{
 }
 /*게시판 글 상세
 ---------------------*/
+.title-detail{
+	font-weight:bold;
+	font-size:27pt;
+	color:#757575;
+	margin-right:16.5em;
+}
 ul.detail-info{
 	list-style:none;
 	margin:0;
@@ -226,7 +241,9 @@ ul.detail-info li:last-child{
 div#reply_div{
 	padding:5px 10px 40px 10px;
 	margin-top:10px;
-	background-color:#eeeeee;
+	margin-bottom:10px;
+	border:2.5px solid #6d7073;
+	border-radius:6px;
 }
 form#re_form{
 	width:650px;
@@ -289,6 +306,7 @@ div.editable {
    object-fit:cover;
    object-position:top;
    border-radius:50%;
+   margin-right:10px;
 }
 
 

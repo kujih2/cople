@@ -7,8 +7,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/SHH/community.fav.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/SHH/community.reply.js"></script>
-<div class="page-detail">
-	<h1><a href="boardList">자유게시판</a></h1>
+<div class="page-detail ">
+	<li><a href="boardList" class="title-detail">자유게시판</a>
+		<c:if test="${!empty user && user.mem_num == board.mem_num}">
+			<input type="button" value="글삭제" id="delete_btn" class="commu-btn">
+		</c:if>
+	</li>
 	<hr size="1" width="100%">
 	<ul class="detail-info">
 		<li>
@@ -39,21 +43,20 @@
 		<%-- 좋아요 싫어요 --%>
 		<li>
 			<img id="output_fav" class="favicon" data-num="${board.board_num}" data-favStatus="1"
-				 src="${pageContext.request.contextPath}/images/fav.png" width="24">
+				 src="${pageContext.request.contextPath}/images/fav.png" width="28">
 		</li>
 		<li>
 			<span id="favHateSum"></span>
 		</li>
 		<li>
 			<img id="output_hate" class="favicon" data-num="${board.board_num}" data-favStatus="2"
-			src="${pageContext.request.contextPath}/images/hate.png" width="21">
+			src="${pageContext.request.contextPath}/images/hate.png" width="25">
 		</li>
 	</ul>
 	</div>
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_num == board.mem_num}">
-		<input type="button" value="수정" onclick="location.href='boardUpdate?board_num=${board.board_num}'">
-		<input type="button" value="삭제" id="delete_btn">
+		<input type="button" class="commu-btn" value="수정" onclick="location.href='boardUpdate?board_num=${board.board_num}'">
 		<script type="text/javascript">
 			let delete_btn = document.getElementById('delete_btn');
 			delete_btn.onclick=function(){
@@ -71,7 +74,6 @@
 	</ul>
 	<!-- 댓글 시작 -->
 	<div id="reply_div">
-		<span class="re-title">댓글 달기</span>
 		<form id="re_form">
 			<input type="hidden" name="board_num" 
 			                value="${board.board_num}" id="board_num">

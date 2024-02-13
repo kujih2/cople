@@ -114,14 +114,4 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 	}
 	
-	//마이 페이지
-	@Override
-	public List<BoardVO> selectWriter(Map<String, Object> map) {
-		return boardMapper.selectWriter(map);
-	}
-	@Override
-	public int selectWriterRowCount(Map<String, Object> map) {
-		return boardMapper.selectWriterRowCount(map);
-	}
-	
 }

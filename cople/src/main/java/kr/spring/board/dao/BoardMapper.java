@@ -57,13 +57,5 @@ public interface BoardMapper {
 		public void insertReply(BoardReplyVO boardReplyVO);
 		public void insertReplies (BoardReplyVO boardReplyVO);
 		public void updateReply(BoardReplyVO boardReplyVO);
-		
-	//관리자
-		public void insertNotice(BoardVO board);
-		
-	//마이페이지
-		public List<BoardVO> selectWriter(Map<String,Object> map);
-		@Select("SELECT COUNT(*) FROM commu_board WHERE mem_num=#{mem_num}")
-		public int selectWriterRowCount(Map<String,Object> map);
-		
+	
 }

@@ -65,11 +65,11 @@ $(function(){
 					output += '<div class="sub-item">';
 					output += '<p>' + item.re_content.replace(/\r\n/g,'<br>') + '</p>';
 					
-					output += ' <input type="button" data-num="'+item.re_num+'" value="답글달기" class="replies-btn">';
+					output += ' <input type="button" data-num="'+item.re_num+'" value="답글달기" id="replies-btn" class="commu-btn">';
 					if(param.user_num==item.mem_num){
 						//로그인한 회원번호와 댓글 작성자 회원번호와 같으면
-						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" class="modify-btn">';
-						output += ' <input type="button" data-num="'+item.re_num+'" value="삭제" class="delete-btn">';
+						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" id="modify-btn" class="commu-btn">';
+						output += ' <input type="button" data-num="'+item.re_num+'" value="삭제" id="delete-btn" class="commu-btn">';
 					}
 					
 					output += '<hr size="1" noshade>';
@@ -146,7 +146,7 @@ $(function(){
 	 * 댓글 수정
      *-------------------------------*/
 	//댓글 수정 버튼 클릭시 수정폼 노출
-	$(document).on('click','.modify-btn',function(){
+	$(document).on('click','#modify-btn',function(){
 		//댓글 번호
 		let re_num = $(this).attr('data-num');
 		//댓글 내용
@@ -158,8 +158,8 @@ $(function(){
             modifyUI += '<textarea rows="3" cols="50" name="re_content" id="mre_content" class="rep-content">'+content+'</textarea>';
             modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
             modifyUI += '<div id="mre_second" class="align-right">';
-            modifyUI += ' <input type="submit" value="수정">';
-            modifyUI += ' <input type="button" value="취소" class="re-reset">';
+            modifyUI += ' <input type="submit" value="수정" class="commu-btn">';
+            modifyUI += ' <input type="button" value="취소" id="re-reset" class="commu-btn">';
             modifyUI += '</div>';
             modifyUI += '<hr size="1" noshade width="96%">';
             modifyUI += '</form>';
@@ -235,7 +235,7 @@ $(function(){
 	/*-------------------------------
 	 * 대댓글 작성
      *-------------------------------*/
-	$(document).on('click','.replies-btn',function(){
+	$(document).on('click','#replies-btn',function(){
 		let board_num = $('#board_num').val();
 		//댓글 번호
 		let re_num = $(this).attr('data-num');
