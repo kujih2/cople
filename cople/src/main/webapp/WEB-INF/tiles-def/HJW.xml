@@ -79,6 +79,10 @@
     	<put-attribute name="footer"
     	               value="/WEB-INF/views/admin/footer_admin.jsp"/>                                             
     </definition>
+    <definition name="adminAuthCertify" extends="adminTeacher">
+    	<put-attribute name="title" value="회원 등급 승인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/admin/adminAuthCertify.jsp"/>
+    </definition>
 </tiles-definitions>
 
 

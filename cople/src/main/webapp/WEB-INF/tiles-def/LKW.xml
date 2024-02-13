@@ -8,7 +8,6 @@
     <definition name="wikiDetail" template="/WEB-INF/views/template/layout_wiki.jsp">
 	    <put-attribute name="title" value="위키"/>
     	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>    	
-    	<put-attribute name="subHeader" value="/WEB-INF/views/wiki/wikiHeader.jsp"/>    	
     	<put-attribute name="body" value="/WEB-INF/views/wiki/wikiDetail.jsp"/>
     	<put-attribute name="css" value="/WEB-INF/views/wiki/wikiDetailCSS.jsp"/>
 	    <put-attribute name="js" value="/WEB-INF/views/wiki/wikiDetailJS.jsp"/>
@@ -26,9 +25,9 @@
     	<put-attribute name="body" value="/WEB-INF/views/wiki/wikiUpdate.jsp"/>    	    	
     </definition>
     <definition name="wikiList" extends="wikiDetail">
-	    <put-attribute name="title" value="문서검색"/> 	
+	    <put-attribute name="title" value="문서검색"/>
+	    <put-attribute name="css" value="/WEB-INF/views/wiki/wikiListCSS.jsp"/>
 	    <put-attribute name="js" value="/WEB-INF/views/wiki/wikiListJS.jsp"/>
-	    
     	<put-attribute name="body" value="/WEB-INF/views/wiki/wikiList.jsp"/>    	    	
     </definition>
     <definition name="wikiHistory" extends="wikiDetail">

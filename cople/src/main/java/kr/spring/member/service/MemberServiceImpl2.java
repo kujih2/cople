@@ -1,5 +1,7 @@
 package kr.spring.member.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,11 @@ public class MemberServiceImpl2 implements MemberService2{
 		memberMapper.insertMember_detail(member);
 		
 		return member;
+	}
+
+	@Override
+	public List<MemberVO> selectUncertifiedMember() {
+		return memberMapper.selectUncertifiedMember();
 	}
 
 }

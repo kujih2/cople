@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#keyword').on('keydown', function(event) {
+	$('#total_search_box').on('keydown', function(event) {
 	    if (event.which === 13) {
 	    	event.preventDefault();
-	    	window.location.href = 'detail?doc_name='+$('#keyword').val();
+	    	window.location.href = 'detail?doc_name='+$('#total_search_box').val();
 	    }
 	});
 	

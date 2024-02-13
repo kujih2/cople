@@ -82,14 +82,14 @@
 		<where>
 			<if test="keyword != null and keyword !=''">
 				<if test="keyfield == 1 or keyfield==null">
-					doc_name Like '%' || #{keyword} || '%' OR
-					update_content Like '%' || #{keyword} || '%'
+					(doc_name Like '%' || #{keyword} || '%' OR
+					update_content Like '%' || #{keyword} || '%') AND update_status=1
 				</if>
 				<if test="keyfield == 2">
-					doc_name Like '%' || #{keyword} || '%'
+					(doc_name Like '%' || #{keyword} || '%') AND update_status=1
 				</if>
 				<if test="keyfield == 3">
-					update_content Like '%' || #{keyword} || '%'
+					(update_content Like '%' || #{keyword} || '%') AND update_status=1
 				</if>
 
 			</if>
@@ -115,11 +115,12 @@
 				update_date
 			 FROM wiki_doc
 			 LEFT OUTER JOIN wiki_update USING(doc_num)
+			 
 			<include refid="wikiSearch"></include>
 			)a)
 			
 		<![CDATA[
-		WHERE rnum >= #{start} AND rnum <=#{end} AND update_status=1
+		WHERE rnum >= #{start} AND rnum <=#{end}
 		]]>
 			
 	</select>

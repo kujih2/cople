@@ -27,7 +27,7 @@
            </a>
         </li>
 		<li class="">
-        	<a href="#" title="관리자 관리">
+        	<a href="/admin/adminAuthCertify" title="관리자 관리">
                 <em class="icon-people"></em>
                 <span>관리자 승인</span>
             </a>
