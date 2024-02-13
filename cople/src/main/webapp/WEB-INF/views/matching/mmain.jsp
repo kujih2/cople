@@ -937,13 +937,25 @@ function drawChart() {
     ["기타", 기타, "color: #e5e4e2"]
   ]);
 
+//주석: 자격증 이름을 표시할 열 추가
+  data.addColumn({type: 'string', role: 'annotation'});
+
+  // 주석: 각 막대마다 자격증 이름을 설정
+  data.setValue(1, 3, "정보처리기사(필기)");
+  data.setValue(2, 3, "정보처리기사(실기)");
+  data.setValue(3, 3, "SQLD");
+  data.setValue(4, 3, "AWS");
+  data.setValue(5, 3, "기타");
+
   var view = new google.visualization.DataView(data);
   view.setColumns([0, 1,
                    { calc: "stringify",
                      sourceColumn: 1,
                      type: "string",
                      role: "annotation" },
-                   2]);
+                   2, 3]);
+  
+
 
   var options = {
     title: "취업 당시 보유 자격증",

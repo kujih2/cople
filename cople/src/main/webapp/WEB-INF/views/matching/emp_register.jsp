@@ -348,11 +348,12 @@ $(function () {
                     selected = true;
                     break;
                 }
-                if (!selected) {
-                    let label = document.querySelector('label[for="' + groups[i] + '"]');
-                    alert(label.textContent + ' 항목은 필수 선택입니다.');
-                    return false;
-                }
+            }
+
+            if (!selected) {
+                let label = document.querySelector('label[for="' + groups[i] + '"]');
+                alert(label.textContent + ' 항목은 필수 선택입니다.');
+                return false;
             }
         }
         
