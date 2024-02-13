@@ -587,7 +587,7 @@ span.category1{
 	position:relative;
 	border:1px solid black;
 	width:70%;
-	height:80px;
+	height:100px;
 	margin:0 auto;
 	padding-left:280px;
 	padding-top:10px;
@@ -595,8 +595,8 @@ span.category1{
 }
 .profileListBox img{
 	position:absolute;
-	margin-left:100px;
-	margin-top:-20px;
+	margin-left:-80px;
+	margin-top:5px;
 }
 .profile_title{
 	font-weight:bold;

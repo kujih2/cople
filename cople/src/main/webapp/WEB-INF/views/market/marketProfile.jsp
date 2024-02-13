@@ -14,12 +14,12 @@
 		<c:if test="${!empty list}">
 					<c:forEach var="list" items="${list}">
 						<div class="profileListBox" onclick="location.href='detail?product_num=${list.product_num}'">
+								<img src="${pageContext.request.contextPath}/upload/${list.filename0}" width="55" height="55">
 								<span class="profile_title">${list.product_title}</span> 
 								<span class="profile_price"><fmt:formatNumber value="${list.product_price}" pattern="#,###" /> 원</span>
 								<br>
 								<b>판매자:</b><c:if test="${empty list.seller_nickname}">${list.seller_id}</c:if>
 									 <c:if test="${!empty list.seller_nickname}">${list.seller_nickname}</c:if>
-									 <img src="${pageContext.request.contextPath}/upload/${list.filename0}" width="55" height="55">
 						</div>
 					</c:forEach>
 				</c:if>
