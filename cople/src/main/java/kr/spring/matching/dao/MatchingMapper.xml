@@ -181,7 +181,7 @@
 			    	member
 			    	ON letter.sender=member.mem_num
 			    WHERE 
-			    	receiver=#{receiver}
+			    	receiver=#{receiver} AND receive_del=0
 			    	<include refid="letterSearch"></include>
 			   	ORDER BY letter_num DESC,
 			   			 date_read NULLS FIRST,
@@ -232,7 +232,7 @@
 			    	member
 			    	ON letter.receiver=member.mem_num
 			    WHERE 
-			    	sender=#{sender}
+			    	sender=#{sender} and sent_del = 0
 			    	<include refid="letterSentSearch"></include>
 			   	ORDER BY letter_num DESC,
 			   			 date_read NULLS FIRST,
@@ -288,7 +288,7 @@
 			    	member
 			    	ON advice.sender=member.mem_num
 			    WHERE 
-			    	receiver=#{receiver}
+			    	receiver=#{receiver} and receive_del=0
 			    	<include refid="adviceSearch"></include>
 			   	ORDER BY advice_num DESC,
 			   			 date_read NULLS FIRST,
@@ -298,9 +298,55 @@
 		]]>
 	</select>
 	
+	<sql id="adviceSendSearch">
+		<where>
+			<if test="keyword!=null and keyword!=''">
+				<if test="keyfield==1">
+					AND receiver LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield==2">
+					AND advice_content LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield==3">
+					AND (advice_content LIKE '%' || #{keyword} || '%' OR
+					 receiver LIKE '%' || #{keyword} || '%')
+				</if>
+			</if>
+		</where>
+	</sql>
+	
 	<!-- 보낸 첨삭 리스트 -->
 	<select id="selectSentAdvice" parameterType="map" resultType="adviceVO">
-	
+	SELECT 
+		  *
+		FROM
+			(SELECT
+				a.*, rownum rnum
+			 FROM
+			   (SELECT 
+			   		advice_num, 
+			   		sender,
+			   		receiver,
+			   		<![CDATA[
+				   	 REPLACE(REPLACE(advice_content,'<','&lt;'),'>', '&gt;')advice_content,
+			   		]]>
+			   		date_sent,
+			   		date_read,
+			   		member.id AS id
+			    FROM 
+			        advice
+			    JOIN 
+			    	member
+			    	ON advice.receiver=member.mem_num
+			    WHERE 
+			    	sender=#{sender} and sent_del=0
+			    	<include refid="adviceSendSearch"></include>
+			   	ORDER BY advice_num DESC,
+			   			 date_read NULLS FIRST,
+			   			 date_read DESC)a)
+		<![CDATA[
+		WHERE rnum>= #{start} AND rnum<= #{end}
+		]]>
 	</select>
 	
 	

@@ -63,11 +63,14 @@
             <li>내용 <br><br>
             ${advice.advice_content}
             </li>
+            <li>
+           		<a href="download.do?advice_num=${advice.advice_num}">첨부파일</a>
+            </li>
         </ul>
         <div>
 			<a class="answer" href="#" onclick="answer_advice('${sender}')" data-id="${sender}">첨삭 답장하기</a>
-            <input type="button" value="삭제" onclick="location.href=''">
-            <input type="button" value="목록" onclick="location.href=''">
+            <input type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/myPage/adviceReceiveDelete?letter_num=${advice.advice_num}'">
+            <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/myPage/myAdvice'">
         </div>
     </div>
 </body>

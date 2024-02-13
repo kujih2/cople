@@ -1,17 +1,22 @@
 package kr.spring.mypage.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -164,6 +169,48 @@ public class JobsController {
 			model.addAttribute("letter_num", letter_num);
 			
 			return "LetterDetail";	
+	}
+	
+	//받은 편지 삭제
+	@GetMapping("/myPage/letterReceiveDelete")
+	public String letterReceiveDelete(HttpSession session, Model model, HttpServletRequest request, int letter_num) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user==null) {
+			model.addAttribute("message", "회원만 이용 가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/member/login");
+
+			return "matching/resultAlert";
+		}
+		
+		matchingService.deleteReceivedLetter(letter_num);
+		model.addAttribute("message", "성공적으로 삭제되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/myPage/myLetter");
+
+		
+		return "common/resultAlert";
+	}
+	
+	//보낸 편지 삭제
+	@GetMapping("myPage/letterSentDelete")
+	public String letterSentDelete(HttpSession session, Model model, HttpServletRequest request, int letter_num) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user==null) {
+			model.addAttribute("message", "회원만 이용 가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/member/login");
+
+			return "matching/resultAlert";
+		}
+		
+		matchingService.deleteSentLetter(letter_num);
+		model.addAttribute("message", "성공적으로 삭제되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/myPage/myLetter");
+
+		
+		return "common/resultAlert";
 	}
 	
 	@RequestMapping("/myPage/letterSentDetail")
@@ -402,6 +449,96 @@ public class JobsController {
 		}
 
 		return "matching/resultAlert";
+	}
+	
+	//받은 첨삭 삭제
+	@GetMapping("/myPage/adviceReceiveDelete")
+	public String adviceReceiveDelete(HttpSession session, Model model, HttpServletRequest request, int letter_num) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if(user==null) {
+			model.addAttribute("message", "회원만 이용 가능합니다.");
+			model.addAttribute("url", request.getContextPath() + "/member/login");
+
+			return "matching/resultAlert";
+		}
+		
+		matchingService.deleteReceivedAdvice(letter_num);
+		model.addAttribute("message", "성공적으로 삭제되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/myPage/myadvice");
+
+		
+		return "common/resultAlert";
+	}
+	
+	//보낸 첨삭 요청함
+	@RequestMapping("/myPage/myAdviceSent")
+	public ModelAndView receivedAdviceSent(@RequestParam(value="pageNum",defaultValue="1") int currentPage, HttpSession session,
+									String keyfield, String keyword) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		int mem_num = user.getMem_num();
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("sender", mem_num);
+		
+		int count = matchingService.sentAdviceCount(mem_num);
+		log.debug("<<Advice Count >> : " + count);
+		
+		PageUtil page = new PageUtil(keyfield, keyword, currentPage, count, 20, 10, "MyAdviceAction");
+		
+		List<AdviceVO> list = null;
+		if(count>0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = matchingService.selectSentAdvice(map);
+			log.debug("<<LetterVO list >> : " + list);
+			
+			if (list != null && !list.isEmpty()) {
+			    for (AdviceVO adviceVO : list) {
+			        adviceVO.setAdvice_content(StringUtil.useNoHtml(adviceVO.getAdvice_content()));
+			    }
+			}
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",list);
+		mav.addObject("count",count);
+		mav.addObject("page",page.getPage());
+		mav.setViewName("MyAdviceSentAction");
+		
+		return mav;
+	}
+	
+	private static final String UPLOAD_PATH = "/upload";
+
+	@RequestMapping("/myPage/download.do")
+	public void fileDownload(int advice_num, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		
+		AdviceVO adviceVO = matchingService.selectAdvice(advice_num);
+		
+		String file_path = request.getServletContext().getRealPath(UPLOAD_PATH);
+		String fileName = adviceVO.getFilename();
+		fileName=fileName.toString().substring(37);
+		String downFile = file_path+"/"+fileName;		
+		
+		File f = new File(downFile);
+		
+		response.setContentType("application/download");
+        response.setContentLength((int)f.length());
+        response.setHeader("Content-disposition", "attachment;filename=\"" + fileName + "\"");
+        // response 객체를 통해서 서버로부터 파일 다운로드
+        OutputStream os = response.getOutputStream();
+        // 파일 입력 객체 생성
+        FileInputStream fis = new FileInputStream(f);
+        FileCopyUtils.copy(fis, os);
+        fis.close();
+        os.close();
+		
 	}
 
 }

@@ -42,7 +42,6 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 				.addPathPatterns("/market/modify")
 				.addPathPatterns("/market/delete")
 				.addPathPatterns("/market/marketChatRoom")
-				.addPathPatterns("/market/marketProfile")
 				;
 	}
 	
@@ -55,6 +54,7 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 				"/WEB-INF/tiles-def/LKW.xml",
 				"/WEB-INF/tiles-def/LKW2.xml",
 				"/WEB-INF/tiles-def/SHJ.xml",
+				"/WEB-INF/tiles-def/SHJ2.xml",
 				"/WEB-INF/tiles-def/HJW.xml",
 				"/WEB-INF/tiles-def/JJH.xml",
 				"/WEB-INF/tiles-def/SHH.xml"

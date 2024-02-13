@@ -3,6 +3,7 @@ package kr.spring.matching.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -39,6 +40,21 @@ public interface MatchingMapper {
 	@Select("SELECT COUNT(*) FROM letter WHERE sender=#{mem_nmm}")
 	public int sentLetterCount(int mem_num);
 	//보낸쪽지
+	//받은 쪽지 삭제상태로 변경
+	@Update("UPDATE letter SET receive_del = 1 WHERE letter_num=#{letter_num}")
+	public void deleteReceivedLetter(int letter_num);
+	//받은 쪽지 보낸사람 삭제상태여부 불러오기
+	@Select("SELECT sent_del FROM letter WHERE letter_num=#{letter_num}")
+	public int selectSentDel(int letter_num);
+	//쪽지 테이블에서 삭제
+	@Delete("DELETE FROM letter WHERE letter_num=#{letter_num}")
+	public void deleteLetter(int letter_num);
+	//보낸 쪽지 삭제로 변경
+	@Update("UPDATE letter SET sent_del = 1 WHERE letter_num=#{letter_num}")
+	public void deleteSentLetter(int letter_num);
+	//보낸 쪽지 받은사람 삭제상태여부 불러오기
+	@Select("SELECT receive_del FROM letter WHERE letter_num=#{letter_num}")
+	public int selectReceiveDel(int letter_num);
 	
 	
 	//첨삭기능
@@ -53,6 +69,21 @@ public interface MatchingMapper {
 	public int sentAdviceCount(int mem_num);
 	@Update("UPDATE advice SET date_read= CASE WHEN date_read IS NULL THEN SYSDATE ELSE date_read END WHERE advice_num=#{advice_num}")
 	public void readAdvice(int advice_num);
+	//받은 첨삭 삭제상태로 변경
+	@Update("UPDATE advice SET receive_del = 1 WHERE advice_num=#{advice_num}")
+	public void deleteReceivedAdvice(int advice_num);
+	//받은 첨삭 보낸사람 삭제상태여부 불러오기
+	@Select("SELECT sent_del FROM advice WHERE advice_num=#{advice_num}")
+	public int selectAdviceSentDel(int advice_num);
+	//첨삭 테이블에서 삭제
+	@Delete("DELETE FROM advice WHERE advice_num=#{advice_num}")
+	public void deleteAdvice(int advice_num);
+	//보낸 첨삭 삭제로 변경
+	@Update("UPDATE advice SET sent_del = 1 WHERE advice_num=#{advice_num}")
+	public void deleteSentAdvice(int advice_num);
+	//보낸 첨삭 받은사람 삭제상태여부 불러오기
+	@Select("SELECT receive_del FROM advice WHERE advice_num=#{advice_num}")
+	public int selectAdviceReceiveDel(int advice_num);
 	
 	//회원기능
 	@Select("SELECT mem_num FROM member WHERE id=#{id}")

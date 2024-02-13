@@ -5,15 +5,14 @@
 <div class="page-main">
 	<br><br>
 	<h2><a href='${pageContext.request.contextPath}/myPage/myAdvice'>받은 첨삭요청함</a></h2>
-	<h2><a href='${pageContext.request.contextPath}/myPage/myAdviceSent'>보낸 첨삭 요청함</a></h2>
-	<br><br>
-	<form action="/myPage/myAdvice" id="asearch_form" method="get">
+<h2><a href='${pageContext.request.contextPath}/myPage/myAdviceSent'>보낸 첨삭응답함</a></h2>
+	<br><br><form action="/myPage/myAdvice" id="asearch_form" method="get">
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield" style="height:44px;">
-					<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>보낸사람</option>
+					<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>받은사람</option>
 					<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>내용</option>
-					<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>보낸사람+내용</option>
+					<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>받은사람+내용</option>
 				</select>
 			</li>
 			<li>
@@ -27,12 +26,12 @@
 	</form>
 	<br><br>
 	<c:if test="${count == 0}">
-	<div class="result-display">받은 첨삭 없습니다.</div>
+	<div class="result-display">보낸 첨삭 없습니다.</div>
 	</c:if>
 	<c:if test="${count >0 }">
 	<table class="striped-table">
 		<tr>
-			<td class="align-center">보낸사람</td>
+			<td class="align-center">받은사람</td>
 			<td class="align-center">날짜</td>
 			<td class="align-center">읽은 날짜</td>
 		</tr>

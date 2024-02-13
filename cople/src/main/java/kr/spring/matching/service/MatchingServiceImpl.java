@@ -140,6 +140,48 @@ public class MatchingServiceImpl implements MatchingService{
 		return matchingMapper.selectAdvice(advice_num);
 	}
 	
+	//받은 쪽지 삭제
+	@Override
+	public void deleteReceivedLetter(int letter_num) {
+		int del = matchingMapper.selectSentDel(letter_num);
+		matchingMapper.deleteReceivedLetter(letter_num);
+		if(del==1) {
+			matchingMapper.deleteLetter(letter_num);
+		}
+	}
+	//보낸 쪽지 삭제
+	@Override
+	public void deleteSentLetter(int letter_num) {
+		int del = matchingMapper.selectReceiveDel(letter_num);
+		matchingMapper.deleteSentLetter(letter_num);
+		if(del==1) {
+			matchingMapper.deleteLetter(letter_num);
+		}
+	}
+
+
+	//보낸 첨삭 삭제
+	@Override
+	public void deleteSentAdvice(int advice_num) {
+		int del = matchingMapper.selectReceiveDel(advice_num);
+		matchingMapper.deleteSentAdvice(advice_num);
+		if(del==1) {
+			matchingMapper.deleteAdvice(advice_num);
+		}
+	}
+	
+	//받은 첨삭 삭제
+	@Override
+	public void deleteReceivedAdvice(int advice_num) {
+		int del = matchingMapper.selectAdviceSentDel(advice_num);
+		matchingMapper.deleteReceivedAdvice(advice_num);
+		if(del ==1) {
+			matchingMapper.deleteAdvice(advice_num);
+		}
+	}
+	
+	
+	
 	
 
 }

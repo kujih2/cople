@@ -26,6 +26,14 @@ public interface MatchingService {
 	public int receivedLetterCount(int mem_num);
 	public int sentLetterCount(int mem_num);
 	public LetterVO readLetter(int letter_num, HttpSession session);
+	//받은 쪽지 삭제
+	public void deleteReceivedLetter(int letter_num);
+	//보낸 쪽지 삭제
+	public void deleteSentLetter(int letter_num);
+	//받은 첨삭 삭제
+	public void deleteReceivedAdvice(int advice_num);
+	//보낸 첨삭 삭제
+	public void deleteSentAdvice(int advice_num);
 	//회원찾기
 	public int findMemnumById(String id);
 	//첨삭기능

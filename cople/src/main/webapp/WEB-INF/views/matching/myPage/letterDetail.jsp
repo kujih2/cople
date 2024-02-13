@@ -66,8 +66,8 @@
         </ul>
         <div>
 			<a class="answer" href="#" onclick="answer_letter('${sender}')" data-id="${sender}">쪽지 보내기</a>
-            <input type="button" value="삭제" onclick="location.href=''">
-            <input type="button" value="목록" onclick="location.href=''">
+            <input type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/myPage/letterSentDelete?letter_num=${letter.letter_num}'">
+            <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/myPage/myLetter'">
         </div>
     </div>
 </body>
