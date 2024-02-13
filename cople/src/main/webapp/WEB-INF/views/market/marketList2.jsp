@@ -98,7 +98,7 @@
 				
 					<div class="styled__ProductWrapper-sc-32dn86-1 eCFZgW">
 						<a data-pid="243493400" target="_blank" rel="noopener noreferrer" class="sc-dEoRIm iizKix">
-							<div class="sc-jtggT eSpfym">
+							<div class="sc-jtggT eSpfym" style="overflow:hidden;">
 								<img src="${pageContext.request.contextPath}/upload/${market.filename0}" width="194" height="194" alt="상품 이미지">
 								<div class="styled__BadgeArea-sc-3zkh6z-0 dwFxLs">
 								</div>
