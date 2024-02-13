@@ -26,7 +26,6 @@ public interface BoardMapper {
 		@Delete("DELETE FROM commu_board WHERE board_num=#{board_num}")
 		public void deleteBoard(int board_num);
 		
-		
 	//좋아요
 		@Select("SELECT * FROM commu_fav WHERE board_num=#{board_num} AND mem_num=#{mem_num}")
 		public BoardFavVO selectFav(BoardFavVO fav);
@@ -59,5 +58,12 @@ public interface BoardMapper {
 		public void insertReplies (BoardReplyVO boardReplyVO);
 		public void updateReply(BoardReplyVO boardReplyVO);
 		
+	//관리자
+		public void insertNotice(BoardVO board);
+		
+	//마이페이지
+		public List<BoardVO> selectWriter(Map<String,Object> map);
+		@Select("SELECT COUNT(*) FROM commu_board WHERE mem_num=#{mem_num}")
+		public int selectWriterRowCount(Map<String,Object> map);
 		
 }

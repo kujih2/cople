@@ -59,7 +59,7 @@ public class BoardController {
 	//전송된 데이터 처리
 	@PostMapping("/community/boardWrite")
 	public String submit(@Valid BoardVO boardVO, BindingResult result, HttpServletRequest request, 
-								HttpSession session, Model model,@RequestParam(name="notice", required = false)String notice ) throws IllegalStateException, IOException {
+								HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<게시판 글 저장>> : " + boardVO);
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
@@ -73,10 +73,6 @@ public class BoardController {
 		boardVO.setMem_num(vo.getMem_num());
 		//ip셋팅
 		boardVO.setIp(request.getRemoteAddr());
-		//auth값 설정
-		if("9".equals(notice)) {
-			boardVO.setAuth(9);
-		}
 		
 		//글쓰기
 		boardService.insertBoard(boardVO);

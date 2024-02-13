@@ -18,9 +18,6 @@
 				제목
 				<form:input path="title" placeholder="제목을 입력하세요."/>
 				<form:errors path="title" cssClass="error-color"/>
-				<c:if test="${user.auth == 9}">
-					공지하기<input type="checkbox" name="notice" value="9">
-				</c:if>
 			</li>
 			<li>
 				내용

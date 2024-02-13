@@ -37,6 +37,11 @@ $(function(){
 				//댓글 목록 작업
 				$(param.list).each(function(index,item){
 					let output = '<div class="item">';
+					
+					if (item.re_parent_num > 0) { // 대댓글인 경우 들여쓰기 적용
+				        output = '<div class="item" style="margin-left: 50px;">';
+				    }
+
 					output += '<ul class="detail-info">';
 					output += '<li>';
 					output += '<img src="../member/viewProfile?mem_num='+item.mem_num+'" width="40" height="40" class="my-photo">';

@@ -7,7 +7,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/SHH/community.fav.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/SHH/community.reply.js"></script>
-<div class="page-main">
+<div class="page-detail">
 	<h1><a href="boardList">자유게시판</a></h1>
 	<hr size="1" width="100%">
 	<ul class="detail-info">
@@ -27,6 +27,7 @@
 			<c:if test="${empty board.modify_date}">
 			작성일 : ${board.reg_date}
 			</c:if>
+			<img src="${pageContext.request.contextPath}/images/commu_eye_1.png" width="20"> ${board.hit}
 		</li>
 	</ul>
 	<h1>${board.title}</h1>

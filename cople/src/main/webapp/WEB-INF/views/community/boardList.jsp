@@ -2,20 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!---내용 시작 -->
-<div>
+<div id="page-list">
 	<!-- 검색 폼 시작 -->
 	<form action="boardList" id="search_form" method="get">
 		<ul class="search">
 			<li>
 			<c:if test="${!empty user}">
-				<input type="button" value="글쓰기" onclick="location.href='boardWrite'">
+				<input type="button" value="글쓰기" class="sub-btn" onclick="location.href='boardWrite'">
 			</c:if>
 			</li>
 			<li>
-				<input type="search" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색할 내용을 입력하세요">
+				<input class="search-bar" type="search" name="keyword" id="keyword" value="${param.keyword}" placeholder="검색할 내용을 입력하세요">
 			</li>
 			<li>
-				<select id="order" name="order">
+				<select id="order" name="order" class="sub-btn2" style ="height:40px">
 					<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
 					<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
 					<option value="3" <c:if test="${param.order == 3}">selected</c:if>>좋아요</option>
@@ -29,9 +29,9 @@
 	</form>
 	<!-- 검색 폼 끝 -->
 	<ul>
-		<li style="border:1px solid #000;">
-			<div>
-				<input type="button" value="새로고침" onclick="location.href=location.href">
+		<li class="title-main">
+			<div class="title-elements">
+				<input type="button" class="refresh-button" onclick="location.href=location.href">
 				<span>자유게시판</span>
 			</div>
 		</li>
@@ -63,13 +63,19 @@
 					<a href="boardDetail?board_num=${board.board_num}">${board.title}</a>
 				</div>
 				<div class="board_list both">
-					<div>조회 ${board.hit}</div>
+					<div><img src="${pageContext.request.contextPath}/images/commu_eye_1.png" width="20"> ${board.hit}</div>
 					<div>
-						<c:if test="${board.favhate_cnt == 0}">눌러 ${board.favhate_cnt}</c:if>
-						<c:if test="${board.favhate_cnt > 0 }">좋아요 ${board.favhate_cnt}</c:if>
-						<c:if test="${board.favhate_cnt < 0 }">싫어요 ${board.favhate_cnt}</c:if>
+						<c:if test="${board.favhate_cnt == 0}"> 
+						<img src="${pageContext.request.contextPath}/images/fav.png" width="20">${board.favhate_cnt}
+						</c:if>
+						<c:if test="${board.favhate_cnt > 0 }">
+						<img src="${pageContext.request.contextPath}/images/fav_alt.png" width="20">${board.favhate_cnt}
+						</c:if>
+						<c:if test="${board.favhate_cnt < 0 }"> 
+						<img src="${pageContext.request.contextPath}/images/hate_alt.png" width="20">${board.favhate_cnt}
+						</c:if>
 					</div>
-					<div>댓글 ${board.re_cnt}</div>
+					<div><img src="${pageContext.request.contextPath}/images/commu_reply_1.png" width="20"> ${board.re_cnt}</div>
 				</div>
 				<hr size="1" width="100%">
 			</c:forEach>

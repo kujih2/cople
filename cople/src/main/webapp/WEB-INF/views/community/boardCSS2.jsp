@@ -4,9 +4,19 @@
 
 /* 페이지 기본 레이아웃
 -------------------------*/
-.page-main{
-	width:98%;
+.page-detail{
+	background-color:#FFFFFF;
+	border-radius: 10px;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+	width:65%;
+	margin: 0 auto;
+	margin-bottom: 100px;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 40px;
+	padding-bottom: 40px;
 	margin:0 auto;/*중앙 정렬*/
+	margin-bottom:100px;
 }
 .page-one{
 	width:600px;
@@ -16,6 +26,16 @@
 	width:25%;
 	display:inline-block;
 	margin:0 auto;
+}
+#page-list{
+	background-color:#FFFFFF;
+	border-radius: 10px;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+	width:65%;
+	margin: 0 auto;
+	margin-bottom: 100px;
+	padding-right: 40px;
+	padding-bottom: 40px;
 }
 
 /* 공통 메시지 및 버튼
@@ -56,7 +76,7 @@ form{
 	width:600px;
 	margin:0 auto;
 	border:none;
-	padding:10px 10px 30px 10px;
+	padding:20px 10px 10px 10px;
 }
 ul{
 	list-style:none;
@@ -65,36 +85,104 @@ ul{
 form ul li{
 	clear:both;
 }
-form ul li label{
-	padding-top:10px;
-	width:110px;
-	float:left;
-}
 
 button[type="submit"],[type="button"]{
 	height:33px;
 }
+/*글 작성*/
+.form-main ul li form{
+	width:600px;
+	margin:0 auto;
+	padding:20px 10px 10px 10px;
+	list-style-type: none;
+}
+
 /*검색 창*/
 ul.search li{
 	margin:0 0 9px 0;
 	padding:0;
 	display:inline;
 }
+.search-bar {
+	height:40px;
+	width:350px;
+	border:3px solid #9e9e9e;
+	border-radius:10px;
+	padding-left:20px;
+	font-size:13pt;
+}
+.search-button {
+	position: relative;
+}
+.sub-btn {
+	height:40px;
+	width:90px;
+	border:2px solid #bdbdbd;
+	border-radius:10px;
+	font-weight: bold;
+	font-size:11pt;
+	margin-right:5px;
+	cursor: pointer;
+}
+.sub-btn2 {
+	width:90px;
+	border:2px solid #bdbdbd;
+	border-radius:10px;
+	font-weight: bold;
+	font-size:11pt;
+	padding-left:10px;
+	cursor: pointer;
+}
 /*게시판 목록
 -----------------------*/
 form#search_form #order{
 	height:32px;
 }
+.title-main {
+	background-image: url('${pageContext.request.contextPath}/images/commu_title_1.png');
+	background-size:cover;
+	border:1.5px solid #eceff1;
+	border-radius:10px;
+	height:110px;
+}
+.title-elements {
+	position: relative;
+    top:30px;
+}
+.title-elements span {
+	font-weight:bold;
+	font-size:30pt;
+	color:#757575;
+}
+
 div.board_list div{
 	float:left;
 	width:auto;
 	padding-right:10px;
-	margin-top:5px;
+	margin-top:15px;
 	margin-bottom:5px;
 }
+div.board_list div img{
+	padding-right:5px;
+	position: relative;
+	top: 2px;
+}
+
 div.both{
 	clear:both;
 }
+.refresh-button {
+    width: 30px; 
+    height: 30px; 
+    background-image: url('${pageContext.request.contextPath}/images/commu_refersh_1.png');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none; 
+    cursor: pointer;
+    margin-left:10px; 
+}
+
 /*게시판 폼
 ---------------------*/
 form#register_form, form#update_form{
