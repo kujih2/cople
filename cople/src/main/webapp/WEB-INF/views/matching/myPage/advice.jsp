@@ -27,7 +27,7 @@
 	</form>
 	<br><br>
 	<c:if test="${count == 0}">
-	<div class="result-display">받은 첨삭 없습니다.</div>
+	<div class="result-display">받은 쪽지함이 비었습니다.</div>
 	</c:if>
 	<c:if test="${count >0 }">
 	<table class="striped-table">

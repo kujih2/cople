@@ -49,7 +49,8 @@
 <script src="${pageContext.request.contextPath}/js/SHJ/register.js"></script>
 <body>
     <div class="page-main">
-        <h2>첨삭요청</h2>
+        <h2><a href='${pageContext.request.contextPath}/myPage/myAdvice'>받은 첨삭요청함</a></h2>
+		<h2><a href='${pageContext.request.contextPath}/myPage/myAdviceSent'>보낸 첨삭 요청함</a></h2>
         <ul class="content">
             <li>보낸 사람 
                 <c:if test="${sender == userId}">나</c:if>
@@ -69,8 +70,8 @@
         </ul>
         <div>
 			<a class="answer" href="#" onclick="answer_advice('${sender}')" data-id="${sender}">첨삭 답장하기</a>
-            <input type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/myPage/adviceReceiveDelete?letter_num=${advice.advice_num}'">
-            <input type="button" value="목록" onclick="location.href='${pageContext.request.contextPath}/myPage/myAdvice'">
+            <input type="button" value="삭제" onclick="location.href=''">
+            <input type="button" value="목록" onclick="location.href=''">
         </div>
     </div>
 </body>

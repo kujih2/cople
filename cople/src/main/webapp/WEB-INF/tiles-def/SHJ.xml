@@ -5,11 +5,12 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name="matchingMain" template="/WEB-INF/views/template/layout_matching.jsp">
+	<definition name="matchingMain" extends="main2">
 		<put-attribute name="title" value="매칭서비스" />
-		<put-attribute name="header" value="/WEB-INF/views/template/header2.jsp"/>
+		<put-attribute name="header"
+			value="/WEB-INF/views/template/header.jsp" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/matching/mmain2.jsp" />
+			value="/WEB-INF/views/matching/mmain.jsp" />
 	</definition>
 
 	<definition name="MyActionMain" extends="myPage3">
@@ -20,31 +21,56 @@
 	<definition name="myPage3"
 		template="/WEB-INF/views/template/layout_mypage3.jsp">
 		<put-attribute name="title" value="MyPage" />
-		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
-		<put-attribute name="subNav" value="/WEB-INF/views/template/myPage_subnav.jsp" />
-		<put-attribute name="nav" value="/WEB-INF/views/template/nav_mypage.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/template/body_mypage.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/template/header.jsp" />
+		<put-attribute name="subNav"
+			value="/WEB-INF/views/template/myPage_subnav.jsp" />
+		<put-attribute name="nav"
+			value="/WEB-INF/views/template/nav_mypage.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/template/body_mypage.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/template/footer.jsp" />
 	</definition>
-	
+
 	<!-- 나의 쪽지함(받은 쪽지함) -->
 	<definition name="MyLetterAction" extends="myPage3">
 		<put-attribute name="title" value="나의 쪽지함" />
-		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/letter.jsp"/>
+		<put-attribute name="body"
+			value="/WEB-INF/views/matching/myPage/letter.jsp" />
 	</definition>
-	
+
+	<!-- 나의 쪽지함(보낸 쪽지함) -->
+	<definition name="MySentLetterAction" extends="myPage3">
+		<put-attribute name="title" value="나의 쪽지함" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/matching/myPage/sentLetter.jsp" />
+	</definition>
+
 	<!-- 나의 쪽지함(받은 쪽지함) -->
 	<definition name="LetterDetail" extends="myPage3">
 		<put-attribute name="title" value="쪽지읽기" />
-		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/letterDetail.jsp"/>
+		<put-attribute name="body"
+			value="/WEB-INF/views/matching/myPage/letterDetail.jsp" />
 	</definition>
-	
+
+	<definition name="LetterSentDetail" extends="myPage3">
+		<put-attribute name="title" value="쪽지읽기" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/matching/myPage/letterSentDetail.jsp" />
+	</definition>
+
 	<!-- 나의 첨삭요청함(받은 첨삭요청함) -->
 	<definition name="MyAdviceAction" extends="myPage3">
 		<put-attribute name="title" value="나의 첨삭요청함" />
-		<put-attribute name="body" value="/WEB-INF/views/matching/myPage/advice.jsp"/>
+		<put-attribute name="body"
+			value="/WEB-INF/views/matching/myPage/advice.jsp" />
 	</definition>
-
+	<definition name="AdviceDetail" extends="myPage3">
+		<put-attribute name="title" value="쪽지읽기" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/matching/myPage/adviceDetail.jsp" />
+	</definition>
 </tiles-definitions>
 
 
