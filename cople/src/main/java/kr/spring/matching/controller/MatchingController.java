@@ -55,7 +55,7 @@ public class MatchingController {
 
 	@RequestMapping("/matching/mmain")
 	public String mmain(@RequestParam(defaultValue="1") int currentPage, Model model,
-						@RequestParam(value="rowCount",defaultValue="10") int rowCount,
+						@RequestParam(value="rowCount",defaultValue="100") int rowCount,
 						HttpSession session) throws JsonProcessingException {
 
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -77,6 +77,7 @@ public class MatchingController {
 			log.debug("<<listEmp >> : " + map);
 			ObjectMapper objectMapper = new ObjectMapper();
 			String empListJson = objectMapper.writeValueAsString(empList);
+			log.debug("<<empList (size)>> : " + empList.size());
 			model.addAttribute("empListJson", empListJson);
 			//멤버 프로필리스트 생성
 			memberList = matchingService.selectMemberList();

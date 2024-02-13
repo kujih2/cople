@@ -23,6 +23,11 @@ $(document).ready(function(){
 	
 })
 </script>
+<style>
+	img{
+	
+	}
+</style>
 <script
 	src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 
@@ -194,7 +199,7 @@ $(document).ready(function(){
 		
 		option = {
 				title: {  // 이 부분이 추가된 부분입니다.
-				    text: '지원직무',  // 제목 텍스트
+				    text: '지원분야',  // 제목 텍스트
 				    left: 'center',  // 가로 위치 (센터 정렬)
 				    top: '90%',  // 세로 위치 (5% 위치)
 				    textStyle: {
@@ -613,7 +618,7 @@ $(document).ready(function(){
 		var empListJson = '${empListJson}'; // JSP에서 문자열 그대로 가져옴
 		
 	    var empList = JSON.parse(empListJson);
-		
+	    console.log("empList의 길이:", empList.length);
 	 	// career 값들의 개수를 저장할 객체 생성
 	    var careerCounts = {};
 		var careerCount=0;
@@ -775,7 +780,7 @@ $(document).ready(function(){
 		  var data = google.visualization.arrayToDataTable(dataArray);
 		
 		  var options = {
-		    title: '수료 후 준비기간 (표본 :' + educationCount + '명)',
+		    title: '학력 (표본 :' + educationCount + '명)',
 		    pieHole: 0.4,
 		  };
 		
