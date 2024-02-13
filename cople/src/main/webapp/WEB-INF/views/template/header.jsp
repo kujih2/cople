@@ -3,7 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 상단시작 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var totalSearchBox = document.getElementById('total_search_box');
+    if (totalSearchBox) {
+        totalSearchBox.addEventListener('keydown', function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                window.location.href = '/wiki/detail?doc_name=' + totalSearchBox.value;
+            }
+        });
+    }
+    document.getElementById('total_search_box_btn').onclick = function() {
+        var totalSearchBox = document.getElementById('total_search_box');
+        if (totalSearchBox) {
+            window.location.href = '/wiki/detail?doc_name=' + totalSearchBox.value;
+        }
+    };
+    
+});
+</script>
 <div id="header">
 	<div id="header_nav_logo">
 			<a href="${pageContext.request.contextPath}/main/main2">
@@ -22,9 +41,11 @@
 	<div id="header_nav_search">
 		<div>
 			<input id="total_search_box" type="text">
-			<svg id="total_search_box_btn" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-			  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-			</svg>
+			<button id="total_search_box_btn">	
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+				  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+				</svg>
+			</button>
 		</div>
 	</div>
 	<div id="header_nav_user">

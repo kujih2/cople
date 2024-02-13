@@ -143,6 +143,7 @@
 		</svg>
 	</button>
 	<div class="editor-item" id="btn_submit">전송</div>
+	<form:textarea path="update_summary" id="update_summary" placeholder="이곳에 수정 요약을 적어주세요"></form:textarea>
 </div>
 <h2>${wikiVO.doc_name}</h2>
 <input id="original_doc" type="hidden" data-num="${wikiVO.doc_num}" data-name="${wikiVO.doc_name}">
@@ -159,7 +160,7 @@
 
 <div id="editor" contenteditable="true" spellcheck="false">
 </div>
-<form:textarea path="update_summary" id="update_summary"></form:textarea>
+
 
 
 </form:form>

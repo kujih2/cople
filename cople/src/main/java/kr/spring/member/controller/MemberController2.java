@@ -1,5 +1,7 @@
 package kr.spring.member.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -50,6 +52,17 @@ public class MemberController2 {
 	@RequestMapping("/member/result")
 	public String form3() {
 		return "memberRegisterResult";
+	}
+
+	@RequestMapping("/admin/adminAuthCertify")
+	public ModelAndView processAdminAuthCertify() {
+		List<MemberVO> list = memberService.selectUncertifiedMember();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("adminAuthCertify");
+		mav.addObject("list",list);
+		
+		return mav;
 	}
 
 	

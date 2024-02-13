@@ -20,7 +20,6 @@
 <div id="main">
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
-		<tiles:insertAttribute name="subHeader"/>
 	</div>
 	<div id="side_branch">
 		<div id="main_body">

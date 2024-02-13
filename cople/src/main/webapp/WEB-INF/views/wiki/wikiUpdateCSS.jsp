@@ -131,6 +131,20 @@
 	background-color:rgb(1, 144, 249);
 	border:none;
 }
+#update_summary{
+	float:right;
+	resize:none;
+	box-sizing:border-box;
+	border:none;
+	border-left:1px solid #CCCCCC;
+	height:38px;
+	width:200px;
+	padding-top:10px;
+	padding-left:5px;
+}
+#update_summary:focus{
+	outline:none;
+}
 
 #editor p{ 
 clear:both;

@@ -54,6 +54,7 @@ public class MemberVO {
 	private Date reg_date;
 	private Date modify_date;
 	private String now_passwd;
+	private String filename;
 	
 
 	/*=========================

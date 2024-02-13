@@ -41,10 +41,10 @@ $(document).ready(function() {
 
 	
 	//헤더에서 엔터를 눌러 검색할때
-	$('#keyword').on('keydown', function(event) {
+	$('#total_search_box').on('keydown', function(event) {
 	    if (event.which === 13) {
 	    	event.preventDefault();
-	    	window.location.href = 'detail?doc_name='+$('#keyword').val();
+	    	window.location.href = 'detail?doc_name='+$('#total_search_box').val();
 	    }
 	});
 	

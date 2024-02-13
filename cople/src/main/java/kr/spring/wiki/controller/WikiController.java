@@ -84,7 +84,7 @@ public class WikiController {
     * 위키 글 목록
     ==================*/
    @RequestMapping("/wiki/list")
-   public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+   public ModelAndView wikiList(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
                         @RequestParam(value="order",defaultValue="1") int order,
                         String keyfield, String keyword, Model model) {
       Map<String,Object> map = new HashMap<String,Object>();
@@ -96,7 +96,7 @@ public class WikiController {
       log.debug("<<count>> :"+count);
       PageUtil page = new PageUtil(keyfield,keyword,currentPage,count,20,10,"list","&order="+order);
       List<WikiVO> list = null;
-      
+      log.debug("<<start,end>>: "+page.getEndRow()+page.getStartRow());
       if(count > 0) {
          map.put("order", order);
          map.put("start", page.getStartRow());
@@ -120,7 +120,7 @@ public class WikiController {
     * 위키 글 상세
     ==================*/
    @RequestMapping("/wiki/detail")
-   public ModelAndView process(@RequestParam(required=false) Integer doc_num,
+   public ModelAndView wikiDetail(@RequestParam(required=false) Integer doc_num,
                         @RequestParam(required=false) Integer update_num,
                         @RequestParam(required=false) String doc_name,
                         Model model) throws UnsupportedEncodingException {
@@ -193,9 +193,7 @@ public class WikiController {
     * 위키 되돌리기
     ==================*/ 
    @GetMapping("/wiki/undo")
-   public String wikiUndo(@RequestParam int update_num,
-                     @RequestParam int doc_num,
-                     Model model,HttpServletRequest request,HttpSession session) {
+   public String wikiUndo(@RequestParam int update_num, @RequestParam int doc_num, Model model,HttpServletRequest request,HttpSession session) {
       wikiService.undoWiki(doc_num, update_num,((MemberVO)session.getAttribute("user")).getId());
       
       model.addAttribute("message","되돌리기 완료");
@@ -207,10 +205,7 @@ public class WikiController {
     * 위키 역사
     ==================*/
    @GetMapping("/wiki/history")
-   public ModelAndView history(@RequestParam int doc_num,
-                        @RequestParam(value="pageNum",defaultValue="1") int currentPage,
-                        @RequestParam(value="order",defaultValue="1") int order,
-                        Model model) {
+   public ModelAndView history(@RequestParam int doc_num, @RequestParam(value="pageNum",defaultValue="1") int currentPage, @RequestParam(value="order",defaultValue="1") int order, Model model) {
       Map<String,Object> map = new HashMap<String,Object>();
       map.put("doc_num",doc_num);
       
@@ -236,9 +231,5 @@ public class WikiController {
       return mav;
    }
 
-   @GetMapping("/wiki/map")
-   public String getMap() {
-      return "/google/map";
-   }
    
 }
