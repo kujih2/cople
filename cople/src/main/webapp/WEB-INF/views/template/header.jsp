@@ -14,7 +14,7 @@
 	<div id="header_nav_menu">
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/wiki/detail?doc_num=82">위키</a></li>
-			<li><a href="${pageContext.request.contextPath}/community/commuMain">커뮤니티</a></li>
+			<li><a href="${pageContext.request.contextPath}/community/boardList">자유게시판</a></li>
 			<li><a href="${pageContext.request.contextPath}/market/list?category=0">장터</a></li>
 			<li><a href="${pageContext.request.contextPath}/matching/mmain">취업현황</a></li>
 		</ul>
