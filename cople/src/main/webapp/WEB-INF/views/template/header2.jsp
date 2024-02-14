@@ -26,7 +26,7 @@
 							<a class="text-gray-900 hover:text-blue-500" href="${pageContext.request.contextPath}/wiki/detail?doc_num=82">위키</a>
 						</div>
 						<div class="shrink-0">
-							<a class="text-gray-900 hover:text-blue-500" href="${pageContext.request.contextPath}/community/commuMain">커뮤니티</a>
+							<a class="text-gray-900 hover:text-blue-500" href="${pageContext.request.contextPath}/community/boardList">자유게시판</a>
 						</div>
 						<div class="shrink-0">
 							<a class="text-gray-900 hover:text-blue-500" href="${pageContext.request.contextPath}/market/list?category=0">장터</a>

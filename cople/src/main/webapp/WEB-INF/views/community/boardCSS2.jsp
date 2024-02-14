@@ -8,7 +8,7 @@
 	background-color:#FFFFFF;
 	border-radius: 10px;
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-	width:65%;
+	width:50%;
 	margin: 0 auto;
 	margin-bottom: 100px;
 	padding-left: 40px;
