@@ -57,6 +57,11 @@
 .submit{
 	text-align:center;
 }
+	.my-photo{
+	object-fit:cover;
+	object-position:top;
+	border-radius:50%;
+	}
 </style>
 <script>
 

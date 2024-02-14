@@ -37,7 +37,7 @@ $(document).ready(function(){
 	<button class="emp_register" onclick="emp_register()">현직자 신청하기</button>
 </c:if>
 <c:if test="${user.auth==2}">
-	<button class="my_emp_register" onclick="my_emp_register()">나의
+	<button class="my_emp_register" onclick="my_emp_register(${user.mem_num})">나의
 		현직자 신청 정보 보기</button>
 </c:if>
 <h2>취업 현황 지도</h2>

@@ -63,7 +63,9 @@ public class MatchingController {
 		List<EmpVO> empList;
 		List<MemberVO> memberList;
 		
-
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		model.addAttribute("user",member);
+		
 		//지도에 표시할 멤버리스트를 만들기 위한 페이지 처리
 		int count = matchingService.selectEmpCount();
 		model.addAttribute("count", count);

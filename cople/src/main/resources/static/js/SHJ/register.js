@@ -17,7 +17,7 @@ function emp_register() {
         };
     }
 }
-function my_emp_register() {
+function my_emp_register(user_id) {
     var width = '700';
     var height = '700';
 
@@ -25,7 +25,7 @@ function my_emp_register() {
     var top = (window.innerHeight - height) / 2;
 
     // 팝업 창 열기
-    var popupWindow = window.open("my_emp_register", "나의 프로필 확인하기", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top + ",scrollbars=yes");
+    var popupWindow = window.open("see_emp_register?user_id="+user_id, "나의 프로필 확인하기", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top + ",scrollbars=yes");
 
     // 팝업 내용 스타일 조절
     if (popupWindow) {

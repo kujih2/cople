@@ -49,6 +49,11 @@
         border-radius: 4px;
         box-sizing: border-box;
     }
+    .my-photo{
+    object-fit:cover;
+	object-position:top;
+	border-radius:50%;
+    }
   
     .map_wrap {position:relative;width:100%;height:350px;}
     .title {font-weight:bold;display:block;}
@@ -188,7 +193,7 @@
 		    	<input type="hidden" id="location_api" name="location_api" value="${empVO.location_api}">
 		    	<input type="hidden" id="location_api_lat" name="location_api_lat" value="${empVO.location_api_lat}">
 		    	<input type="hidden" id="location_api_lng" name="location_api_lng" value="${empVO.location_api_lng}">
-		    	<input type="hidden" id="user_num" name="user_num" value="${user.mem_num}">
+		    	<input type="hidden" id="user_num" name="user_num" value="${empVO.mem_num}">
 		    	<input type="hidden" id="user_id" name="user_id" value="${empVO.id}">
 		</div>
 			</td>
@@ -234,7 +239,7 @@
 	
 	 
  	var content = '<div class ="label"><span class="left"></span><span class="center">'
- 				 +user_id+'님의 회사<br><img src="${pageContext.request.contextPath}/matching/viewProfile?userNum='
+ 				 +'<br><img src="${pageContext.request.contextPath}/matching/viewProfile?userNum='
  				 +user_num+'" width="40" height="40" class="my-photo"></span><span class="right">'
  				 +'</span></div>';
 
