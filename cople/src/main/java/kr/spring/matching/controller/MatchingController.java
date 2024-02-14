@@ -287,7 +287,7 @@ public class MatchingController {
 			model.addAttribute("message","수강생 회원만 이용가능합니다.");
 			model.addAttribute("url", request.getContextPath() + "/matching/mmain");
 			
-			return "matchinig/resultAlert";
+			return "matching/resultAlert";
 		}else {//로그인, Auth가 1인 경우
 			model.addAttribute("login_user", user);
 			model.addAttribute("receive_user", matchingService.selectMember(user_id));
