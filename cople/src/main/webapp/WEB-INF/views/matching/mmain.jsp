@@ -24,8 +24,10 @@ $(document).ready(function(){
 })
 </script>
 <style>
-	img{
-	
+	.my-photo{
+	object-fit:cover;
+	object-position:top;
+	border-radius:50%;
 	}
 </style>
 <script
@@ -52,7 +54,7 @@ $(document).ready(function(){
 					<a href="#" data-id="${member.mem_num}">
 					</a>					    
 					 <div class="profile-dropdown">
-						<img src="${pageContext.request.contextPath}/matching/viewProfile?userNum=${member.mem_num}" width="200" height="200" class="photo_list">
+						<img src="${pageContext.request.contextPath}/matching/viewProfile?userNum=${member.mem_num}" width="200" height="200" class="my-photo photo_list">
 					    <div class="profile-dropdown-content">
 					        <a class="detail" href="#" onclick="see_emp_register('${member.mem_num}')" data-id="${member.mem_num}">프로필 보기</a>
 					        <a class="detail" href="#" onclick="send_letter('${member.mem_num}')" data-id="${member.mem_num}">쪽지 보내기</a>
